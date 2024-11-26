@@ -1,0 +1,70 @@
+/* stylesheet.css */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.ranking {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ranking h1 {
+    text-align: center;
+    color: #007BFF;
+    font-size: 2.5em; /* Große Schriftgröße für bessere Lesbarkeit aus der Distanz */
+}
+
+.ranking ol {
+    padding-left: 20px;
+}
+
+.ranking li {
+    margin-bottom: 15px;
+    font-size: 1.8em; /* Große Schriftgröße für bessere Lesbarkeit aus der Distanz */
+    font-weight: 800; /* Extra-bold Schriftgewicht */
+}
+/* stylesheet.css */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.ranking {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ranking h1 {
+    text-align: center;
+    color: #007BFF;
+    font-size: 2.5em; /* Große Schriftgröße für bessere Lesbarkeit aus der Distanz */
+}
+
+.ranking ol {
+    padding-left: 20px;
+}
+
+.ranking li {
+    margin-bottom: 15px;
+    font-size: 1.8em; /* Große Schriftgröße für bessere Lesbarkeit aus der Distanz */
+    font-weight: 800; /* Extra-bold Schriftgewicht */
+}

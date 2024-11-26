@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farbiges Rechteck</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+        }
+        .outer-container {
+            height: 100vh;
+            margin: 10px; /* Äußere Farbe */
+            background-color: #ffcccb; /* Farbe für den Margin-Bereich */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            border: 10px solid #ff6347; /* Randfarbe */
+            background-color: #fffacd; /* Hintergrundfarbe des Randes */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .box {
+            width: 100%;
+            height: 100%;
+            padding: 50px; /* Padding-Farbe */
+            background-color: #90ee90; /* Hintergrundfarbe des Paddings */
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .content {
+            width: 100%;
+            height: 100%;
+            background-color: #add8e6; /* Inhalt-Hintergrundfarbe */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .inner-content {
+            width: 100%;
+            height: 100%;
+            background-color: #dda0dd; /* Innerer Inhalt-Hintergrundfarbe */
+        }
+    </style>
+</head>
+<body>
+    <div class="outer-container">
+        <div class="container">
+            <div class="box">
+                <div class="content">
+                    <div class="inner-content">
+                        <!-- Innerer Inhalt -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

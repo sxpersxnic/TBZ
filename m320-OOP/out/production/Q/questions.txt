@@ -1,0 +1,30 @@
+What is the capital of France?,1) Paris,2) Berlin,3) Madrid,4) Rome,1
+Which planet is known as the Red Planet?,1) Earth,2) Mars,3) Jupiter,4) Venus,2
+Who wrote 'To Kill a Mockingbird'?,1) Harper Lee,2) Mark Twain,3) J.K. Rowling,4) Jane Austen,1
+What is the smallest prime number?,1) 1,2) 2,3) 3,4) 5,2
+What is the chemical symbol for gold?,1) Au,2) Ag,3) Fe,4) Pb,1
+Who is known as the 'Father of Computers'?,1) Charles Babbage,2) Alan Turing,3) John von Neumann,4) Ada Lovelace,1
+Which element has the highest atomic number?,1) Uranium,2) Plutonium,3) Oganesson,4) Californium,3
+What is the largest ocean on Earth?,1) Atlantic Ocean,2) Indian Ocean,3) Arctic Ocean,4) Pacific Ocean,4
+Which programming language is primarily used for Android app development?,1) Python,2) Swift,3) Java,4) Ruby,3
+Who painted the Mona Lisa?,1) Vincent van Gogh,2) Leonardo da Vinci,3) Pablo Picasso,4) Claude Monet,2
+What is the largest planet in our solar system?,1) Earth,2) Saturn,3) Jupiter,4) Neptune,3
+What is the square root of 64?,1) 6,2) 7,3) 8,4) 9,3
+Who developed the theory of relativity?,1) Isaac Newton,2) Albert Einstein,3) Nikola Tesla,4) Galileo Galilei,2
+What is the capital of Japan?,1) Seoul,2) Beijing,3) Tokyo,4) Bangkok,3
+What is the chemical formula for water?,1) CO2,2) H2O,3) O2,4) CH4,2
+Which country is known as the Land of the Rising Sun?,1) China,2) Japan,3) Korea,4) Thailand,2
+Who is the author of the Harry Potter series?,1) J.R.R. Tolkien,2) J.K. Rowling,3) George R.R. Martin,4) C.S. Lewis,2
+What is the speed of light in a vacuum?,1) 300'000 km/s,2) 150'000 km/s,3) 1'000'000 km/s,4) 299'792 km/s,4
+Which continent is the Sahara Desert located on?,1) Africa,2) Asia,3) South America,4) Australia,1
+What is the freezing point of water in degrees Celsius?,1) 0,2) 32,3) -10,4) 100,1
+What is the hardest natural substance on Earth?,1) Gold,2) Iron,3) Diamond,4) Graphite,3
+Who painted "Starry Night"?,1) Vincent van Gogh,2) Claude Monet,3) Pablo Picasso,4) Leonardo da Vinci,1
+What is the tallest mountain in the world?,1) Mount Kilimanjaro,2) Mount Everest,3) K2,4) Denali,2
+Which organ is responsible for pumping blood in the human body?,1) Brain,2) Stomach,3) Liver,4) Heart,4
+What is the longest river in the world?,1) Amazon River,2) Nile River,3) Yangtze River,4) Mississippi River,2
+What is the primary ingredient in guacamole?,1) Tomato,2) Avocado,3) Onion,4) Pepper,2
+Which sport is known as "the beautiful game"?,1) Basketball,2) Soccer,3) Tennis,4) Cricket,2
+What is the atomic number of carbon?,1) 6,2) 8,3) 12,4) 14,1
+What is the primary gas found in the Earth's atmosphere?,1) Oxygen,2) Nitrogen,3) Carbon Dioxide,4) Hydrogen,2
+Who invented the telephone?,1) Thomas Edison,2) Alexander Graham Bell,3) Nikola Tesla,4) Samuel Morse,2

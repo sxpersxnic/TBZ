@@ -1,0 +1,28 @@
+.title {
+    color: #00ff00;
+}
+
+.layer_1 {
+    display: flex;
+    background-color: #0000ff;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+.layer_2 {
+    display: flex;
+    background-color: #ff0000;
+    width: 90px;
+    height: 90px;
+    justify-content: center;
+    align-items: center;
+}
+.layer_3 {
+    display: flex;
+    background-color: #00ff00;
+    width: 80px;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+}

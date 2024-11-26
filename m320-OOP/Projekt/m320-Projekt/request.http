@@ -1,0 +1,75 @@
+@id = 1
+@username = admin
+@email = admin@localhost.com
+@password = P@ssw0rd!14
+
+@title = Custom Title
+
+### GET - Seed
+GET http://localhost:8080/api/v1/seed
+
+### POST - Sign Up
+POST http://localhost:8080/api/v1/auth/signup
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### POST - Sign In
+POST http://localhost:8080/api/v1/auth/signin
+Content-Type: application/json
+
+{
+  "principal": "{{email}}",
+  "password": "{{password}}"
+}
+
+> {%
+    client.global.set("auth_token", response.body.token);
+%}
+
+### GET - All Users
+GET http://localhost:8080/api/v1/users
+Authorization: Bearer {{auth_token}}
+
+### GET - All Roles
+GET http://localhost:8080/api/v1/users
+Authorization: Bearer {{auth_token}}
+
+### GET - All Items
+GET http://localhost:8080/api/v1/users
+Authorization: Bearer {{auth_token}}
+
+### GET - User by ID
+GET http://localhost:8080/api/v1/users/{{id}}
+Authorization: Bearer {{auth_token}}
+
+### GET - Role by ID
+GET http://localhost:8080/api/v1/roles/{{id}}
+Authorization: Bearer {{auth_token}}
+
+### GET - Item by ID
+GET http://localhost:8080/api/v1/items/{{id}}
+Authorization: Bearer {{auth_token}}
+
+### POST - Create Item
+POST http://localhost:8080/api/v1/items/post
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "title": "{{title}}",
+  "authorId": "{{id}}"
+}
+
+### POST - Create Role
+POST http://localhost:8080/api/v1/roles/post
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "name": "test"
+}

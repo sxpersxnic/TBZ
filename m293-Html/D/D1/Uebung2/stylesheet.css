@@ -1,0 +1,12 @@
+body
+{
+    height: 100%;
+}
+
+#Box1
+{
+    width: 90%;
+    height: 90%;
+    border: 5px;
+    background-color: blueviolet;
+}
