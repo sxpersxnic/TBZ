@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>M293 Project</title>
+        <link rel="stylesheet" type="text/css" href="../CSS/project_index.css">
+        <link rel="stylesheet" type="text/css" href="../CSS/header.css">
+        <link rel="stylesheet" type="text/css" href="../CSS/stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="../CSS/sidebar.css">
+        <script src="../JS/script.js" defer></script>
+    </head>
+    <body>
+        <header class="header-wrapper">
+            <div class="header-banner">
+                <img src="../design/Logo.svg" class="logo"/>
+            </div>
+            <header class="header-wrapper">
+                <div class="filler"></div>
+                <div class="top-nav">
+                    <div class="logo-ctn">
+                        <a href="./index.html" class="logo-link"></a>  
+                        <img src="../public/Logo.png" class="logo"/>
+                    </div>
+                </div>
+                <div class="sub-nav">
+                    <div class="bar-ctn">
+                        <div class="menu-bars" onclick="toggleSidebar()">
+                            <div class="bar1"></div>
+                            <div class="bar2"></div>
+                            <div class="bar3"></div>
+                        </div>
+                    </div>
+                    <nav class="nav">
+                        <div class="tp-br-ul-wrapper">
+                            <ul class="tp-br-ul">
+                                <li class="tp-br-li"><a class="header-link" href="./loader.html">Gaming</a></li>
+                                <li class="tp-br-li"><a class="header-link" href="./loader.html">Nature</a></li>
+                                <li class="tp-br-li"><a class="header-link" href="./loader.html">Politics</a></li>
+                                <li class="tp-br-li"><a class="header-link" href="./loader.html">Sports</a></li>
+                                <li class="tp-br-li"><a class="header-link" href="./loader.html">IT</a></li>
+                                <li class="tp-br-li"><a class="header-link" href="./loader.html">Economy</a></li>
+                                <li class="tp-br-li"><a class="header-link" href="./loader.html">Fashion</a></li>
+                                <li class="tp-br-li"><a class="header-link" href="./loader.html">Lifestyle</a></li>
+                                <li class="tp-br-li"><a class="header-link" href="./loader.html">Culture</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <main>
+                <div class="sidebar" id="sideBar">
+                    <div class="ctn">
+                        <div class="menubox"><a href="./auth/login.html" onclick="toggleSidebar()" alt="Link to login page">Login</a></div>
+                        <div class="menubox"><a href="./auth/register.html" onclick="toggleSidebar()" alt="Link to register page">Register</a></div>
+                        <div class="menubox"><a href="loader.html" onclick="toggleSidebar()">Profile</a></div>
+                        <div class="menubox"><a href="index.html" onclick="toggleSidebar()">Home</a></div>
+                    </div>
+                </div>
+        
+
+        <div class="description">
+            <h3>
+                Diese Website wurde als Projekt im Rahmen des Modul 293 von Melvin und Tristan erstellt.
+                Sie dient als ein Demonstration unserer HTML-, CSS- und JavaScript-Künste. 
+            </h3>
+        </div>
+
+        <div class="aboutme">
+            <img src="../public/images/pfp.jpg" class="portrait" alt="Avatar von Tristan">
+
+            <div class="facts">
+                <ul>
+                    <li>Tristan/ <a href="https://github.com/TJahari">TJahari on Github</a> </li>
+                    <li>
+                        Ich Arbeite bei <a href="https://www.orbisag.ch/">Orbis Schweiz AG</a> und gehe bei der
+                        <a href="https://www.bms-zuerich.ch/">BMZ</a>/<a href="https://tbz.ch/grundbildung/informatik/">TBZ</a>
+                         in die Schule
+                     </li>
+                    <li>Hobbys: Sportschütze, Autos/Motorsport, Gaming</li>
+                </ul>
+            </div> 
+        </div>
+        <div class="aboutme">
+            <img src="../public/images/github-pfp.jpg" class="portrait" alt="Avatar von Melvin">
+
+            <div class="facts">
+                <ul>
+                    <li>Melvin/ <a href="https://github.com/sxpersxnic">sxpersxnic on Github</a> </li>
+                    <li>
+                        Ich Arbeite bei <a href="https://www.stadt-zuerich.ch/fd/de/index/das_departement/organisation/oiz.html">OIZ - Organisation und Informatik Stadt Zürich</a> und gehe zur Schule in der
+                        <a href="https://tbz.ch/grundbildung/informatik/">TBZ</a>
+                     </li>
+                    <li>In meiner Freizeit, befasse ich mich mit Kunst und Informatik.</li>
+                </ul>
+            </div> 
+        </div>
+        </main>
+    </body>
+</html>

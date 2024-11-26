@@ -1,0 +1,25 @@
+.aboutme {
+    width: 100vw; /* Breite des Containers so breit wie das Fenster */
+    height: 300px; /* Höhe des Containers */
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.portrait {
+    height: 100%; /* Bild auf die gesamte Höhe des Containers skalieren */
+    object-fit: cover; /* Bild proportional zuschneiden und skalieren */
+}
+
+.facts {
+    padding: 0;
+    margin: 40px;
+    float: left;
+    font-size: 20px;
+}
+
+.description {
+    padding-left: 10px;
+    padding-top: 20px;
+}
