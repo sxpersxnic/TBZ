@@ -1,0 +1,19 @@
+#cloud-config
+users:  # Benutzer collection -> Konfiguration für mehrere Benutzer
+  # Sequence of Mappings
+  - name: ubuntu  # Benutzername
+    sudo: ALL=(ALL) NOPASSWD:ALL # sudo-Regeln für diesen Bneutzer -> Alle Rechte ohne Passwort
+    groups: users, admin # Usergruppen, denen der Benutzer angehört
+    home: /home/ubuntu # Absoluter Pfad zu Home-Verzeichnis, alias ~
+    shell: /bin/bash # Absoluter Pfad zum Bash (Bourne again Shell) interpreter -> Wichtig für She-Bang
+    ssh_authorized_keys: # Mapping Scalars to Sequences
+      # SSH (Secure Shell) Public key des Benutzers
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0WGP1EZykEtv5YGC9nMiPFW3U3DmZNzKFO5nEu6uozEHh4jLZzPNHSrfFTuQ2GnRDSt+XbOtTLdcj26+iPNiFoFha42aCIzYjt6V8Z+SQ9pzF4jPPzxwXfDdkEWylgoNnZ+4MG1lNFqa8aO7F62tX0Yj5khjC0Bs7Mb2cHLx1XZaxJV6qSaulDuBbLYe8QUZXkMc7wmob3PM0kflfolR3LE7LResIHWa4j4FL6r5cQmFlDU2BDPpKMFMGUfRSFiUtaWBNXFOWHQBC2+uKmuMPYP4vJC9sBgqMvPN/X2KyemqdMvdKXnCfrzadHuSSJYEzD64Cve5Zl9yVvY4AqyBD aws-key       
+
+# Konfigurationen für Benutzer
+ssh_pwauth: false # Instanz authentifizier Benutzer nicht durch Passwort
+disable_root: false # Benutzer haben Zugriff auf den Root User
+package_update: true # Packages werden geupdated
+packages: # Mapping Scalars to Sequences
+  - curl # Curl Package um http-Requests auszuführen (Client for URL)
+  - wget # Wget ist das curl Äquivalent von Windows und in der PowerShell, unterstützt ftp

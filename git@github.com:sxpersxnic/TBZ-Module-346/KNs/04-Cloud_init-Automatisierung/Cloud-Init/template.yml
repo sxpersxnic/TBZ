@@ -1,0 +1,16 @@
+#cloud-config
+users:
+  - name: ubuntu 
+    sudo: ALL=(ALL) NOPASSWD:ALL 
+    groups: user, admin 
+    home: /home/ubutntu
+    shell: /bin/bash 
+    ssh_authorized_keys: ssh-key <Fingerprint> aws-key
+ssh_pwauth: false 
+disable_root: false 
+package_update: true 
+packages:
+  - curl
+  - wget
+runcmd: 
+write_file: 
