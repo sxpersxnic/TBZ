@@ -2,10 +2,12 @@
 
 ## Get Started with Vercel
 
-1. Clone the Repository
-```sh
-git clone https://github.com/sxpersxnic/m426-ph-studio.git
-```
+1. Clone the Repository 
+  
+  ```sh
+    git clone https://github.com/sxpersxnic/m426-ph-studio.git
+  ```
+
 2. Set the Environment variables according to `.env.example`
 3. Create an account on [Vercel](https://vercel.com/login)
 4. Link your Github, Gitlab or BitBucket Account.
@@ -20,13 +22,16 @@ git clone https://github.com/sxpersxnic/m426-ph-studio.git
 ## Get Started Locally
 
 1. Clone the Repository
+
 ```sh
 git clone https://github.com/sxpersxnic/m426-ph-studio.git
 ```
+
 2. Setup a *PostgreSQL* Database, see [Postgres Guide](https://www.postgresql.org/docs/current/tutorial-start.html)
 3. Set the Environment variables according to `.env.example` in a new file `.env.local`
 4. Install the dependencies, for development I used **pnpm**, but feel free to choose an other package manager.
    Run the command using your chosen package manager:
+
    ```sh
      pnpm install
      # or
@@ -36,7 +41,9 @@ git clone https://github.com/sxpersxnic/m426-ph-studio.git
      # or
      bun install
    ```
+
 5. Run the local development server:
+
    ```sh
      pnpm dev
      # or
@@ -46,6 +53,7 @@ git clone https://github.com/sxpersxnic/m426-ph-studio.git
      # or
      bun dev
    ```
+
 7. Finally seed your database by navigating to the api route `http://localhost:3000/api/seed` .
 
 Don't worry if you want to deploy your project later on, just follow the guide above.
@@ -70,7 +78,7 @@ PostgreSQL is a powerful, open source object-relational database system with ove
 
 ### [Drizzle ORM](https://orm.drizzle.team)
 
-Drizzle ORM is a headless TypeScript ORM with a head. 
+Drizzle ORM is a headless TypeScript ORM with a head.
 
 It looks and feels simple, performs on day 1000 of your project,
 lets you do things your way, and is there when you need it.

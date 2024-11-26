@@ -1,0 +1,2 @@
+melly3o6
+uid=1000(melly3o6) gid=1000(melly3o6) groups=1000(melly3o6),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),116(netdev)

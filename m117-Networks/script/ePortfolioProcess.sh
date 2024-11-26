@@ -43,7 +43,7 @@ then
     log_message "File ${EPORTFOLIO_DIR}/${FILE} already exists and has content. Skipping file creation."
 else
     touch "${EPORTFOLIO_DIR}/${FILE}" || handle_error "create file ${EPORTFOLIO_DIR}/${FILE}"
-    echo "# ePortfolio Melvin Kampus - ${DATE}" > ${EPORTFOLIO_DIR}/${FILE} || handle_error "write to file ${EPORTFOLIO_DIR}/${FILE}"
+    echo "# ePortfolio - ${DATE}" > ${EPORTFOLIO_DIR}/${FILE} || handle_error "write to file ${EPORTFOLIO_DIR}/${FILE}"
 fi
 
 # Automation for Gitlab remote

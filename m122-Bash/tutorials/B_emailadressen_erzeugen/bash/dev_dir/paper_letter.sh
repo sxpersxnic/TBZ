@@ -49,7 +49,7 @@ Passwort:       ${password}
 
 Mit freundlichen Grüßen
 
-Melvin Kampus
+<name>
 (TBZ-IT-Service)
 
 admin.it@tbz.ch, Abt. IT: +41 44 446 96 60

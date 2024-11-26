@@ -1,4 +1,4 @@
-# ePortfolio Melvin Kampus - 14-06-2024
+# ePortfolio - 14-06-2024
 
 ## Netwerkplan
 

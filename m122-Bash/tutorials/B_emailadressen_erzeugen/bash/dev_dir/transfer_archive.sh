@@ -8,5 +8,5 @@ DEV_DIR='/mnt/c/Development/coding/Scripting/m122-Projects/B_emailadressen_erzeu
 ftp -n <<EOF
 open ftp.example.com
 user username password
-put ${DEV_DIR}/YYYY-MM-DD_newMailadr_AP23c_Kampus.tar.gz
+put ${DEV_DIR}/YYYY-MM-DD_newMailadr_AP23c_Name.tar.gz
 EOF

@@ -1,4 +1,4 @@
-# ePortfolio Melvin Kampus - 06-28-2024
+# ePortfolio - 06-28-2024
 
 ## Teil 2 PCs der Anwaltskanzlei Arista GmbH
 

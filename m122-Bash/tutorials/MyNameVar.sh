@@ -1,5 +1,5 @@
 #!/usr/bin/bash
 
-myName="Melvin Kampus"
+myName=""
 
 echo $myName

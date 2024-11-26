@@ -109,8 +109,6 @@ display_header() {
     echo "|                      |                          |                     |"
     echo -e "|                      |            ${PINK}by${RESET}            |                     |"
     echo "|                      |                          |                     |"
-    echo -e "|                      |       ${PINK}Melvin Kampus${RESET}      |                     |"
-    echo "|                      |                          |                     |"
     echo -e "|                      |          ${PINK}[AP23c]${RESET}         |                     |"
     echo "|                      |__________________________|                     |"
     echo "|                                                                       |"
