@@ -1,8 +1,7 @@
 # ![Logo TBZ](/assets/logo.svg)
 
-## Links
+## Gitlab
 
-- [Technische Berufsschule Zürich](https://tbz.ch)
 - [Gitlab](https://gitlab.com/ch-tbz-it/Stud)
 
 ## Modules
