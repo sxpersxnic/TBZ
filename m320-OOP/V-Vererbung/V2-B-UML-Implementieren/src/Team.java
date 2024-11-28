@@ -1,40 +1,31 @@
-import java.util.Set;
+import java.util.ArrayList;
 
 public class Team {
-    private final String teamName;
-    private Goalie goalie = null;
-    private Set<Defender> defenders;
-    private Set<Striker> strikers;
+    private ArrayList<Player> players;
 
-    public Team(String teamName) {
-        this.teamName = teamName;
+    public Team() {
+        this.players = new ArrayList<>();
     }
 
-    public String getTeamName() {
-        return teamName;
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 
-    public Goalie getGoalie() {
-        return goalie;
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
     }
 
-    public void setGoalie(Goalie goalie) {
-        this.goalie = goalie;
+    public void addPlayer(Player player) {
+        players.add(player);
     }
 
-    public Set<Defender> getDefenders() {
-        return defenders;
-    }
-
-    public void setDefenders(Set<Defender> defenders) {
-        this.defenders = defenders;
-    }
-
-    public Set<Striker> getStrikers() {
-        return strikers;
-    }
-
-    public void setStrikers(Set<Striker> strikers) {
-        this.strikers = strikers;
+    public void printTeam() {
+        if (!players.isEmpty()) {
+            for (Player player : players) {
+                player.showName();
+            }
+        } else {
+            System.out.println("Team is empty");
+        }
     }
 }
