@@ -1,14 +1,14 @@
 public class Striker extends Player {
+    public Striker(String name) {
+        super(name);
+    }
 
-    public Striker() {
-        super(Position.STRIKE);
+    public void jogTraining() {
+        System.out.println(getName() + " is jogging...");
     }
 
     @Override
     public void play() {
-        System.out.println("Im " + this.showName() + " and i strike many goals!");
-    }
-    public void jogTraining() {
-        System.out.println(this.showName() + " is jogging...");
+        System.out.println(getName() + " is playing as Striker!");
     }
 }
