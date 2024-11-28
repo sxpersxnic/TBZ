@@ -1,11 +1,15 @@
-public class Passenger {
-    private final String name;
+import java.util.ArrayList;
 
-    public Passenger(String name) {
-        this.name = name;
-    }
+public class Seed {
 
-    public void printName() {
-        System.out.println(name);
+    public static Flight seedFlight() {
+        ArrayList<Passenger> passengers = new ArrayList<>();
+
+        for (int i = 0; i <= 20; i++) {
+            Passenger passenger = new Passenger(Util.getRandomName());
+            passengers.add(passenger);
+        }
+
+        return new Flight(passengers);
     }
 }
