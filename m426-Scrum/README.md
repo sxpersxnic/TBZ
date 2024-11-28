@@ -94,6 +94,12 @@ A utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-cen
 
 Vercel is a platform for developers that provides the tools, workflows, and infrastructure you need to build and deploy your web apps faster, without the need for additional configuration.
 
+# .NET API for Snippets
+
+## License
+
+This repository is licensed with the [MIT](LICENSE) license.
+
 Vercel supports popular frontend frameworks out-of-the-box, and its scalable, secure infrastructure is globally distributed to serve content from data centers near your users for optimal speeds.
 
 During development, Vercel provides tools for real-time collaboration on your projects such as automatic preview and production environments, and comments on preview deployments.
