@@ -1,86 +1,89 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Menu {
-    private final Team team;
 
-    public Menu(Team team) {
-        this.team = team;
+    public static Team start() {
+        System.out.println("Welcome to the Team Menu");
+        return new Team();
     }
 
-    public void changeGoalie(Goalie goalie) {
-        team.setGoalie(goalie);
-    }
-
-    public Integer getTeamSize() {
-        int count = 0;
-        if (team.getGoalie() != null) {
-            count++;
+    public static void selectOption(Team team) {
+        String option = read("Enter [v] to view your team, [c] to create a player and [p] to play: ");
+        switch (option) {
+            case "v":
+                team.printTeam();
+                break;
+            case "c":
+                String name = read("Enter name: ");
+                String positionStr = read("Enter position: ");
+                Position position = Position.valueOf(positionStr);
+                team.addPlayer(createPlayer(position, name));
+                break;
+            case "p":
+                play(team);
+                break;
+            default:
+                end();
         }
-        int defenderCount = team.getDefenders().size();
-        int strikerCount = team.getStrikers().size();
-        return count + defenderCount + strikerCount;
     }
 
-    public void addStriker(Striker striker) {
-        Set<Striker> strikers = team.getStrikers();
-
-        if (strikers.contains(striker)) {
-            System.out.println("Striker " + striker.showName() + " already exists");
-        }
-        if (strikers.size() <= 16) {
-            strikers.add(striker);
-            team.setStrikers(strikers);
+    public static void play(Team team) {
+        System.out.println("Match Started!");
+        ArrayList<Player> players = team.getPlayers();
+        if (!players.isEmpty()) {
+            for (Player player : players) {
+                player.play();
+            }
         } else {
-            System.out.println("Max amount of Strikers reached, remove a striker to add a new one");
-        }
-    }
-
-    public void addDefender(Defender defender) {
-        Set<Defender> defenders = team.getDefenders();
-
-        if (defenders.contains(defender)) {
-            System.out.println("Defender " + defender.showName() + " already exists");
-        }
-        if (defenders.size() <= 4) {
-            defenders.add(defender);
-            team.setDefenders(defenders);
-        } else {
-            System.out.println("Max amount of Defenders reached, remove a striker to add a new one");
-        }
-    }
-
-    public void removeStriker(int index) {
-
-        if (team.getStrikers().size() <= index || team.getDefenders().isEmpty()) {
-            System.out.println("Striker " + index + " does not exist");
+            System.out.println("Team is empty, you lost!");
         }
 
-        Set<Striker> strikers = team.getStrikers();
-        List<Striker> strikerList = new ArrayList<>(strikers);
-        strikerList.remove(index);
-        strikers.addAll(strikerList);
-        team.setStrikers(strikers);
     }
 
-    public void removeDefender(int index) {
-
-        if (team.getDefenders().size() < index || team.getDefenders().isEmpty()) {
-            System.out.println("Defender " + index + " does not exist");
-        }
-
-        Set<Defender> defenders = team.getDefenders();
-        List<Defender> defenderList = new ArrayList<>(defenders);
-        defenderList.remove(index);
-        defenders.addAll(defenderList);
-        team.setDefenders(defenders);
+    public static void end() {
+        System.out.println(" ");
+        System.out.println("Bye!");
+        System.exit(0);
     }
 
-    public Team getTeam() {
-        return team;
+    public static Player createPlayer(Position position, String name) {
+        return switch (position) {
+            case Keeper -> {
+                double height = readDouble("Enter keepers height: ");
+                yield createKeeper(height, name);
+            }
+            case Striker -> createStriker(name);
+            case Defender -> createDefender(name);
+            default -> {
+                yield null;
+            }
+        };
     }
 
-    public void play() {
-        Goalie goalie = 
-        System.out.println("Your team won ☺!");
+    public static Keeper createKeeper(double height, String name) {
+        return new Keeper(name, height);
+    }
+
+    public static Defender createDefender(String name) {
+        return new Defender(name);
+    }
+
+    public static Striker createStriker(String name) {
+        Striker striker = new Striker(name);
+        striker.jogTraining();
+        return striker;
+    }
+
+    public static String read(String out) {
+        System.out.println(out);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    public static double readDouble(String out) {
+        System.out.print(out);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextDouble();
     }
 }
