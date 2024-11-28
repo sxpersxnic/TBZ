@@ -1,28 +1,25 @@
 public class Player {
     private String name;
-    private Position position;
 
-    public Player(Position position) {
-        this.position = position;
+    public Player(String name) {
+        this.name = name;
     }
 
-    public String showName() {
-        return this.name;
-    }
+    public Player() {}
 
-    public void play() {
-        System.out.println("Im a Player!");
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public Position getPosition() {
-        return position;
+    public void showName() {
+        System.out.println(name);
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void play() {
+        System.out.println(name + " is playing!");
     }
 }
