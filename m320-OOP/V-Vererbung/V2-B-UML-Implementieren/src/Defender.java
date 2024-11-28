@@ -1,10 +1,10 @@
 public class Defender extends Player {
-    public Defender() {
-        super(Position.DEFENSE);
+    public Defender(String name) {
+        super(name);
     }
 
     @Override
     public void play() {
-        System.out.println("Player " + this.showName() + " is a defender and defends things!");
+        System.out.println(getName() + " is playing as a Defender!");
     }
 }
