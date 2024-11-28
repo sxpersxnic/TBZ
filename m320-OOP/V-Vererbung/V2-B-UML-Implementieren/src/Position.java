@@ -1,5 +1,5 @@
 public enum Position {
-    GOAL,
-    DEFENSE,
-    STRIKE
+    Striker,
+    Keeper,
+    Defender
 }
