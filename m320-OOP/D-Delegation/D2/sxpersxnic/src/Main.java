@@ -1,4 +1,6 @@
-import java.util.Scanner;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,6 +8,7 @@ public class Main {
         List<Passenger> passengers = flight.getPassengers();
 
         System.out.println("------------D2------------");
+        System.out.println(" ");
 
         System.out.print("Enter your firstname: ");
         String firstName = Util.read();
@@ -16,10 +19,39 @@ public class Main {
         String name = firstName + " " + lastName;
         Passenger you = new Passenger(name);
 
+        System.out.println(" ");
         passengers.add(you);
         flight.setPassengers(passengers);
         flight.printPassengers();
-
         System.out.println("--------------------------");
+
+        System.out.print("Start flight? ");
+        System.out.print("[r] Remove me from list [s] Start: ");
+        System.out.println(" ");
+        String choice = Util.read();
+
+        switch (choice) {
+            case "s":
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                System.out.println(" ");
+                System.out.println("Flight " + flight.getFlightNumber() + " started at " + Instant.now().atZone(ZoneId.systemDefault()).format(formatter) + "!");
+                break;
+            case "r":
+                List<Passenger> passengerList = flight.getPassengers();
+                passengerList.remove(you);
+                flight.setPassengers(passengerList);
+                System.out.println(" ");
+                System.out.println("You have been removed from the flight!");
+                System.out.println(" ");
+                System.out.println("New list: ");
+                System.out.println(" ");
+                flight.printPassengers();
+                break;
+            default:
+                break;
+        }
+
+        System.out.println(" ");
+        System.out.println("Goodbye!");
     }
 }
