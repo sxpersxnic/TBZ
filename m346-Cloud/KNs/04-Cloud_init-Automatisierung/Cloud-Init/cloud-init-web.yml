@@ -20,4 +20,7 @@ packages:
   - adminer
 runcmd:
   - sudo a2enconf adminer
+  - sudo wget -O /tmp/index.html https://github.com/sxpersxnic/TBZ/edit/main/m346-Cloud/KNs/04-Cloud_init-Automatisierung/apache/index.html
+  - sudo cp /tmp/index.html /var/www/html/index.html
   - sudo systemctl restart apache2
+  
