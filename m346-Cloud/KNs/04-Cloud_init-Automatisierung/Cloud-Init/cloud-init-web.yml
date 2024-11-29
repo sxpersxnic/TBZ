@@ -18,9 +18,116 @@ packages:
   - libapache2-mod-php
   - php-mysqli
   - adminer
+
+write_files:
+  - path: /var/www/html/index.html
+    content: |
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8" />
+          <title>Hello, world!</title>
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <meta name="description" content="" />
+          <style>
+          	* {
+              	padding: 0;
+                  margin: 0;
+                  display: box;
+              }
+              
+          	:root {
+              	--primary: #fafafa;
+                  --secondary: #000000;
+                  --shadow: #949494;
+                  --body-bg: #f4f4f4;
+                  --link: #f6953f;
+                  --link-hover: #f4801a;
+              }
+              
+              html, body {
+              	padding: 16px;
+                  size: 100%;
+                  background-color: var(--body-bg);
+              }
+              
+              main {
+              	background-color: var(--primary);
+                  padding: 24px 24px 24px 24px;
+                  border: 1px solid;
+                  border-color: var(--secondary);
+                  box-shadow: 0px 8px 8px var(--shadow); 
+              }
+              
+              header {
+              	display: flex;
+                  flex-direction: row;
+                  
+                  width: 100%;
+                  height: 80px;
+                  
+          		justify-content: center;
+                  align-items: center;
+              }
+              
+              section {
+              	display: flex;
+                  flex-direction: column;
+                  
+                  padding-left: 40px;
+                  padding-right: 40px;
+                  
+                  justify-content: end;
+                  align-items: start;
+                  
+                  width: 100%;
+                  height: 72px;
+              }
+              
+              h2 {
+              	font-size: 20px;
+                  padding:0;
+                  margin:0 0 12px 0;
+              }
+              
+              p {
+              	font-size: 20px;
+                  transition: 0.2s ease-in;
+              }
+              
+              a {
+              	text-decoration: none;
+                  color: var(--link);
+                  transition: 0.2s ease-in;
+              }
+              
+              a:hover {
+                  color: var(--link-hover);
+              }  
+          </style>
+        </head>
+        <body>
+          <main>
+            <header>
+      	      <h1>The Apache WebServer ec2 instance works!</h1>
+            </header>
+            <section>
+              <h2>
+                This is KN04 of TBZ Module 346
+              </h2>
+              <p>
+                Visit on 
+                <a href="https://github.com/sxpersxnic/TBZ/tree/main/m346-Cloud">
+                  Github
+                </a>
+              </p>
+            </section>
+          </main>
+        </body>
+      </html>
+    permissions: '0644'
+
 runcmd:
   - sudo a2enconf adminer
-  - sudo wget -O /tmp/index.html https://github.com/sxpersxnic/TBZ/edit/main/m346-Cloud/KNs/04-Cloud_init-Automatisierung/apache/index.html
-  - sudo cp /tmp/index.html /var/www/html/index.html
   - sudo systemctl restart apache2
   
