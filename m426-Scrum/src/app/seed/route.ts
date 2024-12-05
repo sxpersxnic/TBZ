@@ -15,7 +15,7 @@ const client = await db.connect();
  * Description placeholder
  *
  * @async
- * @returns {*}
+ * @void
  */
 async function clear() {
   await client.sql`DROP TABLE posts`;

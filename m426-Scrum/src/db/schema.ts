@@ -7,7 +7,7 @@ import {
 } from 'drizzle-orm/pg-core';
 import { InferInsertModel } from 'drizzle-orm';
 import { defaultPfp } from '@/lib/definitions';
-import { generateUUID } from '@/lib/utils';
+import { getUuid } from '@/lib/utils';
 
 /**
  * Description placeholder
@@ -17,7 +17,7 @@ import { generateUUID } from '@/lib/utils';
 export const users = pgTable(
   "users",
   {
-    id: varchar('id', { length: 255 }).primaryKey().notNull().$defaultFn(() => generateUUID()),
+    id: varchar('id', { length: 255 }).primaryKey().notNull().$defaultFn(() => getUuid()),
     username: varchar('username', { length: 255 }).unique().notNull(),
     email: text('email').unique().notNull(),
     image_url: varchar('image_url', { length: 255 }).default(defaultPfp),
@@ -33,7 +33,7 @@ export const users = pgTable(
 export const posts = pgTable(
   "posts", 
   {
-    id: varchar('id', { length: 255 }).primaryKey().notNull().$defaultFn(() => generateUUID()),
+    id: varchar('id', { length: 255 }).primaryKey().notNull().$defaultFn(() => getUuid()),
     authorId: varchar('author_id', { length: 255 })
       .references(() => users.id)
       .notNull(),
@@ -52,7 +52,7 @@ export const posts = pgTable(
 export const sessions = pgTable(
   "sessions",
   {
-    id: varchar('id', { length: 255 }).primaryKey().notNull().$defaultFn(() => generateUUID()),
+    id: varchar('id', { length: 255 }).primaryKey().notNull().$defaultFn(() => getUuid()),
     userId: varchar('user_id', { length: 255 })
       .references(() => users.id)
       .notNull(),

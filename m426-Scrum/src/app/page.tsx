@@ -3,12 +3,13 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Logo from "@/ui/components/logo";
 
 /**
- * Description placeholder
+ * Homepage
  *
+ * @default
  * @export
- * @returns {*}
+ * @returns {React.JSX.Element} HTML
  */
-export default function Page() {
+export default function Page(): React.JSX.Element {
   return (
     <main className="flex min-h-screen flex-col p-6 w-full">
       <Logo />

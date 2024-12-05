@@ -3,12 +3,15 @@ import { PostPreview, PostsTable, PostView, UserPreview, UserRecord, UsersTable 
 
 /**
  * Function for getting latest posts sorted by date (descending)
+ * 
+ * @export
+ * @async
  * @param {number} limit - The number of posts to fetch
- * @returns {Promise<QueryResult<PostPreview>>} - A promise that resolves to an array of post previews
+ * @returns {Promise<QueryResult<PostPreview>>} data - A promise that resolves to an array of post previews
  */
 export async function fetchLatestPosts(limit: number): Promise<QueryResult<PostPreview>> {
   try {
-    const data = await sql<PostPreview>`
+    const data: QueryResult<PostPreview> = await sql<PostPreview>`
       SELECT posts.id, posts.author_id, users.username, users.image_url, posts.date, posts.title
       FROM posts
       JOIN users ON posts.author_id = users.id
@@ -69,7 +72,7 @@ export async function fetchFilteredPosts(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
-    const posts = await sql<PostsTable>`
+    const posts: QueryResult<PostsTable> = await sql<PostsTable>`
       SELECT
         posts.id,
         posts.author_id,
@@ -106,7 +109,7 @@ export async function fetchFilteredPosts(
  */
 export async function fetchPostsPages(query: string | string[]): Promise<number> {
   try {
-    const count = await sql`SELECT COUNT(*)
+    const count: QueryResult<number> = await sql`SELECT COUNT(*)
     FROM posts
     JOIN users ON posts.author_id = users.id
     WHERE
@@ -132,7 +135,7 @@ export async function fetchPostsPages(query: string | string[]): Promise<number>
  */
 export async function fetchPostById(id: string): Promise<PostView> {
   try {
-    const data = await sql<PostView>`
+    const data: QueryResult<PostView> = await sql<PostView>`
       SELECT
         users.username,
         users.image_url,
@@ -146,10 +149,10 @@ export async function fetchPostById(id: string): Promise<PostView> {
       WHERE posts.id = ${id};
     `;
 
-    const post = data.rows;
+    const post: PostView = data.rows[0];
 
     console.log(post);
-    return post[0];
+    return post;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch post.');
@@ -162,7 +165,7 @@ export async function fetchPostById(id: string): Promise<PostView> {
  */
 export async function fetchUsers(): Promise<UserPreview[]> {
   try {
-    const data = await sql<UserPreview>`
+    const data: QueryResult<UserPreview> = await sql<UserPreview>`
       SELECT
         id,
         COUNT(post_ids),
@@ -172,8 +175,7 @@ export async function fetchUsers(): Promise<UserPreview[]> {
       ORDER BY users ASC
     `;
 
-    const users = data.rows;
-    return users;
+    return data.rows;
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch all users.');
@@ -187,7 +189,7 @@ export async function fetchUsers(): Promise<UserPreview[]> {
  */
 export async function fetchFilteredUsers(query: string): Promise<UsersTable[]> {
   try {
-    const data = await sql<UsersTable>`
+    const data: QueryResult<UsersTable> = await sql<UsersTable>`
         SELECT
           users.id,
           users.name,
@@ -203,8 +205,7 @@ export async function fetchFilteredUsers(query: string): Promise<UsersTable[]> {
         ORDER BY users.username ASC
       `;
 
-    const users = data.rows;
-    return users;
+    return data.rows;
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch user table.');
@@ -218,7 +219,8 @@ export async function fetchFilteredUsers(query: string): Promise<UsersTable[]> {
  */
 export async function fetchUserById(id: string): Promise<UserRecord> {
   try {
-    const data = await sql<UserRecord>`
+
+    const data: QueryResult<UserRecord> = await sql<UserRecord>`
       SELECT
         users.id,
         users.username,
@@ -228,10 +230,8 @@ export async function fetchUserById(id: string): Promise<UserRecord> {
       WHERE users.id = ${id};
     `;
 
-    const user = data.rows;
+    return data.rows[0];
 
-    console.log(user);
-    return user[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch user.');
@@ -245,7 +245,7 @@ export async function fetchUserById(id: string): Promise<UserRecord> {
  */
 export async function fetchProfilePosts(id: string): Promise<PostPreview[]> {
   try {
-    const data = await sql<PostPreview>`
+    const data: QueryResult<PostPreview> = await sql<PostPreview>`
       SELECT posts.id, users.username, users.image_url, posts.date, posts.title
       FROM posts
       JOIN users ON posts.author_id = users.id
@@ -253,11 +253,7 @@ export async function fetchProfilePosts(id: string): Promise<PostPreview[]> {
       ORDER BY posts.date DESC
     `;
 
-    const profilePosts = data.rows.map((post) => ({
-      ...post,
-    }));
-
-    return profilePosts;
+    return data.rows;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the Profiles posts.');

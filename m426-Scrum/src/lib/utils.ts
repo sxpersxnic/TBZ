@@ -19,23 +19,17 @@ export const formatDateToLocal = (
   return formatter.format(date);
 };
 
-// export const generateYAxis = (revenue: Revenue[]) => {
-//   // Calculate what labels we need to display on the y-axis
-//   // based on highest record and in 1000s
-//   const yAxisLabels = [];
-//   const highestRecord = Math.max(...revenue.map((month) => month.revenue));
-//   const topLabel = Math.ceil(highestRecord / 1000) * 1000;
-
-//   for (let i = topLabel; i >= 0; i -= 1000) {
-//     yAxisLabels.push(`$${i / 1000}K`);
-//   }
-
-//   return { yAxisLabels, topLabel };
-// };
-
 /**
- * Description placeholder
+ * Generates Pagination for pages.
+ * 
+ * - If the total number of pages is 7 or less, all pages are displayed without any ellipsis.
+ * 
+ * - If the current page is among the first 3 pages, the first 3, an ellipsis and the last 2 pages are shown.
  *
+ * - If the current page is among the last 3 pages, the first 2, an ellipsis and the last 3 pages are shown.
+ * 
+ * - If the current page is somewhere in the middle, the first page, an ellipsis, the current page and its neighbors, another ellipsis, and the last page are shown.
+ * 
  * @param {number} currentPage
  * @param {number} totalPages
  * @returns {*}
@@ -74,13 +68,13 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
 };
 
 /**
- * Description placeholder
+ * Utility function to generate a random
  *
  * @param {number} length
  * @param {string} chars
- * @returns {string}
+ * @returns {string} - Random hex string
  */
-function generateRandomHex(length: number, chars: string): string {
+function getRandomHex(length: number, chars: string = '0123456789abcdef'): string {
   let result = '';
   for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * chars.length);
@@ -90,17 +84,19 @@ function generateRandomHex(length: number, chars: string): string {
 }
 
 /**
- * Description placeholder
+ * Generates a valid UUIDv4.
+ * 
+ * Format: **xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx**
+ *  - x: A random Hex string `(0123456789abcdef)`
+ *  - 4: Version
+ *  - y: Variant `(ab89)`
  *
- * @returns {string}
+ * @export
+ * @returns {string} 36 Characters long String.
  */
-export const generateUUID = (): string => {
-  const version: string = "4";
-  const chars: string = '0123456789abcdef';
+export function getUuid(): string {
   const variant: string = 'ab89';
-  const uuid: string = `${generateRandomHex(8, chars)}-${generateRandomHex(4, chars)}-${version}${generateRandomHex(3, chars)}-${generateRandomHex(1, variant)}${generateRandomHex(3, chars)}-${generateRandomHex(12, chars)}`;
-
-  console.log(uuid);
+  const uuid: string = `${getRandomHex(8)}-${getRandomHex(4)}-4${getRandomHex(3)}-${getRandomHex(1, variant)}${getRandomHex(3)}-${getRandomHex(12)}`;
 
   return uuid;
 }

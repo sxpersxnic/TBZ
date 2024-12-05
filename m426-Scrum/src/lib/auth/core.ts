@@ -1,18 +1,18 @@
-"use server";
+'use server';
 
 import { redirect } from "next/navigation";
-import { defaultPfp, defaultSession, FormState, SessionData, sessionOptions, SignInFormSchema, SignUpFormSchema } from "../definitions";
+import { defaultPfp, FormState, SignUpFormSchema } from "../definitions";
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import bcrypt from 'bcrypt';
-import { revalidatePath } from "next/cache";
 import { eq } from 'drizzle-orm';
 import { getSession } from "./session";
-import { getIronSession } from "iron-session";
-import { cookies } from "next/headers";
 
 /**
- * Description placeholder
+ * - Validates fields
+ * - Hash password
+ * - Check for existence of User
+ * - Insert User into database
  *
  * @export
  * @async
@@ -67,38 +67,39 @@ export async function signup(state: FormState, formData: FormData): Promise<Form
   }
 
   // 5. Redirect to signin
-  revalidatePath("/auth/login");
   redirect("/auth/login");
-
 }
 
 export async function signin(prevState: FormState, formData: FormData): Promise<FormState> {
+  
   const session = await getSession();
 
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  const foundUsers = await db.select().from(users).where(eq(users.email, email))
+  const foundUsers = await db.select().from(users).where(eq(users.email, email));
+  
   const user = foundUsers[0];
   const hash = user.password;
 
   const passwordsMatch = await bcrypt.compare(password, hash);
 
-  if (!passwordsMatch) {
-    return {
-      message: "Invalid Credentials"
-    };
-  }
+  if (!passwordsMatch) { return { message: "Invalid Credentials" }; }
 
-  session.userId = user?.id
-  session.isLoggedIn = true
+  session.userId = user?.id;
+  session.isLoggedIn = true;
 
   await session.save();
   redirect("/blog");
 };
 
-export async function signout() {
-  const session = await getSession();
-  session.destroy();
-  redirect("/");
+export async function signout(): Promise<void> {
+  try {
+    const session = await getSession();
+    session.destroy();
+    redirect("/");
+  } catch (err) {
+    console.error("There was an Error during signout: ", err);
+    throw new Error('Failed to signout');
+  }
 }
