@@ -1,8 +1,8 @@
 # KN05 13.12.2024 #
 
-## A) Terms and private IP
+## A) Terms and private IP ##
 
-### Term explanation
+### Term explanation ###
 
 |Term|Explanation|
 |----|-----------|
@@ -11,26 +11,25 @@
 |How many subnets are already predefined?| There is one predefined subnet with the name: '-' |
 |Do the IP ranges of the subnet cover the entire IP range of the VPC?|Yes the entire range of the VPC (172.31.0.0/16) is covered (Min: 172.31.0.0/20, Max: 172.31.80.0/20) but by multiple subnets, a single subnet does not cover the entire range of the VPC.|
 |Public IP address| The public IP is reachable from the internet |
-|Static IP address|A static IP address is an IP address that does not change. Unlike dynamic IP addresses assigned by DHCP, static IP addresses remain constant, making them useful for servers that need a consistent address for communication.
+|Static IP address|A static IP address is an IP address that does not change. Unlike dynamic IP addresses assigned by DHCP, static IP addresses remain constant, making them useful for servers that need a consistent address for communication.|
 
-###  Screenshot Subnet-List
+### Screenshot Subnet-List ###
 
   ![Subnet-List in AWS](/m346-Cloud/Images/KN05/SUBNETS.png)
 
-### Private IPs
+### Private IPs ###
 
-#### Apache:
+#### Apache ####
 
-  - 172.31.0.10/16
+- 172.31.0.10/16
   
-#### Mariadb:
+#### Mariadb ####
 
-  - 172.31.0.20/16
+- 172.31.0.20/16
 
+## B) Creation of objects and instances ##
 
-## B) Creation of objects and instances
-
-### Securitygroup
+### Securitygroup ###
 
 **Screenshot Securitygroups list:**
 
@@ -44,10 +43,10 @@
 
   ![Inbound rules of Apache Server](/m346-Cloud/Images/KN05/INBOUND-APACHE.png)
 
-### Public, static IP
+### Public, static IP ###
 
   ![Elastic IPs](/m346-Cloud/Images/KN05/IP-APACHE.png)
 
-### Create instances
+### Create instances ###
 
   ![EC2 Instances](/m346-Cloud/Images/KN05/INSTANCES.png)
