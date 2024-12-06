@@ -6,7 +6,7 @@
 
 ## B) SSH-Key und Cloud-init ##
 
-- [Config-File](./aws_2.yml)
+- [Config-File](./Cloud-Init/aws_2.yml)
   
 - Screenshot "Key pair assigned at launch":
   
@@ -26,7 +26,7 @@
 
 ## C) Template ##
 
-[YML Template](./template.yml)
+[YML Template](./Cloud-Init/template.yml)
 
 ## D) Installation automatisieren ##
 
