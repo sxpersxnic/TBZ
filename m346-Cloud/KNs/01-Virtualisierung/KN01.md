@@ -28,11 +28,11 @@ Der Hypervisor verwaltet virtuelle Maschinen und teilt Hardware Resource zwische
 
 ##### CPU des Host-Systems
 
-  ![CPU des Host-Systems](/Images/KN01/CPU-Host.png)
+  ![CPU des Host-Systems](/m346-Cloud/Images/KN01/CPU-Host.png)
 
 ##### RAM des Host-Systems
 
-  ![RAM des Host-Systems](/Images/KN01/RAM-Host.png)
+  ![RAM des Host-Systems](/m346-Cloud/Images/KN01/RAM-Host.png)
 
 #### 2.2 VM aufsetzen
 
@@ -41,7 +41,7 @@ Wir benutzen Oracles Virtualbox mit einem Ubuntu Linux System.
 #### 2.3 VM überladen (CPU)
 
 Fehler Bei 3 Logischen CPU's:
-![Fehlermeldung der Virtualbox](/Images/KN01/Error-CPUs.png)
+![Fehlermeldung der Virtualbox](/m346-Cloud/Images/KN01/Error-CPUs.png)
 
 #### 2.4 CPUs der VM
 
@@ -49,13 +49,13 @@ Wir haben nun bloss einen logischen Prozessor benutzt.
 
 Command: ```sh lscpu | grep "CPU(s)"```
 
-![Ubuntu VM Terminal](/Images/KN01/VM-Screenshot-CPU.png)
+![Ubuntu VM Terminal](/m346-Cloud/Images/KN01/VM-Screenshot-CPU.png)
 
 #### 2.5 RAM der VM
 
 Command: ```sh free -h```
 
-![Ubuntu VM Terminal](/Images/KN01/VM-Screenshot-RAM.png)
+![Ubuntu VM Terminal](/m346-Cloud/Images/KN01/VM-Screenshot-RAM.png)
 
 ### 3. Fazit Vermutung
 
