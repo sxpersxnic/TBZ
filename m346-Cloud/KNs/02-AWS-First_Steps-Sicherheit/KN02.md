@@ -8,7 +8,7 @@
 
 ### AWS EC2 Instanz
 
-![Screenshot von AWS EC2 Instanzen](/Images/KN02/AWS_KN02_EC2.png)
+![Screenshot von AWS EC2 Instanzen](/m346-Cloud/Images/KN02/AWS_KN02_EC2.png)
 
 ### Details
 
@@ -34,12 +34,12 @@ ssh -i "C:\Users\sxpersxnic\.ssh\sxnic1.pem" ubuntu@ec2-23-21-28-114.compute-1.a
 
 ### Screenshot Key-1
 
-![Screenshot mit dem ssh-Befehl und des Resultats unter Verwendung des ersten Schlüssels](/Images/KN02/AWS_KN02_EC2_KEY1.png)
+![Screenshot mit dem ssh-Befehl und des Resultats unter Verwendung des ersten Schlüssels](/m346-Cloud/Images/KN02/AWS_KN02_EC2_KEY1.png)
 
 ### Screenshot Key-2
 
-![Screenshot mit dem ssh-Befehl und des Resultats unter Verwendung des zweiten Schlüssels](/Images/KN02/AWS_KN02_EC2_KEY2.png)
+![Screenshot mit dem ssh-Befehl und des Resultats unter Verwendung des zweiten Schlüssels](/m346-Cloud/Images/KN02/AWS_KN02_EC2_KEY2.png)
 
 ### Screenshot Instance-Details
 
-![Screenshot der Instanz-Detail (oder Liste), so dass der verwendete Schlüssel sichtbar ist.](/Images/KN02/AWS_KN02_EC2_KEY_USED.png)
+![Screenshot der Instanz-Detail (oder Liste), so dass der verwendete Schlüssel sichtbar ist.](/m346-Cloud/Images/KN02/AWS_KN02_EC2_KEY_USED.png)
