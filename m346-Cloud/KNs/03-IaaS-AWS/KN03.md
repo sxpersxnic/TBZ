@@ -8,25 +8,25 @@ In AWS EC2 Machine run bash script: [Here](https://github.com/sxpersxnic/m346/tr
 
 #### Index.html
 
-![index.html Seite](/Images/KN03/INDEX-HTML.png)
+![index.html Seite](/m346-Cloud/Images/KN03/INDEX-HTML.png)
 
 #### Info.php
 
-![info.php Seite](/Images/KN03/INFO-PHP.png)
+![info.php Seite](/m346-Cloud/Images/KN03/INFO-PHP.png)
 
 #### Db.php
 
-![db.php Seite](/Images/KN03/DB-PHP.png)
+![db.php Seite](/m346-Cloud/Images/KN03/DB-PHP.png)
 
 ### EC2
 
 #### Instanz infos
 
-![Instanz Details](/Images/KN03/INSTANCE-DETAILS.png)
+![Instanz Details](/m346-Cloud/Images/KN03/INSTANCE-DETAILS.png)
 
 #### Security Group
 
-![Details Security group](/Images/KN03/SECURITY-GROUP.png)
+![Details Security group](/m346-Cloud/Images/KN03/SECURITY-GROUP.png)
 
 ### MySQL CLI
 
