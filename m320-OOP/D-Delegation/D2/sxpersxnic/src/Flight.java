@@ -1,24 +1,41 @@
 import java.util.List;
 
+/**
+ * Represents a flight with passengers and flight-specific details.
+ */
 public class Flight {
 
-
-    // <---------Passengers--------->
+    /** List of passengers on the flight */
     private List<Passenger> passengers;
 
-    public String getFlightNumber() {
-        return flightNumber;
-    }
-
+    /** Unique flight number */
     private final String flightNumber;
 
-    // <---------Constructor--------->
+
+    /**
+     * Constructs a flight with a list of passengers.
+     * Generates a random flight number upon creation.
+     *
+     * @param passengers Initial list of passengers on the flight
+     */
     public Flight(List<Passenger> passengers) {
         this.passengers = passengers;
         this.flightNumber = Util.randomFlightNumber();
     }
 
-    // <---------printPassengers--------->
+    /**
+     * Retrieves the flight number.
+     *
+     * @return The unique flight number
+     */
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    /**
+     * Prints the list of passengers on the flight.
+     * Displays flight number and passenger names.
+     */
     public void printPassengers() {
 
         System.out.println("Passengers of Flight " + getFlightNumber() + ":");
@@ -30,10 +47,20 @@ public class Flight {
         }
     }
 
+    /**
+     * Retrieves the current list of passengers.
+     *
+     * @return List of passengers on the flight
+     */
     public List<Passenger> getPassengers() {
         return passengers;
     }
 
+    /**
+     * Updates the list of passengers on the flight.
+     *
+     * @param passengers New list of passengers
+     */
     public void setPassengers(List<Passenger> passengers) {
         this.passengers = passengers;
     }

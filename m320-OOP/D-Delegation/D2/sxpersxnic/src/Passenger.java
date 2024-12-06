@@ -1,15 +1,25 @@
-import java.util.ArrayList;
 
-public class Seed {
+/**
+ * Represents an individual passenger on a flight.
+ */
+public class Passenger {
 
-    public static Flight seedFlight() {
-        ArrayList<Passenger> passengers = new ArrayList<>();
+    /** Passenger's full name */
+    private final String name;
 
-        for (int i = 0; i <= 20; i++) {
-            Passenger passenger = new Passenger(Util.getRandomName());
-            passengers.add(passenger);
-        }
+    /**
+     * Constructs a passenger with a given name.
+     *
+     * @param name Full name of the passenger
+     */
+    public Passenger(String name) {
+        this.name = name;
+    }
 
-        return new Flight(passengers);
+    /**
+     * Prints the passenger's name.
+     */
+    public void printName() {
+        System.out.println(name);
     }
 }

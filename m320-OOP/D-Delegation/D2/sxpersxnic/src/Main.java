@@ -2,7 +2,18 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Main application class for flight booking system.
+ * Handles flight registration, passenger management, and flight initialization.
+ */
 public class Main {
+
+    /**
+     * Primary entry point of the flight booking application.
+     * Allows user to join a flight, view passengers, and start or remove themselves from the flight.
+     *
+     * @param args Command-line arguments (not used in this application)
+     */
     public static void main(String[] args) {
         Flight flight = Seed.seedFlight();
         List<Passenger> passengers = flight.getPassengers();
