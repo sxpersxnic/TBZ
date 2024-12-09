@@ -3,6 +3,9 @@
 ## A) Installation App ##
 
 - **Reverse Proxy:**
+
+Das Reverse Proxy wird verwendet um Requests über das HTTP-Protokoll von Port 80 auf den Port der Java Applikation (8080) umzuleiten.
+
 - **Screenshot Swagger-URL:**
   
   ![Swagger Website](/m346-Cloud/Images/KN06/SWAGGER-URL.png)
