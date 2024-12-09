@@ -12,29 +12,29 @@ Miro Board: [Here](https://miro.com/app/board/uXjVLE30rto=/)
 
 ### D
 
-- [ ] D1
-- [ ] D2
-- [ ] D3
+- [x] D1
+- [x] D2
+- [x] D3
 - [ ] D4
 
 ### M
 
-- [ ] M1
-- [ ] M2
+- [x] M1
+- [x] M2
 - [ ] M3
 - [ ] M4
 
 ### Q
 
-- [ ] Q1
-- [ ] Q2
+- [x] Q1
+- [x] Q2
 - [ ] Q3
 - [ ] Q4
 
 ### V
 
-- [ ] V1
-- [ ] V2
+- [x] V1
+- [x] V2
 - [ ] V3
 - [ ] V4
 
