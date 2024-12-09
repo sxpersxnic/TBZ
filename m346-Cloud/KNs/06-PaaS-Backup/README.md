@@ -10,6 +10,12 @@
 - **Screenshot Swagger endpoints (Products: Java, GetProducts: .NET):**
 
   ![Swagger Website](/m346-Cloud/Images/KN06/SWAGGER-PRODUCTS.png)
+
+- **Screenshot MongoDB:**
+
+  ![Screenshot MongoDB Collections](/m346-Cloud/Images/KN06/MONGODB.png)
+
+- **Cloud init. Useless for productive system:**
   
 ## B) Verticale scaling ##
 
