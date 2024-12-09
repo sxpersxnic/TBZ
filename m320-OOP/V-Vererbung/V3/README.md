@@ -8,7 +8,7 @@ Verwendung eines Interfaces um den Code flexibler zu gestalten. Polymorphismus m
 
 Wir wollen ein Portfolio von Wertpapieren (Aktien) simulieren. Dabei soll das Portfolio entsprechende Börsen aufrufen können, um die Preise der Aktien zu aktualisieren.
 Unsere Portfolio Klasse soll es aber ermöglichen, dass wir verschiedene Börsen als Parameter übergeben können. Somit verwendet die Portfolio Klasse ein Interface Stock Exchange.
-Hinter dem StockExchange können sich verschiedene Börsen ,,verstecken": Zürich, London und NY z.Bsp.
+Hinter dem StockExchange können sich verschiedene Börsen *verstecken*: Zürich, London und NY z.Bsp.
 
 ## Schwierigkeit
 
@@ -16,19 +16,19 @@ Das Konzept des Interfaces verstehen und anwenden. Dabei kann auch Polymorphismu
 
 ## Vorgehen
 
-Erstellen Sie eine Klasse Portfolio, welche eine Sammlung von Ak- tien besitzt. Um den aktuellen Wert einer Aktie zu bestimmen, wird eine entsprechende Börse aufgerufen.
+Erstellen Sie eine Klasse Portfolio, welche eine Sammlung von Aktien besitzt. Um den aktuellen Wert einer Aktie zu bestimmen, wird eine entsprechende Börse aufgerufen.
 Dabei soll es möglich sein, dass das Portfolio verschiedene Börsen aufrufen kann. Somit ist die Börse als Interface im Portfolio definiert.
 
 ### TASK a):
 
-Implementieren Sie die Struktur Portfolio - Liste von Aktien - Inter- face Stock Exchange mit zwei konkreten Implementationen (Börsenplätze).
+Implementieren Sie die Struktur Portfolio - Liste von Aktien - Interface Stock Exchange mit zwei konkreten Implementationen (Börsenplätze).
 Setzen Sie die Preise für zwei Aktien in den jeweiligen Börsen fest. (z.Bsp. Microsoft hat 100$ in NY, 120 CHF in Zürich).
 Ihre Testklasse (main-Klasse) ruft das Portfolio auf und übergibt eine Börse als Parameter.
 Die jeweiligen Werte für die beiden Aktien werden in der Konsole ausgegeben.
 
 ### TASK b):
 
-Implementieren Sie die Struktur Portfolio - Liste von Aktien - In- terface StockExchange mit zwei konkreten Implementationen (Börsenplätze).
+Implementieren Sie die Struktur Portfolio - Liste von Aktien - Interface StockExchange mit zwei konkreten Implementationen (Börsenplätze).
 Setzen Sie die Preise für vier Aktien in den jeweiligen Börsen fest. (z.Bsp. Microsoft hat 100$ in NY, 120 CHF in Zürich).
 Ihre Testklasse (main-Klasse) ruft das Portfolio auf und übergibt eine Börse als Parameter.
 Die jeweiligen Werte für die beiden Aktien werden in der Konsole ausgegeben.
