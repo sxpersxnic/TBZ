@@ -52,11 +52,11 @@ runcmd:
   - sudo apt-get update
   - sudo apt-get install -y mongodb-mongosh
   # import mongodb collections
-  - mongosh "mongodb+srv://[[Mongodb-Cluster-URL]]/" -u sxpersxnic -p [[Mongodb-password]] < /home/ubuntu/m346scripts/KN06/shop-database-mongodb.txt
+  - mongosh "mongodb+srv://cluster-kn06.k1ml4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-KN06" -u sxpersxnic -p [[Mongodb-password]] < /home/ubuntu/m346scripts/KN06/shop-database-mongodb.txt
   # install App
   - sudo mkdir /var/www
   - sudo mkdir /var/www/app
-  - sudo sed -i 's/<clusterUrl>/[[Mongodb-Cluster-URL]]/g' /home/ubuntu/m346scripts/KN06/java/production.properties
+  - sudo sed -i 's/<clusterUrl>/mongodb+srv://cluster-kn06.k1ml4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-KN06/g' /home/ubuntu/m346scripts/KN06/java/production.properties
   - sudo sed -i 's/<username>/sxpersxnic/g' /home/ubuntu/m346scripts/KN06/java/production.properties
   - sudo sed -i 's/<password>/[[Mongodb-password]]/g' /home/ubuntu/m346scripts/KN06/java/production.properties
   - sudo cp -r /home/ubuntu/m346scripts/KN06/java/* /var/www/app/
