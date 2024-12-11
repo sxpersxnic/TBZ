@@ -12,11 +12,31 @@ Miro Board: [Here](https://miro.com/app/board/uXjVLE30rto=/)
 
 ### D
 
+- [x] D1
+- [x] D2
+- [x] D3
+- [ ] D4
+
 ### M
+
+- [x] M1
+- [x] M2
+- [ ] M3
+- [ ] M4
 
 ### Q
 
+- [x] Q1
+- [x] Q2
+- [ ] Q3
+- [ ] Q4
+
 ### V
+
+- [x] V1
+- [x] V2
+- [ ] V3
+- [ ] V4
 
 ## The 4 Principles of OO Programming
 

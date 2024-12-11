@@ -32,7 +32,7 @@ In AWS EC2 Machine run bash script: [Here](https://github.com/sxpersxnic/m346/tr
 
 #### Query
 
-![MySQL Query](/Images/KN03/MYSQL-QUERY.png)
+![MySQL Query](/m346-Cloud/Images/KN03/MYSQL-QUERY.png)
 
 #### Explanation
 
