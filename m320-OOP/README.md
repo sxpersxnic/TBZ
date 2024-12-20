@@ -28,14 +28,14 @@ Miro Board: [Here](https://miro.com/app/board/uXjVLE30rto=/)
 
 - [x] Q1
 - [x] Q2
-- [ ] Q3
+- [x] Q3
 - [ ] Q4
 
 ### V
 
 - [x] V1
 - [x] V2
-- [ ] V3
+- [x] V3
 - [ ] V4
 
 ## The 4 Principles of OO Programming
