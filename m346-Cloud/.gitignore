@@ -1,1 +1,3 @@
 /m346-gitlab
+*/**/*.env*
+!*/**/*.env.example
