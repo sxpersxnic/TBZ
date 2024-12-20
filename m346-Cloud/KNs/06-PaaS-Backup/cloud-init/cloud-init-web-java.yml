@@ -5,7 +5,8 @@ users:
     groups: users, admin
     home: /home/ubuntu
     shell: /bin/bash
-    ssh_authorized_keys: # Public key!
+    ssh_authorized_keys: 
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDKZvoJSId9VihK89aCEIkwynyzDj6qsonkRTqHFCw53QNhEtprGlsmxzaDAO1NYU6S+z721z0SDCfRJUpPnLWUS0kTAWwTHemdyTdRwgzmxj9xPER8r7xILw3j5SLvWiEv1j2wmMqAwn6/YTEqF4TEszK7VhibpK3OwnvITH1c0dseo5tVrl0GxsRRYuZBW5mLeZC7uIj4+I4c/QuD6OtOTvxBcPT+ID2xwNzXGrfS/cogd72w/fL5NfmhrFbLICpdYpaSv0dKf2Hpn7D9qhqNxFEAaDXwlkNfugKrixREN5vK0K0ebFZWfwzYfr1Hh7vTFP5Gq/ejrWyiC2UsMa3tpq5t5+QXzCrzbHU6hkjPEPeYsZDLQXCZMBt9ZI3BEOUQW6iU+TXMnVC5SFxo0SZMfgJQTlwBbtG+s4EihTXNWC6N1BT7Ta7l+Gv92r3giZI19FqVNIQdYrJ6L8rc61BPHfspPFKypEMscjmnHyN/3wJBYxRFOs6bYue6hgfDiVxftOp453Qu3b2kbOZP7nvt/9/X7jC6CVfb5SWV6BYPpY8w2D2ir39bl6O2l4lmSNqISvP5UDUD9rvFratX4lzgmegAN8bhZjMM7+emYONlDMrk1zv699quRQuhFeDHouTJ0vTV7QPFB4YIE+pdhy5J+YO3hWgMguvkagRLhNZ+aQ== sxpersxnic@sxnic
 ssh_pwauth: true
 disable_root: false  
 package_update: true 
@@ -61,7 +62,10 @@ runcmd:
   - sudo sed -i 's/<password>/p6gApXhrq3HUlNT3/g' /home/ubuntu/m346scripts/KN06/java/production.properties
   - sudo cp -r /home/ubuntu/m346scripts/KN06/java/* /var/www/app/
   - sudo systemctl enable shop-app.service
-  - sudo systemctl start shop-app.service
   - sudo service nginx start
+
   - sudo cp /home/ubuntu/nginx /etc/nginx/sites-available/default
+  # Symlink
+  - sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
   - sudo nginx -s reload
+  - sudo systemctl start shop-app.service

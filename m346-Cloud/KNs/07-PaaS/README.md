@@ -2,7 +2,7 @@
 
 ## A) Datenbank im PAAS Modell
 
-![Screenshot MySQL Workbench mit ausgeführtem Query](/m346-Cloud/Images/KN07/MYSQL.png)
+![Screenshot MySQL Workbench mit ausgeführtem Query](/m346-Cloud/Images/KN07/MYSQL-QUERY.png)
 
 ### Vorteile PAAS/SAAS 
 
