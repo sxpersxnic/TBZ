@@ -6,6 +6,6 @@ public class Main {
         Checker checker = new Checker();
 
         List<Person> persons = initializer.intitalizePersons();
-        checker.doesPersonHaveCar(persons.get(15));
+        checker.doesPersonHaveCar(persons.get(12));
     }
 }

@@ -16,7 +16,7 @@
             Person mara = new Person("Mara", false);
             Person dimitri = new Person("Dimitri", false);
             Person kumaran = new Person("Kumaran", false);
-            Person januscha = new Person("Januscha", true);
+            Person januscha = new Person("Januscha", false);
             Person pablo = new Person("Pablo", true);
             Person christian = new Person("Christian", false);
             Person iljas = new Person("Iljas", false);
