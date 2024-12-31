@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active:
+      - dev
+  config:
+    import: application-dev.yml
+
+# For production:
+#spring:
+#  profiles:
+#    active:
+#      - prod
+#  config:
+#    import: application-prod.yml

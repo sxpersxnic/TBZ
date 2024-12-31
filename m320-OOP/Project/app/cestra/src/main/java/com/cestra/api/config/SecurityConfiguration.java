@@ -2,67 +2,32 @@ package com.cestra.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
+
+import static com.cestra.api.lib.constants.SecurityConstants.*;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
-
-    @Value("${cestora.auth.urls}")
-    private static final String AUTH_URLS;
-
-    @Value("${cestora.root.path}")
-    private static final String ROOT_PATH;
-
-    @Value("${cestora.api.documentation.urls}")
-    private static final String API_DOCUMENTATION_URLS;
-
-    @Value("${cestora.ws.endpoint}")
-    private static final String WS_ENDPOINT;
-
-    @Value("${cestora.secret.key.spec}")
-    private static final String SECRET_KEY_SPEC;
-
-    @Value("${cestora.jwt.issuer}")
-    private static final String JWT_ISSUER;
-
-    @Value("${cestora.jwt.audience}")
-    private static final String JWT_AUDIENCE;
-
-    @Value("${cestora.jwt.expiration}")
-    private static final String JWT_EXPIRATION;
-
-    @Value("${cestora.jwt.claim.roles}")
-    private static final String JWT_CLAIM_ROLES;
-
-    @Value("${cestora.jwt.claim.permissions}")
-    private static final String JWT_CLAIM_PERMISSIONS;
-
-    @Value("${cestora.jwt.claim.username}") 
-    private static final String JWT_CLAIM_USERNAME; 
-
-    @Value("${cestora.jwt.claim.email}")    
-
-    private static final String JWT_CLAIM_EMAIL;
-
-    @Value("${cestora.jwt.claim.fullname}")
-    private static final String JWT_CLAIM_FULLNAME;
-
-    @Value("${server.servlet.context-path}")
-    private static final String CONTEXT_PATH;
-
-    @Value("${cestora.profile}")
-    private static final String PROFILE;
-
-    if 
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -76,11 +41,8 @@ public class SecurityConfiguration {
                 .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authorizeRequest ->
                         authorizeRequest
-                                .requestMatchers(HttpMethod.POST, SecurityConstants.AUTH_URLS).permitAll()
-                                .requestMatchers(HttpMethod.GET, SecurityConstants.ROOT_PATH).permitAll()
-                                .requestMatchers(HttpMethod.GET, SecurityConstants.API_DOCUMENTATION_URLS).permitAll()
-
-                                .requestMatchers(new AntPathRequestMatcher(CONTEXT_PATH + "/**")).permitAll()
+                                .requestMatchers(HttpMethod.POST, AUTH_URLS).permitAll()
+                                .requestMatchers(HttpMethod.GET, PUBLIC_URLS).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()))
@@ -91,7 +53,7 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:9000"));
+        configuration.setAllowedOrigins(List.of(CLIENT_URL));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
@@ -108,9 +70,9 @@ public class SecurityConfiguration {
     @Bean
     public JwtDecoder customDecoder() {
         return NimbusJwtDecoder
-                .withSecretKey(SecurityConstants.SECRET_KEY_SPEC)
+                .withSecretKey(SECRET_KEY_SPEC)
                 .build();
     }
 
 }
-}
+

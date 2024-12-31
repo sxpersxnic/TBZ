@@ -1,0 +1,43 @@
+DROP TABLE IF EXISTS resources;
+DROP TABLE IF EXISTS templates;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS user_cloud_accounts;
+
+CREATE TABLE users (
+    id UUID PRIMARY KEY UNIQUE NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(256) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE templates (
+    id UUID PRIMARY KEY UNIQUE NOT NULL,
+    user_id UUID NOT NULL REFERENCES users(id),
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    template_content JSONB NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE cloud_resources (
+    id UUID PRIMARY KEY UNIQUE NOT NULL,
+    user_id UUID NOT NULL REFERENCES users(id),
+    provider VARCHAR(50) NOT NULL,
+    resource_id VARCHAR(100) NOT NULL,
+    configuration JSONB,
+    status VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_cloud_accounts (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL REFERENCES users(id),
+    provider VARCHAR(50) NOT NULL,     -- AWS, Azure, GCP
+    access_token TEXT,                 -- Encrypted OAuth token
+    refresh_token TEXT,                -- Encrypted OAuth token (optional)
+    api_key TEXT,                      -- Encrypted API key (for AWS)
+    secret_key TEXT,                   -- Encrypted secret key (for AWS)
+    token_expiry TIMESTAMP,            -- OAuth token expiry time
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
