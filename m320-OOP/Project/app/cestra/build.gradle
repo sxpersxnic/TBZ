@@ -31,7 +31,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    //implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
     // Development
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -45,6 +44,42 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 
+    // Provider SDKs
+    // AWS
+    implementation 'software.amazon.awssdk:aws-sdk-java:2.29.34'
+
+    // Azure
+    implementation 'com.azure:azure-core:1.21.0'
+    implementation 'com.azure:azure-storage-blob:12.14.0'
+    implementation 'com.azure:azure-storage-file-share:12.14.0'
+    implementation 'com.azure:azure-storage-queue:12.14.0'
+    implementation 'com.azure:azure-storage-table:12.14.0'
+    implementation 'com.azure:azure-identity:1.4.0'
+    implementation 'com.azure:azure-keyvault'
+    implementation 'com.azure:azure-keyvault-secrets'
+    implementation 'com.azure:azure-key'
+
+    // GCP
+    implementation 'com.google.cloud:google-cloud-storage:2.2.0'
+    implementation 'com.google.cloud:google-cloud-secretmanager:2.2.0'
+    implementation 'com.google.cloud:google-cloud-kms:2.2.0'
+    implementation 'com.google.cloud:google-cloud-pubsub:2.2.0'
+    implementation 'com.google.cloud:google-cloud-bigquery:2.2.0'
+    implementation 'com.google.cloud:google-cloud-spanner:2.2.0'
+    implementation 'com.google.cloud:google-cloud-firestore:2.2.0'
+    implementation 'com.google.cloud:google-cloud-datastore:2.2.0'
+    implementation 'com.google.cloud:google-cloud-bigtable:2.2.0'
+    implementation 'com.google.cloud:google-cloud-iot:2.2.0'
+    implementation 'com.google.cloud:google-cloud-logging:2.2.0'
+    implementation 'com.google.cloud:google-cloud-monitoring:2.2.0'
+    implementation 'com.google.cloud:google-cloud-error-reporting:2.2.0'
+    implementation 'com.google.cloud:google-cloud-tasks:2.2.0'
+    implementation 'com.google.cloud:google-cloud-vision:2.2.0'
+    implementation 'com.google.cloud:google-cloud-speech:2.2.0'
+    implementation 'com.google.cloud:google-cloud-translate:2.2.0'
+    implementation 'com.google.cloud:google-cloud-natural-language:2.2.0'
+    implementation 'com.google.cloud:google-cloud-videointelligence:2.2.0'
+
     // Lombok & Annotation processors
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -55,7 +90,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework:spring-webflux'
     testImplementation 'org.springframework.graphql:spring-graphql-test'
-    runtimeOnly 'com.h2database:h2'
+    testRuntimeOnly 'com.h2database:h2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

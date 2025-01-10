@@ -14,10 +14,9 @@ Ein weiterer Vorteil ist die Netzwerkstruktur einer Applikation. Hat man z.B. ei
 ## B) PAAS Applikationen erstellen
 
 ![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-1.png)
-
 ![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-2.png)
-
 ![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-3.png)
+![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-4.png)
 
 ### Erläuterung Auswahlen
 
