@@ -38,7 +38,11 @@ public class SecurityConfig {
                 .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authorizeRequest ->
                         authorizeRequest
-                                .requestMatchers("*", "*").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/**").permitAll()
+                                .requestMatchers(HttpMethod.PATCH, "/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/**").permitAll()
                 )
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
