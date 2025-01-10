@@ -1,40 +1,27 @@
-supabase:
-  url: ${SUPABASE_URL}
-  anon: ${SUPABASE_ANON_KEY}
-  secret: ${SUPABASE_JWT_SECRET}
 spring:
-  config:
-    activate:
-      on-profile: dev
   application:
     name: api
   profiles:
-    default: dev
-    active: ${ACTIVE_PROFILE}
-  main:
-    banner-mode: off
-  thymeleaf:
-    prefix: classpath:/public/
+    default: application-dev
+    active: ${ACTIVE_PROFILE:application-dev}
+  config:
+    import: file:./${ACTIVE_PROFILE}.yml
   jpa:
     hibernate:
       ddl-auto: validate
-    show_sql: true
     properties:
       hibernate:
-        format_sql: true
-        show_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: ${SUPABASE_DATABASE_URL}
     username: ${SUPABASE_DATABASE_USER}
     password: ${SUPABASE_DATABASE_PASSWORD}
     driverClassName: org.postgresql.Driver
+  thymeleaf:
+    prefix: classpath:/public/
+  main:
+    banner-mode: off
 server:
-  error:
-    whitelabel:
-      enabled: true
-    include-stacktrace: always
-    include-message: always
   address: ${ADDRESS:localhost}
   port: ${PORT:8080}
   compression:
@@ -48,53 +35,8 @@ logging:
     console: "%d{HH:mm:ss.SSS} %highlight(%-5level) %yellow(%logger{40}.%M\\(%class{0}.java:%line\\)) - %msg%throwable%n"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %yellow(%logger{40}.%M\\(%class{0}.java:%line\\)) - %msg%throwable%n"
   file:
-    name: src/main/resources/logs/dev.log
----
+    name: src/main/resources/logs/${ACTIVE_PROFILE}.log
 supabase:
   url: ${SUPABASE_URL}
   anon: ${SUPABASE_ANON_KEY}
   secret: ${SUPABASE_JWT_SECRET}
-spring:
-  profiles:
-    active: ${ACTIVE_PROFILE}
-  config:
-    activate:
-      on-profile: prod
-  application:
-    name: api
-  main:
-    banner-mode: off
-  thymeleaf:
-    prefix: classpath:/public/
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: validate
-        show_sql: false
-  datasource:
-    url: ${SUPABASE_DATABASE_URL}
-    username: ${SUPABASE_DATABASE_USER}
-    password: ${SUPABASE_DATABASE_PASSWORD}
-    driverClassName: org.postgresql.Driver
-server:
-  error:
-    whitelabel:
-      enabled: true
-    include-stacktrace: never
-    include-message: always
-  address: ${ADDRESS:localhost}
-  port: ${PORT:8080}
-  compression:
-    enabled: true
-    mime-types: text/html, text/xml, application/json
-    min-response-size: 1024
-logging:
-  level:
-    root: WARN
-  pattern:
-    console: "%d{HH:mm:ss.SSS} %highlight(%-5level) %yellow(%logger{40}.%M\\(%class{0}.java:%line\\)) - %msg%throwable%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %yellow(%logger{40}.%M\\(%class{0}.java:%line\\)) - %msg%throwable%n"
-  file:
-    name: src/main/resources/logs/prod.log
----

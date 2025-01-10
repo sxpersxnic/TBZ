@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: application-prod
+  jpa:
+    show_sql: false
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+server:
+  error:
+    whitelabel:
+      enabled: false
+    include-path: never
