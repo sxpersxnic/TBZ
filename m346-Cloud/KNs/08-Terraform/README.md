@@ -1,6 +1,6 @@
-# KN08: FaaS und Backup (17.01.2025)
+# KN08: FaaS und Backup (17.01.2025) ##
 
-## A) Backup-Skript
+## A) Backup-Skript ##
 
 ![Screenshot Instanzen mit korrekten Tags](/m346-Cloud/Images/KN08/TAGGED-INSTANCES.png)
 
@@ -10,8 +10,8 @@
 
 ![Screenshot Liste nach Ausführung des Cleanup](/m346-Cloud/Images/KN08/POST-CLEANUP.png)
 
-## B) CRON-Job
+## B) CRON-Job ##
 
-### Scheduler
+### Scheduler ###
 
-### Verknüpfung mit Lambda Funktion
+### Verknüpfung mit Lambda Funktion ###

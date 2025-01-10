@@ -1,6 +1,6 @@
-# KN09 24.01.2025
+# KN09 24.01.2025 #
 
-## A) Automatisierung mit CLI
+## A) Automatisierung mit CLI ##
 
 ![Screenshot der Details der Instanz, die Sie stoppen und starten](/m346-Cloud/Images/KN09/CLI.png)
 
@@ -10,6 +10,6 @@ Skript: [Here](./script.sh)
 
 ![Screenshot des Befehls telnet ihre-IP 3306](/m346-Cloud/Images/KN09/CMD.png)
 
-## B) Terraform
+## B) Terraform ##
 
-## C) Beliebige Erweiterungen (optional)
+## C) Beliebige Erweiterungen (optional) ##
