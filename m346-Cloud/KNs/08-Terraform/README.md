@@ -2,7 +2,8 @@
 
 ## A) Backup-Skript ##
 
-![Screenshot Instanzen mit korrekten Tags](/m346-Cloud/Images/KN08/TAGGED-INSTANCES.png)
+![Screenshot Instanz mit korrektem Tag](/m346-Cloud/Images/KN08/EC2-TAGS-1.png)
+![Screenshot Instanz mit korrektem Tag](/m346-Cloud/Images/KN08/EC2-TAGS-2.png)
 
 ![Screenshot Liste der erstellten Snapshots](/m346-Cloud/Images/KN08/SNAPSHOTS.png)
 
