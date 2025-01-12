@@ -4,7 +4,9 @@ import com.m320.api.model.Profile;
 import com.m320.api.model.User;
 import com.m320.api.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthService {
 
     private final UserRepository userRepository;

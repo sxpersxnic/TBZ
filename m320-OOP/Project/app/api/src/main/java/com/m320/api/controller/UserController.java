@@ -25,6 +25,10 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping()
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll().stream().map(UserMapper::toDTO).toList());
+    }
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable UUID id) {
         try {
