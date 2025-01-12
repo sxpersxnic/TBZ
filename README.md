@@ -30,6 +30,10 @@
 - [346 Cloud](https://github.com/sxpersxnic/TBZ/tree/main/m346-Cloud)
 - [320 OOP](https://github.com/sxpersxnic/TBZ/tree/main/m320-OOP)
 
+### 4th Semester
+
+- [165 NoSQL](https://github.com/sxpersxnic/TBZ/tree/main/m165-NoSQL)
+
 ## License
 
 This repository is licensed with the [MIT](LICENSE) license.
