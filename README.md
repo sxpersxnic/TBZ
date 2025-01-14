@@ -30,6 +30,13 @@
 - [346 Cloud](https://github.com/sxpersxnic/TBZ/tree/main/m346-Cloud)
 - [320 OOP](https://github.com/sxpersxnic/TBZ/tree/main/m320-OOP)
 
+### 4th Semester
+
+- [114 Encryption](https://github.com/sxpersxnic/TBZ/tree/main/m114-Encryption)
+- [165 NoSQL](https://github.com/sxpersxnic/TBZ/tree/main/m165-NoSQL)
+- [254 Business Processes](https://github.com/sxpersxnic/TBZ/tree/main/m254-Business-Processes)
+- [347 Container](https://github.com/sxpersxnic/TBZ/tree/main/m347-Container)
+
 ## License
 
 This repository is licensed with the [MIT](LICENSE) license.
