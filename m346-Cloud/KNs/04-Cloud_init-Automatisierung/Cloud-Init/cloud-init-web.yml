@@ -6,7 +6,7 @@ users:
     home: /home/ubuntu
     shell: /bin/bash 
     ssh_authorized_keys: 
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFvxB6AIaJa3UP9YxvwpiDm5bhxDYlzjqLSpQ8eAyu7rPmMOkIc74e5/gu8kPhbtcaX+bfUkEN8XMNoes2O5E9ujsDm4c20HmDN13Hc16qyvQZVULqpTIkp81YxjZAhmmkAYm9gxxHmVMPhCkAjD+ZiRE4dOqK2WsQKT6f8jopP0WLiGdBgyDR1yUMYqF9KmmtaAPKtLZTPzP51nsLsGN+kVe8hQwbACeThcfzZfEah04sTt5s2DYT+BAvamUX050WlRGk5WwvpHp/D46+t7ehnzHbcvbLXwjdtnZ/usVqeI/6Z5p2cfZJR35MAuThbDcIk6kCy//X2Wt3iA6NFQKkuJ1e5+WMHugWEwxC+kBDg0xjUTbOuKdi5g8chti2Wh/QplH6WqJTvI+51UfUXaPV3SfFcBqSmn+bhXDKasiNBRbFvAR557I8rdumlvo9hhme7WBY569PCWc0ixAjLzEAvWGeLGGaPf1SWf7l/R4W/3ju5vnXeGb85nL/GKBLQKaO1m0mBZ5I7REsigwRavNNYk67y/BlIO/2JoTftrAI0SfDnPPqvynfpfdlnyFZ6q7IY5YeGE4ffQoBX3nQFfl9TzRFgbYebxa8LrrcMAil+rpbA/23e/x35fA0YoieuZ1SLQQZjJ3iH/CRJOkhhXnAk35epPa586AdXuVulgCKfQ== sxpersxnic@sxnic
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDX2hXfKV0Q04uwt4PFeliVnz9uZu+F69NMXCjjpFesxYP3l/N8N4jzs9XAROfufbDi59F7wmjhzl4c0+QIqBp40tbQSvvKWIMfjorlPV3NocUhzS1OxFzREOz5n7b+6T/4SFQbpvZtieT+eGwATBATkw+VuA5e33/evbSRQFKecLgfBAuyMqBFOwd75G1IguI4m1kQHklC7bZYAJZyIsSYl1Mz8+pT4+AspSkEBG1PdEPTM8R7GBznfmbQz3+NBVgtd8GUmRSRyy+iI04YaP56ocEbzXpBLeSbwKs2SmHGLprvu1PH+AkhGDz+BOq7Avr35mHsCpiZyTOCHzfCZ8FFWUckMAtYOfneKbak6k3QuLYpk1F4v10DzAtYwvkXOUj+9sPkiqRQVIj9yHck0YTMkJdt3tYA0GTwGb9r7SJm8BnfeTPGQmRjPUj5E493HyBBPxBwLFRmMF9rLsAx6S93nIcEV36/Q3L3727bOXOX6UeFXoJcV9AtXmV1impTKboMS5LOLgc3Cf9+eJtINtxAT1AP9w0SPzVKYOSb2PsFVmWAMyIz9reAdGCSWICBHAh+NY0O+stOAWMhkVqGZEJ48Es6cS16vArVDqOEFNF2dddKSZkOLxjY+BwI6GL7GuQTcEYhcZeBOdp/+Ji5vhRCRHeLMNs5AUzu5TKamRyHYw== sxpersxnic@sxnic
 ssh_pwauth: false  
 disable_root: false
 package_update: true  
@@ -26,7 +26,7 @@ write_files:
       <html>
         <head>
           <meta charset="UTF-8" />
-          <title>Hello, world!</title>
+          <title>AWS EC2 Instance!</title>
           <meta name="viewport" content="width=device-width,initial-scale=1" />
           <meta name="description" content="" />
           <style>
@@ -109,11 +109,11 @@ write_files:
         <body>
           <main>
             <header>
-      	      <h1>The Apache WebServer ec2 instance works!</h1>
+      	      <h1>EC2 instance works!</h1>
             </header>
             <section>
               <h2>
-                This is KN04 of TBZ Module 346
+                This is the TBZ Module 346
               </h2>
               <p>
                 Visit on 
@@ -129,5 +129,5 @@ write_files:
 
 runcmd:
   - sudo a2enconf adminer
-  - sudo systemctl restart apache2
+  - sudo systemctl restart apache2e
   
