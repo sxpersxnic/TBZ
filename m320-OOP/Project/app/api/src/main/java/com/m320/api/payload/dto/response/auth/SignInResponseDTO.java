@@ -1,12 +1,12 @@
 package com.m320.api.payload.dto.response.auth;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+import java.util.UUID;
+
+@Data
 public class SignInResponseDTO {
-    private String id;
+    private UUID id;
     private String username;
     private String token;
 }

@@ -1,17 +1,13 @@
 package com.m320.api.model;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Getter
-@Setter
-@EqualsAndHashCode(of = "username")
-@Table(name = "profiles", schema = "public")
+@Data
+@Table(name = "profiles")
 @Entity
 public class Profile {
     @Id

@@ -1,16 +1,14 @@
 package com.m320.api.payload.dto.request.auth;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class SignInRequestDTO {
 
-    @NotBlank(message = "Invalid Sign in!")
+    @NotBlank(message = "Email must not be blank!")
     private String email;
 
-    @NotBlank(message = "Invalid Sign in!")
+    @NotBlank(message = "Password must not be blank!")
     private String password;
 }

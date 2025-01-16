@@ -20,4 +20,10 @@ public interface ProfileRepository extends JpaRepository<Profile, UUID> {
     @Query("SELECT p FROM Profile p WHERE p.id = :id")
     Optional<Profile> findByIdForUpdate(UUID id);
 
+    @Query("SELECT p FROM Profile p WHERE p.user.id = :id")
+    Optional<Profile> findByUserId(UUID id);
+
+    boolean existsByUserId(UUID id);
+    boolean existsByUsername(String username);
+
 }

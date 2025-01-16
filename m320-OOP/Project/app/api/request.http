@@ -1,0 +1,62 @@
+### GET: Index page
+GET http://localhost:9000
+
+### POST: Valid Sign in
+POST http://localhost:9000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "user@localhost.com",
+  "password": "P@ssw0rd!14"
+}
+
+### POST: Invalid email Sign in
+POST http://localhost:9000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "user2@localhost.com",
+  "password": "P@ssw0rd!14"
+}
+
+### POST: Invalid password Sign in
+POST http://localhost:9000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "user@localhost.com",
+  "password": "123456"
+}
+
+### POST: Valid Sign up
+POST http://localhost:9000/auth/signup
+Content-Type: application/json
+
+{
+  "username": "user",
+  "email": "user@localhost.com",
+  "password": "P@ssw0rd!14",
+  "confirmPassword": "P@ssw0rd!14"
+}
+
+### POST: Invalid email Sign up
+POST http://localhost:9000/auth/signup
+Content-Type: application/json
+
+{
+  "username": "user",
+  "email": "user@localhost",
+  "password": "P@ssw0rd!14",
+  "confirmPassword": "P@ssw0rd!14"
+}
+
+### POST: Invalid password Sign up
+POST http://localhost:9000/auth/signup
+Content-Type: application/json
+
+{
+  "username": "user",
+  "email": "user@localhost.com",
+  "password": "P@",
+  "confirmPassword": "P@"
+}

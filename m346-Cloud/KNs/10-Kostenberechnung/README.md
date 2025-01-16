@@ -10,63 +10,66 @@ Mögliche Optionen sind die folgenden Modelle *Rehosting*, *Replatforming*, *Rep
 
 Bisher wurde die Applikation *On Premise* betrieben mit folgender Spezifikation:
 
-|Service|CPU Cores|Speicher|RAM|OS|Anzahl|
-|-------|---------|--------|---|-----|------|
-|Web Server|1|20GB|2GB|Ubuntu|1|
-|DB Server|2|100GB|4GB|Ubuntu|1|
-
-- Backup-Speicher für DB Daten
-    - Täglich für letzte 7 Tage
-    - Wöchentlich für letzten Monat
-    - Monatlich für letzte drei Monate
-- Anzahl Benutzer: 30
-
 ## A) Kostenrechnung IAAS - Rehosting (60%) ##
 
-### AWS ###
-
-![Screenshots Kostenrechnung EC2](/m346-Cloud/Images/KN10/EC2.png)
-![Screenshots Kostenrechnung RDS](/m346-Cloud/Images/KN10/RDS.png)
-![Screenshots Kostenrechnung Total](/m346-Cloud/Images/KN10/AWS-TOTAL.png)
-
-#### Erläuterung Komponenten Auswahl ###
-
-|Component|Reasoning|
-|---------|---------|
-|VPC|Virtual Private Cloud for creating a Subnet, so the database won't need a public IPv4 Address|
-|Private Subnet||
-|EC2: Web server|EC2 Instance replacing the Web Server|
-|RDS: Database|RDS Database replacing the Database Server|
-|Lambda: Backup|Lambda function for backing up the database|
-
-#### Abweichungen zur *On Premise* Infrastruktur ####
-
-For the replacemenet of the database server we could have used a second EC2 instance,
- but since AWS provides the RDS service we save us the maintainance of the instance.
-Additionally we use a AWS Lambda function for backing up the database.
-
-#### Begründung der Auswahl ####
-
-- VPC: Used to create Subnets
-- EC2: Web Server will run on EC2 Instance
-- RDS: Database runs on RDS service.
-- Lambda: Two Lambda functions used.
-One for backing up the database and one for cleaning up instances.
-
-### Azure ###
-
-![Screenshots Kostenrechnung CPU](/m346-Cloud/Images/KN10/CPU.png)
-![Screenshots Kostenrechnung RAM](/m346-Cloud/Images/KN10/RAM.png)
-![Screenshots Kostenrechnung Disk](/m346-Cloud/Images/KN10/DISK.png)
-
-#### Erläuterung Komponenten Auswahl ###
-
-#### Abweichungen zur *On Premise* Infrastruktur ####
-
-#### Begründung der Auswahl ####
+- [AWS](./AWS/README.md)
+- [Azure](./Azure/README.md)
 
 ## B) Kostenrechnung PAAS - Replatforming ##
 
+- **Webserver:**
+    - **Type:** Heroku Dyno
+    - **Plan:** Standard
+    - **CPUs:** 1x - 4x
+    - **RAM:** 1GB
+    - **SSD:** -
+    - **Monthly:** ~ 25$ - 50$
+
+- **Datenbankserver:**
+    - **Type:** Heroku Postgres
+    - **Plan:** Standard
+    - **CPUs:** -
+    - **RAM:** 4GB - 768GB
+    - **SSD:** 64 GB - 4 TB
+    - **Monthly:** ~ 50$
+
+- **Backup:**
+    - **Type:** Add-on
+    - **Provider:** Cloudcube
+    - **Plan:** Medium Business
+    - **Storage:** 1TB
+    - **Hourly:** ~ 1.528$
+    - **Monthly:** max. 1100$
+
+**Total:**
+
+- Webserver: 50$
+- Datenbank: 50$
+- Backup: 20h x 1.528$ = 30.56$
+
+50$ + 50$ + 30.56$ = **130.56$/Month**
+
+### Abweichung on Premise ###
+
+Das Replatforming model weicht relativ stark zu der on Premise Lösung ab,
+da es nur wenige Optionen gibt. Die ausgewählten Pläne treffen am besten auf
+die bisherige Infrastruktur zu. Dazu ist es im Vergleich zu der IAAS Lösung 80% billiger
+und spart zu gleich die Wartungsarbeit ein.
+
 ## C) Kostenrechnung SAAS - Repurchasing ##
 
+### Zoho CRM vs. SalesForce Sales Cloud ###
+
+![SalesForce Sales Cloud vs. Zoho CRM Pricing](/m346-Cloud/Images/KN10/CRM.png)
+
 ## D) Interpretation der Resultate ##
+
+Bei der Entscheidung für die richtige Lösung
+kommt es natürlich auf die Bedürfnisse an.
+Geht es rein um den Preis,
+ist die PAAS Lösung (Replatforming) mit Heroku die beste Option.
+Liegt die Priorität auf möglichst wenig Wartung,
+ist das Zoho CRM also die SAAS Lösung die passende Entscheidung.
+Ist es jedoch wichtig, dass man die Kontrolle über die Resourcen beibehält,
+ist die IAAS Lösung empfohlen. Für welchen IAAS Anbieter man sich entscheidet,
+kommt auf sekundäre Bedürfnisse an.
