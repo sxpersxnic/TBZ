@@ -33,8 +33,8 @@ POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
 {
-  "username": "user",
-  "email": "user@localhost.com",
+  "username": "user2",
+  "email": "user2@localhost.com",
   "password": "P@ssw0rd!14",
   "confirmPassword": "P@ssw0rd!14"
 }
@@ -44,8 +44,8 @@ POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
 {
-  "username": "user",
-  "email": "user@localhost",
+  "username": "useree",
+  "email": "user@",
   "password": "P@ssw0rd!14",
   "confirmPassword": "P@ssw0rd!14"
 }
@@ -55,8 +55,12 @@ POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
 {
-  "username": "user",
-  "email": "user@localhost.com",
+  "username": "userewewe",
+  "email": "2323@localhost.com",
   "password": "P@",
   "confirmPassword": "P@"
 }
+
+### GET: User by ID
+@id = c2d567ce-10bc-4356-ac89-be22e42ecc5a
+GET http://localhost:9000/users/{{id}}

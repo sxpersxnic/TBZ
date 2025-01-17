@@ -29,9 +29,9 @@ public class UserController {
     }
 
     @GetMapping(GET_ROUTE)
-    public ResponseEntity<?> getUserById(@PathVariable UUID id) {
+    public ResponseEntity<?> findById(@PathVariable UUID id) {
         try {
-            User user = userService.getUserById(id);
+            User user = userService.findById(id);
             UserResponseDTO dto = UserMapper.toDTO(user);
 
             return ResponseEntity.status(HttpStatus.OK).body(dto);
