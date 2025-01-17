@@ -2,68 +2,66 @@
 # Dokumentiert die Schritte zur Verwaltung von EC2-Instanzen mit AWS CLI.
 
 # Variablen
-$InstanceNameTag = "WebServer"  # Name-Tag der bestehenden Instanz
-$AMI_ID = "<AMI_ID>"                        # Amazon Machine Image ID für die neue Instanz
-$KeyName = "aws"                     # Schlüsselname für SSH
-$SecurityGroupId = "<SECURITY_GROUP_ID>"    # Sicherheitsgruppen-ID
-$CloudInitPath = ".\cloud-init.yml"         # Pfad zur Cloud-Init-Datei
+$InstanceNameTag = "WebServer-KN09"  # Name-Tag der bestehenden Instanz
+$LaunchTemplateId = "lt-067af6ea39b913777"  # Launch Template ID für neue Instanz
+$LogFile = ".\aws-automation.log"  # Pfad zur Log-Datei
 
-# Überprüfen, ob die Cloud-Init-Datei existiert
-if (-Not (Test-Path $CloudInitPath)) {
-    Write-Output "FEHLER: Die Cloud-Init-Datei ($CloudInitPath) wurde nicht gefunden. Bitte sicherstellen, dass die Datei existiert."
-    Exit 1
-}
+# Log starten
+New-Item $LogFile
+Start-Transcript -Path $LogFile -Append
+Write-Host "==== AWS CLI Automation Script gestartet ====" -ForegroundColor Green
 
 # 1. Finde die Instance ID basierend auf dem Name-Tag
-Write-Output "==== Schritt 1: Ermitteln der Instance ID ===="
+Write-Host "==== Schritt 1: Ermitteln der Instance ID (WebServer-KN09) ====" -ForegroundColor Green
 $DescribeInstancesOutput = aws ec2 describe-instances --query "Reservations[].Instances[?Tags[?Key=='Name' && Value=='$InstanceNameTag']].[InstanceId]" --output text
 $InstanceId = $DescribeInstancesOutput.Trim()
 
 if (-Not $InstanceId) {
-    Write-Output "FEHLER: Keine Instanz mit dem Tag-Namen '$InstanceNameTag' gefunden."
+    Write-Host "FEHLER: Keine Instanz mit dem Tag-Namen '$InstanceNameTag' gefunden." -ForegroundColor Red
+    Stop-Transcript
     Exit 1
 }
 
-Write-Output "Gefundene Instance ID: $InstanceId"
+Write-Host "Gefundene Instance ID: $InstanceId" -ForegroundColor Green
 
 # 2. Stoppen der Instanz
-Write-Output "==== Schritt 2: Stoppen der Instanz ===="
-Write-Output "Versuche, die Instanz mit der ID $InstanceId zu stoppen..."
-aws ec2 stop-instances --instance-ids $InstanceId | Write-Output
-Write-Output "Instanz wurde gestoppt. Überprüfen Sie den Status mit folgendem Befehl:"
-Write-Output "aws ec2 describe-instances --instance-ids $InstanceId"
+Write-Host "==== Schritt 2: Stoppen der Instanz (WebServer-KN09) ====" -ForegroundColor Green
+Write-Host "Versuche, die Instanz mit der ID $InstanceId zu stoppen..."
+aws ec2 stop-instances --instance-ids $InstanceId | Write-Host
+Write-Host "Instanz wurde gestoppt. Überprüfen Sie den Status mit folgendem Befehl:" -ForegroundColor Blue
+Write-Host "aws ec2 describe-instances --instance-ids $InstanceId"
 
 # Warte, um sicherzustellen, dass die Aktion abgeschlossen ist
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 60
 
 # 3. Starten der Instanz
-Write-Output "==== Schritt 3: Starten der Instanz ===="
-Write-Output "Starte die Instanz mit der ID $InstanceId..."
-aws ec2 start-instances --instance-ids $InstanceId | Write-Output
-Write-Output "Instanz wurde gestartet. Überprüfen Sie den Status mit folgendem Befehl:"
-Write-Output "aws ec2 describe-instances --instance-ids $InstanceId"
+Write-Host "==== Schritt 3: Starten der Instanz (WebServer-KN09) ====" -ForegroundColor Green
+Write-Host "Starte die Instanz mit der ID $InstanceId..."
+aws ec2 start-instances --instance-ids $InstanceId | Write-Host
+Write-Host "Instanz wurde gestartet. Ueberpruefe Sie den Status mit folgendem Befehl:" -ForegroundColor Blue
+Write-Host "aws ec2 describe-instances --instance-ids $InstanceId"
 
 # Warte kurz, um sicherzustellen, dass die Aktion abgeschlossen ist
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 60
 
-# 4. Erstellen einer neuen Instanz mit Cloud-Init
-Write-Output "==== Schritt 4: Erstellen einer neuen Instanz ===="
-Write-Output "Erstelle eine neue Instanz mit folgenden Eigenschaften:"
-Write-Output "AMI ID: $AMI_ID, Instanztyp: t2.micro, Sicherheitsgruppe: $SecurityGroupId, Schlüsselname: $KeyName"
+# 4. Erstellen einer neuen Instanz mit Launch Template
+Write-Host "==== Schritt 4: Erstellen einer neuen Instanz mit Launch Template (DatenbankServer) ====" -ForegroundColor Green
+Write-Host "Erstelle eine neue Instanz mit Launch Template ID: $LaunchTemplateId" -ForegroundColor Yellow
 
 aws ec2 run-instances `
-  --image-id $AMI_ID `
-  --count 1 `
-  --instance-type t2.micro `
-  --key-name $KeyName `
-  --security-group-ids $SecurityGroupId `
-  --user-data file://$CloudInitPath | Write-Output
+  --launch-template LaunchTemplateId=$LaunchTemplateId | Write-Host
 
-Write-Output "Neue Instanz wurde erfolgreich erstellt. Überprüfen Sie die Details der neuen Instanz."
+Write-Host "Neue Instanz wurde erfolgreich erstellt. Überprüfen Sie die Details der neuen Instanz." -ForegroundColor Blue
 
 # 5. Telnet-Test vorbereiten
-Write-Output "==== Schritt 5: Teste den Zugriff auf WebServer ===="
-Write-Output "Führe folgenden Befehl aus, um den Telnet-Zugriff zu überprüfen:"
-Write-Output "telnet <INSTANCE_PUBLIC_IP>"
+Write-Host "==== Schritt 5: Teste den Zugriff auf Port 3306 (DatenbankServer) ====" -ForegroundColor Green
 
-Write-Output "==== Automatisierung abgeschlossen ===="
+$PublicIpAddress = aws ec2 describe-instances --query "Reservations[].Instances[?Tags[?Key=='Name' && Value=='DatabaseServer'] && State.Name=='running'].[PublicIpAddress]" --output text
+Write-Host "Found Public IP Address: $PublicIpAddress" -ForegroundColor Blue
+Write-Host "telnet $PublicIpAddress 3306"
+telnet $PublicIpAddress 3306
+
+Write-Host "==== Automatisierung abgeschlossen ====" -ForegroundColor Green
+
+# Log stoppen
+Stop-Transcript

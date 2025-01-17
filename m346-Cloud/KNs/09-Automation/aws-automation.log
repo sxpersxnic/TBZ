@@ -1,0 +1,67 @@
+**********************
+Windows PowerShell transcript start
+Start time: 20250117105016
+Username: SXNIC\sxpersxnic
+RunAs User: SXNIC\sxpersxnic
+Configuration Name: 
+Machine: SXNIC (Microsoft Windows NT 10.0.22631.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 17008
+PSVersion: 5.1.22621.4391
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.4391
+BuildVersion: 10.0.22621.4391
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is .\aws-automation.log
+==== AWS CLI Automation Script gestartet ====
+==== Schritt 1: Ermitteln der Instance ID (WebServer-KN09) ====
+Gefundene Instance ID: i-066b34f53b3ec8feb
+==== Schritt 2: Stoppen der Instanz (WebServer-KN09) ====
+Versuche, die Instanz mit der ID i-066b34f53b3ec8feb zu stoppen...
+STOPPINGINSTANCES	i-066b34f53b3ec8feb
+CURRENTSTATE	64	stopping
+PREVIOUSSTATE	16	running
+Instanz wurde gestoppt. ??berpr??fen Sie den Status mit folgendem Befehl:
+aws ec2 describe-instances --instance-ids i-066b34f53b3ec8feb
+==== Schritt 3: Starten der Instanz (WebServer-KN09) ====
+Starte die Instanz mit der ID i-066b34f53b3ec8feb...
+Instanz wurde gestartet. Ueberpruefe Sie den Status mit folgendem Befehl:
+aws ec2 describe-instances --instance-ids i-066b34f53b3ec8feb
+==== Schritt 4: Erstellen einer neuen Instanz mit Launch Template (DatenbankServer) ====
+Erstelle eine neue Instanz mit Launch Template ID: lt-067af6ea39b913777
+454746003234	r-06e814704a7b82046
+INSTANCES	0	x86_64	uefi-preferred	a14b0b39-f2f0-4089-a3b1-728e6de2e8d9	legacy-bios	False	True	xen	ami-04b4f1a9cf54c11d0	i-06ca290fe7623b4bb	t2.micro	RSA	2025-01-17T09:52:26+00:00	ip-172-31-1-98.ec2.internal	172.31.1.98		/dev/sda1	ebs	True		subnet-066e7a0209ffc6acb	hvm	vpc-002ef42653b9453bf
+CAPACITYRESERVATIONSPECIFICATION	open
+CPUOPTIONS	1	1
+ENCLAVEOPTIONS	False
+MAINTENANCEOPTIONS	default
+METADATAOPTIONS	enabled	disabled	2	required	disabled	pending
+MONITORING	disabled
+NETWORKINTERFACES		interface	02:20:01:a9:12:db	eni-06f5de1b48f7c00da	454746003234	ip-172-31-1-98.ec2.internal	172.31.1.98	True	in-use	subnet-066e7a0209ffc6acb	vpc-002ef42653b9453bf
+ATTACHMENT	2025-01-17T09:52:26+00:00	eni-attach-04a7fee36e3bec69e	True	0	0	attaching
+GROUPS	sg-0128866357899b1fa	DatabaseServer
+OPERATOR	False
+PRIVATEIPADDRESSES	True	ip-172-31-1-98.ec2.internal	172.31.1.98
+OPERATOR	False
+PLACEMENT	us-east-1a		default
+PRIVATEDNSNAMEOPTIONS	False	False	ip-name
+SECURITYGROUPS	sg-0128866357899b1fa	DatabaseServer
+STATE	0	pending
+STATEREASON	pending	pending
+TAGS	aws:ec2launchtemplate:id	lt-067af6ea39b913777
+TAGS	aws:ec2launchtemplate:version	1
+TAGS	Name	DatabaseServer
+Neue Instanz wurde erfolgreich erstellt. ??berpr??fen Sie die Details der neuen Instanz.
+==== Schritt 5: Teste den Zugriff auf Port 3306 (DatenbankServer) ====
+Found Public IP Address: 18.214.39.85
+telnet 18.214.39.85 3306
+
+==== Automatisierung abgeschlossen ====
+**********************
+Windows PowerShell transcript end
+End time: 20250117105249
+**********************
