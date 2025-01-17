@@ -1,5 +1,6 @@
 package com.m320.api.controller;
 
+import com.m320.api.lib.exceptions.ExceptionMessages;
 import com.m320.api.model.User;
 import com.m320.api.payload.dto.response.UserResponseDTO;
 import com.m320.api.payload.mapper.UserMapper;
@@ -35,7 +36,7 @@ public class UserController {
 
             return ResponseEntity.status(HttpStatus.OK).body(dto);
         } catch (EntityNotFoundException ex) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ExceptionMessages.getNotFoundMessage("User"));
         }
     }
 }

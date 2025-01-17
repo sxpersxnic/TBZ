@@ -64,7 +64,15 @@ public class ProfileService implements CrudService<Profile, UUID> {
             if (StringUtils.isNotBlank(changing.getUsername())) {
                 existing.setUsername(changing.getUsername());
             } else {
-                errors.put("username", List.of(ExceptionMessages.getNotBlankMessage("Username")));
+                errors.put("Username", List.of(ExceptionMessages.getNotBlankMessage("Username")));
+            }
+        }
+
+        if (changing.getProfilePicture() != null) {
+            if (StringUtils.isNotBlank(changing.getProfilePicture())) {
+                existing.setProfilePicture(changing.getProfilePicture());
+            } else {
+                existing.setProfilePicture("/default.png");
             }
         }
 

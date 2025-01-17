@@ -15,6 +15,7 @@ packages:
   - curl # Curl package is installed
   - wget # Wget package is installed
   - mariadb-server # Mariadb-Server is installed
+  - adminer
 runcmd:
  - sudo mysql -sfu root -e "GRANT ALL ON *.* TO 'admin'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;" # MySQL Password is set for user admin
  - sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf # Configures MySQL to enabke access for any ip

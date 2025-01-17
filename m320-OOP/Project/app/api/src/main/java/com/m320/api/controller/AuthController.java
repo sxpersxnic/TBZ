@@ -1,5 +1,6 @@
 package com.m320.api.controller;
 
+import com.m320.api.lib.exceptions.ExceptionMessages;
 import com.m320.api.lib.exceptions.FailedValidationException;
 import com.m320.api.lib.utils.Account;
 import com.m320.api.model.Profile;
@@ -37,9 +38,9 @@ public class AuthController {
             String token = authService.signIn(dto.getEmail(), dto.getPassword());
             return ResponseEntity.status(HttpStatus.OK).body(token);
         } catch (BadCredentialsException ex) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, ExceptionMessages.getInvalidMessage("Email or Password"));
         } catch (EntityNotFoundException ex) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such account");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ExceptionMessages.getNotFoundMessage("Account"));
         }
     }
 
@@ -51,9 +52,9 @@ public class AuthController {
             SignUpResponseDTO response = SignUpMapper.toDTO(profile);
             return ResponseEntity.ok().body(response);
         } catch (FailedValidationException ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getErrors().toString());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ExceptionMessages.getFailedValidationMessage(ex.getErrors()));
         } catch (DataIntegrityViolationException ex) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Account already exists");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, ExceptionMessages.getAlreadyExistsMessage("Account"));
         }
     }
 }

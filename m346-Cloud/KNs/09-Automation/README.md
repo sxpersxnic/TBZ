@@ -4,7 +4,8 @@
 
 ![Screenshot der Details der Instanz, die Sie stoppen und starten](/m346-Cloud/Images/KN09/CLI.png)
 
-Skript: [Here](./script.sh)
+Skript: [Here](./script.ps1)
+Log: [Here](./aws-automation.log)
 
 ![Screenshot der Details der neu-erstellten Instanz](/m346-Cloud/Images/KN09/NEW-INSTANCE.png)
 

@@ -1,5 +1,6 @@
 package com.m320.api.service;
 
+import com.m320.api.lib.exceptions.ExceptionMessages;
 import com.m320.api.lib.exceptions.FailedValidationException;
 import com.m320.api.model.Profile;
 import com.m320.api.model.User;
@@ -33,9 +34,9 @@ public class AuthService {
         user.setPassword(hashedPassword);
 
         if (userRepository.existsByEmail(user.getEmail())) {
-            errors.put("Email", List.of("Email is already in use"));
+            errors.put("Email", List.of(ExceptionMessages.getAlreadyInUseMessage("Email")));
         } else if (profileRepository.existsByUsername(profile.getUsername())) {
-            errors.put("Username", List.of("Username is already taken"));
+            errors.put("Username", List.of(ExceptionMessages.getAlreadyInUseMessage("Username")));
         } else {
             userRepository.save(user);
             profileRepository.save(profile);
@@ -53,7 +54,7 @@ public class AuthService {
         boolean matches = passwordEncoder.matches(password, user.getPassword());
 
         if (!matches) {
-            throw new BadCredentialsException("Invalid Password");
+            throw new BadCredentialsException(ExceptionMessages.getInvalidMessage("Password"));
         }
 
         //TODO: Generate JWT Token

@@ -1,5 +1,6 @@
 package com.m320.api.service;
 
+import com.m320.api.lib.exceptions.ExceptionMessages;
 import com.m320.api.lib.exceptions.FailedValidationException;
 import com.m320.api.lib.validation.Validator;
 import com.m320.api.model.User;
@@ -34,7 +35,7 @@ public class UserService {
             user.setEmail(newEmail);
             return userRepository.save(user);
         } else {
-            errors.put("email", List.of("Invalid email"));
+            errors.put("Email", List.of(ExceptionMessages.getInvalidMessage("Email")));
             throw new FailedValidationException(errors);
         }
     }

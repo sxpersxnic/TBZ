@@ -1,5 +1,6 @@
 package com.m320.api.lib.validation;
 
+import com.m320.api.lib.exceptions.ExceptionMessages;
 import com.m320.api.lib.exceptions.FailedValidationException;
 import com.m320.api.model.Profile;
 import com.m320.api.model.User;
@@ -30,9 +31,9 @@ public class Validator {
     public static User validateCredentials(SignUpRequestDTO dto, User user, Profile profile) throws FailedValidationException {
         Map<String, List<String>> errors = new HashMap<>();
 
-        validateField(dto.getEmail(), EMAIL_PATTERN, "email", errors);
-        validateField(dto.getUsername(), USERNAME_PATTERN, "username", errors);
-        validateField(dto.getPassword(), PASSWORD_PATTERN, "password", errors);
+        validateField(dto.getEmail(), EMAIL_PATTERN, "Email", errors);
+        validateField(dto.getUsername(), USERNAME_PATTERN, "Username", errors);
+        validateField(dto.getPassword(), PASSWORD_PATTERN, "Password", errors);
 
         if (!errors.isEmpty()) {
             throw new FailedValidationException(errors);
@@ -47,7 +48,7 @@ public class Validator {
     private static void validateField(String value, Pattern pattern, String fieldName, Map<String, List<String>> errors) {
         Matcher matcher = pattern.matcher(value);
         if (!matcher.matches()) {
-            errors.put(fieldName, List.of("Invalid " + fieldName + "!"));
+            errors.put(fieldName, List.of(ExceptionMessages.getInvalidMessage(fieldName)));
         }
     }
 
