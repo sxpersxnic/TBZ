@@ -18,7 +18,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private UUID userId;
+    private UUID profileId;
 
     private String question;
 

@@ -9,7 +9,7 @@ import java.util.UUID;
 @Setter
 public class QuestionResponseDTO {
     private UUID id;
-    private UUID user_id;
+    private UUID profile_id;
     private String question;
     private String description;
 }

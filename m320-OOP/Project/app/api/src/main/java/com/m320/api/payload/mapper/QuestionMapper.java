@@ -1,15 +1,27 @@
 package com.m320.api.payload.mapper;
 
 import com.m320.api.model.Question;
-import com.m320.api.model.User;
-import com.m320.api.payload.dto.request.UserRequestDTO;
+import com.m320.api.payload.dto.request.QuestionRequestDTO;
 
 public class QuestionMapper {
 
-    public static User fromDTO(UserRequestDTO dto)
+    public static Question fromDTO(QuestionRequestDTO dto)
     {
         Question question = new Question();
 
-        question.setId()
+        question.setQuestion(dto.getQuestion());
+        question.setDescription(dto.getDescription());
+
+        return question;
+    }
+
+    public static QuestionRequestDTO toDTO(Question src)
+    {
+        QuestionRequestDTO dto = new QuestionRequestDTO();
+
+        dto.setQuestion(src.getQuestion());
+        dto.setDescription(src.getDescription());
+
+        return dto;
     }
 }
