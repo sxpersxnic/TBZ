@@ -1,9 +1,5 @@
 package com.m320.api.controller;
 
-import com.m320.api.lib.exceptions.ExceptionMessages;
-import com.m320.api.model.User;
-import com.m320.api.payload.dto.response.UserResponseDTO;
-import com.m320.api.payload.mapper.UserMapper;
 import com.m320.api.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;

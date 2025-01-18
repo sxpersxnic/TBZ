@@ -4,8 +4,6 @@ import com.m320.api.model.Profile;
 import com.m320.api.payload.dto.request.ProfileRequestDTO;
 import com.m320.api.payload.dto.response.ProfileResponseDTO;
 
-import java.util.stream.Collectors;
-
 public class ProfileMapper {
 
     public static Profile fromDTO(ProfileRequestDTO dto) {
