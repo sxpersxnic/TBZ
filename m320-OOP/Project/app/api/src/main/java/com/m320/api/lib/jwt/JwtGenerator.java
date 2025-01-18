@@ -18,12 +18,13 @@ public final class JwtGenerator {
     /**
      * Generates a JWT token for the given id.
      *
-     * @param id the id for which to generate the JWT token
+     * @param userId the user id for which to generate the JWT token
+     * @param profileId the profile id for which to generate the JWT token
      * @return the generated JWT token
      */
-    public static String generateJwtToken(UUID id) throws JOSEException {
+    public static String generateJwtToken(UUID userId, UUID profileId) {
         try {
-            SignedJWT jwt = new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), buildJWTClaimSet(id));
+            SignedJWT jwt = new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), buildJWTClaimSet(userId, profileId));
             jwt.sign(new MACSigner(SECRET_KEY_SPEC));
             return jwt.serialize();
         } catch (JOSEException e) {
@@ -34,12 +35,14 @@ public final class JwtGenerator {
     /**
      * Builds a JWTClaimsSet object for the given id.
      *
-     * @param id the id for which to build the JWTClaimsSet
+     * @param userId the user id for which to build the JWTClaimsSet
+     * @param profileId the profile id for which to build the JWTClaimsSet
      * @return the constructed JWTClaimsSet object
      */
-    private static JWTClaimsSet buildJWTClaimSet(UUID id) {
+    private static JWTClaimsSet buildJWTClaimSet(UUID userId, UUID profileId) {
         return new JWTClaimsSet.Builder()
-                .subject(id.toString())
+                .subject(userId.toString())
+                .subject(profileId.toString())
                 .expirationTime(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .build();
     }

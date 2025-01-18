@@ -30,7 +30,7 @@ import static com.m320.api.lib.constants.Security.SECRET_KEY_SPEC;
 public class SecurityConfig {
 
     @Bean
-    public static PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder()  {
         return new BCryptPasswordEncoder();
     }
 
@@ -42,10 +42,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequest ->
                         authorizeRequest
                                 .requestMatchers(HttpMethod.GET, "/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/**").permitAll()
-                                .requestMatchers(HttpMethod.PATCH, "/**").permitAll()
-                                .requestMatchers(HttpMethod.PUT, "/**").permitAll()
-                                .requestMatchers(HttpMethod.DELETE, "/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

@@ -2,6 +2,7 @@ package com.m320.api.service;
 
 import com.m320.api.lib.exceptions.ExceptionMessages;
 import com.m320.api.lib.exceptions.FailedValidationException;
+import com.m320.api.lib.jwt.JwtGenerator;
 import com.m320.api.model.Profile;
 import com.m320.api.model.User;
 import com.m320.api.payload.dto.request.auth.SignInRequestDTO;
@@ -69,8 +70,7 @@ public class AuthService {
 
         Profile profile = profileRepository.findByUserId(user.getId()).orElseThrow(EntityNotFoundException::new);
 
-        // TODO: JWT generation
-        String token = "dummy-token";
+        String token = JwtGenerator.generateJwtToken(user.getId(), profile.getId());
 
         return SignInMapper.toDTO(user, profile, token);
     }
