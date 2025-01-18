@@ -31,12 +31,9 @@ public class UserController {
     @GetMapping(GET_ROUTE)
     public ResponseEntity<?> findById(@PathVariable UUID id) {
         try {
-            User user = userService.findById(id);
-            UserResponseDTO dto = UserMapper.toDTO(user);
-
-            return ResponseEntity.status(HttpStatus.OK).body(dto);
+            return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
         } catch (EntityNotFoundException ex) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ExceptionMessages.getNotFoundMessage("User"));
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
     }
 }

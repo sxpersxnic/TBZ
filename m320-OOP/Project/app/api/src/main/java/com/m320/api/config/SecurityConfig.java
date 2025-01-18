@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
@@ -20,6 +22,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
+
+import static com.m320.api.lib.constants.Security.SECRET_KEY_SPEC;
 
 @Configuration
 @EnableWebSecurity
@@ -65,12 +69,12 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-//
-//    @Bean
-//    public JwtDecoder customDecoder() {
-//        return NimbusJwtDecoder
-//                .withSecretKey("TODO: SECRET_KEY_SPEC")
-//                .build();
-//    }
+
+    @Bean
+    public JwtDecoder customDecoder() {
+        return NimbusJwtDecoder
+                .withSecretKey(SECRET_KEY_SPEC)
+                .build();
+    }
 
 }

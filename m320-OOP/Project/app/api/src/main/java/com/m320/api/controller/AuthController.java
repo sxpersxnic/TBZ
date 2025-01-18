@@ -1,15 +1,12 @@
 package com.m320.api.controller;
 
-import com.m320.api.lib.exceptions.ExceptionMessages;
-import com.m320.api.lib.exceptions.FailedValidationException;
-import com.m320.api.lib.utils.Account;
-import com.m320.api.model.Profile;
 import com.m320.api.payload.dto.request.auth.SignInRequestDTO;
 import com.m320.api.payload.dto.request.auth.SignUpRequestDTO;
+import com.m320.api.payload.dto.response.auth.SignInResponseDTO;
 import com.m320.api.payload.dto.response.auth.SignUpResponseDTO;
-import com.m320.api.payload.mapper.auth.SignUpMapper;
 import com.m320.api.service.AuthService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,29 +29,28 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping(SIGN_IN_ROUTE)
-    public ResponseEntity<?> signIn(@RequestBody SignInRequestDTO dto) {
+    @PostMapping(SIGN_UP_ROUTE)
+    public ResponseEntity<?> signUp(@Valid @RequestBody SignUpRequestDTO dto) {
         try {
-            String token = authService.signIn(dto.getEmail(), dto.getPassword());
-            return ResponseEntity.status(HttpStatus.OK).body(token);
-        } catch (BadCredentialsException ex) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, ExceptionMessages.getInvalidMessage("Email or Password"));
-        } catch (EntityNotFoundException ex) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ExceptionMessages.getNotFoundMessage("Account"));
+            SignUpResponseDTO response = authService.signUp(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (DataIntegrityViolationException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid sign up credentials");
         }
     }
 
-    @PostMapping(SIGN_UP_ROUTE)
-    public ResponseEntity<?> signUp(@RequestBody SignUpRequestDTO dto) {
+    @PostMapping(SIGN_IN_ROUTE)
+    public ResponseEntity<?> signIn(@Valid @RequestBody SignInRequestDTO dto) {
         try {
-            Account acc = SignUpMapper.fromDTO(dto);
-            Profile profile = authService.signUp(acc.getUser(), acc.getProfile());
-            SignUpResponseDTO response = SignUpMapper.toDTO(profile);
-            return ResponseEntity.ok().body(response);
-        } catch (FailedValidationException ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ExceptionMessages.getFailedValidationMessage(ex.getErrors()));
+            SignInResponseDTO response = authService.signIn(dto);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (DataIntegrityViolationException ex) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, ExceptionMessages.getAlreadyExistsMessage("Account"));
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid sign in credentials");
+        } catch (BadCredentialsException ex) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Bad credentials");
+        } catch (EntityNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
     }
+
 }

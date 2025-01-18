@@ -1,11 +1,9 @@
 package com.m320.api.payload.mapper;
 
-import com.m320.api.lib.interfaces.Mapper;
 import com.m320.api.model.User;
 import com.m320.api.payload.dto.request.UserRequestDTO;
 import com.m320.api.payload.dto.response.UserResponseDTO;
 
-@Mapper
 public class UserMapper {
 
     public static User fromDTO(UserRequestDTO dto) {
@@ -20,6 +18,7 @@ public class UserMapper {
         UserResponseDTO dto = new UserResponseDTO();
 
         dto.setId(src.getId());
+        dto.setProfileId(src.getProfile().getFirst().getId());
         dto.setEmail(src.getEmail());
 
         return dto;

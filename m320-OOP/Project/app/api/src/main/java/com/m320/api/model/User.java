@@ -2,25 +2,26 @@ package com.m320.api.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.UUID;
+
+import java.util.*;
 
 @Data
-@Table(name="users", schema="auth")
 @Entity
+@Table(name="users", schema="auth")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private UUID id;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "encrypted_password")
+    @Column(name = "encrypted_password", nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Profile profile;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Profile> profile = new ArrayList<>();
 
 }

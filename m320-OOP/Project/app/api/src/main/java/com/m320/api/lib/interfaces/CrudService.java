@@ -1,14 +1,19 @@
 package com.m320.api.lib.interfaces;
+
 import java.util.List;
 
-public interface CrudService<E, ID> {
-    E findById(ID id);
-    E findByIdForUpdate(ID id);
-    List<E> findAll();
+public interface CrudService<E, ID, REQ, RES> {
 
-    E create(E e);
-    E update(E changing, ID id);
+    RES findById(ID id);
+
+    E findByIdForUpdate(ID id);
+
+    List<RES> findAll();
+
+    RES update(REQ changing, ID id);
+
     void delete(ID id);
+
     void merge(E existing, E changing);
 
 }

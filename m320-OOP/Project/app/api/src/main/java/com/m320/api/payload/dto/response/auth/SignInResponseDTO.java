@@ -6,7 +6,9 @@ import java.util.UUID;
 
 @Data
 public class SignInResponseDTO {
-    private UUID id;
+    private UUID userId;
+    private UUID profileId;
+    private String email;
     private String username;
     private String token;
 }

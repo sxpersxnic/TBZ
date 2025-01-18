@@ -1,18 +1,15 @@
 package com.m320.api.payload.dto.request.auth;
 
-import com.m320.api.lib.validation.password.ConfirmPassword;
 import com.m320.api.lib.validation.password.Password;
-import jakarta.validation.constraints.Email;
+import com.m320.api.lib.validation.principles.Email;
+import com.m320.api.lib.validation.principles.Username;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-@ConfirmPassword(
-        password = "password",
-        confirmPassword = "confirmPassword"
-)
 public class SignUpRequestDTO {
 
+    @Username(message = "Invalid username!")
     @NotBlank(message = "Username must not be blank!")
     private String username;
 
@@ -23,6 +20,4 @@ public class SignUpRequestDTO {
     @Password
     @NotBlank(message = "Password must not be blank!")
     private String password;
-
-    private String confirmPassword;
 }
