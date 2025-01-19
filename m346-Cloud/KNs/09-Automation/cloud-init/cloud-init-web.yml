@@ -1,0 +1,169 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL 
+    groups: user, admin 
+    home: /home/ubuntu
+    shell: /bin/bash 
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDX2hXfKV0Q04uwt4PFeliVnz9uZu+F69NMXCjjpFesxYP3l/N8N4jzs9XAROfufbDi59F7wmjhzl4c0+QIqBp40tbQSvvKWIMfjorlPV3NocUhzS1OxFzREOz5n7b+6T/4SFQbpvZtieT+eGwATBATkw+VuA5e33/evbSRQFKecLgfBAuyMqBFOwd75G1IguI4m1kQHklC7bZYAJZyIsSYl1Mz8+pT4+AspSkEBG1PdEPTM8R7GBznfmbQz3+NBVgtd8GUmRSRyy+iI04YaP56ocEbzXpBLeSbwKs2SmHGLprvu1PH+AkhGDz+BOq7Avr35mHsCpiZyTOCHzfCZ8FFWUckMAtYOfneKbak6k3QuLYpk1F4v10DzAtYwvkXOUj+9sPkiqRQVIj9yHck0YTMkJdt3tYA0GTwGb9r7SJm8BnfeTPGQmRjPUj5E493HyBBPxBwLFRmMF9rLsAx6S93nIcEV36/Q3L3727bOXOX6UeFXoJcV9AtXmV1impTKboMS5LOLgc3Cf9+eJtINtxAT1AP9w0SPzVKYOSb2PsFVmWAMyIz9reAdGCSWICBHAh+NY0O+stOAWMhkVqGZEJ48Es6cS16vArVDqOEFNF2dddKSZkOLxjY+BwI6GL7GuQTcEYhcZeBOdp/+Ji5vhRCRHeLMNs5AUzu5TKamRyHYw== sxpersxnic@sxnic 
+ssh_pwauth: false  
+disable_root: false
+package_update: true  
+packages:
+  - curl
+  - wget
+  - apache2
+  - php 
+  - libapache2-mod-php
+  - php-mysqli
+
+write_files:
+  - path: /var/www/html/index.html
+    content: |
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8" />
+          <title>Hello, world!</title>
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <meta name="description" content="" />
+          <style>
+          	* {
+              	padding: 0;
+                  margin: 0;
+                  display: box;
+              }
+              
+          	:root {
+              	--primary: #fafafa;
+                  --secondary: #000000;
+                  --shadow: #949494;
+                  --body-bg: #f4f4f4;
+                  --link: #f6953f;
+                  --link-hover: #f4801a;
+              }
+              
+              html, body {
+              	padding: 16px;
+                  size: 100%;
+                  background-color: var(--body-bg);
+              }
+              
+              main {
+              	background-color: var(--primary);
+                  padding: 24px 24px 24px 24px;
+                  border: 1px solid;
+                  border-color: var(--secondary);
+                  box-shadow: 0px 8px 8px var(--shadow); 
+              }
+              
+              header {
+              	display: flex;
+                  flex-direction: row;
+                  
+                  width: 100%;
+                  height: 80px;
+                  
+          		justify-content: center;
+                  align-items: center;
+              }
+              
+              section {
+              	display: flex;
+                  flex-direction: column;
+                  
+                  padding-left: 40px;
+                  padding-right: 40px;
+                  
+                  justify-content: end;
+                  align-items: start;
+                  
+                  width: 100%;
+                  height: 72px;
+              }
+              
+              h2 {
+              	font-size: 20px;
+                  padding:0;
+                  margin:0 0 12px 0;
+              }
+              
+              p {
+              	font-size: 20px;
+                  transition: 0.2s ease-in;
+              }
+              
+              a {
+              	text-decoration: none;
+                  color: var(--link);
+                  transition: 0.2s ease-in;
+              }
+              
+              a:hover {
+                  color: var(--link-hover);
+              }  
+          </style>
+        </head>
+        <body>
+          <main>
+            <header>
+      	      <h1>The Apache WebServer ec2 instance works!</h1>
+            </header>
+            <section>
+              <h2>
+                This is KN09 of TBZ Module 346
+              </h2>
+              <p>
+                Visit on 
+                <a href="https://github.com/sxpersxnic/TBZ/tree/main/m346-Cloud">
+                  Github
+                </a>
+              </p>
+            </section>
+          </main>
+        </body>
+      </html>
+    permissions: '0644'
+  - path: /var/www/html/info.php 
+    content: |
+      <?php
+      phpinfo();
+      ?>
+    permissions: '0644'
+  - path: /var/www/html/db.php 
+    content: |
+      <html>
+        <head></head>
+        <body>
+          Diese Seite macht eine Abfrage auf die Datenbank. <br />
+          Das ausgeführte Query ist: <i>select Host, User from mysql.user;</i><br /><br />
+          Das Resultat: <br />
+          <?php
+                  //database
+                  $servername = "172.31.0.20";
+                  $username = "admin";
+                  $password = "root";
+                  $dbname = "mysql";
+
+                  // Create connection
+                  $conn = new mysqli($servername, $username, $password, $dbname);
+                  // Check connection
+                  if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                  }
+
+                  $sql = "select Host, User from mysql.user;";
+                  $result = $conn->query($sql);
+                  while($row = $result->fetch_assoc()){
+                          echo("<li>" . $row["Host"] . " / " . $row["User"] . "</li>");
+                  }
+                  //var_dump($result);
+          ?>
+        </body>
+      </html>
+    permissions: '0644'
+
+runcmd:
+  - sudo systemctl restart apache2
+  
