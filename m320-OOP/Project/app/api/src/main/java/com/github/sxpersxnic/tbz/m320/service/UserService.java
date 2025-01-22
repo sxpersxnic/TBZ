@@ -1,7 +1,9 @@
 package com.github.sxpersxnic.tbz.m320.service;
 
 import com.github.sxpersxnic.tbz.m320.lib.exceptions.FailedValidationException;
+import com.github.sxpersxnic.tbz.m320.model.Profile;
 import com.github.sxpersxnic.tbz.m320.model.Role;
+import com.github.sxpersxnic.tbz.m320.repository.ProfileRepository;
 import com.github.sxpersxnic.tbz.m320.repository.RoleRepository;
 import com.github.sxpersxnic.tbz.m320.model.User;
 import com.github.sxpersxnic.tbz.m320.repository.UserRepository;
@@ -10,10 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author sxpersxnic
@@ -23,11 +22,14 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, ProfileRepository profileRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.profileRepository = profileRepository;
+
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -52,12 +54,17 @@ public class UserService {
         return userRepository.findUserByEmail(email).orElseThrow(EntityNotFoundException::new);
     }
 
-    public User create(User newUser) {
+    public User create(User newUser, String username) {
         Role defaultRole = roleRepository.findByName("USER");
+        Profile profile = new Profile(username);
+
         String password = newUser.getPassword();
         String encodedPassword = passwordEncoder.encode(password);
         newUser.setPassword(encodedPassword);
         newUser.getAssignedRoles().add(defaultRole);
+
+        profile.setUser(newUser);
+        newUser.getProfiles().add(profileRepository.save(profile));
         return userRepository.save(newUser);
     }
     public void deleteById(UUID id) {

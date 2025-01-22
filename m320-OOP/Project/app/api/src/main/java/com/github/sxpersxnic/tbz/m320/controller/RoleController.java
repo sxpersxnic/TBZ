@@ -157,7 +157,8 @@ public class RoleController {
     public ResponseEntity<?> findAll() {
         List<Role> roles = roleService.findAll();
 
-        return ResponseEntity.status(HttpStatus.OK).body(roles.stream()
+        return ResponseEntity.status(HttpStatus.OK).body(
+                roles.stream()
                 .map(RoleMapper::toDTO)
                 .toList());
     }

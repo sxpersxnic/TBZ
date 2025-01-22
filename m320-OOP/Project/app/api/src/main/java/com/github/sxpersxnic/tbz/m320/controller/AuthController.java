@@ -1,10 +1,12 @@
 package com.github.sxpersxnic.tbz.m320.controller;
 
 import com.github.sxpersxnic.tbz.m320.lib.jwt.JwtGenerator;
-import com.github.sxpersxnic.tbz.m320.payload.dto.request.AuthRequestDTO;
+import com.github.sxpersxnic.tbz.m320.payload.dto.request.SignInRequestDTO;
+import com.github.sxpersxnic.tbz.m320.payload.dto.request.SignUpRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.SignInResponseDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.SignUpResponseDTO;
-import com.github.sxpersxnic.tbz.m320.payload.mapper.AuthMapper;
+import com.github.sxpersxnic.tbz.m320.payload.mapper.SignInMapper;
+import com.github.sxpersxnic.tbz.m320.payload.mapper.SignUpMapper;
 import com.github.sxpersxnic.tbz.m320.model.User;
 import com.github.sxpersxnic.tbz.m320.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,11 +56,11 @@ public class AuthController {
             @ApiResponse(responseCode = "409", description = "User could not be created, username already in use",
                     content = @Content)
     })
-    @SecurityRequirements //no security here, default is BEARER
-    public ResponseEntity<?> signUp(@Valid @RequestBody AuthRequestDTO authRequestDTO) {
+    @SecurityRequirements // no security here, default is BEARER
+    public ResponseEntity<?> signUp(@Valid @RequestBody SignUpRequestDTO dto) {
         try {
-            User user = userService.create(AuthMapper.fromDTO(authRequestDTO));
-            return ResponseEntity.status(HttpStatus.CREATED).body(AuthMapper.toDTO(user));
+            User user = userService.create(SignUpMapper.fromDTO(dto), dto.getUsername());
+            return ResponseEntity.status(HttpStatus.CREATED).body(SignUpMapper.toDTO(user));
         } catch (DataIntegrityViolationException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "User could not be created, username already in use");
         }
@@ -72,8 +74,8 @@ public class AuthController {
             @ApiResponse(responseCode = "401", description = "Invalid credentials",
                     content = @Content)
     })
-    @SecurityRequirements //no security here, default is BEARER
-    public ResponseEntity<?> signIn(@RequestBody AuthRequestDTO authRequest) {
+    @SecurityRequirements // no security here, default is BEARER
+    public ResponseEntity<?> signIn(@RequestBody SignInRequestDTO authRequest) {
         try {
             String email = authRequest.getEmail();
             String password = authRequest.getPassword();
@@ -83,9 +85,9 @@ public class AuthController {
 
             User user = userService.findByEmail(email);
             String jwt = JwtGenerator.generateJwtToken(authentication);
-            return ResponseEntity.ok(new SignInResponseDTO(jwt, user.getId()));
+            return ResponseEntity.status(HttpStatus.OK).body(SignInMapper.toDTO(jwt, user));
         } catch (BadCredentialsException ignored) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
         }
     }
 

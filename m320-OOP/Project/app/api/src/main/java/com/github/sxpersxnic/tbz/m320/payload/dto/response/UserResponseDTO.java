@@ -18,6 +18,7 @@ public class UserResponseDTO {
     @NotBlank(message = "Email can not be empty!")
     private String email;
     private List<UUID> roleIds;
+    private UUID profileId;
 
     public UUID getId() {
         return id;
@@ -40,6 +41,14 @@ public class UserResponseDTO {
 
     public void setRoleIds(List<UUID> roleIds) {
         this.roleIds = roleIds;
+    }
+
+    public UUID getProfileId() {
+        return profileId;
+    }
+
+    public void setProfileId(UUID profileId) {
+        this.profileId = profileId;
     }
 
     @Override

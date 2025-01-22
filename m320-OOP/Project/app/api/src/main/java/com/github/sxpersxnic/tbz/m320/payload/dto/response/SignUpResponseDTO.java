@@ -7,4 +7,4 @@ import java.util.UUID;
  * @param userId
  * @param email
  */
-public record SignUpResponseDTO(UUID userId, String email) {}
+public record SignUpResponseDTO(UUID userId, UUID profileId, String email) {}

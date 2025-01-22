@@ -1,5 +1,6 @@
 package com.github.sxpersxnic.tbz.m320.util;
 
+import com.github.sxpersxnic.tbz.m320.model.Profile;
 import com.github.sxpersxnic.tbz.m320.model.User;
 import com.github.sxpersxnic.tbz.m320.model.Role;
 
@@ -24,11 +25,13 @@ public class DataUtil {
             user.setPassword("password" + i);
 
             Role role = new Role();
+            Profile profile = new Profile("user" + i);
 
             role.setId(testUUID(3));
             role.setName("USER");
             user.setAssignedRoles(new HashSet<>());
             user.getAssignedRoles().add(role);
+            user.getProfiles().add(profile);
             userList.add(user);
         }
         return userList;

@@ -1,32 +1,28 @@
 package com.github.sxpersxnic.tbz.m320.payload.dto.request;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
 /**
  * @author sxpersxnic
  */
-public class AuthRequestDTO {
+public class SignInRequestDTO {
 
-    @NotBlank(message = "email must not be empty")
-    @Email
+    @NotBlank(message = "Email must not be empty")
     private String email;
 
-    @NotBlank(message = "password must not be empty")
-    @Size(min = 8, max = 255, message = "length must be between 8 and 255")
+    @NotBlank(message = "Password must not be empty")
     private String password;
 
-    public AuthRequestDTO() {
+    public SignInRequestDTO() {
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        AuthRequestDTO that = (AuthRequestDTO) obj;
+        SignInRequestDTO that = (SignInRequestDTO) obj;
         return Objects.equals(email, that.email) && Objects.equals(password, that.password);
     }
 

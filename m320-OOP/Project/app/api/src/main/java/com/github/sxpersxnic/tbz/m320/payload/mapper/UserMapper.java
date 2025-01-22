@@ -1,5 +1,6 @@
 package com.github.sxpersxnic.tbz.m320.payload.mapper;
 
+import com.github.sxpersxnic.tbz.m320.model.Profile;
 import com.github.sxpersxnic.tbz.m320.model.User;
 import com.github.sxpersxnic.tbz.m320.payload.dto.request.UserRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.UserResponseDTO;
@@ -17,6 +18,14 @@ public class UserMapper {
 
         dto.setId(user.getId());
         dto.setEmail(user.getEmail());
+
+        UUID profileId = user
+                .getProfiles()
+                .stream()
+                .map(Profile::getId)
+                .toList()
+                .getFirst();
+        dto.setProfileId(profileId);
 
         List<UUID> roleIds = user.getAssignedRoles()
                 .stream()

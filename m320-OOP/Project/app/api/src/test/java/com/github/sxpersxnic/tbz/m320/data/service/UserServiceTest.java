@@ -107,7 +107,7 @@ public class UserServiceTest {
         when(userRepository.save(expectedUser)).thenReturn(expectedUser);
         when(roleRepository.findByName("USER")).thenReturn(testRole);
         when(passwordEncoder.encode(expectedUser.getPassword())).thenReturn("encPassword");
-        User actualUser = userService.create(expectedUser);
+        User actualUser = userService.create(expectedUser, "user1");
 
         assertNotNull(actualUser);
         assertEquals(expectedUser.getId(), actualUser.getId());
@@ -119,7 +119,7 @@ public class UserServiceTest {
     public void checkCreate_whenEmailAlreadyExisting_thenThrowConstraintViolation() {
         User user = DataUtil.getTestUser();
         when(userRepository.save(eq(user))).thenThrow(ConstraintViolationException.class);
-        assertThrows(ConstraintViolationException.class, () -> userService.create(user));
+        assertThrows(ConstraintViolationException.class, () -> userService.create(user, "user1"));
     }
 
     @Test

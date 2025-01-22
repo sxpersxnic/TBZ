@@ -7,8 +7,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * @author sxpersxnic
+ */
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "auth")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -17,8 +20,11 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "encrypted_password", nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Profile> profiles = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -37,6 +43,14 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public Set<Profile> getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(Set<Profile> profile) {
+        this.profiles = profile;
     }
 
     public String getPassword() {

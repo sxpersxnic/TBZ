@@ -20,10 +20,6 @@ public class Seed {
     }
 
     public void seed() {
-        Role admin  = new Role();
-        Role moderator = new Role();
-        Role user  = new Role();
-
         User adminUser = new User();
         User moderatorUser = new User();
         User userUser = new User();
@@ -36,27 +32,16 @@ public class Seed {
         moderatorUser.setPassword("moderator123");
         userUser.setPassword("user123");
 
-        admin.setName("ADMIN");
-        moderator.setName("MODERATOR");
-        user.setName("USER");
-
-        admin.getAssignedUsers().add(adminUser);
-        moderator.getAssignedUsers().add(moderatorUser);
-        moderator.getAssignedUsers().add(adminUser);
-        user.getAssignedUsers().add(adminUser);
-        user.getAssignedUsers().add(userUser);
+        Role admin = roleService.findByName("ADMIN");
+        Role moderator = roleService.findByName("MODERATOR");
 
         adminUser.getAssignedRoles().add(admin);
         adminUser.getAssignedRoles().add(moderator);
 
         moderatorUser.getAssignedRoles().add(moderator);
 
-        roleService.create(admin);
-        roleService.create(moderator);
-        roleService.create(user);
-
-        userService.create(adminUser);
-        userService.create(moderatorUser);
-        userService.create(userUser);
+        userService.create(adminUser, "admin");
+        userService.create(moderatorUser, "moderator");
+        userService.create(userUser, "user");
     }
 }

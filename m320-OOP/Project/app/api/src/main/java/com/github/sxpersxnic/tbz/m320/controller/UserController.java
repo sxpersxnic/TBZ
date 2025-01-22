@@ -15,6 +15,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import jakarta.persistence.EntityNotFoundException;
@@ -45,8 +47,17 @@ public class UserController {
     })
     // METHOD
     public ResponseEntity<?> findAll() {
-        List<User> users = userService.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(users.stream().map(UserMapper::toDTO).toList());
+        try {
+            List<User> users = userService.findAll();
+            System.out.println(users);
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    users.stream()
+                         .map(UserMapper::toDTO)
+                         .toList()
+                    );
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
+        }
     }
     // GET
     // DOCUMENTATION
@@ -69,7 +80,7 @@ public class UserController {
     }
     // PATCH
     // DOCUMENTATION
-    @PatchMapping("/update/{id}")
+    @PatchMapping("/{id}")
     @Operation(summary = "Update a user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User updated successfully!",
@@ -100,7 +111,7 @@ public class UserController {
 
     // DELETE
     // DOCUMENTATION
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Delete a user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "User was deleted successfully",

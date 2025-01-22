@@ -1,8 +1,8 @@
 ### Seed (Only once)
-GET http://localhost:8080/seed
+GET http://localhost:9000/seed
 
 ### SignIn as User
-POST http://localhost:8080/auth/signin
+POST http://localhost:9000/auth/signin
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 %}
 
 ### SignIn as Moderator
-POST http://localhost:8080/auth/signin
+POST http://localhost:9000/auth/signin
 Content-Type: application/json
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 
 ### SignIn as Admin
-POST http://localhost:8080/auth/signin
+POST http://localhost:9000/auth/signin
 Content-Type: application/json
 
 {
@@ -43,21 +43,22 @@ Content-Type: application/json
 
 
 ### Get all users
-GET http://localhost:8080/users
+GET http://localhost:9000/users
 Authorization: Bearer {{auth_token}}
 
 
 ### Get all roles
-GET http://localhost:8080/roles
+GET http://localhost:9000/roles
 Authorization: Bearer {{auth_token}}
 
 ### SignUp
-POST http://localhost:8080/auth/signup
+POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "test@localhost.com",
-  "password": "test123"
+  "username": "test2",
+  "email": "test2@localhost.com",
+  "password": "test1234"
 }
 
 > {%
@@ -65,12 +66,12 @@ Content-Type: application/json
 %}
 
 ### SignIn
-POST http://localhost:8080/auth/signin
+POST http://localhost:9000/auth/signin
 Content-Type: application/json
 
 {
-  "email": "test@localhost.com",
-  "password": "test123"
+  "email": "test2@localhost.com",
+  "password": "test1234"
 }
 
 > {%

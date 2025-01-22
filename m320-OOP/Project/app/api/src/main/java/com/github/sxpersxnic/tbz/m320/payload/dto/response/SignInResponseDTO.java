@@ -8,4 +8,4 @@ import java.util.UUID;
  *
  * @author sxpersxnic
  */
-public record SignInResponseDTO(String accessToken, UUID userId) {}
+public record SignInResponseDTO(String accessToken, UUID userId, UUID profileId) {}
