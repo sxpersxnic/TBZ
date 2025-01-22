@@ -103,7 +103,7 @@ public class UserControllerTest {
 
         when(userService.update(any(User.class), eq(DataUtil.testUUID(1)))).thenReturn(user);
 
-        mockMvc.perform(patch("/users/update/" + DataUtil.testUUID(1))
+        mockMvc.perform(patch("/users/" + DataUtil.testUUID(1))
                         .contentType("application/json")
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -118,7 +118,7 @@ public class UserControllerTest {
 
         when(userService.update(any(User.class), eq(DataUtil.testUUID(1)))).thenThrow(new FailedValidationException(Map.of()));
 
-        mockMvc.perform(patch("/users/update/" + DataUtil.testUUID(1)).
+        mockMvc.perform(patch("/users/" + DataUtil.testUUID(1)).
                         contentType("application/json")
                         .content(requestBody))
                 .andExpect(status().isBadRequest());
@@ -126,7 +126,7 @@ public class UserControllerTest {
 
     @Test
     public void checkDelete_whenValidId_thenIsOk() throws Exception {
-        mockMvc.perform(delete("/users/delete/" + DataUtil.testUUID(1)))
+        mockMvc.perform(delete("/users/" + DataUtil.testUUID(1)))
                 .andExpect(status().isNoContent());
     }
 
@@ -134,7 +134,7 @@ public class UserControllerTest {
     public void checkDelete_whenInvalidId_thenIsNotFound() throws Exception {
         doThrow(EmptyResultDataAccessException.class).when(userService).deleteById(DataUtil.testUUID(0));
 
-        mockMvc.perform(delete("/users/delete/" + DataUtil.testUUID(0)))
+        mockMvc.perform(delete("/users/" + DataUtil.testUUID(0)))
                 .andExpect(status().isNotFound());
     }
 }
