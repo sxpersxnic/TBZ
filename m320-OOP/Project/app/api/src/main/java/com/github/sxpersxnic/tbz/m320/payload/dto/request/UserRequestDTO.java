@@ -1,12 +1,8 @@
 package com.github.sxpersxnic.tbz.m320.payload.dto.request;
 
-import com.github.sxpersxnic.tbz.m320.payload.dto.response.UserResponseDTO;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.util.Objects;
 
 /**
  * @author sxpersxnic

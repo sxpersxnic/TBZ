@@ -1,11 +1,9 @@
 package com.github.sxpersxnic.tbz.m320.payload.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 /**

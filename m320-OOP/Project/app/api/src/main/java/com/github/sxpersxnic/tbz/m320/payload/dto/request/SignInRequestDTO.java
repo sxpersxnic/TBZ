@@ -3,8 +3,6 @@ package com.github.sxpersxnic.tbz.m320.payload.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.util.Objects;
-
 /**
  * @author sxpersxnic
  */

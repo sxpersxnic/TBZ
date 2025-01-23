@@ -96,7 +96,7 @@ public class UserControllerTest {
         User user = DataUtil.getTestUser();
         user.setEmail("NewUser@bbcag.ch");
         UserResponseDTO userResponseDTO = DataDTOUtil.getTestUserResponseDTO();
-        UserResponseDTO personRequestDTO = DataDTOUtil.getTestUserRequestDTO();
+        UserRequestDTO personRequestDTO = DataDTOUtil.getTestUserRequestDTO();
         userResponseDTO.setEmail("NewUser@bbcag.ch");
         String expectedResponseBody = objectMapper.writeValueAsString(userResponseDTO);
         String requestBody = objectMapper.writeValueAsString(personRequestDTO);
