@@ -7,6 +7,9 @@ import com.github.sxpersxnic.tbz.m320.payload.dto.response.SignInResponseDTO;
 
 import java.util.UUID;
 
+/**
+ * @author sxpersxnic
+ */
 public class SignInMapper {
 
     public static User fromDTO(SignInRequestDTO dto) {

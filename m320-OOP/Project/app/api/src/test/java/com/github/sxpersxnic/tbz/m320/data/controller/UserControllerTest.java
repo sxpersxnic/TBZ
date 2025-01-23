@@ -132,7 +132,7 @@ public class UserControllerTest {
 
     @Test
     public void checkDelete_whenInvalidId_thenIsNotFound() throws Exception {
-        doThrow(EmptyResultDataAccessException.class).when(userService).deleteById(DataUtil.testUUID(0));
+        doThrow(EmptyResultDataAccessException.class).when(userService).delete(DataUtil.testUUID(0));
 
         mockMvc.perform(delete("/users/" + DataUtil.testUUID(0)))
                 .andExpect(status().isNotFound());

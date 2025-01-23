@@ -1,32 +1,36 @@
-### Seed (Only once)
-GET http://localhost:9000/seed
+@id = 8c48c6e5-94c2-4011-b487-630c1ea428d8
 
-### SignIn as User
-POST http://localhost:9000/auth/signin
-Content-Type: application/json
+### Index
+GET http://localhost:9000
 
-{
-  "email": "user@localhost.com",
-  "password": "user123"
-}
-
-> {%
-    client.global.set("auth_token", response.body.accessToken);
-%}
-
-### SignIn as Moderator
-POST http://localhost:9000/auth/signin
-Content-Type: application/json
-
-{
-  "email": "moderator@localhost.com",
-  "password": "moderator123"
-}
-
-> {%
-    client.global.set("auth_token", response.body.accessToken);
-%}
-
+#### Seed (Only once) (Succeeded)
+#GET http://localhost:9000/seed
+#
+#### SignIn as User (Succeeded
+#POST http://localhost:9000/auth/signin
+#Content-Type: application/json
+#
+#{
+#  "email": "user@localhost.com",
+#  "password": "user123"
+#}
+#
+#> {%
+#    client.global.set("auth_token", response.body.accessToken);
+#%}
+#
+#### SignIn as Moderator
+#POST http://localhost:9000/auth/signin
+#Content-Type: application/json
+#
+#{
+#  "email": "moderator@localhost.com",
+#  "password": "moderator123"
+#}
+#
+#> {%
+#    client.global.set("auth_token", response.body.accessToken);
+#%}
 
 ### SignIn as Admin
 POST http://localhost:9000/auth/signin
@@ -41,23 +45,17 @@ Content-Type: application/json
     client.global.set("auth_token", response.body.accessToken);
 %}
 
-
-### Get all users
-GET http://localhost:9000/users
-Authorization: Bearer {{auth_token}}
-
-
-### Get all roles
-GET http://localhost:9000/roles
-Authorization: Bearer {{auth_token}}
-
+#### Get all roles
+#GET http://localhost:9000/roles
+#Authorization: Bearer {{auth_token}}
+#
 ### SignUp
 POST http://localhost:9000/auth/signup
 Content-Type: application/json
 
 {
-  "username": "test2",
-  "email": "test2@localhost.com",
+  "username": "test",
+  "email": "test@localhost.com",
   "password": "test1234"
 }
 
@@ -65,15 +63,36 @@ Content-Type: application/json
     client.global.set("auth_token", response.body.accessToken);
 %}
 
-### SignIn
-POST http://localhost:9000/auth/signin
-Content-Type: application/json
+#### SignIn
+#POST http://localhost:9000/auth/signin
+#Content-Type: application/json
+#
+#{
+#  "email": "test2@localhost.com",
+#  "password": "test1234"
+#}
+#
+#> {%
+#    client.global.set("auth_token", response.body.accessToken);
+#%}
+#
+#### Find user by Id
+#GET http://localhost:9000/users/{{id}}
+#Authorization: Bearer {{auth_token}}
+#
+#### Get all users
+#GET http://localhost:9000/users
+#Authorization: Bearer {{auth_token}}
 
-{
-  "email": "test2@localhost.com",
-  "password": "test1234"
-}
+#### PATCH user
+#PATCH http://localhost:9000/users/{{id}}
+#Content-Type: application/json
+#Authorization: Bearer {{auth_token}}
+#
+#{
+#  "email": "tested@localhost.com"
+#}
 
-> {%
-    client.global.set("auth_token", response.body.accessToken);
-%}
+#### Delete user by Id
+#DELETE http://localhost:9000/users/{{id}}
+#Authorization: Bearer {{auth_token}}

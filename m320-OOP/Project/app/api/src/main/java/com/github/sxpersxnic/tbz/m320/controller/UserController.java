@@ -15,13 +15,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import jakarta.persistence.EntityNotFoundException;
 
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -47,17 +44,14 @@ public class UserController {
     })
     // METHOD
     public ResponseEntity<?> findAll() {
-        try {
-            List<User> users = userService.findAll();
-            System.out.println(users);
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    users.stream()
-                         .map(UserMapper::toDTO)
-                         .toList()
-                    );
-        } catch (RuntimeException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
-        }
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(userService
+                        .findAll()
+                        .stream()
+                        .map(UserMapper::toDTO)
+                        .toList()
+                );
     }
     // GET
     // DOCUMENTATION
@@ -122,7 +116,7 @@ public class UserController {
     // METHOD
     public ResponseEntity<?> delete(@Parameter(description = "Id of user to delete") @PathVariable UUID id) {
         try {
-            userService.deleteById(id);
+            userService.delete(id);
             return ResponseEntity.noContent().build();
         } catch (EmptyResultDataAccessException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User to be deleted was not found!");

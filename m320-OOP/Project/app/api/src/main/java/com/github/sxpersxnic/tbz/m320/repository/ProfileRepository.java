@@ -6,5 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+/**
+ * @author sxpersxnic
+ */
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, UUID> {}

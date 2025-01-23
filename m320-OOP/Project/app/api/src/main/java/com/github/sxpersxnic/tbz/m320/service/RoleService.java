@@ -1,6 +1,7 @@
 package com.github.sxpersxnic.tbz.m320.service;
 
 import com.github.sxpersxnic.tbz.m320.lib.exceptions.FailedValidationException;
+import com.github.sxpersxnic.tbz.m320.lib.interfaces.CrudService;
 import com.github.sxpersxnic.tbz.m320.model.Role;
 import com.github.sxpersxnic.tbz.m320.repository.RoleRepository;
 import io.micrometer.common.util.StringUtils;
@@ -16,41 +17,47 @@ import java.util.UUID;
  * @author sxpersxnic
  */
 @Service
-public class RoleService {
+public class RoleService implements CrudService<Role, UUID> {
 
-    private final RoleRepository roleRepo;
+    private final RoleRepository roleRepository;
 
-    public RoleService(RoleRepository roleRepo) {
-        this.roleRepo = roleRepo;
+    public RoleService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
+    @Override
     public List<Role> findAll() {
-        return roleRepo.findAll();
+        return roleRepository.findAll();
     }
 
+    @Override
     public Role findById(UUID id) {
-        return roleRepo.findById(id).orElseThrow(EntityNotFoundException::new);
+        return roleRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public Role findByName(String name) {
-        return roleRepo.findByName(name);
+        return roleRepository.findByName(name);
     }
 
-    public void deleteById(UUID id) {
-        roleRepo.deleteById(id);
+    @Override
+    public void delete(UUID id) {
+        roleRepository.deleteById(id);
     }
 
+    @Override
     public Role update(Role changing, UUID id) {
         Role existing = findById(id);
-        mergeRoles(existing, changing);
-        return roleRepo.save(existing);
+        merge(existing, changing);
+        return roleRepository.save(existing);
     }
 
+    @Override
     public Role create(Role role) {
-        return roleRepo.save(role);
+        return roleRepository.save(role);
     }
 
-    private void mergeRoles(Role existing, Role changing) {
+    @Override
+    public void merge(Role existing, Role changing) {
         Map<String, List<String>> errors = new HashMap<>();
 
         if (changing.getName() != null) {

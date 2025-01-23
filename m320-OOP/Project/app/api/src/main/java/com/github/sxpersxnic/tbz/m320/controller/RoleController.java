@@ -114,7 +114,7 @@ public class RoleController {
             @PathVariable("id") UUID id
     ) {
         try {
-            roleService.deleteById(id);
+            roleService.delete(id);
             return ResponseEntity.noContent().build();
         } catch (EmptyResultDataAccessException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role was not found");

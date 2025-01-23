@@ -164,9 +164,9 @@ public class UserServiceTest {
     }
 
     @Test
-    public void checkDeleteById_whenNonExistingId_thenEntityNotFoundExceptionIsThrown() {
+    public void checkDelete_thenEntityNotFoundExceptionIsThrown() {
         doThrow(new EntityNotFoundException()).when(userRepository).deleteById(DataUtil.testUUID(0));
-        assertThrows(EntityNotFoundException.class, () -> userService.deleteById(DataUtil.testUUID(0)));
+        assertThrows(EntityNotFoundException.class, () -> userService.delete(DataUtil.testUUID(0)));
     }
 
 }

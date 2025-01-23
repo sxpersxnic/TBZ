@@ -1,10 +1,15 @@
 package com.github.sxpersxnic.tbz.m320.model;
 
 import jakarta.persistence.*;
-
+import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * @author sxpersxnic
+ */
+
+@Data
 @Entity
 @Table(name = "profiles")
 public class Profile {
@@ -23,9 +28,8 @@ public class Profile {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "created_at", nullable = false, updatable = false, insertable = false)
+    @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;
-
 
     public Profile(String username) {
         this.username = username;
@@ -36,45 +40,5 @@ public class Profile {
     public Profile() {
         this.createdAt = LocalDateTime.now();
         this.profilePicture = "/default.jpg";
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }
