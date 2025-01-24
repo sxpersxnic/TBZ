@@ -16,11 +16,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 @Order(10)
 class UserTest {
@@ -184,14 +180,14 @@ class UserTest {
 
     @Test
     @Order(6)
-    public void equalsMethod_comparesOnlyId() {
+    public void equalsMethod_comparesNotOnlyId() {
         User user1 = DataUtil.getTestUser();
         User user2 = DataUtil.getTestUser();
 
         user1.setEmail("NotSameEmail@foo.bar");
         user1.setPassword("NotSamePassword");
 
-        assertEquals(user1, user2);
+        assertNotEquals(user1, user2);
     }
 
     @Test

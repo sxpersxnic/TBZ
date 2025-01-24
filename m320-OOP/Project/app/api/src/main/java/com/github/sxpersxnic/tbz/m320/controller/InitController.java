@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @author sxpersxnic
  */
 @RestController
-@RequestMapping("/seed")
-public class SeedController {
+@RequestMapping("/db-init")
+public class InitController {
     private final Seed seed;
 
-    public SeedController(Seed seed) {
+    public InitController(Seed seed) {
         this.seed = seed;
     }
 

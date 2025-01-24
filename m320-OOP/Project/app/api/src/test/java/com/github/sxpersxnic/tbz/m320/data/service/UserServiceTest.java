@@ -2,6 +2,7 @@ package com.github.sxpersxnic.tbz.m320.data.service;
 
 import com.github.sxpersxnic.tbz.m320.lib.exceptions.FailedValidationException;
 import com.github.sxpersxnic.tbz.m320.model.User;
+import com.github.sxpersxnic.tbz.m320.repository.ProfileRepository;
 import com.github.sxpersxnic.tbz.m320.repository.UserRepository;
 import com.github.sxpersxnic.tbz.m320.service.UserService;
 import com.github.sxpersxnic.tbz.m320.model.Role;
@@ -36,6 +37,9 @@ public class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
+
+    @Mock
+    private ProfileRepository profileRepository;
 
     @Mock
     private RoleRepository roleRepository;

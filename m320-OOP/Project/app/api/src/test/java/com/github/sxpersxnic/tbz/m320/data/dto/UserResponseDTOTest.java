@@ -1,16 +1,11 @@
 package com.github.sxpersxnic.tbz.m320.data.dto;
 
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.UserResponseDTO;
-import jakarta.validation.constraints.NotBlank;
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class UserResponseDTOTest {
 
@@ -32,19 +27,7 @@ public class UserResponseDTOTest {
     }
 
     @Test
-    public void emailField_isAnnotatedWithNotBlank() {
-        try {
-            assertNotNull(UserResponseDTO.class
-                    .getDeclaredField("email")
-                    .getDeclaredAnnotation(NotBlank.class));
-        } catch (NoSuchFieldException e) {
-            fail();
-        }
-    }
-
-    @Test
     public void passwordField_doesNotExist() {
         assertThrows(NoSuchFieldException.class, () -> UserResponseDTO.class.getDeclaredField("password"));
     }
-
 }

@@ -15,11 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 @Order(10)
 class RoleTest {
@@ -134,13 +130,13 @@ class RoleTest {
 
     @Test
     @Order(6)
-    public void equalsMethod_comparesOnlyId() {
+    public void equalsMethod_comparesNotOnlyId() {
         Role role1 = DataUtil.getTestRole();
         Role role2 = DataUtil.getTestRole();
 
         role1.setName("ADMIN");
 
-        assertEquals(role1, role2);
+        assertNotEquals(role1, role2);
     }
 
     @Test

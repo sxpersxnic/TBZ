@@ -57,7 +57,7 @@ public class RoleController {
         }
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
     @Operation(summary = "Get a role by name")
     @ApiResponses(value = {
@@ -78,7 +78,7 @@ public class RoleController {
         }
     }
 
-    @PostMapping("/new")
+    @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
     @Operation(summary = "Add a new role")
     @ApiResponses(value = {

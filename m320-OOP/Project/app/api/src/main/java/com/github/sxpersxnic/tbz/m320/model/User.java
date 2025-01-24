@@ -1,7 +1,7 @@
 package com.github.sxpersxnic.tbz.m320.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,11 @@ import java.util.UUID;
  * @author sxpersxnic
  */
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "users")
 public class User {
@@ -34,4 +38,5 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> assignedRoles = new HashSet<>();
+
 }

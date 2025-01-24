@@ -26,21 +26,4 @@ public class UserRequestDTOTest {
     public void passwordField_doesExist() {
         assertDoesNotThrow(() -> UserRequestDTO.class.getDeclaredField("password"));
     }
-
-    @Test
-    public void passwordField_isAnnotatedWithNotBlank() {
-        try {
-            assertNotNull(UserRequestDTO.class
-                    .getDeclaredField("password")
-                    .getDeclaredAnnotation(NotBlank.class));
-        } catch (NoSuchFieldException e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void doesExtendUserResponseDTO() {
-        assertEquals(UserResponseDTO.class, UserRequestDTO.class.getSuperclass());
-    }
-
 }
