@@ -1,17 +1,10 @@
 package com.github.sxpersxnic.tbz.m320.data.dto;
 
 import com.github.sxpersxnic.tbz.m320.payload.dto.request.UserRequestDTO;
-import com.github.sxpersxnic.tbz.m320.payload.dto.response.UserResponseDTO;
-import jakarta.validation.constraints.NotBlank;
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class UserRequestDTOTest {
 
