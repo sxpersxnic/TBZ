@@ -64,7 +64,7 @@ public class GlobalControllerExceptionHandler {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(new JsonMessage(tex.getPropertyName() + " must be valid"));
             }
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new JsonMessage(ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new JsonMessage("Internal server error. message: " + ex.getMessage()));
     }
 
     @ExceptionHandler({AccessDeniedException.class})
