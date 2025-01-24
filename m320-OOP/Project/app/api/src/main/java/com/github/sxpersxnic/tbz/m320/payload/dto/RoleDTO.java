@@ -1,4 +1,4 @@
-package com.github.sxpersxnic.tbz.m320.payload.dto.request;
+package com.github.sxpersxnic.tbz.m320.payload.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

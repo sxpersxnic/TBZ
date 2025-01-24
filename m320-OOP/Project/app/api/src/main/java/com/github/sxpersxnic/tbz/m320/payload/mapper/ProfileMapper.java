@@ -1,6 +1,8 @@
 package com.github.sxpersxnic.tbz.m320.payload.mapper;
 
+import com.github.sxpersxnic.tbz.m320.model.Answer;
 import com.github.sxpersxnic.tbz.m320.model.Profile;
+import com.github.sxpersxnic.tbz.m320.model.Question;
 import com.github.sxpersxnic.tbz.m320.payload.dto.request.ProfileRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.ProfileResponseDTO;
 
@@ -25,6 +27,8 @@ public class ProfileMapper {
         dto.setUserId(src.getUser().getId());
         dto.setUsername(src.getUsername());
         dto.setProfilePicture(src.getProfilePicture());
+        dto.setQuestionIds(src.getQuestions().stream().map(Question::getId).toList());
+        dto.setAnswerIds(src.getAnswers().stream().map(Answer::getId).toList());
 
         return dto;
     }

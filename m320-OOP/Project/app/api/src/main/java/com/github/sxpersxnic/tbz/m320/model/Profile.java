@@ -3,6 +3,8 @@ package com.github.sxpersxnic.tbz.m320.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -27,6 +29,12 @@ public class Profile {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    private Set<Question> questions = new HashSet<>();
+
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    private Set<Answer> answers = new HashSet<>();
 
     @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;

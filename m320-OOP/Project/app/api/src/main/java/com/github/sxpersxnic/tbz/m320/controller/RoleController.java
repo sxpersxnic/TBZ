@@ -1,7 +1,7 @@
 package com.github.sxpersxnic.tbz.m320.controller;
 
 import com.github.sxpersxnic.tbz.m320.model.Role;
-import com.github.sxpersxnic.tbz.m320.payload.dto.request.RoleDTO;
+import com.github.sxpersxnic.tbz.m320.payload.dto.RoleDTO;
 import com.github.sxpersxnic.tbz.m320.payload.mapper.RoleMapper;
 import com.github.sxpersxnic.tbz.m320.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;

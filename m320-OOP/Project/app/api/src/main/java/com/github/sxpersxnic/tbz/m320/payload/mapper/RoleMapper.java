@@ -1,7 +1,7 @@
 package com.github.sxpersxnic.tbz.m320.payload.mapper;
 
 import com.github.sxpersxnic.tbz.m320.model.Role;
-import com.github.sxpersxnic.tbz.m320.payload.dto.request.RoleDTO;
+import com.github.sxpersxnic.tbz.m320.payload.dto.RoleDTO;
 import com.github.sxpersxnic.tbz.m320.model.User;
 
 import java.util.List;
