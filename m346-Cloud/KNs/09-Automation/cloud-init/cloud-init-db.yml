@@ -1,0 +1,23 @@
+#cloud-config
+users:
+  - name: ubuntu 
+    sudo: ALL=(ALL) NOPASSWD:ALL 
+    groups: user, admin 
+    home: /home/ubuntu 
+    shell: /bin/bash 
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDX2hXfKV0Q04uwt4PFeliVnz9uZu+F69NMXCjjpFesxYP3l/N8N4jzs9XAROfufbDi59F7wmjhzl4c0+QIqBp40tbQSvvKWIMfjorlPV3NocUhzS1OxFzREOz5n7b+6T/4SFQbpvZtieT+eGwATBATkw+VuA5e33/evbSRQFKecLgfBAuyMqBFOwd75G1IguI4m1kQHklC7bZYAJZyIsSYl1Mz8+pT4+AspSkEBG1PdEPTM8R7GBznfmbQz3+NBVgtd8GUmRSRyy+iI04YaP56ocEbzXpBLeSbwKs2SmHGLprvu1PH+AkhGDz+BOq7Avr35mHsCpiZyTOCHzfCZ8FFWUckMAtYOfneKbak6k3QuLYpk1F4v10DzAtYwvkXOUj+9sPkiqRQVIj9yHck0YTMkJdt3tYA0GTwGb9r7SJm8BnfeTPGQmRjPUj5E493HyBBPxBwLFRmMF9rLsAx6S93nIcEV36/Q3L3727bOXOX6UeFXoJcV9AtXmV1impTKboMS5LOLgc3Cf9+eJtINtxAT1AP9w0SPzVKYOSb2PsFVmWAMyIz9reAdGCSWICBHAh+NY0O+stOAWMhkVqGZEJ48Es6cS16vArVDqOEFNF2dddKSZkOLxjY+BwI6GL7GuQTcEYhcZeBOdp/+Ji5vhRCRHeLMNs5AUzu5TKamRyHYw== sxpersxnic@sxnic 
+ssh_pwauth: false 
+disable_root: false 
+package_update: true 
+packages:
+  - curl 
+  - wget 
+  - mariadb-server 
+  - adminer
+runcmd:
+  - sudo a2enconf adminer
+  - sudo mysql -sfu root -e "GRANT ALL ON *.* TO 'admin'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;"
+  - sudo sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf 
+  - sudo systemctl restart mariadb-server
+  - sudo systemctl restart mariadb.service

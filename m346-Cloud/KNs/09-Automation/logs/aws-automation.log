@@ -1,0 +1,87 @@
+**********************
+Windows PowerShell transcript start
+Start time: 20250119215729
+Username: SXNIC\sxpersxnic
+RunAs User: SXNIC\sxpersxnic
+Configuration Name: 
+Machine: SXNIC (Microsoft Windows NT 10.0.22631.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 10720
+PSVersion: 5.1.22621.4391
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.22621.4391
+BuildVersion: 10.0.22621.4391
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is ..\logs\aws-automation.log
+==== Step 1: Checking for Instance ID (webserver) ====
+Found Instance ID: i-0a17d2fac3aefbb51
+==== Step 2: Stopping Instance (webserver) ====
+Trying to stop instance with ID: i-0a17d2fac3aefbb51...
+STOPPINGINSTANCES	i-0a17d2fac3aefbb51
+CURRENTSTATE	64	stopping
+PREVIOUSSTATE	16	running
+Instance was stopped.
+Waiting 60 seconds for instance to shut down...
+==== Step 3: Start of instance (webserver) ====
+Starting instance with ID: i-0a17d2fac3aefbb51...
+STARTINGINSTANCES	i-0a17d2fac3aefbb51
+CURRENTSTATE	0	pending
+PREVIOUSSTATE	80	stopped
+Waiting 30 seconds for instance to start up...
+Instance was started.
+==== Step 4: Creating new instance with Launch Template (databaseserver) ====
+Creating new instance with Launch Template ID: lt-0da41b3d69b36b110
+454746003234	r-09e4a51dfb5a358fe
+INSTANCES	0	x86_64	uefi-preferred	06547dc6-e2af-4c00-b719-0c065cf3f05e	legacy-bios	False	True	xen	ami-04b4f1a9cf54c11d0	i-0424ea8f2e6da3be5	t2.micro	rsa	2025-01-19T20:59:11+00:00	ip-172-31-0-20.ec2.internal	172.31.0.20	ec2-3-218-44-99.compute-1.amazonaws.com	3.218.44.99	/dev/sda1	ebs	True		subnet-0a39d70817d7c3df0	hvm	vpc-0a6c791853a5cc4dc
+CAPACITYRESERVATIONSPECIFICATION	open
+CPUOPTIONS	1	1
+ENCLAVEOPTIONS	False
+MAINTENANCEOPTIONS	default
+METADATAOPTIONS	enabled	disabled	2	required	disabled	pending
+MONITORING	disabled
+NETWORKINTERFACES	databaseserver	interface	02:58:a5:93:91:cd	eni-01f483809b3c63678	454746003234	ip-172-31-0-20.ec2.internal	172.31.0.20	True	in-use	subnet-0a39d70817d7c3df0	vpc-0a6c791853a5cc4dc
+ASSOCIATION	454746003234	ec2-3-218-44-99.compute-1.amazonaws.com	3.218.44.99
+ATTACHMENT	2025-01-19T20:59:11+00:00	eni-attach-0a2562ba8cfab493c	False	0	0	attaching
+GROUPS	sg-0c9488bf7ebc476de
+OPERATOR	False
+PRIVATEIPADDRESSES	True	ip-172-31-0-20.ec2.internal	172.31.0.20
+ASSOCIATION	454746003234	ec2-3-218-44-99.compute-1.amazonaws.com	3.218.44.99
+OPERATOR	False
+PLACEMENT	us-east-1a		default
+PRIVATEDNSNAMEOPTIONS	False	False	ip-name
+SECURITYGROUPS	sg-0c9488bf7ebc476de
+STATE	0	pending
+STATEREASON	pending	pending
+TAGS	aws:ec2launchtemplate:id	lt-0da41b3d69b36b110
+TAGS	aws:ec2launchtemplate:version	1
+TAGS	Name	databaseserver
+New instance launched successfully.
+Waiting 300 seconds for databaseserver to initialize...
+==== Step 5: Testing connection on Port 3306 (databaseserver) ====
+Found Public IP Address: 3.218.44.99
+Using: ec2-3-218-44-99.compute-1.amazonaws.com
+
+Pinging ec2-3-218-44-99.compute-1.amazonaws.com [3.218.44.99] with 32 bytes of data:
+Reply from 3.218.44.99: bytes=32 time=143ms TTL=50
+Reply from 3.218.44.99: bytes=32 time=148ms TTL=50
+Reply from 3.218.44.99: bytes=32 time=140ms TTL=50
+Reply from 3.218.44.99: bytes=32 time=142ms TTL=50
+
+Ping statistics for 3.218.44.99:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 140ms, Maximum = 148ms, Average = 143ms
+telnet ec2-3-218-44-99.compute-1.amazonaws.com 3306
+j
+ 5.5.5-10.11.8-MariaDB-0ubuntu0.24.04.1?i$r7V.~U??-???lA?Y~4$U_aF{mysql_native_password
+
+Connection to host lost.
+==== Done ====
+**********************
+Windows PowerShell transcript end
+End time: 20250119220504
+**********************
