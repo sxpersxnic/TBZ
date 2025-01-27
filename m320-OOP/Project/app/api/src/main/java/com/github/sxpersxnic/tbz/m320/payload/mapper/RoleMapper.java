@@ -2,8 +2,6 @@ package com.github.sxpersxnic.tbz.m320.payload.mapper;
 
 import com.github.sxpersxnic.tbz.m320.model.Role;
 import com.github.sxpersxnic.tbz.m320.payload.dto.RoleDTO;
-import com.github.sxpersxnic.tbz.m320.model.User;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -14,12 +12,12 @@ public class RoleMapper {
     public static RoleDTO toDTO(Role role) {
         RoleDTO dto = new RoleDTO();
 
-        dto.setId(role.getId());
+        dto.setId(role.getId().toString());
         dto.setName(role.getName());
 
-        List<UUID> userIds = role.getAssignedUsers()
+        List<String> userIds = role.getAssignedUsers()
                 .stream()
-                .map(User::getId)
+                .map(user -> user.getId().toString())
                 .toList();
         dto.setAssignedUserIds(userIds);
         return dto;
@@ -27,7 +25,8 @@ public class RoleMapper {
     public static Role fromDTO(RoleDTO dto) {
         Role role = new Role();
 
-        role.setId(dto.getId());
+        UUID id = UUID.fromString(dto.getId());
+        role.setId(id);
         role.setName(dto.getName());
         return role;
     }

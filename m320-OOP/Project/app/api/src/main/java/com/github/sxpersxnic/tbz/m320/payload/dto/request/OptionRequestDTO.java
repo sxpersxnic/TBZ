@@ -2,7 +2,6 @@ package com.github.sxpersxnic.tbz.m320.payload.dto.request;
 
 import lombok.Data;
 
-import java.util.UUID;
 import com.github.sxpersxnic.tbz.m320.model.Option;
 
 /// Request Data transfer object of {@link Option}.
@@ -15,6 +14,6 @@ import com.github.sxpersxnic.tbz.m320.model.Option;
 /// @author sxpersxnic
 @Data
 public class OptionRequestDTO {
-    private UUID questionId;
+    private String questionId;
     private String content;
 }

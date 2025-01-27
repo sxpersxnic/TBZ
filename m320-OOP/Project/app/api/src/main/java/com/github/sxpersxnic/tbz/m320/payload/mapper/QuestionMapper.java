@@ -42,7 +42,8 @@ public class QuestionMapper {
         Question question = new Question();
         Profile profile = new Profile();
 
-        profile.setId(dto.getProfileId());
+        UUID profileId = UUID.fromString(dto.getProfileId());
+        profile.setId(profileId);
 
         question.setProfile(profile);
         question.setContent(dto.getContent());

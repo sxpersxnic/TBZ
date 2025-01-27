@@ -7,12 +7,11 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 /// Request Data transfer object of {@link Question}.
 ///
 /// **Contains:**
-/// - `private UUID profileId;` - Profile identifier of the questions author.
+/// - `private String profileId;` - Profile identifier of the questions author.
 /// - `private String content;` - Content of question.
 /// - `private String description;` - Optional description of question.
 /// - `private List<OptionRequestDTO> options;` - Given options of the question.
@@ -22,8 +21,9 @@ import java.util.UUID;
 @Data
 public class QuestionRequestDTO {
 
-    private UUID profileId;
-    @NotBlank(message = "Content cannot be empty")
+    @NotBlank(message = "Profile ID cannot be empty!")
+    private String profileId;
+    @NotBlank(message = "Content cannot be empty!")
     private String content;
 
     private String description;

@@ -4,7 +4,6 @@ import com.github.sxpersxnic.tbz.m320.lib.abstracts.ResponseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.UUID;
 import java.util.List;
 
 /**
@@ -13,9 +12,9 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ProfileResponseDTO extends ResponseDTO {
-    private UUID userId;
+    private UserResponseDTO user;
     private String username;
     private String profilePicture;
-    private List<UUID> questionIds;
-    private List<UUID> answerIds;
+    private List<QuestionResponseDTO> questions;
+    private List<AnswerResponseDTO> answers;
 }
