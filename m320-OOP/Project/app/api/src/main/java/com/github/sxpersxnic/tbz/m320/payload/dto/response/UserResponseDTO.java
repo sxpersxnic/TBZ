@@ -1,6 +1,9 @@
 package com.github.sxpersxnic.tbz.m320.payload.dto.response;
 
+import com.github.sxpersxnic.tbz.m320.lib.abstracts.ResponseDTO;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -8,9 +11,9 @@ import java.util.UUID;
  * @author sxpersxnic
  */
 @Data
-public class UserResponseDTO {
-    private UUID id;
-    private String email;
-    private List<UUID> roleIds;
+@EqualsAndHashCode(callSuper = true)
+public class UserResponseDTO extends ResponseDTO {
     private UUID profileId;
+    private List<UUID> roleIds;
+    private String email;
 }

@@ -21,13 +21,20 @@ public class SignUpMapper {
     }
 
     public static SignUpResponseDTO toDTO(User user) {
+        SignUpResponseDTO dto = new SignUpResponseDTO();
+
+        dto.setId(user.getId());
+        dto.setEmail(user.getEmail());
+
         UUID profileId = user
                 .getProfiles()
                 .stream()
                 .map(Profile::getId)
                 .toList()
                 .getFirst();
-        return new SignUpResponseDTO(user.getId(), profileId, user.getEmail());
+        dto.setProfileId(profileId);
+
+        return dto;
     }
 
 }

@@ -1,7 +1,7 @@
 package com.github.sxpersxnic.tbz.m320.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -11,7 +11,11 @@ import java.util.UUID;
 /**
  * @author sxpersxnic
  */
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "options")
 public class Option {

@@ -1,13 +1,14 @@
 package com.github.sxpersxnic.tbz.m320.payload.mapper;
 
-import com.github.sxpersxnic.tbz.m320.model.Answer;
 import com.github.sxpersxnic.tbz.m320.model.Option;
+import com.github.sxpersxnic.tbz.m320.model.Profile;
 import com.github.sxpersxnic.tbz.m320.model.Question;
+import com.github.sxpersxnic.tbz.m320.payload.dto.request.OptionRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.request.QuestionRequestDTO;
+import com.github.sxpersxnic.tbz.m320.payload.dto.response.OptionResponseDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.QuestionResponseDTO;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author sxpersxnic
@@ -16,27 +17,22 @@ public class QuestionMapper {
 
     public static QuestionResponseDTO toDTO(Question src) {
         QuestionResponseDTO dto = new QuestionResponseDTO();
+        List<OptionResponseDTO> options = new ArrayList<>();
 
         dto.setId(src.getId());
-        dto.setOwnerId(src.getProfile().getId());
-
-        List<UUID> optionIds = src
-                .getOptions()
-                .stream()
-                .map(Option::getId)
-                .toList();
-        dto.setOptionIds(optionIds);
-
-        List<UUID> answerIds = src
-                .getAnswers()
-                .stream()
-                .map(Answer::getId)
-                .toList();
-        dto.setAnswerIds(answerIds);
-
         dto.setContent(src.getContent());
         dto.setDescription(src.getDescription());
+        dto.setProfileId(src.getProfile().getId());
+        dto.setUsername(src.getProfile().getUsername());
+        dto.setProfilePicture(src.getProfile().getProfilePicture());
 
+        for (Option option : src.getOptions()) {
+            OptionResponseDTO optionDto = OptionMapper.toDTO(option);
+            dto.setTotalAnswerCount(dto.getTotalAnswerCount() + optionDto.getAnswerCount());
+            options.add(optionDto);
+        }
+
+        dto.setOptions(options);
         dto.setCreatedAt(src.getCreatedAt());
 
         return dto;
@@ -44,14 +40,16 @@ public class QuestionMapper {
 
     public static Question fromDTO(QuestionRequestDTO dto) {
         Question question = new Question();
+        Profile profile = new Profile();
 
+        profile.setId(dto.getProfileId());
+
+        question.setProfile(profile);
         question.setContent(dto.getContent());
         question.setDescription(dto.getDescription());
 
-        for (UUID optionId : dto.getOptionIds()) {
-            Option option = new Option();
-            option.setId(optionId);
-
+        for (OptionRequestDTO optionReq : dto.getOptions()) {
+            Option option = OptionMapper.fromDTO(optionReq, question.getId());
             question.getOptions().add(option);
         }
 

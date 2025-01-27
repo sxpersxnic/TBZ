@@ -1,12 +1,10 @@
 package com.github.sxpersxnic.tbz.m320.payload.dto.response;
 
 import com.github.sxpersxnic.tbz.m320.lib.abstracts.ResponseDTO;
-import com.github.sxpersxnic.tbz.m320.model.Option;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -14,14 +12,10 @@ import java.util.UUID;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class QuestionResponseDTO extends ResponseDTO {
-    private String content;
-    private String description;
+public class AnswerResponseDTO extends ResponseDTO {
+    private UUID optionId;
     private UUID profileId;
     private String username;
     private String profilePicture;
-    private List<OptionResponseDTO> options;
     private LocalDateTime createdAt;
-    private int totalAnswerCount;
-
 }

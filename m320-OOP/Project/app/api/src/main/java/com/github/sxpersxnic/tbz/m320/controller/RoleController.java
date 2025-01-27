@@ -23,20 +23,21 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.UUID;
 
+import static com.github.sxpersxnic.tbz.m320.lib.constants.Controller.*;
+
 /**
  * @author sxpersxnic
  */
 @RestController
-@RequestMapping(path = RoleController.PATH)
+@RequestMapping(path = ROLES)
 public class RoleController {
-    public static final String PATH = "/roles";
     public final RoleService roleService;
 
     public RoleController(RoleService roleService) {
         this.roleService = roleService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(ID_GET)
     @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
     @Operation(summary = "Get a role by id")
     @ApiResponses(value = {
@@ -57,7 +58,7 @@ public class RoleController {
         }
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping(NAME_GET)
     @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
     @Operation(summary = "Get a role by name")
     @ApiResponses(value = {
@@ -78,7 +79,7 @@ public class RoleController {
         }
     }
 
-    @PostMapping("/create")
+    @PostMapping(POST)
     @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
     @Operation(summary = "Add a new role")
     @ApiResponses(value = {
@@ -100,7 +101,7 @@ public class RoleController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(DELETE)
     @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
     @Operation(summary = "Delete a role")
     @ApiResponses(value = {
@@ -121,9 +122,9 @@ public class RoleController {
         }
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping(PATCH)
     @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
-    @Operation(summary = "Update a role")
+    @Operation(summary = "UpÖdate a role")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Role was updated successfully",
                     content = @Content(schema = @Schema(implementation = RoleDTO.class))),
@@ -162,7 +163,4 @@ public class RoleController {
                 .map(RoleMapper::toDTO)
                 .toList());
     }
-
-
-
 }

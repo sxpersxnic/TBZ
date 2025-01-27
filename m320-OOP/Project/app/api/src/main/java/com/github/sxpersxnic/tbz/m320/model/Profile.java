@@ -1,7 +1,8 @@
 package com.github.sxpersxnic.tbz.m320.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +12,10 @@ import java.util.UUID;
  * @author sxpersxnic
  */
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "profiles")
 public class Profile {

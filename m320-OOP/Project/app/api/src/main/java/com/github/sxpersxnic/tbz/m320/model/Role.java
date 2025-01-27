@@ -1,7 +1,7 @@
 package com.github.sxpersxnic.tbz.m320.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.HashSet;
@@ -12,7 +12,11 @@ import java.util.UUID;
  * @author sxpersxnic
  */
 
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
@@ -24,8 +28,6 @@ public class Role implements GrantedAuthority {
 
     @ManyToMany(mappedBy = "assignedRoles")
     private Set<User> assignedUsers = new HashSet<>();
-
-    public Role() {}
 
     @Override
     public String getAuthority() {

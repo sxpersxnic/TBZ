@@ -27,9 +27,6 @@ public class Question {
     @OneToMany(mappedBy = "question")
     private Set<Option> options = new HashSet<>();
 
-    @OneToMany(mappedBy = "question")
-    private Set<Answer> answers = new HashSet<>();
-
     @Column(name = "content", nullable = false)
     private String content;
 

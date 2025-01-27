@@ -3,8 +3,10 @@ package com.github.sxpersxnic.tbz.m320.service;
 import com.github.sxpersxnic.tbz.m320.lib.exceptions.FailedValidationException;
 import com.github.sxpersxnic.tbz.m320.lib.interfaces.CrudService;
 import com.github.sxpersxnic.tbz.m320.model.Answer;
+import com.github.sxpersxnic.tbz.m320.model.Option;
 import com.github.sxpersxnic.tbz.m320.model.Question;
 import com.github.sxpersxnic.tbz.m320.repository.AnswerRepository;
+import com.github.sxpersxnic.tbz.m320.repository.OptionRepository;
 import com.github.sxpersxnic.tbz.m320.repository.QuestionRepository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,11 +18,14 @@ import java.util.*;
 public class QuestionService implements CrudService<Question, UUID> {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
+    private final OptionRepository optionRepository;
 
-    public QuestionService(QuestionRepository questionRepository, AnswerRepository answerRepository) {
+    public QuestionService(QuestionRepository questionRepository, AnswerRepository answerRepository, OptionRepository optionRepository) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
+        this.optionRepository = optionRepository;
     }
+
 
     @Override
     public Question findById(UUID id) {
@@ -70,13 +75,21 @@ public class QuestionService implements CrudService<Question, UUID> {
         }
     }
 
-    public Question addAnswer(Question question, Set<Answer> answers) {
-        for (Answer answer : answers) {
-            if (!answerRepository.existsByIdAndQuestionId(answer.getId(), question.getId())) {
-                question.getAnswers().add(answer);
+    public List<Question> getQuestionDetails(int itemsPerPage, int currentPage) {
+        int offset = (currentPage - 1) * itemsPerPage;
+        List<Question> questions = questionRepository.getPage(itemsPerPage, offset);
+
+        for (Question question : questions) {
+            List<Option> options = optionRepository.getOptionByQuestionId(question.getId());
+
+            for (Option option : options) {
+                List<Answer> answers = answerRepository.findByOptionId(option.getId());
+                option.setAnswers(new HashSet<>(answers));
             }
+
+            question.setOptions(new HashSet<>(options));
         }
 
-        return questionRepository.save(question);
+        return questions;
     }
 }

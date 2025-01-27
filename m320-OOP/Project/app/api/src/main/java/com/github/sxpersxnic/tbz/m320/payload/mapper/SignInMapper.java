@@ -22,12 +22,20 @@ public class SignInMapper {
     }
 
     public static SignInResponseDTO toDTO(String token, User user) {
+        SignInResponseDTO dto = new SignInResponseDTO();
+
+        dto.setId(user.getId());
+
         UUID profileId = user
                 .getProfiles()
                 .stream()
                 .map(Profile::getId)
                 .toList()
                 .getFirst();
-        return new SignInResponseDTO(token, user.getId(), profileId);
+        dto.setProfileId(profileId);
+
+        dto.setAccessToken(token);
+
+        return dto;
     }
 }

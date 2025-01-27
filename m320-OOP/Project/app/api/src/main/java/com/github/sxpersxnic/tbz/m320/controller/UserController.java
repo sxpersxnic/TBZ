@@ -21,13 +21,14 @@ import jakarta.persistence.EntityNotFoundException;
 
 import java.util.UUID;
 
+import static com.github.sxpersxnic.tbz.m320.lib.constants.Controller.*;
+
 /**
  * @author sxpersxnic
  */
 @RestController
-@RequestMapping(path = UserController.PATH)
+@RequestMapping(USERS)
 public class UserController {
-    public static final String PATH = "/users";
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -55,7 +56,7 @@ public class UserController {
     }
     // GET
     // DOCUMENTATION
-    @GetMapping("/{id}")
+    @GetMapping(ID_GET)
     @Operation(summary = "Get user by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User found!",
@@ -74,7 +75,7 @@ public class UserController {
     }
     // PATCH
     // DOCUMENTATION
-    @PatchMapping("/{id}")
+    @PatchMapping(PATCH)
     @Operation(summary = "Update a user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User updated successfully!",
@@ -105,7 +106,7 @@ public class UserController {
 
     // DELETE
     // DOCUMENTATION
-    @DeleteMapping("/{id}")
+    @DeleteMapping(DELETE)
     @Operation(summary = "Delete a user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "User was deleted successfully",

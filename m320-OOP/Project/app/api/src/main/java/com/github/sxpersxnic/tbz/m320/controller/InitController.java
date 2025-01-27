@@ -6,11 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.github.sxpersxnic.tbz.m320.lib.constants.Controller.DB_INIT;
+
 /**
  * @author sxpersxnic
  */
 @RestController
-@RequestMapping("/db-init")
+@RequestMapping(DB_INIT)
 public class InitController {
     private final Seed seed;
 
