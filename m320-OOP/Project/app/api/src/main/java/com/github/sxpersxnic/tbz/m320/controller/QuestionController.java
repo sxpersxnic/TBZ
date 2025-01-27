@@ -1,6 +1,5 @@
 package com.github.sxpersxnic.tbz.m320.controller;
 
-import com.github.sxpersxnic.tbz.m320.model.Option;
 import com.github.sxpersxnic.tbz.m320.model.Question;
 import com.github.sxpersxnic.tbz.m320.payload.dto.request.QuestionRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.mapper.QuestionMapper;
