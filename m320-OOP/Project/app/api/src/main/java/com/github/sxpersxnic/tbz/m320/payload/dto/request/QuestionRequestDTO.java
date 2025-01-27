@@ -1,5 +1,6 @@
 package com.github.sxpersxnic.tbz.m320.payload.dto.request;
 
+import com.github.sxpersxnic.tbz.m320.model.Question;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -8,9 +9,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author sxpersxnic
- */
+/// Request Data transfer object of {@link Question}.
+///
+/// **Contains:**
+/// - `private UUID profileId;` - Profile identifier of the questions author.
+/// - `private String content;` - Content of question.
+/// - `private String description;` - Optional description of question.
+/// - `private List<OptionRequestDTO> options;` - Given options of the question.
+/// - `private LocalDateTime createdAt;` - Local (with timezone) date and time of the question's creation.
+///
+/// @author sxpersxnic
 @Data
 public class QuestionRequestDTO {
 

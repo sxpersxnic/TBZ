@@ -16,6 +16,8 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.*;
 
 /**
+ * Service component for {@link User}
+ *
  * @author sxpersxnic
  */
 @Service

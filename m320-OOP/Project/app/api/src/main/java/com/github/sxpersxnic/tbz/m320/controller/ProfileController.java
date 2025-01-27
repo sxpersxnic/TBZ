@@ -15,6 +15,9 @@ import java.util.UUID;
 
 import static com.github.sxpersxnic.tbz.m320.lib.constants.Controller.*;
 
+/**
+ * @author sxpersxnic
+ */
 @RestController
 @RequestMapping(PROFILES)
 public class ProfileController {

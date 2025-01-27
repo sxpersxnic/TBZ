@@ -18,4 +18,6 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
     OFFSET :offset
     """, nativeQuery = true)
     List<Question> getPage(int itemsPerPage, int offset);
+
+    boolean existsByContentAndProfileId(String content, UUID profileId);
 }

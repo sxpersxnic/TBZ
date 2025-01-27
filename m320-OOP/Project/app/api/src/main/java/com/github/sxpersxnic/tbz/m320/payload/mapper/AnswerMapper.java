@@ -6,6 +6,8 @@ import com.github.sxpersxnic.tbz.m320.model.Profile;
 import com.github.sxpersxnic.tbz.m320.payload.dto.request.AnswerRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.AnswerResponseDTO;
 
+import java.util.UUID;
+
 public class AnswerMapper {
 
     public static AnswerResponseDTO toDTO(Answer answer) {
@@ -26,8 +28,11 @@ public class AnswerMapper {
         Profile profile = new Profile();
         Option option = new Option();
 
-        profile.setId(dto.getProfileId());
-        option.setId(dto.getOptionId());
+        UUID profileId = UUID.fromString(dto.getProfileId());
+        profile.setId(profileId);
+
+        UUID optionId = UUID.fromString(dto.getOptionId());
+        option.setId(optionId);
 
         answer.setProfile(profile);
         answer.setOption(option);

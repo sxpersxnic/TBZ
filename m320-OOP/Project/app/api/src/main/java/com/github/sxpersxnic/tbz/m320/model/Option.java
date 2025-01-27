@@ -14,7 +14,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "options")
@@ -30,9 +29,17 @@ public class Option {
     @OneToMany(mappedBy = "option")
     private Set<Answer> answers = new HashSet<>();
 
+    @Column(name = "answer_count")
+    private int answerCount;
+
     @Column(name = "content", nullable = false)
     private String content;
 
     @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;
+
+    public Option() {
+        this.answerCount = 0;
+        this.createdAt = LocalDateTime.now();
+    }
 }

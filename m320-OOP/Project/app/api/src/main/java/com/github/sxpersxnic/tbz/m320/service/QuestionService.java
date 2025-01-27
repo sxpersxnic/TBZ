@@ -9,11 +9,15 @@ import com.github.sxpersxnic.tbz.m320.repository.AnswerRepository;
 import com.github.sxpersxnic.tbz.m320.repository.OptionRepository;
 import com.github.sxpersxnic.tbz.m320.repository.QuestionRepository;
 import io.micrometer.common.util.StringUtils;
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * Service component for {@link Question}
+ */
 @Service
 public class QuestionService implements CrudService<Question, UUID> {
     private final QuestionRepository questionRepository;
@@ -44,6 +48,9 @@ public class QuestionService implements CrudService<Question, UUID> {
 
     @Override
     public Question create(Question question) {
+        if (questionRepository.existsByContentAndProfileId(question.getContent(), question.getProfile().getId())) {
+            throw new EntityExistsException("Question already exists on this profile");
+        }
         return questionRepository.save(question);
     }
 
