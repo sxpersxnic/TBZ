@@ -1,7 +1,6 @@
 package com.github.sxpersxnic.tbz.m320.payload.dto.response;
 
 import com.github.sxpersxnic.tbz.m320.lib.abstracts.ResponseDTO;
-import com.github.sxpersxnic.tbz.m320.model.Option;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
