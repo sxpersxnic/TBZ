@@ -1,13 +1,12 @@
 package com.github.sxpersxnic.tbz.m320.repository;
 
 import com.github.sxpersxnic.tbz.m320.model.Answer;
-import com.github.sxpersxnic.tbz.m320.model.Option;
-import com.github.sxpersxnic.tbz.m320.model.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -27,7 +26,14 @@ public interface AnswerRepository extends JpaRepository<Answer, UUID> {
     @Query("SELECT a FROM Answer a WHERE a.option.question.id = :questionId")
     List<Answer> findByQuestionId(UUID questionId);
 
-    Answer findByOptionIdAndProfileId(UUID optionId, UUID profileId);
+    Optional<Answer> findByOptionIdAndProfileId(UUID optionId, UUID profileId);
 
-    boolean existsByOptionAndProfile(Option option, Profile profile);
+    @Query("SELECT COUNT(a) FROM Answer a WHERE a.option.id = :optionId AND a.profile.id = :profileId")
+    boolean existsByOptionAndProfile(UUID optionId, UUID profileId);
+
+    @Query("SELECT COUNT(a) FROM Answer a WHERE a.option.id = :id")
+    int countByOptionId(UUID id);
+
+    @Query("SELECT COUNT(a) FROM Answer a WHERE a.option.question.id = :id")
+    int countByQuestionId(UUID id);
 }

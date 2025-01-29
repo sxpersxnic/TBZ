@@ -9,6 +9,7 @@ import com.github.sxpersxnic.tbz.m320.payload.dto.response.OptionResponseDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.QuestionResponseDTO;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /// Class to map Question objects to QuestionResponseDTO objects and vice versa.
@@ -43,6 +44,7 @@ public class QuestionMapper {
 
     public static Question fromDTO(QuestionRequestDTO dto) {
         Question question = new Question();
+        List<Option> options = new ArrayList<>();
         Profile profile = new Profile();
 
         UUID profileId = UUID.fromString(dto.getProfileId());
@@ -53,9 +55,11 @@ public class QuestionMapper {
         question.setDescription(dto.getDescription());
 
         for (OptionRequestDTO optionReq : dto.getOptions()) {
-            Option option = OptionMapper.fromDTO(optionReq, question.getId());
-            question.getOptions().add(option);
+            Option option = OptionMapper.fromDTO(optionReq, question);
+            options.add(option);
         }
+
+        question.setOptions(new HashSet<>(options));
 
         return question;
     }

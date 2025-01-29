@@ -52,7 +52,7 @@ public class RoleService implements CrudService<Role, UUID> {
     /// @return The {@link Role} entity with the given name.
     /// @throws EntityNotFoundException If no {@link Role} entity with the given name exists.
     public Role findByName(String name) {
-        return roleRepository.findByName(name);
+        return roleRepository.findByName(name).orElseThrow(EntityNotFoundException::new);
     }
 
     /// Delete a {@link Role} entity by its ID.

@@ -1,4 +1,4 @@
-package com.github.sxpersxnic.tbz.m320.payload.dto;
+package com.github.sxpersxnic.tbz.m320.payload.dto.response;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -6,13 +6,14 @@ import lombok.Data;
 import java.util.List;
 
 
-/// DTO for role
+/// Response DTO for role
 /// @author sxpersxnic
 @Data
-public class RoleDTO {
+public class RoleResponseDTO {
 
     private String id;
-    @NotBlank(message = "Name can not be empty!")
+
+    @NotBlank(message = "Name must not be blank")
     private String name;
 
     private List<String> assignedUserIds;

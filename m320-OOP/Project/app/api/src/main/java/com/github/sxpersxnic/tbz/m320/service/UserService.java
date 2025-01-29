@@ -96,7 +96,7 @@ public class UserService implements CrudService<User, UUID> {
     ///
     /// That's why there isn't a **create** method in the {@link ProfileController}.
     public User create(User newUser, String username) {
-        Role defaultRole = roleRepository.findByName("USER");
+        Role defaultRole = roleRepository.findByName("USER").orElseThrow(EntityNotFoundException::new);
         Profile profile = new Profile(username);
 
         String password = newUser.getPassword();
@@ -118,7 +118,7 @@ public class UserService implements CrudService<User, UUID> {
     /// @throws EntityNotFoundException If no {@link User} entity with the given ID exists.
     @Override
     public User update(User changing, UUID id) {
-        User existing = this.findById(id);
+        User existing = findById(id);
         merge(existing, changing);
         String password = existing.getPassword();
         String encodedPassword = passwordEncoder.encode(password);
@@ -149,16 +149,16 @@ public class UserService implements CrudService<User, UUID> {
             if (StringUtils.isNotBlank(changing.getEmail())) {
                 existing.setEmail(changing.getEmail());
             } else {
-                errors.put("email", List.of("Email can not be empty!"));
+                errors.put("email", List.of("Email must not be blank!"));
             }
         }
-        if (changing.getPassword() != null) {
-            if (StringUtils.isNotBlank(changing.getPassword())) {
-                existing.setPassword(changing.getPassword());
-            } else {
-                errors.put("password", List.of("Password can not be empty!"));
-            }
-        }
+//        if (changing.getPassword() != null) {
+//            if (StringUtils.isNotBlank(changing.getPassword())) {
+//                existing.setPassword(changing.getPassword());
+//            } else {
+//                errors.put("password", List.of("Password can not be empty!"));
+//            }
+//        }
 
         if (!errors.isEmpty()) {
             throw new FailedValidationException(errors);

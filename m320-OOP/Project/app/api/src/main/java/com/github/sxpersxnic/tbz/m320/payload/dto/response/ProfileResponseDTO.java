@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ProfileResponseDTO extends ResponseDTO {
-    private UserResponseDTO user;
     private String username;
     private String profilePicture;
     private List<QuestionResponseDTO> questions;

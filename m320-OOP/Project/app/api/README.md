@@ -1,0 +1,49 @@
+# API
+
+## Features
+
+- [x] Users can sign up.
+- [x] Users can sign in.
+- [ ] Users can delete their account.
+- [x] Users have role 'USER' by default.
+- [ ] Users can be assigned role 'ADMIN'.
+- [ ] Users can be assigned role 'MODERATOR'.
+- [ ] Users can be assigned role 'USER'.
+- [ ] ADMIN can delete any user account.
+- [ ] ADMIN only can assign role 'ADMIN' to any user.
+- [ ] ADMIN can assign role 'MODERATOR' to any user.
+- [ ] ADMIN can assign role 'USER' to any user.
+- [ ] MODERATOR can delete any user account.
+- [ ] MODERATOR can assign role 'MODERATOR' to any user.
+- [ ] MODERATOR can assign role 'USER' to any user.
+- [ ] USER can delete their account.
+- [ ] USER can update their account.
+- [ ] USER can view their account.
+- [ ] Only admins can view all users.
+- [ ] Only admins can view all moderators.
+- [ ] Only admins can CRUD roles.
+- [ ] Profile is created with user account.
+- [ ] Profile is deleted when user account is deleted.
+- [ ] Profile can be updated.
+- [ ] Profile can be found through id.
+- [ ] Profile can be found through user id.
+- [ ] Profile can create a question.
+- [ ] Question can be updated by author only.
+- [ ] Question can be deleted by author only.
+- [ ] Question can be found through id.
+- [ ] Question can be found through author id.
+- [ ] Question has min. 2 Options.
+- [ ] Multiple Question view is returned as page.
+- [ ] Option can be updated by author only.
+- [ ] Option can be deleted by author only.
+- [ ] Option can be found through id.
+- [ ] Option can be found through question id.
+- [ ] Option has min. 0 answers.
+- [ ] Profile can submit an answer.
+- [ ] Answer can be set to other option.
+- [ ] Answer can only be submitted to 1 option per question.
+- [ ] Answer can be updated by answer author only.
+- [ ] Answer can be deleted by answer author only.
+- [ ] Answer can be found through id.
+- [ ] Answer can be found through question id.
+- [ ] Answer can be found through option id.

@@ -23,7 +23,6 @@ public class ProfileMapper {
     public static ProfileResponseDTO toDTO(Profile src) {
         ProfileResponseDTO dto = new ProfileResponseDTO();
         dto.setId(src.getId());
-        dto.setUser(UserMapper.toDTO(src.getUser()));
         dto.setUsername(src.getUsername());
         dto.setProfilePicture(src.getProfilePicture());
         dto.setQuestions(src.getQuestions().stream().map(QuestionMapper::toDTO).toList());

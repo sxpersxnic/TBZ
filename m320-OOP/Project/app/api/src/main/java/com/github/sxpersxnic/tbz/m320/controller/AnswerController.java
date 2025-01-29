@@ -49,7 +49,7 @@ public class AnswerController {
 
     @GetMapping(QUESTION_ID_GET)
     public ResponseEntity<?> findByQuestionId(@RequestParam UUID questionId) {
-        return ResponseEntity.status(HttpStatus.OK).body(answerService.findByOption(questionId).stream().map(AnswerMapper::toDTO).toList());
+        return ResponseEntity.status(HttpStatus.OK).body(answerService.findByQuestion(questionId).stream().map(AnswerMapper::toDTO).toList());
     }
 
     @PostMapping(POST)

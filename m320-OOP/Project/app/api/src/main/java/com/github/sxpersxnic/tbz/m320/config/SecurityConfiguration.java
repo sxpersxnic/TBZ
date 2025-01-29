@@ -24,6 +24,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 /// Security configuration class
@@ -59,17 +60,21 @@ public class SecurityConfiguration {
     /// @see Security#PUBLIC_URLS
     @Bean
     public SecurityFilterChain customFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(CsrfConfigurer::disable)
-                .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))
-                .authorizeHttpRequests(authorizeRequest ->
-                        authorizeRequest
-                                .requestMatchers(HttpMethod.POST, Security.AUTH_URLS).permitAll()
-                                .requestMatchers(HttpMethod.GET, Security.PUBLIC_URLS).permitAll()
-                                .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        return http.build();
+        try {
+            http.csrf(CsrfConfigurer::disable)
+                    .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))
+                    .authorizeHttpRequests(authorizeRequest ->
+                            authorizeRequest
+                                    .requestMatchers(HttpMethod.POST, Security.AUTH_URLS).permitAll()
+                                    .requestMatchers(HttpMethod.GET, Security.PUBLIC_URLS).permitAll()
+                                    .anyRequest().authenticated()
+                    )
+                    .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()))
+                    .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+            return http.build();
+        } catch (Exception ex) {
+            throw new AccessDeniedException("Access denied");
+        }
     }
 
     /// Returns a new instance of the {@link CorsConfigurationSource}.

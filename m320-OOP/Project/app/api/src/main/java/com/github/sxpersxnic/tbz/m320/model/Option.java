@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = {"id", "content"})
 @Entity
 @Table(name = "options")
 public class Option {
@@ -36,10 +37,10 @@ public class Option {
     private String content;
 
     @Column(name = "created_at", updatable = false, insertable = false)
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     public Option() {
         this.answerCount = 0;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = ZonedDateTime.now();
     }
 }

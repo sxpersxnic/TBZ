@@ -15,8 +15,8 @@ public class SignUpRequestDTO {
     @Size(min = 3, max = 255, message = "Length must be between 3 and 255 characters")
     private String username;
 
-    @NotBlank(message = "Email must not be blank")
     @Email
+    @NotBlank(message = "Email must not be blank")
     private String email;
 
     @NotBlank(message = "Password must not be blank")

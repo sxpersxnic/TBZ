@@ -6,8 +6,11 @@ import com.github.sxpersxnic.tbz.m320.model.Profile;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.hibernate.grammars.hql.HqlParser;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /// Request Data transfer object of {@link Question}.
@@ -37,9 +40,8 @@ public class QuestionRequestDTO {
 
     /// Given options of the {@link Question}.
     /// @see Option
-    @Min(value = 2, message = "A minimum of two options is required")
     private List<OptionRequestDTO> options;
 
     /// Local (with timezone) date and time of the {@link Question}'s creation.
-    private final LocalDateTime createdAt = LocalDateTime.now();
+    private final ZonedDateTime createdAt = ZonedDateTime.now();
 }

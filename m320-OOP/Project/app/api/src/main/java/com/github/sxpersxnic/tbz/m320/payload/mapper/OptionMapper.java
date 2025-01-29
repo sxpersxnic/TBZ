@@ -34,14 +34,11 @@ public class OptionMapper {
         return dto;
     }
 
-    public static Option fromDTO(OptionRequestDTO dto, UUID questionId) {
+    public static Option fromDTO(OptionRequestDTO dto, Question question) {
         Option option = new Option();
-        Question question = new Question();
 
-        question.setId(questionId);
-
-        option.setQuestion(question);
         option.setContent(dto.getContent());
+        option.setQuestion(question);
 
         return option;
     }

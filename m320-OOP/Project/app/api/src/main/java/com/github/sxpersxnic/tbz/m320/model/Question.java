@@ -1,9 +1,11 @@
 package com.github.sxpersxnic.tbz.m320.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -11,7 +13,9 @@ import java.util.UUID;
 /**
  * @author sxpersxnic
  */
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "questions")
 public class Question {
@@ -33,6 +37,14 @@ public class Question {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "total_answer_count")
+    private int totalAnswerCount;
+
     @Column(name = "created_at", updatable = false, insertable = false)
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
+
+    public Question() {
+        this.createdAt = ZonedDateTime.now();
+        this.totalAnswerCount = 0;
+    }
 }

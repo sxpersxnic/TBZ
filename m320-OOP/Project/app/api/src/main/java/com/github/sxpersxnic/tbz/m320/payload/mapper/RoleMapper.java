@@ -1,19 +1,19 @@
 package com.github.sxpersxnic.tbz.m320.payload.mapper;
 
 import com.github.sxpersxnic.tbz.m320.model.Role;
-import com.github.sxpersxnic.tbz.m320.payload.dto.RoleDTO;
+import com.github.sxpersxnic.tbz.m320.payload.dto.request.RoleRequestDTO;
+import com.github.sxpersxnic.tbz.m320.payload.dto.response.RoleResponseDTO;
 
 import java.util.List;
-import java.util.UUID;
 
 
-/// Class to map Role objects to RoleDTO objects and vice versa.
+/// Class to map Role objects to RoleResponseDTO objects and vice versa.
 /// @see Role
-/// @see RoleDTO
+/// @see RoleResponseDTO
 /// @author sxpersxnic
 public class RoleMapper {
-    public static RoleDTO toDTO(Role role) {
-        RoleDTO dto = new RoleDTO();
+    public static RoleResponseDTO toDTO(Role role) {
+        RoleResponseDTO dto = new RoleResponseDTO();
 
         dto.setId(role.getId().toString());
         dto.setName(role.getName());
@@ -25,12 +25,7 @@ public class RoleMapper {
         dto.setAssignedUserIds(userIds);
         return dto;
     }
-    public static Role fromDTO(RoleDTO dto) {
-        Role role = new Role();
-
-        UUID id = UUID.fromString(dto.getId());
-        role.setId(id);
-        role.setName(dto.getName());
-        return role;
+    public static Role fromDTO(RoleRequestDTO dto) {
+        return new Role(dto.getName());
     }
 }

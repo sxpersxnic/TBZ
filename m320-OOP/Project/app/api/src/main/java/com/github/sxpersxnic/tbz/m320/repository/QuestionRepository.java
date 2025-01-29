@@ -27,4 +27,6 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
     List<Question> getPage(int itemsPerPage, int offset);
 
     boolean existsByContentAndProfileId(String content, UUID profileId);
+
+    int countById(UUID id);
 }

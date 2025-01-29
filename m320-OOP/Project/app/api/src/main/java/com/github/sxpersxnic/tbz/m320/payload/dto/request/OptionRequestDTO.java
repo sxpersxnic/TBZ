@@ -1,9 +1,9 @@
 package com.github.sxpersxnic.tbz.m320.payload.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import com.github.sxpersxnic.tbz.m320.model.Option;
-import com.github.sxpersxnic.tbz.m320.model.Question;
 
 /// Request Data transfer object of {@link Option}.
 ///
@@ -16,11 +16,7 @@ import com.github.sxpersxnic.tbz.m320.model.Question;
 @Data
 public class OptionRequestDTO {
 
-    /// Question identifier of the question the option is given for.
-    ///
-    /// @see Question
-    private String questionId;
-
     /// Content of the option.
+    @NotBlank(message = "Content must not be blank")
     private String content;
 }

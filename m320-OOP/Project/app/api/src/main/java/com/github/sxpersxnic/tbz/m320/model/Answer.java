@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 /**
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = {"id", "profile", "option"})
 @Entity
 @Table(name = "answers")
 public class Answer {
@@ -29,9 +30,9 @@ public class Answer {
     @JoinColumn(name = "option_id", nullable = false)
     private Option option;
 
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     public Answer() {
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = ZonedDateTime.now();
     }
 }

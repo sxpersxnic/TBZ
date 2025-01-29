@@ -1,7 +1,8 @@
 package com.github.sxpersxnic.tbz.m320.controller;
 
 import com.github.sxpersxnic.tbz.m320.model.Role;
-import com.github.sxpersxnic.tbz.m320.payload.dto.RoleDTO;
+import com.github.sxpersxnic.tbz.m320.payload.dto.request.RoleRequestDTO;
+import com.github.sxpersxnic.tbz.m320.payload.dto.response.RoleResponseDTO;
 import com.github.sxpersxnic.tbz.m320.payload.mapper.RoleMapper;
 import com.github.sxpersxnic.tbz.m320.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,6 +17,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -38,11 +40,11 @@ public class RoleController {
     }
 
     @GetMapping(ID_GET)
-    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN', 'SCOPE_MODERATOR')")
     @Operation(summary = "Get a role by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Role found",
-                    content = @Content(schema = @Schema(implementation = RoleDTO.class))),
+                    content = @Content(schema = @Schema(implementation = RoleResponseDTO.class))),
             @ApiResponse(responseCode = "404", description = "Role not found",
                     content = @Content)
     })
@@ -53,17 +55,19 @@ public class RoleController {
         try {
             Role role = roleService.findById(id);
             return ResponseEntity.ok(RoleMapper.toDTO(role));
-        } catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role was not found");
+        } catch (AccessDeniedException ex) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not allowed to access this resource");
         }
     }
 
     @GetMapping(NAME_GET)
-    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN', 'SCOPE_MODERATOR')")
     @Operation(summary = "Get a role by name")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Role found",
-                    content = @Content(schema = @Schema(implementation = RoleDTO.class))),
+                    content = @Content(schema = @Schema(implementation = RoleResponseDTO.class))),
             @ApiResponse(responseCode = "404", description = "Role not found",
                     content = @Content)
     })
@@ -74,8 +78,10 @@ public class RoleController {
         try {
             Role role = roleService.findByName(name);
             return ResponseEntity.status(HttpStatus.OK).body(RoleMapper.toDTO(role));
-        } catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role was not found");
+        } catch (AccessDeniedException ex) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not allowed to access this resource");
         }
     }
 
@@ -84,19 +90,19 @@ public class RoleController {
     @Operation(summary = "Add a new role")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Role was created successfully",
-                    content = @Content(schema = @Schema(implementation = RoleDTO.class))),
+                    content = @Content(schema = @Schema(implementation = RoleResponseDTO.class))),
             @ApiResponse(responseCode = "409", description = "There was a conflict while creating the role",
                     content = @Content)
     })
     public ResponseEntity<?> create(
             @Parameter(description = "The new role to create")
-            @Valid @RequestBody RoleDTO newRoleDTO
+            @Valid @RequestBody RoleRequestDTO newRoleDTO
     ) {
         try {
             Role newRole = RoleMapper.fromDTO(newRoleDTO);
             Role savedRole = roleService.create(newRole);
             return ResponseEntity.status(HttpStatus.CREATED).body(RoleMapper.toDTO(savedRole));
-        } catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException ex) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Role could not be created");
         }
     }
@@ -117,17 +123,19 @@ public class RoleController {
         try {
             roleService.delete(id);
             return ResponseEntity.noContent().build();
-        } catch (EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role was not found");
+        } catch (AccessDeniedException ex) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not allowed to access this resource");
         }
     }
 
     @PatchMapping(PATCH)
     @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
-    @Operation(summary = "UpÖdate a role")
+    @Operation(summary = "Update a role")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Role was updated successfully",
-                    content = @Content(schema = @Schema(implementation = RoleDTO.class))),
+                    content = @Content(schema = @Schema(implementation = RoleResponseDTO.class))),
             @ApiResponse(responseCode = "404", description = "Role not found",
                     content = @Content),
             @ApiResponse(responseCode = "409", description = "There was a conflict while updating the role",
@@ -135,7 +143,7 @@ public class RoleController {
     })
     public ResponseEntity<?> update(
             @Parameter(description = "The role to update")
-            @RequestBody RoleDTO updateRoleDTO,
+            @RequestBody RoleRequestDTO updateRoleDTO,
 
             @Parameter(description = "Id of role to update")
             @PathVariable UUID id) {
@@ -143,24 +151,30 @@ public class RoleController {
             Role updateRole = RoleMapper.fromDTO(updateRoleDTO);
             Role savedRole = roleService.update(updateRole, id);
             return ResponseEntity.status(HttpStatus.CREATED).body(RoleMapper.toDTO(savedRole));
-        } catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException ex) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Role could not be created");
+        } catch (AccessDeniedException ex) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not allowed to access this resource");
         }
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN', 'SCOPE_MODERATOR')")
     @Operation(summary = "Get all roles.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Roles found",
-                    content = @Content(schema = @Schema(implementation = RoleDTO.class)))
+                    content = @Content(schema = @Schema(implementation = RoleResponseDTO.class)))
     })
     public ResponseEntity<?> findAll() {
-        List<Role> roles = roleService.findAll();
+        try {
+            List<Role> roles = roleService.findAll();
 
-        return ResponseEntity.status(HttpStatus.OK).body(
-                roles.stream()
-                .map(RoleMapper::toDTO)
-                .toList());
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    roles.stream()
+                            .map(RoleMapper::toDTO)
+                            .toList());
+        } catch (AccessDeniedException ex) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not allowed to access this resource");
+        }
     }
 }

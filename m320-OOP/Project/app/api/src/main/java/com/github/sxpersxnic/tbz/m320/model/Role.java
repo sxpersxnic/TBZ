@@ -15,7 +15,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "roles")
@@ -28,6 +27,14 @@ public class Role implements GrantedAuthority {
 
     @ManyToMany(mappedBy = "assignedRoles")
     private Set<User> assignedUsers = new HashSet<>();
+
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Role() {
+
+    }
 
     @Override
     public String getAuthority() {

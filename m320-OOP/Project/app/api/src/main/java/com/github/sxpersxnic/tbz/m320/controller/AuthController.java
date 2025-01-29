@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -59,8 +60,10 @@ public class AuthController {
         try {
             User user = userService.create(SignUpMapper.fromDTO(dto), dto.getUsername());
             return ResponseEntity.status(HttpStatus.CREATED).body(SignUpMapper.toDTO(user));
-        } catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException ex) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "User could not be created, username already in use");
+        } catch (EntityNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role not found");
         }
     }
 

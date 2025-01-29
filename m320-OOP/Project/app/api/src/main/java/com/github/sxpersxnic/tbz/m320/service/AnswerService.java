@@ -6,13 +6,16 @@ import com.github.sxpersxnic.tbz.m320.lib.interfaces.CrudService;
 import com.github.sxpersxnic.tbz.m320.model.Answer;
 import com.github.sxpersxnic.tbz.m320.model.Option;
 import com.github.sxpersxnic.tbz.m320.model.Profile;
+import com.github.sxpersxnic.tbz.m320.model.Question;
 import com.github.sxpersxnic.tbz.m320.repository.AnswerRepository;
 import com.github.sxpersxnic.tbz.m320.repository.OptionRepository;
 import com.github.sxpersxnic.tbz.m320.repository.ProfileRepository;
+import com.github.sxpersxnic.tbz.m320.repository.QuestionRepository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -28,13 +31,16 @@ public class AnswerService implements CrudService<Answer, UUID> {
     private final AnswerRepository answerRepository;
     /// The JPA repository for {@link Option} entities.
     private final OptionRepository optionRepository;
+    /// The JPA repository for {@link Question} entities.
+    private final QuestionRepository questionRepository;
     /// The JPA repository for {@link Profile} entities.
     private final ProfileRepository profileRepository;
 
     /// Constructor for the {@link AnswerService}.
-    public AnswerService(AnswerRepository answerRepository, OptionRepository optionRepository, ProfileRepository profileRepository) {
+    public AnswerService(AnswerRepository answerRepository, OptionRepository optionRepository, QuestionRepository questionRepository, ProfileRepository profileRepository) {
         this.answerRepository = answerRepository;
         this.optionRepository = optionRepository;
+        this.questionRepository = questionRepository;
         this.profileRepository = profileRepository;
     }
 
@@ -55,9 +61,9 @@ public class AnswerService implements CrudService<Answer, UUID> {
         return answerRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-//    public List<Answer> findByQuestion(UUID id) {
-//        return answerRepository.findByQuestionId(id);
-//    }
+    public List<Answer> findByQuestion(UUID id) {
+        return answerRepository.findByQuestionId(id);
+    }
 
     /// Find all {@link Answer} entities by their {@link Option} ID.
     /// @param id The ID of the {@link Option} entity.
@@ -70,7 +76,17 @@ public class AnswerService implements CrudService<Answer, UUID> {
     /// Delete a {@link Answer} entity by its ID.
     @Override
     public void delete(UUID id) {
-        answerRepository.findAll();
+        Option option = answerRepository.findById(id).orElseThrow(EntityNotFoundException::new).getOption();
+        Question question = option.getQuestion();
+
+        int answerCount = answerRepository.countByOptionId(option.getId());
+        option.setAnswerCount(answerCount - 1);
+        int totalAnswerCount = answerRepository.countByQuestionId(question.getId());
+        question.setTotalAnswerCount(totalAnswerCount - 1);
+
+        answerRepository.deleteById(id);
+        optionRepository.save(option);
+        questionRepository.save(question);
     }
 
     /// Create a new {@link Answer} entity.
@@ -80,18 +96,28 @@ public class AnswerService implements CrudService<Answer, UUID> {
     /// @return The created {@link Answer} entity.
     @Override
     public Answer create(Answer answer) {
+
+        Optional<Answer> existing = answerRepository.findByOptionIdAndProfileId(answer.getOption().getId(), answer.getProfile().getId());
+        existing.ifPresent(value -> answerRepository.deleteById(value.getId()));
+
         UUID optionId = answer.getOption().getId();
         UUID profileId = answer.getProfile().getId();
 
-        Option option = optionRepository.findById(optionId).orElseThrow(EntityNotFoundException::new);
         Profile profile = profileRepository.findById(profileId).orElseThrow(EntityNotFoundException::new);
+        Option option = optionRepository.findById(optionId).orElseThrow(EntityNotFoundException::new);
+        int answerCount = answerRepository.countByOptionId(optionId);
+        option.setAnswerCount(answerCount + 1);
 
-        answer.setOption(option);
+        Question question = questionRepository.findById(option.getQuestion().getId()).orElseThrow(EntityNotFoundException::new);
+        int totalAnswerCount = answerRepository.countByQuestionId(question.getId());
+        question.setTotalAnswerCount(totalAnswerCount + 1);
+
         answer.setProfile(profile);
+        option.setQuestion(question);
+        answer.setOption(option);
+        optionRepository.save(option);
+        questionRepository.save(question);
 
-        if (answerRepository.existsByOptionAndProfile(answer.getOption(), answer.getProfile())) {
-            return answerRepository.findByOptionIdAndProfileId(answer.getOption().getId(), answer.getProfile().getId());
-        }
         return answerRepository.save(answer);
     }
 

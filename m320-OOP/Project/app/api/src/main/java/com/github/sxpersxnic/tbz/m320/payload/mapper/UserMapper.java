@@ -40,7 +40,7 @@ public class UserMapper {
     public static User fromDTO(UserRequestDTO dto) {
         User user = new User();
 
-        user.setPassword(dto.getPassword());
+//        user.setPassword(dto.getPassword());
         user.setEmail(dto.getEmail());
         return user;
     }

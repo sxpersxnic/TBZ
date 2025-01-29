@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -41,16 +42,16 @@ public class Profile {
     private Set<Answer> answers = new HashSet<>();
 
     @Column(name = "created_at", updatable = false, insertable = false)
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     public Profile(String username) {
         this.username = username;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = ZonedDateTime.now();
         this.profilePicture = "/default.jpg";
     }
 
     public Profile() {
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = ZonedDateTime.now();
         this.profilePicture = "/default.jpg";
     }
 }

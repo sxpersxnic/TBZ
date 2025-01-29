@@ -6,6 +6,7 @@ import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -57,19 +58,21 @@ public class GlobalControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 
+    @ExceptionHandler({AccessDeniedException.class})
+    public ResponseEntity<?> handleAccessDeniedExceptions(AccessDeniedException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonMessage(ex.getMessage()));
+    }
+
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<?> handleRuntimeExceptions(RuntimeException ex) {
         if (ex instanceof InvalidDataAccessApiUsageException) {
             if (ex.getCause() != null && ex.getCause().getCause() instanceof TransientPropertyValueException tex) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(new JsonMessage(tex.getPropertyName() + " must be valid"));
             }
+        } else if (ex instanceof AuthorizationDeniedException) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonMessage(ex.getMessage()));
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new JsonMessage("Internal server error. message: " + ex.getMessage()));
-    }
-
-    @ExceptionHandler({AccessDeniedException.class})
-    public ResponseEntity<?> handleAccessDeniedExceptions(AccessDeniedException ex) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new JsonMessage(ex.getMessage()));
     }
 
     // Strings don't get serialized in ResponseEntity body so with this record it gets serialized as json

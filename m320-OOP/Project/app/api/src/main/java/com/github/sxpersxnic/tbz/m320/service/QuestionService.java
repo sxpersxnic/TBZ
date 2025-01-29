@@ -5,9 +5,9 @@ import com.github.sxpersxnic.tbz.m320.lib.exceptions.FailedValidationException;
 import com.github.sxpersxnic.tbz.m320.lib.interfaces.CrudService;
 import com.github.sxpersxnic.tbz.m320.model.Answer;
 import com.github.sxpersxnic.tbz.m320.model.Option;
+import com.github.sxpersxnic.tbz.m320.model.Profile;
 import com.github.sxpersxnic.tbz.m320.model.Question;
 import com.github.sxpersxnic.tbz.m320.repository.AnswerRepository;
-import com.github.sxpersxnic.tbz.m320.repository.OptionRepository;
 import com.github.sxpersxnic.tbz.m320.repository.QuestionRepository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityExistsException;
@@ -27,14 +27,17 @@ public class QuestionService implements CrudService<Question, UUID> {
     private final QuestionRepository questionRepository;
     /// The JPA repository for {@link Answer} entities.
     private final AnswerRepository answerRepository;
-    /// The JPA repository for {@link Option} entities.
-    private final OptionRepository optionRepository;
+    /// The Service for {@link Option} entities.
+    private final OptionService optionService;
+    /// The Service for {@link Profile} entities.
+    private final ProfileService profileService;
 
     /// Constructor for the {@link QuestionService}.
-    public QuestionService(QuestionRepository questionRepository, AnswerRepository answerRepository, OptionRepository optionRepository) {
+    public QuestionService(QuestionRepository questionRepository, AnswerRepository answerRepository, OptionService optionService, ProfileService profileService) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
-        this.optionRepository = optionRepository;
+        this.optionService = optionService;
+        this.profileService = profileService;
     }
 
 
@@ -70,9 +73,21 @@ public class QuestionService implements CrudService<Question, UUID> {
         if (questionRepository.existsByContentAndProfileId(question.getContent(), question.getProfile().getId())) {
             throw new EntityExistsException("Question already exists on this profile");
         }
+
+        if (question.getOptions().size() < 2) {
+            throw new FailedValidationException(Map.of("Options", List.of("Question must have at least 2 options")));
+        }
+
+        Profile profile = profileService.findById(question.getProfile().getId());
+        question.setProfile(profile);
+
+        for (Option option : question.getOptions()) {
+//            option.setQuestion(question);
+            optionService.create(option);
+        }
+
         return questionRepository.save(question);
     }
-
 
     /// Update a {@link Question} entity.
     /// @param changing The {@link Question} entity to update. Only the fields that are **not null** will be updated.
@@ -129,14 +144,14 @@ public class QuestionService implements CrudService<Question, UUID> {
     /// @param currentPage The current page.
     /// @return A list of {@link Question} entities.
     /// @see QuestionRepository#getPage
-    /// @see OptionRepository#getOptionByQuestionId
+    /// @see OptionService#getOptionByQuestionId
     /// @see AnswerRepository#findByOptionId
     public List<Question> getQuestionDetails(int itemsPerPage, int currentPage) {
         int offset = (currentPage - 1) * itemsPerPage;
         List<Question> questions = questionRepository.getPage(itemsPerPage, offset);
 
         for (Question question : questions) {
-            List<Option> options = optionRepository.getOptionByQuestionId(question.getId());
+            List<Option> options = optionService.getOptionByQuestionId(question.getId());
 
             for (Option option : options) {
                 List<Answer> answers = answerRepository.findByOptionId(option.getId());

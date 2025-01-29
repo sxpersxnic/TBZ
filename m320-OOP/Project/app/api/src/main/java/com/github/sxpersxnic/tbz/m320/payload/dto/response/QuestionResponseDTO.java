@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ public class QuestionResponseDTO extends ResponseDTO {
     private String username;
     private String profilePicture;
     private List<OptionResponseDTO> options;
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
     private int totalAnswerCount;
 
 }

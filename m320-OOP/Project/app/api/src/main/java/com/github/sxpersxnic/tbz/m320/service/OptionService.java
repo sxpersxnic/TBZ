@@ -9,7 +9,7 @@ import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +55,9 @@ public class OptionService implements CrudService<Option, UUID> {
         optionRepository.deleteById(id);
     }
 
+    public List<Option> getOptionByQuestionId(UUID id) {
+        return optionRepository.getOptionByQuestionId(id);
+    }
 
     /// Create a new {@link Option} entity.
     ///
@@ -64,7 +67,7 @@ public class OptionService implements CrudService<Option, UUID> {
     @Override
     public Option create(Option option) {
 
-        option.setCreatedAt(LocalDateTime.now());
+        option.setCreatedAt(ZonedDateTime.now());
 
         return optionRepository.save(option);
     }
@@ -113,5 +116,9 @@ public class OptionService implements CrudService<Option, UUID> {
         if (!errors.isEmpty()) {
             throw new FailedValidationException(errors);
         }
+    }
+
+    private int countAnswers(UUID id) {
+        return optionRepository.countAnswersById(id);
     }
 }
