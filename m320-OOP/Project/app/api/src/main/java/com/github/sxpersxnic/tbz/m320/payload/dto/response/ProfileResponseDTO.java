@@ -6,9 +6,9 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
-/**
- * @author sxpersxnic
- */
+
+/// Response DTO for profile
+/// @author sxpersxnic
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ProfileResponseDTO extends ResponseDTO {

@@ -11,8 +11,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+/// Class to map Option objects to OptionResponseDTO objects and vice versa.
+/// @see Option
+/// @see OptionResponseDTO
+/// @see OptionRequestDTO
+/// @author sxpersxnic
 public class OptionMapper {
-
 
     public static OptionResponseDTO toDTO(Option src) {
         OptionResponseDTO dto = new OptionResponseDTO();

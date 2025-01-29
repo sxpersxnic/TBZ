@@ -9,9 +9,11 @@ import com.github.sxpersxnic.tbz.m320.model.Role;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author sxpersxnic
- */
+/// Class to map User objects to UserResponseDTO objects and vice versa.
+/// @see User
+/// @see UserResponseDTO
+/// @see UserRequestDTO
+/// @author sxpersxnic
 public class UserMapper {
     public static UserResponseDTO toDTO(User user) {
         UserResponseDTO dto = new UserResponseDTO();

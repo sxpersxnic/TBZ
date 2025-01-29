@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author sxpersxnic
- */
+
+/// Response DTO for question
+/// @author sxpersxnic
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class QuestionResponseDTO extends ResponseDTO {

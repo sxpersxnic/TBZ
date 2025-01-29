@@ -1,9 +1,8 @@
 package com.github.sxpersxnic.tbz.m320.util;
 
-import com.github.sxpersxnic.tbz.m320.model.Profile;
-import com.github.sxpersxnic.tbz.m320.model.User;
-import com.github.sxpersxnic.tbz.m320.model.Role;
+import com.github.sxpersxnic.tbz.m320.model.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -55,8 +54,95 @@ public class DataUtil {
         return roles;
     }
 
-    // 1  1  1  1  1  1  1  1  -  1  1  1  1  -  4  1  1  1  -  a  1  1  1  -  1  1  1  1  1  1  1  1  1  1  1  1
-    // 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+    public static Profile getTestProfile() {
+        return getTestProfiles().getFirst();
+    }
+
+    public static List<Profile> getTestProfiles() {
+        List<Profile> profiles = new ArrayList<>();
+
+        for (int i = 1; i <= 4; i++) {
+            Profile profile = new Profile();
+
+            profile.setId(testUUID(i));
+            profile.setUsername("user" + i);
+            profile.setProfilePicture("profile" + i + ".jpg");
+            profile.setCreatedAt(LocalDateTime.of(2025, 1, 29, 0, 0, 0));
+
+            //? If tests fail maybe add values to relations
+            profile.setUser(new User());
+            profile.setAnswers(new HashSet<>());
+            profile.setQuestions(new HashSet<>());
+
+            profiles.add(profile);
+        }
+        return profiles;
+    }
+
+    public static Option getTestOption() {
+        Question question = getTestQuestion();
+        return getTestOptions(question).getFirst();
+    }
+
+    public static List<Option> getTestOptions(Question question) {
+        List<Option> options = new ArrayList<>();
+
+        for (int i = 1; i <= 4; i++) {
+            Option option = new Option();
+            option.setId(testUUID(i));
+            option.setAnswers(new HashSet<>());
+            option.setQuestion(question);
+            option.setAnswerCount(0);
+            option.setContent("Option " + i);
+            option.setCreatedAt(LocalDateTime.of(2025, 1, 29, 0, 0, 0));
+            options.add(option);
+        }
+        return options;
+    }
+
+    public static Question getTestQuestion() {
+        return getTestQuestions().getFirst();
+    }
+
+    public static List<Question> getTestQuestions() {
+        List<Question> questions = new ArrayList<>();
+
+        for (int i = 1; i <= 4; i++) {
+            Question question = new Question();
+            question.setId(testUUID(i));
+            question.setProfile(new Profile("user" + i));
+            question.setContent("Question " + i);
+            question.setDescription("Description " + i);
+            question.setOptions(new HashSet<>());
+            question.getOptions().addAll(getTestOptions(question));
+            question.setCreatedAt(LocalDateTime.of(2025, 1, 29, 0, 0, 0));
+            questions.add(question);
+        }
+        return questions;
+    }
+
+    public static Answer getTestAnswer() {
+        return getTestAnswers().getFirst();
+    }
+
+    public static List<Answer> getTestAnswers() {
+        List<Answer> answers = new ArrayList<>();
+
+        for (int i = 1; i <= 4; i++) {
+            Answer answer = new Answer();
+            Option option = new Option();
+            option.setAnswers(new HashSet<>());
+
+            answer.setId(testUUID(i));
+            answer.setOption(option);
+            answer.setProfile(new Profile("user" + i));
+            answer.setCreatedAt(LocalDateTime.of(2025, 1, 29, 0, 0, 0));
+            option.getAnswers().add(answer);
+            answers.add(answer);
+        }
+        return answers;
+    }
+
     public static UUID testUUID(int number) {
         StringBuilder uuid = new StringBuilder();
         for (int i = 0; i <= 35; i++) {

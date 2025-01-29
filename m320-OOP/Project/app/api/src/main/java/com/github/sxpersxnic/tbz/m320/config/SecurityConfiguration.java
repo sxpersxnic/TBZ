@@ -26,9 +26,13 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
-/**
- * @author sxpersxnic
- */
+/// Security configuration class
+///
+/// This class is responsible for configuring the security of the application.
+///
+/// It defines the *security filter chain*, the *CORS configuration*, the *JWT decoder*, the *authentication manager* and the *password encoder*.
+///
+/// @author sxpersxnic
 @Configuration
 @SecurityScheme(type = SecuritySchemeType.HTTP,
         name = Security.AUTHORIZATION_HEADER_NAME,
@@ -39,11 +43,20 @@ import java.util.List;
 @EnableMethodSecurity(proxyTargetClass = true)
 public class SecurityConfiguration {
 
+    /// Returns a new instance of the {@link BCryptPasswordEncoder}.
+    ///
+    /// Used to Hash passwords.
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /// Returns a new instance of the {@link SecurityFilterChain}.
+    /// Configures the security filter chain.
+    /// The security filter chain allows all POST requests to the authentication URLs and all GET requests to the public URLs.
+    ///
+    /// @see Security#AUTH_URLS
+    /// @see Security#PUBLIC_URLS
     @Bean
     public SecurityFilterChain customFilterChain(HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable)
@@ -59,6 +72,13 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    /// Returns a new instance of the {@link CorsConfigurationSource}.
+    ///
+    /// Configures the *CORS* configuration (**C**ross-**O**rigin **R**esource **S**haring).
+    ///
+    /// For development purposes, it allows all origins, methods and headers.
+    ///
+    /// In production, it should be configured to allow only the necessary origins, methods and headers.
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -70,11 +90,28 @@ public class SecurityConfiguration {
         return source;
     }
 
+    /// Returns a new instance of the {@link AuthenticationManager}.
+    ///
+    /// The authentication manager is used to authenticate the user.
+    ///
+    /// @param authenticationConfiguration The authentication configuration.
+    /// @return The authentication manager.
+    /// @exception Exception If an error occurs while creating the authentication manager.
+    ///
+    /// @see AuthenticationConfiguration#getAuthenticationManager()
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    /// Returns a new instance of the {@link JwtDecoder}.
+    ///
+    /// The JWT decoder is used to decode the JWT token.
+    ///
+    /// @return The JWT decoder.
+    ///
+    /// @see Security#SECRET_KEY_SPEC
+    /// @see NimbusJwtDecoder#withSecretKey
     @Bean
     public JwtDecoder customDecoder() {
         return NimbusJwtDecoder

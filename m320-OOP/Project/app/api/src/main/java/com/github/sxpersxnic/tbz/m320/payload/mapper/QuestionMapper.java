@@ -10,9 +10,12 @@ import com.github.sxpersxnic.tbz.m320.payload.dto.response.QuestionResponseDTO;
 
 import java.util.*;
 
-/**
- * @author sxpersxnic
- */
+
+/// Class to map Question objects to QuestionResponseDTO objects and vice versa.
+/// @see Question
+/// @see QuestionResponseDTO
+/// @see QuestionRequestDTO
+/// @author sxpersxnic
 public class QuestionMapper {
 
     public static QuestionResponseDTO toDTO(Question src) {

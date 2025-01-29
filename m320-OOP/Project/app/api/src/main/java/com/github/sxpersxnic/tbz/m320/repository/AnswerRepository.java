@@ -10,6 +10,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
+
+/// Answer repository.
+///
+/// This interface is used to interact with the database.
+///
+/// It extends JpaRepository which provides basic CRUD operations.
+/// @see JpaRepository
+/// @author sxpersxnic
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, UUID> {
 

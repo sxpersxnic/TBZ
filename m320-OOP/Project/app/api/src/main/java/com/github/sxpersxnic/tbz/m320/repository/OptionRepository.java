@@ -8,6 +8,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
+
+/// Option repository.
+///
+/// This interface is used to interact with the database.
+///
+/// It extends JpaRepository which provides basic CRUD operations.
+/// @see JpaRepository
+/// @author sxpersxnic
 @Repository
 public interface OptionRepository extends JpaRepository<Option, UUID> {
 

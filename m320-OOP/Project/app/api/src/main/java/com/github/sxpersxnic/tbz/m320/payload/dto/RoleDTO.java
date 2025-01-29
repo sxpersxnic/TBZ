@@ -5,10 +5,9 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * @author sxpersxnic
- */
 
+/// DTO for role
+/// @author sxpersxnic
 @Data
 public class RoleDTO {
 

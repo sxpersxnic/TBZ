@@ -7,9 +7,11 @@ import com.github.sxpersxnic.tbz.m320.payload.dto.response.SignInResponseDTO;
 
 import java.util.UUID;
 
-/**
- * @author sxpersxnic
- */
+/// Class to map User objects to SignInResponseDTO objects and vice versa.
+/// @see User
+/// @see SignInResponseDTO
+/// @see SignInRequestDTO
+/// @author sxpersxnic
 public class SignInMapper {
 
     public static User fromDTO(SignInRequestDTO dto) {

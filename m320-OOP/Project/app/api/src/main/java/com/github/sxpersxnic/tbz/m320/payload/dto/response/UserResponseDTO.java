@@ -7,9 +7,8 @@ import lombok.EqualsAndHashCode;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * @author sxpersxnic
- */
+/// Response DTO for user
+/// @author sxpersxnic
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UserResponseDTO extends ResponseDTO {

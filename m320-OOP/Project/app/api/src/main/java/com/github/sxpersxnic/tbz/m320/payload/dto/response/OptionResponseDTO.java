@@ -7,9 +7,9 @@ import lombok.EqualsAndHashCode;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author sxpersxnic
- */
+
+/// Response DTO for option
+/// @author sxpersxnic
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class OptionResponseDTO extends ResponseDTO {

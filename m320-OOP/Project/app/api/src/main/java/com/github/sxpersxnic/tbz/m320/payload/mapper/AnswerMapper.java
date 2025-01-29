@@ -8,6 +8,12 @@ import com.github.sxpersxnic.tbz.m320.payload.dto.response.AnswerResponseDTO;
 
 import java.util.UUID;
 
+
+/// Class to map Answer objects to AnswerResponseDTO objects and vice versa.
+/// @see Answer
+/// @see AnswerResponseDTO
+/// @see AnswerRequestDTO
+/// @author sxpersxnic
 public class AnswerMapper {
 
     public static AnswerResponseDTO toDTO(Answer answer) {

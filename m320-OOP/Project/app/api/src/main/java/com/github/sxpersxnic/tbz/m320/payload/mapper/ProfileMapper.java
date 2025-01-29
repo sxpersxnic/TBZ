@@ -1,20 +1,14 @@
 package com.github.sxpersxnic.tbz.m320.payload.mapper;
 
-import com.github.sxpersxnic.tbz.m320.model.Answer;
 import com.github.sxpersxnic.tbz.m320.model.Profile;
-import com.github.sxpersxnic.tbz.m320.model.Question;
-import com.github.sxpersxnic.tbz.m320.model.User;
 import com.github.sxpersxnic.tbz.m320.payload.dto.request.ProfileRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.ProfileResponseDTO;
-import com.github.sxpersxnic.tbz.m320.payload.dto.response.QuestionResponseDTO;
-import com.github.sxpersxnic.tbz.m320.payload.dto.response.UserResponseDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * @author sxpersxnic
- */
+/// Class to map Profile objects to ProfileResponseDTO objects and vice versa.
+/// @see Profile
+/// @see ProfileResponseDTO
+/// @see ProfileRequestDTO
+/// @author sxpersxnic
 public class ProfileMapper {
 
     public static Profile fromDTO(ProfileRequestDTO dto) {

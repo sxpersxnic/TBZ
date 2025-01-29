@@ -6,9 +6,9 @@ import lombok.EqualsAndHashCode;
 
 import java.util.UUID;
 
-/**
- * @author sxpersxnic
- */
+
+/// Response DTO for sign in
+/// @author sxpersxnic
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class SignInResponseDTO extends ResponseDTO {

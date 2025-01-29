@@ -68,9 +68,9 @@ public class UserServiceTest {
     @Test
     public void checkFindById_whenExistingId_thenUserIsReturned() {
         User expectedUser = DataUtil.getTestUser();
-        when(userRepository.findById(eq(DataUtil.testUUID(1)))).thenReturn(Optional.of(expectedUser));
+        when(userRepository.findById(eq(expectedUser.getId()))).thenReturn(Optional.of(expectedUser));
 
-        User actualUser = userService.findById(DataUtil.testUUID(1));
+        User actualUser = userService.findById(expectedUser.getId());
 
         assertNotNull(actualUser);
         assertEquals(expectedUser.getId(), actualUser.getId());

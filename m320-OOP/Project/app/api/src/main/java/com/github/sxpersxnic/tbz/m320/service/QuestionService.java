@@ -1,5 +1,6 @@
 package com.github.sxpersxnic.tbz.m320.service;
 
+import com.github.sxpersxnic.tbz.m320.controller.QuestionController;
 import com.github.sxpersxnic.tbz.m320.lib.exceptions.FailedValidationException;
 import com.github.sxpersxnic.tbz.m320.lib.interfaces.CrudService;
 import com.github.sxpersxnic.tbz.m320.model.Answer;
@@ -15,15 +16,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-/**
- * Service component for {@link Question}
- */
+/// Service component for {@link Question} entities.
+/// @see Question
+/// @see CrudService
+/// @see QuestionController
+/// @author sxpersxnic
 @Service
 public class QuestionService implements CrudService<Question, UUID> {
+    /// The JPA repository for {@link Question} entities.
     private final QuestionRepository questionRepository;
+    /// The JPA repository for {@link Answer} entities.
     private final AnswerRepository answerRepository;
+    /// The JPA repository for {@link Option} entities.
     private final OptionRepository optionRepository;
 
+    /// Constructor for the {@link QuestionService}.
     public QuestionService(QuestionRepository questionRepository, AnswerRepository answerRepository, OptionRepository optionRepository) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
@@ -31,21 +38,33 @@ public class QuestionService implements CrudService<Question, UUID> {
     }
 
 
-    @Override
-    public Question findById(UUID id) {
-        return questionRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-    }
-
+    /// Find all {@link Question} entities.
+    /// @return A list of all {@link Question} entities.
+    /// @see QuestionRepository#findAll()
     @Override
     public List<Question> findAll() {
         return questionRepository.findAll();
     }
 
+    /// Find a {@link Question} entity by its ID.
+    /// @param id The ID of the {@link Question} entity.
+    /// @return The {@link Question} entity with the given ID.
+    /// @throws EntityNotFoundException If no {@link Question} entity with the given ID exists.
+    @Override
+    public Question findById(UUID id) {
+        return questionRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    /// Delete a {@link Question} entity by its ID.
     @Override
     public void delete(UUID id) {
         questionRepository.deleteById(id);
     }
 
+    /// Create a new {@link Question} entity.
+    /// @param question The {@link Question} entity to create.
+    /// @return The created {@link Question} entity.
+    /// @throws EntityExistsException If a {@link Question} entity with the same content already exists on the same profile.
     @Override
     public Question create(Question question) {
         if (questionRepository.existsByContentAndProfileId(question.getContent(), question.getProfile().getId())) {
@@ -54,6 +73,12 @@ public class QuestionService implements CrudService<Question, UUID> {
         return questionRepository.save(question);
     }
 
+
+    /// Update a {@link Question} entity.
+    /// @param changing The {@link Question} entity to update. Only the fields that are **not null** will be updated.
+    /// @param id The ID of the {@link Question} entity to update.
+    /// @return The updated {@link Question} entity.
+    /// @throws EntityNotFoundException If no {@link Question} entity with the given ID exists.
     @Override
     public Question update(Question changing, UUID id) {
         Question existing = findById(id);
@@ -61,8 +86,23 @@ public class QuestionService implements CrudService<Question, UUID> {
         return questionRepository.save(existing);
     }
 
-    @Override
-    public void merge(Question changing, Question existing) {
+    /// Merge two {@link Question} entities.
+    ///
+    /// Is used in the {@link #update} method.
+    ///
+    /// If the **changing** entity has a field that is not **null**, it will be updated in the **existing** entity.
+    ///
+    /// If the **changing** entity has a field that is **null**, it will be ignored.
+    ///
+    /// If the **changing** entity has a field that is **blank**, an {@link FailedValidationException} will be thrown.
+    ///
+    /// @param existing The existing {@link Question} entity.
+    /// @param changing The changing {@link Question} entity.
+    /// @throws FailedValidationException If a field is **blank**.
+    ///
+    /// @see FailedValidationException
+    /// @see StringUtils#isNotBlank
+    private void merge(Question changing, Question existing) {
         Map<String, List<String>> errors = new HashMap<>();
 
         if (changing.getContent() != null) {
@@ -82,6 +122,15 @@ public class QuestionService implements CrudService<Question, UUID> {
         }
     }
 
+    /// Get a page of {@link Question} entities.
+    ///
+    /// This method is used to get a page of questions with their options and answers.
+    /// @param itemsPerPage The number of items per page.
+    /// @param currentPage The current page.
+    /// @return A list of {@link Question} entities.
+    /// @see QuestionRepository#getPage
+    /// @see OptionRepository#getOptionByQuestionId
+    /// @see AnswerRepository#findByOptionId
     public List<Question> getQuestionDetails(int itemsPerPage, int currentPage) {
         int offset = (currentPage - 1) * itemsPerPage;
         List<Question> questions = questionRepository.getPage(itemsPerPage, offset);
