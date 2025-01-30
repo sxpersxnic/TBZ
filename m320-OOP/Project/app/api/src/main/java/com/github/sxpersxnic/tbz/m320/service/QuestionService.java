@@ -183,10 +183,10 @@ public class QuestionService implements CrudService<Question, UUID> {
     public void updateTotalAnswerCount(UUID id) {
         Question existing = findById(id);
         int answerCount = 0;
+        existing.setTotalAnswerCount(0);
 
         for (Option option : existing.getOptions()) {
-            optionService.updateAnswerCount(option.getId());
-            answerCount = answerCount + option.getAnswerCount();
+            answerCount += option.getAnswerCount();
         }
         existing.setTotalAnswerCount(answerCount);
         questionRepository.save(existing);

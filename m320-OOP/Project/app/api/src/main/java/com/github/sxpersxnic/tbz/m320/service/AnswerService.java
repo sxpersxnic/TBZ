@@ -39,13 +39,15 @@ public class AnswerService implements CrudService<Answer, UUID> {
     private final QuestionRepository questionRepository;
     /// The JPA repository for {@link Profile} entities.
     private final ProfileRepository profileRepository;
+    private final OptionService optionService;
 
     /// Constructor for the {@link AnswerService}.
-    public AnswerService(AnswerRepository answerRepository, OptionRepository optionRepository, QuestionRepository questionRepository, ProfileRepository profileRepository) {
+    public AnswerService(AnswerRepository answerRepository, OptionRepository optionRepository, QuestionRepository questionRepository, ProfileRepository profileRepository, OptionService optionService) {
         this.answerRepository = answerRepository;
         this.optionRepository = optionRepository;
         this.questionRepository = questionRepository;
         this.profileRepository = profileRepository;
+        this.optionService = optionService;
     }
 
     /// Find all {@link Answer} entities.
@@ -105,7 +107,10 @@ public class AnswerService implements CrudService<Answer, UUID> {
     @Override
     public Answer update(Answer changing, UUID id) {
         Answer existing = findById(id);
+        Option old = existing.getOption();
         merge(changing, existing);
+        optionRepository.save(old);
+        optionRepository.save(existing.getOption());
         return answerRepository.save(existing);
     }
 
@@ -128,6 +133,11 @@ public class AnswerService implements CrudService<Answer, UUID> {
     private void merge(Answer changing, Answer existing) {
         if (changing.getOption().getId() != null) {
             Option newOption = optionRepository.findById(changing.getOption().getId()).orElseThrow(EntityNotFoundException::new);
+            Option oldOption = optionRepository.findById(existing.getOption().getId()).orElseThrow(EntityNotFoundException::new);
+            oldOption.getAnswers().remove(existing);
+            newOption.getAnswers().add(existing);
+            optionService.updateAnswerCount(oldOption.getId());
+            optionService.updateAnswerCount(newOption.getId());
             existing.setOption(newOption);
         }
     }

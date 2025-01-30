@@ -77,7 +77,7 @@ public class AnswerController {
             option.setQuestion(question);
             option.getAnswers().add(answer);
             Answer saved = answerService.create(answer);
-//            optionService.updateAnswerCount(option.getId());
+            optionService.updateAnswerCount(option.getId());
             questionService.updateTotalAnswerCount(question.getId());
             return ResponseEntity.status(HttpStatus.CREATED).body(AnswerMapper.toDTO(saved));
         } catch (EntityExistsException ex) {
@@ -109,7 +109,7 @@ public class AnswerController {
             UUID optionId = answerService.findById(id).getOptionId();
             UUID questionId = optionService.findById(optionId).getQuestion().getId();
             answerService.delete(id);
-//            optionService.updateAnswerCount(optionId);
+            optionService.updateAnswerCount(optionId);
             questionService.updateTotalAnswerCount(questionId);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (EntityNotFoundException ex) {
