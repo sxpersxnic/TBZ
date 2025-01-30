@@ -26,7 +26,11 @@ public interface AnswerRepository extends JpaRepository<Answer, UUID> {
     @Query("SELECT a FROM Answer a WHERE a.option.question.id = :questionId")
     List<Answer> findByQuestionId(UUID questionId);
 
+    @Query("SELECT a FROM Answer a WHERE a.option.id = :optionId AND a.profile.id = :profileId")
     Optional<Answer> findByOptionIdAndProfileId(UUID optionId, UUID profileId);
+
+    @Query("SELECT a FROM Answer a WHERE a.option.question.id = :questionId AND a.profile.id = :profileId")
+    Optional<Answer> findByQuestionIdAndProfileId(UUID questionId, UUID profileId);
 
     @Query("SELECT COUNT(a) FROM Answer a WHERE a.option.id = :optionId AND a.profile.id = :profileId")
     boolean existsByOptionAndProfile(UUID optionId, UUID profileId);

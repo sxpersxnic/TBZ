@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -22,5 +23,10 @@ public interface OptionRepository extends JpaRepository<Option, UUID> {
     @Query("SELECT o FROM Option o WHERE o.question.id = :questionId")
     List<Option> getOptionByQuestionId(UUID questionId);
 
+    @Query("SELECT o.question.id FROM Option o WHERE o.id = :optionId")
+    Optional<UUID> findQuestionIdByOptionId(UUID optionId);
+
     int countAnswersById(UUID id);
+
+    List<Option> id(UUID id);
 }

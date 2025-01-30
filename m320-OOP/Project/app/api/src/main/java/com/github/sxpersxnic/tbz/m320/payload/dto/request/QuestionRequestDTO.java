@@ -41,7 +41,4 @@ public class QuestionRequestDTO {
     /// Given options of the {@link Question}.
     /// @see Option
     private List<OptionRequestDTO> options;
-
-    /// Local (with timezone) date and time of the {@link Question}'s creation.
-    private final ZonedDateTime createdAt = ZonedDateTime.now();
 }

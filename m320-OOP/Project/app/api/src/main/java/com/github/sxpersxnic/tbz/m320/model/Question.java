@@ -3,9 +3,7 @@ package com.github.sxpersxnic.tbz.m320.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -15,6 +13,7 @@ import java.util.UUID;
  */
 @Getter
 @Setter
+@RequiredArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "questions")
@@ -24,7 +23,7 @@ public class Question {
     @Column(name = "id", unique = true, nullable = false)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;
 
@@ -38,13 +37,8 @@ public class Question {
     private String description;
 
     @Column(name = "total_answer_count")
-    private int totalAnswerCount;
+    private Integer totalAnswerCount;
 
     @Column(name = "created_at", updatable = false, insertable = false)
     private ZonedDateTime createdAt;
-
-    public Question() {
-        this.createdAt = ZonedDateTime.now();
-        this.totalAnswerCount = 0;
-    }
 }

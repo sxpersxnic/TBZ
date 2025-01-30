@@ -8,12 +8,14 @@ import com.github.sxpersxnic.tbz.m320.model.Option;
 import com.github.sxpersxnic.tbz.m320.model.Profile;
 import com.github.sxpersxnic.tbz.m320.model.Question;
 import com.github.sxpersxnic.tbz.m320.repository.AnswerRepository;
+import com.github.sxpersxnic.tbz.m320.repository.OptionRepository;
 import com.github.sxpersxnic.tbz.m320.repository.QuestionRepository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.*;
 
 /// Service component for {@link Question} entities.
@@ -31,13 +33,15 @@ public class QuestionService implements CrudService<Question, UUID> {
     private final OptionService optionService;
     /// The Service for {@link Profile} entities.
     private final ProfileService profileService;
+    private final OptionRepository optionRepository;
 
     /// Constructor for the {@link QuestionService}.
-    public QuestionService(QuestionRepository questionRepository, AnswerRepository answerRepository, OptionService optionService, ProfileService profileService) {
+    public QuestionService(QuestionRepository questionRepository, AnswerRepository answerRepository, OptionService optionService, ProfileService profileService, OptionRepository optionRepository) {
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
         this.optionService = optionService;
         this.profileService = profileService;
+        this.optionRepository = optionRepository;
     }
 
 
@@ -58,6 +62,11 @@ public class QuestionService implements CrudService<Question, UUID> {
         return questionRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    public Question findByOptionId(UUID optionId) {
+        UUID id = optionRepository.findQuestionIdByOptionId(optionId).orElseThrow(EntityNotFoundException::new);
+        return questionRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
     /// Delete a {@link Question} entity by its ID.
     @Override
     public void delete(UUID id) {
@@ -70,6 +79,9 @@ public class QuestionService implements CrudService<Question, UUID> {
     /// @throws EntityExistsException If a {@link Question} entity with the same content already exists on the same profile.
     @Override
     public Question create(Question question) {
+        question.setTotalAnswerCount(0);
+        question.setCreatedAt(ZonedDateTime.now());
+
         if (questionRepository.existsByContentAndProfileId(question.getContent(), question.getProfile().getId())) {
             throw new EntityExistsException("Question already exists on this profile");
         }
@@ -132,6 +144,10 @@ public class QuestionService implements CrudService<Question, UUID> {
             existing.setDescription(changing.getDescription());
         }
 
+        if (changing.getTotalAnswerCount() != null) {
+            existing.setTotalAnswerCount(changing.getTotalAnswerCount());
+        }
+
         if (!errors.isEmpty()) {
             throw new FailedValidationException(errors);
         }
@@ -162,5 +178,17 @@ public class QuestionService implements CrudService<Question, UUID> {
         }
 
         return questions;
+    }
+
+    public void updateTotalAnswerCount(UUID id) {
+        Question existing = findById(id);
+        int answerCount = 0;
+
+        for (Option option : existing.getOptions()) {
+            optionService.updateAnswerCount(option.getId());
+            answerCount = answerCount + option.getAnswerCount();
+        }
+        existing.setTotalAnswerCount(answerCount);
+        questionRepository.save(existing);
     }
 }

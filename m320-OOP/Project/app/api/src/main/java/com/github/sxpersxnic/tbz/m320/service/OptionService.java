@@ -66,7 +66,7 @@ public class OptionService implements CrudService<Option, UUID> {
     /// @return The created {@link Option} entity.
     @Override
     public Option create(Option option) {
-
+        option.setAnswerCount(0);
         option.setCreatedAt(ZonedDateTime.now());
 
         return optionRepository.save(option);
@@ -84,7 +84,6 @@ public class OptionService implements CrudService<Option, UUID> {
         merge(changing, existing);
         return optionRepository.save(existing);
     }
-
 
     /// Merge two {@link Option} entities.
     ///
@@ -113,12 +112,22 @@ public class OptionService implements CrudService<Option, UUID> {
             }
         }
 
+        if (changing.getAnswerCount() != null) {
+            existing.setAnswerCount(changing.getAnswerCount());
+        }
+
+        if (changing.getAnswers() != null) {
+            existing.setAnswers(changing.getAnswers());
+        }
+
         if (!errors.isEmpty()) {
             throw new FailedValidationException(errors);
         }
     }
 
-    private int countAnswers(UUID id) {
-        return optionRepository.countAnswersById(id);
+    public void updateAnswerCount(UUID id) {
+        Option option = findById(id);
+        option.setAnswerCount(option.getAnswers().size());
+        optionRepository.save(option);
     }
 }

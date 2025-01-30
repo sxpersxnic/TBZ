@@ -13,7 +13,7 @@ import java.util.UUID;
  */
 @Getter
 @Setter
-@ToString
+@RequiredArgsConstructor
 @EqualsAndHashCode(of = {"id", "profile", "option"})
 @Entity
 @Table(name = "answers")
@@ -22,17 +22,21 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id", nullable = false)
     private Profile profile;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "option_id", nullable = false)
     private Option option;
 
     private ZonedDateTime createdAt;
 
-    public Answer() {
-        this.createdAt = ZonedDateTime.now();
+    public UUID getOptionId() {
+        return option.getId();
+    }
+
+    public UUID getProfileId() {
+        return profile.getId();
     }
 }

@@ -14,6 +14,8 @@ import com.github.sxpersxnic.tbz.m320.repository.QuestionRepository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,9 +31,11 @@ public class AnswerService implements CrudService<Answer, UUID> {
 
     /// The JPA repository for {@link Answer} entities.
     private final AnswerRepository answerRepository;
-    /// The JPA repository for {@link Option} entities.
+    /// The Service for {@link Option} entities.
+//    private final OptionService optionService;
     private final OptionRepository optionRepository;
-    /// The JPA repository for {@link Question} entities.
+    /// The Service for {@link Question} entities.
+//    private final QuestionService questionService;
     private final QuestionRepository questionRepository;
     /// The JPA repository for {@link Profile} entities.
     private final ProfileRepository profileRepository;
@@ -76,17 +80,7 @@ public class AnswerService implements CrudService<Answer, UUID> {
     /// Delete a {@link Answer} entity by its ID.
     @Override
     public void delete(UUID id) {
-        Option option = answerRepository.findById(id).orElseThrow(EntityNotFoundException::new).getOption();
-        Question question = option.getQuestion();
-
-        int answerCount = answerRepository.countByOptionId(option.getId());
-        option.setAnswerCount(answerCount - 1);
-        int totalAnswerCount = answerRepository.countByQuestionId(question.getId());
-        question.setTotalAnswerCount(totalAnswerCount - 1);
-
         answerRepository.deleteById(id);
-        optionRepository.save(option);
-        questionRepository.save(question);
     }
 
     /// Create a new {@link Answer} entity.
@@ -95,30 +89,12 @@ public class AnswerService implements CrudService<Answer, UUID> {
     /// @param answer The {@link Answer} entity to create.
     /// @return The created {@link Answer} entity.
     @Override
+
     public Answer create(Answer answer) {
+        answer.setCreatedAt(ZonedDateTime.now());
 
         Optional<Answer> existing = answerRepository.findByOptionIdAndProfileId(answer.getOption().getId(), answer.getProfile().getId());
-        existing.ifPresent(value -> answerRepository.deleteById(value.getId()));
-
-        UUID optionId = answer.getOption().getId();
-        UUID profileId = answer.getProfile().getId();
-
-        Profile profile = profileRepository.findById(profileId).orElseThrow(EntityNotFoundException::new);
-        Option option = optionRepository.findById(optionId).orElseThrow(EntityNotFoundException::new);
-        int answerCount = answerRepository.countByOptionId(optionId);
-        option.setAnswerCount(answerCount + 1);
-
-        Question question = questionRepository.findById(option.getQuestion().getId()).orElseThrow(EntityNotFoundException::new);
-        int totalAnswerCount = answerRepository.countByQuestionId(question.getId());
-        question.setTotalAnswerCount(totalAnswerCount + 1);
-
-        answer.setProfile(profile);
-        option.setQuestion(question);
-        answer.setOption(option);
-        optionRepository.save(option);
-        questionRepository.save(question);
-
-        return answerRepository.save(answer);
+        return existing.orElseGet(() -> answerRepository.save(answer));
     }
 
     /// Update a {@link Answer} entity.
@@ -150,8 +126,9 @@ public class AnswerService implements CrudService<Answer, UUID> {
     /// @see FailedValidationException
     /// @see StringUtils#isNotBlank
     private void merge(Answer changing, Answer existing) {
-        if (changing.getOption() != null) {
-            existing.setOption(changing.getOption());
+        if (changing.getOption().getId() != null) {
+            Option newOption = optionRepository.findById(changing.getOption().getId()).orElseThrow(EntityNotFoundException::new);
+            existing.setOption(newOption);
         }
     }
 }

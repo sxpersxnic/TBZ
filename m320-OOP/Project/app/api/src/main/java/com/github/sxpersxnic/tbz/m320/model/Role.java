@@ -14,7 +14,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "roles")

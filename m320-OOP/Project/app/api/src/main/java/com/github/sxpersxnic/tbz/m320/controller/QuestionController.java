@@ -46,6 +46,16 @@ public class QuestionController {
         }
     }
 
+    @GetMapping(OPTION_ID_GET)
+    public ResponseEntity<?> findByOptionId(@RequestParam UUID optionId) {
+        try {
+            Question question = questionService.findByOptionId(optionId);
+            return ResponseEntity.status(HttpStatus.OK).body(QuestionMapper.toDTO(question));
+        } catch (EntityNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Question not found");
+        }
+    }
+
     @GetMapping(GET)
     public ResponseEntity<?> pagination(@RequestParam int itemsPerPage, @RequestParam int currentPage) {
             List<Question> questionPage = questionService.getQuestionDetails(itemsPerPage, currentPage);

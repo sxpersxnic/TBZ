@@ -2,9 +2,15 @@ package com.github.sxpersxnic.tbz.m320.controller;
 
 import com.github.sxpersxnic.tbz.m320.lib.exceptions.FailedValidationException;
 import com.github.sxpersxnic.tbz.m320.model.Answer;
+import com.github.sxpersxnic.tbz.m320.model.Option;
+import com.github.sxpersxnic.tbz.m320.model.Profile;
+import com.github.sxpersxnic.tbz.m320.model.Question;
 import com.github.sxpersxnic.tbz.m320.payload.dto.request.AnswerRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.mapper.AnswerMapper;
 import com.github.sxpersxnic.tbz.m320.service.AnswerService;
+import com.github.sxpersxnic.tbz.m320.service.OptionService;
+import com.github.sxpersxnic.tbz.m320.service.ProfileService;
+import com.github.sxpersxnic.tbz.m320.service.QuestionService;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -22,9 +28,15 @@ import static com.github.sxpersxnic.tbz.m320.lib.constants.Controller.*;
 @RequestMapping(ANSWERS)
 public class AnswerController {
     private final AnswerService answerService;
+    private final QuestionService questionService;
+    private final OptionService optionService;
+    private final ProfileService profileService;
 
-    public AnswerController(AnswerService answerService) {
+    public AnswerController(AnswerService answerService, QuestionService questionService, OptionService optionService, ProfileService profileService) {
         this.answerService = answerService;
+        this.questionService = questionService;
+        this.optionService = optionService;
+        this.profileService = profileService;
     }
 
     @GetMapping
@@ -56,7 +68,17 @@ public class AnswerController {
     public ResponseEntity<?> create(@Valid @RequestBody AnswerRequestDTO dto) {
         try {
             Answer answer = AnswerMapper.fromDTO(dto);
+            Option option = optionService.findById(answer.getOptionId());
+            Profile profile = profileService.findById(answer.getProfileId());
+            Question question = questionService.findByOptionId(option.getId());
+
+            answer.setProfile(profile);
+            answer.setOption(option);
+            option.setQuestion(question);
+            option.getAnswers().add(answer);
             Answer saved = answerService.create(answer);
+//            optionService.updateAnswerCount(option.getId());
+            questionService.updateTotalAnswerCount(question.getId());
             return ResponseEntity.status(HttpStatus.CREATED).body(AnswerMapper.toDTO(saved));
         } catch (EntityExistsException ex) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "This profile already answered!");
@@ -72,6 +94,7 @@ public class AnswerController {
         try {
             Answer changing = AnswerMapper.fromDTO(dto);
             Answer saved = answerService.update(changing, id);
+            questionService.updateTotalAnswerCount(saved.getOption().getQuestion().getId());
             return ResponseEntity.status(HttpStatus.OK).body(AnswerMapper.toDTO(saved));
         } catch (EntityNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Answer not found!");
@@ -83,7 +106,11 @@ public class AnswerController {
     @DeleteMapping(DELETE)
     public ResponseEntity<?> delete(@PathVariable UUID id) {
         try {
+            UUID optionId = answerService.findById(id).getOptionId();
+            UUID questionId = optionService.findById(optionId).getQuestion().getId();
             answerService.delete(id);
+//            optionService.updateAnswerCount(optionId);
+            questionService.updateTotalAnswerCount(questionId);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (EntityNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Answer not found!");

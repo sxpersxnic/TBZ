@@ -3,7 +3,6 @@ package com.github.sxpersxnic.tbz.m320.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +14,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "profiles")
@@ -31,7 +29,7 @@ public class Profile {
     @Column(name = "profile_picture")
     private String profilePicture;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
