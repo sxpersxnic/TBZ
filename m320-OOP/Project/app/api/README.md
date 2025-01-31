@@ -1,49 +1,107 @@
 # API
 
-## Features
+## Pre-Development UML
 
-- [x] Users can sign up.
-- [x] Users can sign in.
-- [ ] Users can delete their account.
-- [x] Users have role 'USER' by default.
-- [ ] Users can be assigned role 'ADMIN'.
-- [ ] Users can be assigned role 'MODERATOR'.
-- [ ] Users can be assigned role 'USER'.
-- [ ] ADMIN can delete any user account.
-- [ ] ADMIN only can assign role 'ADMIN' to any user.
-- [ ] ADMIN can assign role 'MODERATOR' to any user.
-- [ ] ADMIN can assign role 'USER' to any user.
-- [ ] MODERATOR can delete any user account.
-- [ ] MODERATOR can assign role 'MODERATOR' to any user.
-- [ ] MODERATOR can assign role 'USER' to any user.
-- [ ] USER can delete their account.
-- [ ] USER can update their account.
-- [ ] USER can view their account.
-- [ ] Only admins can view all users.
-- [ ] Only admins can view all moderators.
-- [ ] Only admins can CRUD roles.
-- [ ] Profile is created with user account.
-- [ ] Profile is deleted when user account is deleted.
-- [ ] Profile can be updated.
-- [ ] Profile can be found through id.
-- [ ] Profile can be found through user id.
-- [ ] Profile can create a question.
-- [ ] Question can be updated by author only.
-- [ ] Question can be deleted by author only.
-- [ ] Question can be found through id.
-- [ ] Question can be found through author id.
-- [ ] Question has min. 2 Options.
-- [ ] Multiple Question view is returned as page.
-- [ ] Option can be updated by author only.
-- [ ] Option can be deleted by author only.
-- [ ] Option can be found through id.
-- [ ] Option can be found through question id.
-- [ ] Option has min. 0 answers.
-- [ ] Profile can submit an answer.
-- [ ] Answer can be set to other option.
-- [ ] Answer can only be submitted to 1 option per question.
-- [ ] Answer can be updated by answer author only.
-- [ ] Answer can be deleted by answer author only.
-- [ ] Answer can be found through id.
-- [ ] Answer can be found through question id.
-- [ ] Answer can be found through option id.
+```mermaid
+---
+title: Pre-Development UML
+---
+classDiagram
+    
+    namespace API {
+        class Application
+        class Profiles
+        class Questions
+        class Options
+        class Answers
+    }
+    class Application {
+        +main(String[] args)$
+    }
+    
+    namespace Questions {
+        class Question {
+            -UUID id
+        }
+    }
+    
+    namespace Profiles {
+        class Profile {
+            -UUID id
+        }
+    }
+    
+    namespace Answers {
+        class Answer {
+            -UUID id
+        }
+    }
+    
+    namespace Options {
+        class Option {
+            -UUID id
+        }
+    }
+    
+    Application --> Profiles
+    Application --> Questions
+    Application --> Options
+    Application --> Answers
+    
+    
+
+```
+
+## Past-Development UML
+
+```mermaid
+```
+
+## Sequence Diagram
+
+```mermaid
+---
+title: Create Question (POST /questions)
+---
+sequenceDiagram
+    participant Client
+    participant QuestionController
+    participant QuestionService
+    participant QuestionMapper
+    participant QuestionRepository
+    participant ProfileService
+    participant OptionService
+    
+    Client->>+QuestionController: POST /questions
+    QuestionController->>+QuestionMapper: fromDTO(dto)
+    QuestionMapper-->>-QuestionController: Question
+    QuestionController->>+QuestionService: create(question)
+    QuestionService->>Question: setTotalAnswerCount(0)
+    QuestionService->>Question: setCreatedAt(ZonedDateTime.now())
+    QuestionService->>+QuestionRepository: existsByContentAndProfile
+    alt exists
+     QuestionService->>QuestionController: Throw EntityExistsException
+     break
+        QuestionController->>Client: ResponseEntity.status(HttpStatus.CONFLICT).body("Question already exists")
+     end
+    end
+    alt Size of options is less than 2
+        QuestionService->>QuestionController: Throw FailedValidationException
+        break
+            QuestionController->>Client: ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Question must have at least 2 options")
+        end
+    end
+    QuestionService->>+ProfileService: findById(question.getProfile().getId())
+    ProfileService-->>-QuestionService: Profile
+    QuestionService->>Question: setProfile(Profile)
+    loop For each option
+        QuestionService->>+OptionService: create(option)
+        OptionService-->>-QuestionService: Option
+    end
+    QuestionService->>+QuestionRepository: save(question)
+    QuestionRepository-->>-QuestionService: Question
+    QuestionService-->>-QuestionController: Question
+    QuestionController->>+QuestionMapper: toDTO(saved)
+    QuestionMapper-->>-QuestionController: QuestionDTO
+    QuestionController-->>-Client: ResponseEntity.status(HttpStatus.CREATED).body(QuestionDTO)
+```
