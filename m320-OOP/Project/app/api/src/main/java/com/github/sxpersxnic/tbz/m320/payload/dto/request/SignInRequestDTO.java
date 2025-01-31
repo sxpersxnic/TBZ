@@ -10,12 +10,9 @@ import lombok.Data;
 @Data
 public class SignInRequestDTO {
 
-    @NotBlank(message = "Email must not be empty")
+    @NotBlank(message = "Email must not be blank")
     private String email;
 
-    @NotBlank(message = "Password must not be empty")
+    @NotBlank(message = "Password must not be blank")
     private String password;
-
-    public SignInRequestDTO() {
-    }
 }

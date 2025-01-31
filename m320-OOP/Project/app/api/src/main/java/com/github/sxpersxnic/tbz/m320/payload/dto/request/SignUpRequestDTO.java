@@ -11,15 +11,15 @@ import lombok.Data;
 @Data
 public class SignUpRequestDTO {
 
-    @NotBlank(message = "Username must not be empty")
+    @NotBlank(message = "Username must not be blank")
     @Size(min = 3, max = 255, message = "Length must be between 3 and 255 characters")
     private String username;
 
-    @NotBlank(message = "Email must not be empty")
     @Email
+    @NotBlank(message = "Email must not be blank")
     private String email;
 
-    @NotBlank(message = "Password must not be empty")
+    @NotBlank(message = "Password must not be blank")
     @Size(min = 8, max = 255, message = "Length must be between 8 and 255 characters")
     private String password;
 }

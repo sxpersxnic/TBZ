@@ -13,8 +13,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
+import static com.github.sxpersxnic.tbz.m320.lib.constants.Controller.*;
+
+/**
+ * @author sxpersxnic
+ */
 @RestController
-@RequestMapping("/profiles")
+@RequestMapping(PROFILES)
 public class ProfileController {
     private final ProfileService profileService;
 
@@ -27,7 +32,7 @@ public class ProfileController {
         return ResponseEntity.ok(profileService.findAll().stream().map(ProfileMapper::toDTO).toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(ID_GET)
     public ResponseEntity<?> findById(@PathVariable UUID id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(
@@ -40,7 +45,7 @@ public class ProfileController {
         }
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping(PATCH)
     public ResponseEntity<?> update(
             @RequestBody ProfileRequestDTO changingDTO,
             @PathVariable UUID id

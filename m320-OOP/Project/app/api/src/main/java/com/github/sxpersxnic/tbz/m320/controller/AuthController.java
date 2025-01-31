@@ -15,8 +15,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,25 +30,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import static com.github.sxpersxnic.tbz.m320.lib.constants.Controller.*;
+
 /**
  * @author sxpersxnic
  */
 @RestController
-@RequestMapping(AuthController.PATH)
+@RequestMapping(AUTH)
 public class AuthController {
-
-    public static final String PATH = "/auth";
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
 
-    @Autowired
     public AuthController(UserService userService, AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/signup")
+    @PostMapping(SIGNUP)
     @Operation(summary = "Create a new user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User was created successfully",
@@ -61,12 +60,14 @@ public class AuthController {
         try {
             User user = userService.create(SignUpMapper.fromDTO(dto), dto.getUsername());
             return ResponseEntity.status(HttpStatus.CREATED).body(SignUpMapper.toDTO(user));
-        } catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException ex) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "User could not be created, username already in use");
+        } catch (EntityNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role not found");
         }
     }
 
-    @PostMapping("/signin")
+    @PostMapping(SIGNIN)
     @Operation(summary = "Receive a token for BEARER authorization")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Login successful",
@@ -90,5 +91,4 @@ public class AuthController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
         }
     }
-
 }
