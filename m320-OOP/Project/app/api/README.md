@@ -26,7 +26,382 @@ The advantages:
 
 ### Pre-Development UML
 
+```mermaid
+classDiagram
 
+class Application {
+    +main(String[] args): void$
+}
+class RuntimeException
+class JPARepository["JPARepository<T, ID> from java.persistence"]
+class ViewController {
+    +index(): String
+}
+class InitController {
+    -Seed seed
+    +seed(): ResponseEntity~String~
+}
+class ResponseDTO {
+    <<abstract>>
+    -UUID id
+    
+    +getId(): UUID
+    +setId(UUID): void
+    
+}
+class Seed {
+    -UserService userService
+    
+    +seed(): void
+}
+class CrudService~E I~ {
+    <<interface>>
+    
+    +findAll(): List~E~
+    +findById(I id): E
+    +delete(I id): void
+    +create(E e): E
+    +update(E changing, I id): E
+}
+
+class GlobalControllerExceptionHandler {
+    +handleConversionAndArgumentMismatchExceptions(RuntimeException ex): ResponseEntity~?~
+    +handleResponseStatusExceptions(ResponseStatusException ex): ResponseEntity~?~
+    +handleValidationExceptions(Exception ex): ResponseEntity~?~
+    +handleAccessDeniedExceptions(AccessDeniedException ex): ResponseEntity~?~
+    +handleRuntimeExceptions(RuntimeException ex): ResponseEntity~?~
+    -JsonMessage(String message)
+}
+class FailedValidationException {
+    -Map~String, List~String~~ errors
+    
+    +getErrors(): Map~String, List~String~~
+    +setErrors(Map~String, List~String~~): void
+}
+
+class User {
+    -UUID id
+    -String username
+    +getId(): UUID
+    +setId(UUID): void
+    +getUsername(): String
+    +setUsername(String): void
+}
+class UserRequestDTO {
+    -String username
+}
+class UserResponseDTO {
+    -String id
+    -String username
+    
+    +getId(): String
+    +setId(String): void   
+    +getUsername(): String
+    +setUsername(String): void
+}
+class UserMapper {
+    +toDTO(User user): UserResponseDTO$
+    +fromDTO(UserRequestDTO dto): User$
+}
+class UserRepository {
+    <<interface>>
+}
+class UserService {
+    -UserRepository userRepository
+    
+    +findAll(): List~User~        
+    +findById(UUID id): User
+    +delete(UUID id): void
+    +create(User user): User
+    +update(User changing, UUID id): User
+    -merge(User changing, User existing): void
+}
+class UserController {
+    -UserService userService
+    
+    +findAll(): ResponseEntity~?~
+    +findById(UUID id): ResponseEntity~?~
+    +create(UserRequestDTO dto): ResponseEntity~?~
+    +update(UserRequestDTO dto, UUID id): ResponseEntity~?~
+    +delete(UUID id): ResponseEntity~?~
+}
+
+class Question {
+    -UUID id
+    -User owner
+    -Set~Option~ options
+    -String content
+    -String description
+    -int totalAnswerCount
+    
+    +getId(): UUID
+    +setId(UUID): void
+    +getContent(): String
+    +setContent(String): void
+    +getDescription(): String
+    +setDescription(String): void
+    +getOwner(): User
+    +setOwner(User): void
+    +getOptions(): Set~Option~
+    +setOptions(Set~Option~): void
+    +getTotalAnswerCount(): int
+    +setTotalAnswerCount(int): void
+}
+class QuestionRequestDTO {
+    -String ownerId
+    -String content
+    -String description
+    -List~String~ optionIds
+    
+    +getOwnerId(): String
+    +setOwnerId(String): void
+    +getContent(): String
+    +setContent(String): void
+    +getDescription(): String
+    +setDescription(String): void
+    +getOptions(): List~String~
+    +setOptions(List~String~): void
+}
+class QuestionResponseDTO {
+    -String ownerId
+    -List~String~ optionIds
+    -int totalAnswerCount
+    
+    +getOwnerId(): UUID
+    +setOwnerId(UUID): void
+    +getOptionIds(): List~String~
+    +setOptionIds(List~String~): void
+    +getTotalAnswerCount(): int
+    +setTotalAnswerCount(int): void
+}
+class QuestionMapper {
+    +toDTO(Question question): QuestionResponseDTO$
+    +fromDTO(QuestionRequestDTO dto): Question$
+}
+class QuestionRepository {
+    <<interface>>
+    existsByContentAndUserId(String content, UUID ownerId): boolean
+    getPage(int itemsPerPage, int offset): List~Question~
+    findByOptionId(UUID optionId): Optional~Question~
+}
+class QuestionService {
+    -QuestionRepository questionRepository
+    -AnswerRepository answerRepository
+    -OptionRepository optionRepository
+    -UserRepository userRepository
+    
+    +findAll(): List~Question~
+    +findById(UUID id): Question
+    +findByOptionId(UUID optionId): Question
+    +delete(UUID id): void
+    +create(Question question): Question
+    +update(Question changing, UUID id): Question
+    -merge(Question changing, Question existing): void
+}
+class QuestionController {
+    -QuestionService questionService
+    
+    +findAll(): ResponseEntity~?~
+    +findById(UUID id): ResponseEntity~?~
+    +findByOptionId(UUID optionId): ResponseEntity~?~
+    +pagination(int itemsPerPage, int currentPage): ResponseEntity~?~
+    +create(QuestionRequestDTO dto): ResponseEntity~?~
+    +update(QuestionRequestDTO dto, UUID id): ResponseEntity~?~
+    +delete(UUID id): ResponseEntity~?~
+}
+
+class Option {
+    -UUID id
+    -Question question
+    -Set~Answer~ answers
+    -String content
+    -int answerCount
+    -ZonedDateTime createdAt
+    
+    +getId(): UUID
+    +setId(UUID): void
+    +getContent(): String
+    +setContent(String): void
+    +getQuestion(): Question
+    +setQuestion(Question): void
+    +getAnswers(): Set~Answer~
+    +setAnswers(Set~Answer~): void
+    +getAnswerCount(): int
+    +setAnswerCount(int): void
+    +getCreatedAt(): ZonedDateTime
+    +setCreatedAt(ZonedDateTime): void
+    
+    +equals(Object): boolean
+    +hashCode(): int
+    +canEqual(Object): boolean
+}
+class OptionRequestDTO {
+    -String content
+    
+    +getContent(): String
+    +setContent(String): void
+    
+    +equals(Object): boolean
+    +hashCode(): int
+    +canEqual(Object): boolean
+}
+class OptionResponseDTO {
+    -List~String~ answerIds
+    -String content
+    -int answerCount
+    
+    +getAnswerIds(): List~String~
+    +setAnswerIds(List~String~): void
+    +getContent(): String
+    +setContent(String): void
+    +getAnswerCount(): int
+    +setAnswerCount(int): void
+}
+class OptionMapper {
+    +toDTO(Option option): OptionResponseDTO$
+    +fromDTO(OptionRequestDTO dto): Option$
+}
+class OptionRepository {
+   getOptionByQuestionId(UUID questionId): List~Option~
+   findQuestionIdById(UUID id): Optinal~UUID~
+}
+class OptionService {
+    -OptionRepository optionRepository
+    
+    +findAll(): List~Option~
+    +findById(UUID id): Option
+    +delete(UUID id): void
+    +getOptionByQuestionId(UUID questionId): List~Option~
+    +create(Option option): Option
+    +update(Option changing, UUID id): Option
+    -merge(Option changing, Option existing): void
+}
+class OptionController {
+    -OptionService optionService
+    
+    +findById(UUID id): ResponseEntity~?~
+}
+
+class Answer {
+    -UUID id
+    -Option option
+    -User user
+    -ZonedDateTime createdAt
+    
+    +getId(): UUID
+    +setId(UUID): void
+    +getOption(): Option
+    +setOption(Option): void
+    +getUser(): User
+    +setUser(User): void
+    +getCreatedAt(): ZonedDateTime
+    +setCreatedAt(ZonedDateTime): void 
+}
+class AnswerRequestDTO {
+    -String optionId
+    -String profileId
+    
+    +getOptionId(): String
+    +setOptionId(String): void
+    +getOwnerId(): String
+    +setOwnerId(String): void
+}
+class AnswerResponseDTO {
+    -UUID optionId
+    -UUID userId
+    
+    +getOptionId(): String
+    +setOptionId(String): void
+    +getUserId(): String
+    +setUserId(String): void
+}
+class AnswerMapper {
+    +toDTO(Answer answer): AnswerResponseDTO$
+    +fromDTO(AnswerRequestDTO dto): Answer$
+}
+class AnswerRepository {
+    <<interface>>
+    findByOptionId(UUID optionId): List~Answer~
+    findByQuestionId(UUID questionId): List~Answer~
+    findByOptionIdAndUserId(UUID optionId, UUID userId): Optional~Answer~
+    findByQuestionIdAndUserId(UUID questionId, UUID userId): Optional~Answer~
+    existsByOptionAndUser(UUID optionId, UUID userId): boolean
+    countByOptionId(UUID optionId): int
+    countByQuestionId(UUID questionId): int
+}
+class AnswerService {
+    -AnswerRepository answerRepository
+    -OptionRepository optionRepository
+    
+    +findAll(): List~Answer~
+    +findById(UUID id): Answer
+    +findByOptionId(UUID optionId): List~Answer~
+    +delete(UUID id): void
+    +create(Answer answer): Answer
+    +update(Answer changing, UUID id): Answer
+    -merge(Answer changing, Answer existing): void
+}
+class AnswerController {
+    -AnswerService answerService
+    -QuestionService questionService
+    -OptionService optionService
+    -UserService userService
+    
+    +findAll(): ResponseEntity~?~
+    +findById(UUID id): ResponseEntity~?~
+    +findByOptionId(UUID optionId): ResponseEntity~?~
+    +create(AnswerRequestDTO dto): ResponseEntity~?~
+    +update(AnswerRequestDTO dto, UUID id): ResponseEntity~?~
+    +delete(UUID id): ResponseEntity~?~
+}
+
+%% Relations
+  User "1" -- "*" Question
+  User"1" -- "*" Answer
+  Question "1" -- "*" Option
+  Option "1" -- "*" Answer
+
+%% Inheritance
+  RuntimeException <|-- FailedValidationException
+  JPARepository <|-- UserRepository
+  JPARepository <|-- QuestionRepository
+  JPARepository <|-- OptionRepository
+  JPARepository <|-- AnswerRepository
+  ResponseDTO <|-- UserResponseDTO
+  ResponseDTO <|-- QuestionResponseDTO
+  ResponseDTO <|-- OptionResponseDTO
+  ResponseDTO <|-- AnswerResponseDTO
+
+%% Implementations
+  CrudService~E I~ <|.. UserService
+  CrudService~E I~ <|.. QuestionService
+  CrudService~E I~ <|.. OptionService
+  CrudService~E I~ <|.. AnswerService
+
+%% Associations
+  Application --> ViewController
+  Application --> InitController
+  Application --> Users
+  Application --> Questions
+  Application --> Options
+  Application --> Answers
+
+%% Dependencies
+  UserController ..> UserService
+  QuestionController ..> QuestionService
+  OptionController ..> OptionService
+  AnswerController ..> AnswerService
+  AnswerController ..> QuestionService
+  AnswerController ..> OptionService
+  AnswerService ..> AnswerRepository
+  AnswerService ..> OptionRepository
+  AnswerService ..> OptionService
+  UserService ..> UserRepository
+  QuestionService ..> QuestionRepository
+  QuestionService ..> AnswerRepository
+  QuestionService ..> OptionService
+  OptionService ..> OptionRepository
+```
 
 ### Post-Development UML
 
