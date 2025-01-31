@@ -18,6 +18,11 @@ import java.util.UUID;
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, UUID> {
 
+    /// Get a page of questions from the database.
+    /// @param itemsPerPage The number of items per page.
+    /// @param offset The offset.
+    /// @return A list of questions.
+    /// @see Question
     @Query(value = """
     SELECT *
     FROM questions
@@ -26,6 +31,10 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
     """, nativeQuery = true)
     List<Question> getPage(int itemsPerPage, int offset);
 
+    /// Check if a question exists by its content and the profile id.
+    /// @param content The content of the question.
+    /// @param profileId The profile id.
+    /// @return True if the question exists, false otherwise.
     boolean existsByContentAndProfileId(String content, UUID profileId);
 
 }
