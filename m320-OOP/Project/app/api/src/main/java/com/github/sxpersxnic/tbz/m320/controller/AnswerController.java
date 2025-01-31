@@ -24,6 +24,9 @@ import java.util.UUID;
 
 import static com.github.sxpersxnic.tbz.m320.lib.constants.Controller.*;
 
+/// REST controller for the Answer entity
+/// Handles all CRUD operations for the Answer entity
+/// @see AnswerService
 @RestController
 @RequestMapping(ANSWERS)
 public class AnswerController {
@@ -39,11 +42,13 @@ public class AnswerController {
         this.profileService = profileService;
     }
 
+    /// GET all answers
     @GetMapping
     public ResponseEntity<?> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(answerService.findAll().stream().map(AnswerMapper::toDTO).toList());
     }
 
+    /// GET answer by ID
     @GetMapping(ID_GET)
     public ResponseEntity<?> findById(@PathVariable UUID id) {
         try {
@@ -54,16 +59,19 @@ public class AnswerController {
         }
     }
 
+    /// GET answers by profile ID
     @GetMapping(OPTION_ID_GET)
     public ResponseEntity<?> findByOptionId(@RequestParam UUID optionId) {
-        return ResponseEntity.status(HttpStatus.OK).body(answerService.findByOption(optionId).stream().map(AnswerMapper::toDTO).toList());
+        return ResponseEntity.status(HttpStatus.OK).body(answerService.findByOptionId(optionId).stream().map(AnswerMapper::toDTO).toList());
     }
 
+    /// GET answers by question ID
     @GetMapping(QUESTION_ID_GET)
     public ResponseEntity<?> findByQuestionId(@RequestParam UUID questionId) {
         return ResponseEntity.status(HttpStatus.OK).body(answerService.findByQuestion(questionId).stream().map(AnswerMapper::toDTO).toList());
     }
 
+    /// POST a new answer
     @PostMapping(POST)
     public ResponseEntity<?> create(@Valid @RequestBody AnswerRequestDTO dto) {
         try {
@@ -89,6 +97,7 @@ public class AnswerController {
         }
     }
 
+    /// PATCH an existing answer
     @PatchMapping(PATCH)
     public ResponseEntity<?> update(@Valid @RequestBody AnswerRequestDTO dto, @PathVariable UUID id) {
         try {
@@ -103,6 +112,7 @@ public class AnswerController {
         }
     }
 
+    /// DELETE an existing answer
     @DeleteMapping(DELETE)
     public ResponseEntity<?> delete(@PathVariable UUID id) {
         try {

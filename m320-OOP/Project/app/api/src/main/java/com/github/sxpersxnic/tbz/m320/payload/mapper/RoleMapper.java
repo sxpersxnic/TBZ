@@ -1,10 +1,12 @@
 package com.github.sxpersxnic.tbz.m320.payload.mapper;
 
 import com.github.sxpersxnic.tbz.m320.model.Role;
+import com.github.sxpersxnic.tbz.m320.model.User;
 import com.github.sxpersxnic.tbz.m320.payload.dto.request.RoleRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.RoleResponseDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 
 /// Class to map Role objects to RoleResponseDTO objects and vice versa.
@@ -15,12 +17,12 @@ public class RoleMapper {
     public static RoleResponseDTO toDTO(Role role) {
         RoleResponseDTO dto = new RoleResponseDTO();
 
-        dto.setId(role.getId().toString());
+        dto.setId(role.getId());
         dto.setName(role.getName());
 
-        List<String> userIds = role.getAssignedUsers()
+        List<UUID> userIds = role.getAssignedUsers()
                 .stream()
-                .map(user -> user.getId().toString())
+                .map(User::getId)
                 .toList();
         dto.setAssignedUserIds(userIds);
         return dto;

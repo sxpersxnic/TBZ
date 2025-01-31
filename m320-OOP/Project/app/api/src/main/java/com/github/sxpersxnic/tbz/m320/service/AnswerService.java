@@ -5,12 +5,9 @@ import com.github.sxpersxnic.tbz.m320.lib.exceptions.FailedValidationException;
 import com.github.sxpersxnic.tbz.m320.lib.interfaces.CrudService;
 import com.github.sxpersxnic.tbz.m320.model.Answer;
 import com.github.sxpersxnic.tbz.m320.model.Option;
-import com.github.sxpersxnic.tbz.m320.model.Profile;
 import com.github.sxpersxnic.tbz.m320.model.Question;
 import com.github.sxpersxnic.tbz.m320.repository.AnswerRepository;
 import com.github.sxpersxnic.tbz.m320.repository.OptionRepository;
-import com.github.sxpersxnic.tbz.m320.repository.ProfileRepository;
-import com.github.sxpersxnic.tbz.m320.repository.QuestionRepository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -32,21 +29,14 @@ public class AnswerService implements CrudService<Answer, UUID> {
     /// The JPA repository for {@link Answer} entities.
     private final AnswerRepository answerRepository;
     /// The Service for {@link Option} entities.
-//    private final OptionService optionService;
     private final OptionRepository optionRepository;
     /// The Service for {@link Question} entities.
-//    private final QuestionService questionService;
-    private final QuestionRepository questionRepository;
-    /// The JPA repository for {@link Profile} entities.
-    private final ProfileRepository profileRepository;
     private final OptionService optionService;
 
     /// Constructor for the {@link AnswerService}.
-    public AnswerService(AnswerRepository answerRepository, OptionRepository optionRepository, QuestionRepository questionRepository, ProfileRepository profileRepository, OptionService optionService) {
+    public AnswerService(AnswerRepository answerRepository, OptionRepository optionRepository, OptionService optionService) {
         this.answerRepository = answerRepository;
         this.optionRepository = optionRepository;
-        this.questionRepository = questionRepository;
-        this.profileRepository = profileRepository;
         this.optionService = optionService;
     }
 
@@ -72,11 +62,11 @@ public class AnswerService implements CrudService<Answer, UUID> {
     }
 
     /// Find all {@link Answer} entities by their {@link Option} ID.
-    /// @param id The ID of the {@link Option} entity.
+    /// @param optionId The ID of the {@link Option} entity.
     /// @return A list of all {@link Answer} entities with the given {@link Option} ID.
     /// @see AnswerRepository#findByOptionId
-    public List<Answer> findByOption(UUID id) {
-        return answerRepository.findByOptionId(id);
+    public List<Answer> findByOptionId(UUID optionId) {
+        return answerRepository.findByOptionId(optionId);
     }
 
     /// Delete a {@link Answer} entity by its ID.
@@ -91,7 +81,6 @@ public class AnswerService implements CrudService<Answer, UUID> {
     /// @param answer The {@link Answer} entity to create.
     /// @return The created {@link Answer} entity.
     @Override
-
     public Answer create(Answer answer) {
         answer.setCreatedAt(ZonedDateTime.now());
 

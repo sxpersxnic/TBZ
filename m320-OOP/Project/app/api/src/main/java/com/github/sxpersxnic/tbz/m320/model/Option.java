@@ -37,27 +37,4 @@ public class Option {
 
     @Column(name = "created_at", updatable = false, insertable = false)
     private ZonedDateTime createdAt;
-
-    public void decreaseAnswerCount() {
-        this.setAnswerCount(this.getAnswerCount() - 1);
-    }
-
-    public void increaseAnswerCount() {
-        this.setAnswerCount(this.getAnswerCount() + 1);
-    }
-
-    public void addAnswer(Answer answer) {
-        answers.add(answer);
-        answer.setOption(this);
-    }
-
-    public void removeAnswer(Answer answer) {
-        answers.remove(answer);
-        answer.setOption(null);
-    }
-
-//    public void setQuestion(Question question) {
-//        this.question = question;
-//        question.addOption(this);
-//    }
 }

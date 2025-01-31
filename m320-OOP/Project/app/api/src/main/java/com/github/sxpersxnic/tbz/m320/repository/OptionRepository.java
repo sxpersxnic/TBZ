@@ -24,9 +24,5 @@ public interface OptionRepository extends JpaRepository<Option, UUID> {
     List<Option> getOptionByQuestionId(UUID questionId);
 
     @Query("SELECT o.question.id FROM Option o WHERE o.id = :optionId")
-    Optional<UUID> findQuestionIdByOptionId(UUID optionId);
-
-    int countAnswersById(UUID id);
-
-    List<Option> id(UUID id);
+    Optional<UUID> findQuestionIdById(UUID optionId);
 }

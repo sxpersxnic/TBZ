@@ -33,6 +33,7 @@ public class QuestionService implements CrudService<Question, UUID> {
     private final OptionService optionService;
     /// The Service for {@link Profile} entities.
     private final ProfileService profileService;
+    /// The JPA repository for {@link Option} entities.
     private final OptionRepository optionRepository;
 
     /// Constructor for the {@link QuestionService}.
@@ -63,7 +64,7 @@ public class QuestionService implements CrudService<Question, UUID> {
     }
 
     public Question findByOptionId(UUID optionId) {
-        UUID id = optionRepository.findQuestionIdByOptionId(optionId).orElseThrow(EntityNotFoundException::new);
+        UUID id = optionRepository.findQuestionIdById(optionId).orElseThrow(EntityNotFoundException::new);
         return questionRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
@@ -94,7 +95,6 @@ public class QuestionService implements CrudService<Question, UUID> {
         question.setProfile(profile);
 
         for (Option option : question.getOptions()) {
-//            option.setQuestion(question);
             optionService.create(option);
         }
 
