@@ -7,9 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * @author sxpersxnic
- */
+/// User repository.
+///
+/// This interface is used to interact with the database.
+///
+/// It extends JpaRepository which provides basic CRUD operations.
+/// @see JpaRepository
+/// @author sxpersxnic
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 

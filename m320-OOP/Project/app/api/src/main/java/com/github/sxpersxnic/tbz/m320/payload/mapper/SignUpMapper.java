@@ -6,11 +6,12 @@ import com.github.sxpersxnic.tbz.m320.payload.dto.request.SignUpRequestDTO;
 import com.github.sxpersxnic.tbz.m320.payload.dto.response.SignUpResponseDTO;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-/**
- * @author sxpersxnic
- */
+/// Class to map User objects to SignUpResponseDTO objects and vice versa.
+/// @see User
+/// @see SignUpResponseDTO
+/// @see SignUpRequestDTO
+/// @author sxpersxnic
 public class SignUpMapper {
 
     public static User fromDTO(SignUpRequestDTO dto) {
@@ -21,13 +22,20 @@ public class SignUpMapper {
     }
 
     public static SignUpResponseDTO toDTO(User user) {
+        SignUpResponseDTO dto = new SignUpResponseDTO();
+
+        dto.setId(user.getId());
+        dto.setEmail(user.getEmail());
+
         UUID profileId = user
                 .getProfiles()
                 .stream()
                 .map(Profile::getId)
                 .toList()
                 .getFirst();
-        return new SignUpResponseDTO(user.getId(), profileId, user.getEmail());
+        dto.setProfileId(profileId);
+
+        return dto;
     }
 
 }

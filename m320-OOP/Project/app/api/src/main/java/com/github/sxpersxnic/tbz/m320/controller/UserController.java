@@ -11,38 +11,38 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.UUID;
 
+import static com.github.sxpersxnic.tbz.m320.lib.constants.Controller.*;
+
 /**
  * @author sxpersxnic
  */
 @RestController
-@RequestMapping(path = UserController.PATH)
+@RequestMapping(USERS)
 public class UserController {
-    public static final String PATH = "/users";
     private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // GET
-    // DOCUMENTATION
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN', 'SCOPE_MODERATOR')")
     @Operation(summary = "Get all users")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "All users found!",
                 content = @Content(schema = @Schema(implementation = UserResponseDTO.class)))
     })
-    // METHOD
     public ResponseEntity<?> findAll() {
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -55,7 +55,7 @@ public class UserController {
     }
     // GET
     // DOCUMENTATION
-    @GetMapping("/{id}")
+    @GetMapping(ID_GET)
     @Operation(summary = "Get user by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User found!",
@@ -74,7 +74,7 @@ public class UserController {
     }
     // PATCH
     // DOCUMENTATION
-    @PatchMapping("/{id}")
+    @PatchMapping(PATCH)
     @Operation(summary = "Update a user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User updated successfully!",
@@ -87,7 +87,7 @@ public class UserController {
     // METHOD
     public ResponseEntity<?> update(
             @Parameter(description = "User to update")
-            @RequestBody UserRequestDTO updateUserDTO,
+            @Valid @RequestBody UserRequestDTO updateUserDTO,
 
             @Parameter(description = "Id of user to update")
             @PathVariable UUID id
@@ -105,21 +105,15 @@ public class UserController {
 
     // DELETE
     // DOCUMENTATION
-    @DeleteMapping("/{id}")
+    @DeleteMapping(DELETE)
     @Operation(summary = "Delete a user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "User was deleted successfully",
                     content = @Content),
-            @ApiResponse(responseCode = "404", description = "User could not be deleted",
-                    content = @Content)
     })
     // METHOD
     public ResponseEntity<?> delete(@Parameter(description = "Id of user to delete") @PathVariable UUID id) {
-        try {
-            userService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (EmptyResultDataAccessException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User to be deleted was not found!");
-        }
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
