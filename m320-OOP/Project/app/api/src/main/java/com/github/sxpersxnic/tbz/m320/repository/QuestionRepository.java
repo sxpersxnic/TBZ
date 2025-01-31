@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 /// Question repository.
@@ -29,12 +28,4 @@ public interface QuestionRepository extends JpaRepository<Question, UUID> {
 
     boolean existsByContentAndProfileId(String content, UUID profileId);
 
-    int countById(UUID id);
-
-    @Query(value = """
-    SELECT *
-    FROM questions q
-    WHERE q.id = (SELECT o.question_id FROM options o WHERE o.id = :optionId)
-    """, nativeQuery = true)
-    Optional<Question> findByOptionId(UUID optionId);
 }

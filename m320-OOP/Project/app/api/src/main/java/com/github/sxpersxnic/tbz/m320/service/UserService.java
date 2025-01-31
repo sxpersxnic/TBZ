@@ -152,13 +152,6 @@ public class UserService implements CrudService<User, UUID> {
                 errors.put("email", List.of("Email must not be blank!"));
             }
         }
-//        if (changing.getPassword() != null) {
-//            if (StringUtils.isNotBlank(changing.getPassword())) {
-//                existing.setPassword(changing.getPassword());
-//            } else {
-//                errors.put("password", List.of("Password can not be empty!"));
-//            }
-//        }
 
         if (!errors.isEmpty()) {
             throw new FailedValidationException(errors);

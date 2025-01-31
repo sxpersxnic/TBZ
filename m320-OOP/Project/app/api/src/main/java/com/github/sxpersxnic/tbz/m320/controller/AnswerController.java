@@ -56,7 +56,7 @@ public class AnswerController {
 
     @GetMapping(OPTION_ID_GET)
     public ResponseEntity<?> findByOptionId(@RequestParam UUID optionId) {
-        return ResponseEntity.status(HttpStatus.OK).body(answerService.findByOption(optionId).stream().map(AnswerMapper::toDTO).toList());
+        return ResponseEntity.status(HttpStatus.OK).body(answerService.findByOptionId(optionId).stream().map(AnswerMapper::toDTO).toList());
     }
 
     @GetMapping(QUESTION_ID_GET)

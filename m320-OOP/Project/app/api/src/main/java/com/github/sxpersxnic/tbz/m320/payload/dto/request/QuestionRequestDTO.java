@@ -3,14 +3,8 @@ package com.github.sxpersxnic.tbz.m320.payload.dto.request;
 import com.github.sxpersxnic.tbz.m320.model.Question;
 import com.github.sxpersxnic.tbz.m320.model.Option;
 import com.github.sxpersxnic.tbz.m320.model.Profile;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import org.hibernate.grammars.hql.HqlParser;
-
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /// Request Data transfer object of {@link Question}.
