@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class Security {
 
-    public static final String SECRET = "256-BIZ-SECRET";
+    public static final String SECRET = "256-BIT-SECRET";
 
     public static final String ALGORITHM = "HmacSHA256";
 
