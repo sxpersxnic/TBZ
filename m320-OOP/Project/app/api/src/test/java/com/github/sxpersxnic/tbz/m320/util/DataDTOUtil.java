@@ -16,7 +16,7 @@ public class DataDTOUtil {
     public static UserRequestDTO getTestUserRequestDTO() {
         UserRequestDTO signUpDTO = new UserRequestDTO();
         signUpDTO.setEmail("user1@foo.bar");
-        signUpDTO.setPassword("password1");
+        // signUpDTO.setPassword("password1");
         return signUpDTO;
     }
 

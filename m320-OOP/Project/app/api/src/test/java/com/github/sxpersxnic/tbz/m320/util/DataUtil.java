@@ -2,13 +2,15 @@ package com.github.sxpersxnic.tbz.m320.util;
 
 import com.github.sxpersxnic.tbz.m320.model.*;
 
-import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
 public class DataUtil {
+    static ZoneId zoneId = ZoneId.of("Europe/Zurich");
 
     public static User getTestUser() {
         return getTestUsers().getFirst();
@@ -67,7 +69,7 @@ public class DataUtil {
             profile.setId(testUUID(i));
             profile.setUsername("user" + i);
             profile.setProfilePicture("profile" + i + ".jpg");
-            profile.setCreatedAt(LocalDateTime.of(2025, 1, 29, 0, 0, 0));
+            profile.setCreatedAt(ZonedDateTime.of(2025, 1, 1, 0, 0, 0, 0, zoneId));
 
             //? If tests fail maybe add values to relations
             profile.setUser(new User());
@@ -94,7 +96,7 @@ public class DataUtil {
             option.setQuestion(question);
             option.setAnswerCount(0);
             option.setContent("Option " + i);
-            option.setCreatedAt(LocalDateTime.of(2025, 1, 29, 0, 0, 0));
+            option.setCreatedAt(ZonedDateTime.of(2025, 1, 1, 0, 0, 0, 0, zoneId));
             options.add(option);
         }
         return options;
@@ -115,7 +117,7 @@ public class DataUtil {
             question.setDescription("Description " + i);
             question.setOptions(new HashSet<>());
             question.getOptions().addAll(getTestOptions(question));
-            question.setCreatedAt(LocalDateTime.of(2025, 1, 29, 0, 0, 0));
+            question.setCreatedAt(ZonedDateTime.of(2025, 1, 1, 0, 0, 0, 0, zoneId));
             questions.add(question);
         }
         return questions;
@@ -136,7 +138,7 @@ public class DataUtil {
             answer.setId(testUUID(i));
             answer.setOption(option);
             answer.setProfile(new Profile("user" + i));
-            answer.setCreatedAt(LocalDateTime.of(2025, 1, 29, 0, 0, 0));
+            answer.setCreatedAt(ZonedDateTime.of(2025, 1, 1, 0, 0, 0, 0, zoneId));
             option.getAnswers().add(answer);
             answers.add(answer);
         }
