@@ -108,8 +108,9 @@ public class UserServiceTest {
     public void checkCreate_whenValidUser_thenUserIsReturned() {
         User expectedUser = DataUtil.getTestUser();
         Role testRole = DataUtil.getTestRole();
+        Optional<Role> optionalRole = Optional.of(testRole);
         when(userRepository.save(expectedUser)).thenReturn(expectedUser);
-        when(roleRepository.findByName("USER")).thenReturn(testRole);
+        when(roleRepository.findByName("USER")).thenReturn(optionalRole);
         when(passwordEncoder.encode(expectedUser.getPassword())).thenReturn("encPassword");
         User actualUser = userService.create(expectedUser, "user1");
 

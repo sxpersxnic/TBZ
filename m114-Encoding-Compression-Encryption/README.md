@@ -1,3 +1,17 @@
-# Codierungs-, Kompressions- und Verschlüsselungsverfahren einsetzen
+# Module 114 - Encoding, Compression, Encryption
 
-*21.02.2025*
+## A
+
+- [Link](./A-Daten-codieren)
+
+## B
+
+- [Link](./B-Daten-komprimieren)
+
+## C
+
+- [Link](./C-Grundlagen-Kryptografie)
+
+## D
+
+- [Link](./D-Gesicherte-Datenübertragung)
