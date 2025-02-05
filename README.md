@@ -39,4 +39,4 @@
 
 ## License
 
-This repository is licensed with the [MIT](LICENSE) license.
+This repository is licensed with the [GPL](LICENSE) license.
