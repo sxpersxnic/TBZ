@@ -32,7 +32,7 @@
 
 ### 4th Semester
 
-- [114 Encryption](https://github.com/sxpersxnic/TBZ/tree/main/m114-Encryption)
+- [114 Encoding, Compression and Encryption](https://github.com/sxpersxnic/TBZ/tree/main/m114-Encoding-Compression-Encryption)
 - [165 NoSQL](https://github.com/sxpersxnic/TBZ/tree/main/m165-NoSQL)
 - [254 Business Processes](https://github.com/sxpersxnic/TBZ/tree/main/m254-Business-Processes)
 - [347 Container](https://github.com/sxpersxnic/TBZ/tree/main/m347-Container)
