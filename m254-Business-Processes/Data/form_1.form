@@ -1,0 +1,33 @@
+{
+  "components": [
+    {
+      "label": "Nachnamen",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1rvrzkl",
+        "columns": null
+      },
+      "id": "Field_19juf3z",
+      "key": "textfield_vrq7i7"
+    },
+    {
+      "label": "Vornamen",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0oybj1g",
+        "columns": null
+      },
+      "id": "Field_0qolors",
+      "key": "textfield_0ygl5s"
+    }
+  ],
+  "type": "default",
+  "id": "Form_19zycyf",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.32.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.22.0",
+  "schemaVersion": 18
+}
