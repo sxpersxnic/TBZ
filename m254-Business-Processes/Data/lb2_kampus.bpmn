@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             id="Autohaus_Process"
+             targetNamespace="http://bpmn.io/schema/bpmn">
+
+  <process id="autohausBesichtigung" name="Autohaus Besichtigung" isExecutable="true">
+    
+    <startEvent id="startEvent" name="Kundenanfrage erhalten"/>
+    
+    <userTask id="anfrageBearbeiten" name="Anfrage bearbeiten"/>
+    
+    <exclusiveGateway id="autoInAusstellungGateway" name="Auto in Ausstellung?"/>
+    
+    <userTask id="terminPruefen" name="Termin prüfen"/>
+    <userTask id="einladungErstellen" name="Einladung erstellen"/>
+    <userTask id="einladungSenden" name="Einladung senden"/>
+    <endEvent id="terminAkzeptiert" name="Termin akzeptiert"/>
+    
+    <userTask id="partnerAutohaeuserAbfragen" name="Partner-Autohäuser anfragen"/>
+    <exclusiveGateway id="partnerAutohausGefunden" name="Auto bei Partner gefunden?"/>
+    
+    <userTask id="termineVonPartner" name="Termine von Partner prüfen"/>
+    <userTask id="adresseUndTermineAktualisieren" name="Adresse und Termine aktualisieren"/>
+    <userTask id="listeAnKundenSenden" name="Liste an Kunden senden"/>
+    
+    <exclusiveGateway id="entfernungAkzeptabel" name="Entfernung akzeptabel?"/>
+    <userTask id="terminVereinbaren" name="Termin beim Partner-Autohaus vereinbaren"/>
+    <endEvent id="terminGeblockt" name="Termin geblockt"/>
+    
+    <userTask id="alternativeModelleRecherchieren" name="Alternative Modelle recherchieren"/>
+    <userTask id="alternativeVorschlagen" name="Alternative Modelle vorschlagen"/>
+    <exclusiveGateway id="kundeAkzeptiertAlternative" name="Kunde akzeptiert Alternative?"/>
+    <endEvent id="prozessBeendet" name="Prozess beendet"/>
+    
+    <sequenceFlow sourceRef="startEvent" targetRef="anfrageBearbeiten"/>
+    <sequenceFlow sourceRef="anfrageBearbeiten" targetRef="autoInAusstellungGateway"/>
+    <sequenceFlow sourceRef="autoInAusstellungGateway" targetRef="terminPruefen" name="Ja"/>
+    <sequenceFlow sourceRef="terminPruefen" targetRef="einladungErstellen"/>
+    <sequenceFlow sourceRef="einladungErstellen" targetRef="einladungSenden"/>
+    <sequenceFlow sourceRef="einladungSenden" targetRef="terminAkzeptiert"/>
+    
+    <sequenceFlow sourceRef="autoInAusstellungGateway" targetRef="partnerAutohaeuserAbfragen" name="Nein"/>
+    <sequenceFlow sourceRef="partnerAutohaeuserAbfragen" targetRef="partnerAutohausGefunden"/>
+    <sequenceFlow sourceRef="partnerAutohausGefunden" targetRef="termineVonPartner" name="Ja"/>
+    <sequenceFlow sourceRef="termineVonPartner" targetRef="adresseUndTermineAktualisieren"/>
+    <sequenceFlow sourceRef="adresseUndTermineAktualisieren" targetRef="listeAnKundenSenden"/>
+    <sequenceFlow sourceRef="listeAnKundenSenden" targetRef="entfernungAkzeptabel"/>
+    <sequenceFlow sourceRef="entfernungAkzeptabel" targetRef="terminVereinbaren" name="Ja"/>
+    <sequenceFlow sourceRef="terminVereinbaren" targetRef="terminGeblockt"/>
+    
+    <sequenceFlow sourceRef="entfernungAkzeptabel" targetRef="alternativeModelleRecherchieren" name="Nein"/>
+    <sequenceFlow sourceRef="alternativeModelleRecherchieren" targetRef="alternativeVorschlagen"/>
+    <sequenceFlow sourceRef="alternativeVorschlagen" targetRef="kundeAkzeptiertAlternative"/>
+    <sequenceFlow sourceRef="kundeAkzeptiertAlternative" targetRef="prozessBeendet" name="Nein"/>
+    <sequenceFlow sourceRef="kundeAkzeptiertAlternative" targetRef="terminPruefen" name="Ja"/>
+  </process>
+</definitions>
