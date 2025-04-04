@@ -1,0 +1,10 @@
+# Only for local development!
+spring.jpa.hibernate.ddl-auto=update
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/m320
+spring.datasource.username=postgres
+spring.datasource.password=123456
+spring.datasource.name=m320
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.globally_quoted_identifiers=true
+

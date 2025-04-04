@@ -1,0 +1,13 @@
+/m346-gitlab
+*/**/*.env*
+!*/**/*.env.example
+*/**/.terraform*
+*/**/terraform.tfstate*
+
+*/**/node_modules
+*/**/.idea
+*/**/.iml
+*/**/dist
+*/**/build
+*/**/.next
+*/**/target

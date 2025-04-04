@@ -1,0 +1,43 @@
+# Symmetric Encryption
+
+- ROT13 = 13 Rotationen
+
+## Aufgaben (+1)
+
+1. *CryptTool installieren*
+
+2. **Rotationschiffre:**
+	- GHU DQJULII HUIROJW CXU WHHCHLW GLH ZXHUIHO VLQG JHIDOOHQ LFK NDP VDK XQG VLHJWH WHLOH XQG KHUUVFKH
+	- DER ANGRIFF ERFOLGT ZUR TEEZEIT DIE WUERFEL SIND GEFALLEN ICH KAM SAH UND SIEGTE TEILE UND HERRSCHE
+	-  -> 3 (<-23)
+
+3. **Vigenèreverschlüsselung:**
+	- 3.1
+		- Wort: **BEEF**
+		- Key: **AFFE**
+		- Vigenèrechiffre: ****
+	- 3.2
+		- Vigenèrechiffre: **WRKXQT**
+		- Key: **SECRET**
+		- Wort: ****
+
+4. **Vigenèrecodeanalyse:**
+
+	- USP JHYRH ZZB GTV CJ WQK OCLGQVFQK GAYKGVFGX NS ISBVB MYBC MWCC 
+NS JOEVB GTV KRQFV AGK XCUSP VFLVBLLBE ESSEILUBCLBXZU 
+SENSWFGVRCES SER CZBCE ILUOLBPYISL CCSZG VZJ 
+
+	- DER STAAT BIN ICH ES IST AEUSSERST SCHWIERIG ZU REDEN OHNE VIEL 
+ZU SAGEN ICH MACHE MIT JEDER ERNENNUNG NEUNUNDNEUNZIG 
+UNZUFRIEDENE UND EINEN UNDANKBAREN LOUIS XIV
+
+5. **XOR-Stromchiffre:**
+
+	|||
+	|---|---|
+	|4711|0001 0010 0110 0111|
+	|Schlüssel|1000 1101 1000 1101|
+	|Chiffre|**1001 1111 1110 1010**|
+
+6. **AES (Advanced Encryption Standard):** -
+7. **Wie sicher ist mein Passwort?** -

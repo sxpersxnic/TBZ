@@ -1,5 +1,0 @@
-/m346-gitlab
-*/**/*.env*
-!*/**/*.env.example
-*/**/.terraform*
-*/**/terraform.tfstate*

@@ -1,0 +1,34 @@
+
+-- SYSTEM --
+
+Hostname: <name>HP
+
+Public IP Adress (Class C): 194.209.11.12
+
+LAN IP Adress (Class B): 172.20.170.84
+
+OS version: 5.15.133.1-microsoft-standard-WSL2
+
+-- COMPONENTS --
+
+CPU:
+Model:  Intel(R) Core(TM) i7-7600U CPU @ 2.80GHz | Cores: 4
+
+RAM:
+Total: 7.7Gi | Used: 1.1Gi
+
+SSD:
+Available: 477G | Used: 361G / 76% | Free: 117G
+
+Filesystem (total storage):
+Total: 2.0T | Used: 725G / 38% | Free: 1.2T
+
+-- TIME --
+
+System time: Fri Apr 12 11:43:52 CEST 2024
+Uptime:  up 3 hours, 40 minutes
+Running since: 2024-04-12 08:03:32
+
+====================PROCESS-FINISHED-SUCCESSFULLY====================
+
+

@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Chakra Petch";
+}
+
+.header-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filler {
+    height: 20px;
+    background-color: #f3f3f3;
+}
+
+.top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 80px;
+    width: 100vw;
+    background-color: #E54B4B;
+}
+
+.logo-ctn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 200px;
+}
+
+.logo-link {
+    text-decoration: none;
+    height: 70px;
+    width: 300px;
+    z-index: 12;
+}
+.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 120px;
+    width: auto;
+    z-index: 11;
+}
+
+.sub-nav {
+    display: flex;
+    align-items: center;
+    background-color: #f3f3f3;
+    height: 60px;
+    padding: 0 20px;
+}
+
+.bar-ctn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-right: 20px;
+
+}
+
+.bar-ctn:hover {
+    cursor: pointer;
+}
+.nav {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.tp-br-ul-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.tp-br-ul-wrapper::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.tp-br-ul-wrapper {
+    -ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */
+    scrollbar-width: none;  /* Hide scrollbar for Firefox */
+}
+
+.tp-br-ul {
+    display: flex;
+    list-style: none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.tp-br-li {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 14px;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.tp-br-li:hover {
+    background-color: #909090;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-link {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #000000;
+    text-decoration: none;
+    height: 100%;
+    transition: color 0.2s;
+}
+
+.header-link:hover {
+    color: #333;
+}
+
+.bar1, .bar2, .bar3 {
+
+    width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
+    border-radius: 5px;
+    transition: 0.4s;
+}
+  
+.change .bar1 {
+  
+    transform: translate(0, 11px) rotate(-45deg);
+  
+}
+  
+.change .bar2 {
+  
+    opacity: 0;
+    
+}
+  
+.change .bar3 {
+  
+    transform: translate(0, -11px) rotate(45deg);
+  
+}
+

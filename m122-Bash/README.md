@@ -1,4 +1,4 @@
-# Scripts 
+# Scripts
 
 *whole page of tutorial:*
 

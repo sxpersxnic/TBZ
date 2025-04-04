@@ -1,0 +1,6 @@
+alpha1:1alpha1:alp1ha
+beta2:2beta:be2ta
+gamma3:3gamma:gam3ma
+obelix:belixo:xobeli
+asterix:sterixa:xasteri
+idefix:defixi:ixidef
