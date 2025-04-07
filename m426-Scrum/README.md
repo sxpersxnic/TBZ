@@ -13,11 +13,13 @@ With simple posts, you can now let your family, friends and everyone in the worl
 Our App comes with many easy to use features, that make your experience even better! **Check them out:**
 
 #### Create
+
 Blog about your life with simple posts. In the Navigationbar, click on the *Plus-Icon* to get to the *Createform*. Enter your title to catch viewers and tell them your story in the body of your post:
 
-![Screenshot of the Createform](/m426-Scrum/public/doc/CREATEFORM.png) 
+![Screenshot of the Createform](/m426-Scrum/public/doc/CREATEFORM.png)
 
 #### Edit
+
 You forgot to mention something in your post? Nothing to worry about!
 
 You can now edit your posts by simply navigating to your profile. Click on the *User-Icon* to get to your profile. Now to the right of the screen you see a *Pencil-Icon*. By clicking the *Pencil-Icon* you get to the *Editform*. Now you can savely edit your post!
@@ -37,7 +39,7 @@ You can view posts in many different ways:
    If you rather want to view the        posts of a specific user, click on    there profile picture or username     to get to their profile. There you    will find all posts of that user
 
    ![Screenshot of the Profilepage](/m426-Scrum/public/doc/PROFILEPAGE.png)
-   
+
 3. Post view
    To actually read the content of a     post, click on the title of the       post preview, it does not matter      from where you do this. This          action will take you to the post,     where you can read everything         about it!
 
@@ -53,24 +55,24 @@ By default, the posts on the *Homepage*, are sorted by the creation date of the 
 
 If you know only the username of a person or the title of a post you would like to read. Enter the term you search for in the *Searchfield* on the *Homepage*.
 
-![Screenshot of the Searchfield](/m426-Scrum/public/doc/SEARCH.png) 
+![Screenshot of the Searchfield](/m426-Scrum/public/doc/SEARCH.png)
 
 #### Delete
 
 When you have posts you would not like to be on your profile, delete them and nobody will remember them.
 
-Navigate to your profile by clicking the *User-Icon* in the Navigationbar. 
+Navigate to your profile by clicking the *User-Icon* in the Navigationbar.
 On your profile, select the *Trash-Icon*, on the right of the post.
 
 ![Screenshot of the Delete feature](/m426-Scrum/public/doc/DELETE.png)
 
 ## Get Started with Vercel
 
-1. Clone the Repository 
-  
-  ```sh
-    git clone https://github.com/sxpersxnic/m426-ph-studio.git
-  ```
+1. Clone the Repository
+
+```sh
+   git clone https://github.com/sxpersxnic/m426-ph-studio.git
+```
 
 2. Set the Environment variables according to `.env.example`
 3. Create an account on [Vercel](https://vercel.com/login)
@@ -164,4 +166,3 @@ During development, Vercel provides tools for real-time collaboration on your pr
 ## License
 
 This repository is licensed with the [MIT](LICENSE) license.
-
