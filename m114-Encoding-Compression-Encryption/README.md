@@ -1,17 +1,9 @@
 # Module 114 - Encoding, Compression, Encryption
 
-## A
+## Content
 
-- [Link](./A-Daten-codieren)
-
-## B
-
-- [Link](./B-Daten-komprimieren)
-
-## C
-
-- [Link](./C-Grundlagen-Kryptografie)
-
-## D
-
-- [Link](./D-Gesicherte-Datenübertragung)
+- [Encoding](./1-Encoding)
+- [Compression](./2-Compression)
+- [Multi-Media](./3-Multi-Media)
+- [Images](./4-Images)
+- [Cryptography](./5-Cryptography)
