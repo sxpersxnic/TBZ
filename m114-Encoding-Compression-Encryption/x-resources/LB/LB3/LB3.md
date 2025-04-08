@@ -46,7 +46,7 @@
   4. Shared keys (*A*, *B*) werden ausgetauscht.
   5. Gemeinsamer *Session key* wird generiert -> Alice: *B*^*a* mod *p* und Bob: *A*^*b* mod *p*.
 
-  **Illustration:** ![Vigenére](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/diffie-hellman.jpg)
+  - **Illustration:** ![Vigenére](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/diffie-hellman.jpg)
 
 - **RSA:**
   - **Ablauf und Formeln:**
