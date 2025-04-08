@@ -22,7 +22,7 @@
     - **Kasiski-Methode:** Suche nach wiederkehrenden Sequenzen im Chiffretext, um die Schlüsselperiodenlänge L zu schätzen.
     - **Friedman-Test:** Berechne den Index of Coincidence *(IC): IC = Σ [fᵢ(fᵢ – 1)]⁄[N(N – 1)]*   (*f_i* = Häufigkeit des i-ten Buchstabens, *N* = Gesamtlänge)
     - Spaltenweise Häufigkeitsanalyse: Jede "Spalte" (alle Zeichen, die mit demselben *k_i* verschlüsselt wurden) wird separat analysiert,  um *k_i* zu rekonstruieren.
-  - **Illustration:** ![Vigenére](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/vigenere.jpg)
+  - ![Vigenére Illustration](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/vigenere.jpg)
 - **XOR (Stromchiffre):**
   - **Formel:** *c* = *m* XOR *k*
   - **Entschlüsselung:** *m* = *c* XOR *k*
@@ -46,7 +46,7 @@
   4. Shared keys (*A*, *B*) werden ausgetauscht.
   5. Gemeinsamer *Session key* wird generiert -> Alice: *B*^*a* mod *p* und Bob: *A*^*b* mod *p*.
 
-  - **Illustration:** ![Vigenére](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/diffie-hellman.jpg)
+  ![Diffie Hellman Illustration](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/diffie-hellman.jpg)
 
 - **RSA:**
   - **Ablauf und Formeln:**
