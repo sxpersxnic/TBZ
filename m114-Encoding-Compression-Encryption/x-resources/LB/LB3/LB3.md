@@ -48,7 +48,7 @@
 
   ![Diffie Hellman Illustration](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/diffie-hellman.jpg)
 
-- **RSA:**
+- **RSA (Rivest, Shamir, Adelmann):**
   - **Ablauf und Formeln:**
     1. Wähle zwei grosse Primzahlen *p* und *q*.
     2. Berechne: *n* = *p* * *q*
@@ -64,6 +64,7 @@
 
 - **SYM:**
   - **Vorteile:**
+    - Speed & Efficiency
   - **Nachteile:**
     - **Schlüsselanzahl:**
       - **Formel:** *S = n(n - 1) / 2* (bei *n* Teilnehmern)
@@ -74,19 +75,31 @@
 - **ASYM:**
   - **Vorteile:**
     - P-Key für Verschlüsselung und S-Key für Entschlüsselung.
+    - Digitale Signaturen & Authentifizierung
   - **Nachteile:**
     - Bei verfälschtem public key können Dritte mitlesen.
 
 ---
 
 - **Kryptoanalyse (Histogramm, Brute-Force):**
+  - Häufigkeitsanalyse:
+    - Buchstaben wie z.B. "E" kommen häufiger vor.
 
 - **Hybride Verfahren (RSA/AES):**
+Symmetrische Verschlüsselungsverfahren haben das bereits besprochene Problem des
+Schlüsseltauschs und Schlüsselmanagements, das bei den asymmetrischen Verfahren so
+nicht besteht. Allerdings benötigen symmetrische Verfahren weniger Rechenzeit zur
+Erstellung des Chiffretexts als rein asymmetrische Verfahren. Darum liegt es auf der Hand,
+dass in einem hybriden Verfahren die Vorteile der beiden Verfahren genutzt werden:
+- Asymmetrisches oder Public-Key-Verfahren für Schlüsselmanagement, z.B. RSA
+- Symmetrisches Verfahren zum Versenden der eigentlichen Nachricht, z.B. RC4,
+DES, AES
 
 - **Digitale Signatur, Hashwert, Hashverfahren:**
   - **Digitale Signatur:**
     - Erzeugung: *s* = *H(m)^d* mod *n*
     - Überprüfung: *m'* = *s^e* mod *n*, vergleiche *m'* mit *H(m)* (Dabei ist *H* eine Hashfunktion, *m* die Nachricht, *d* der private Schlüssel und *e* der öffentliche Schlüssel.)
+    - ![Digitale Signatur](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/digital-signature.jpg)
   - **Hashfunktionen:**
     - Allgemeine Funktion: *H: {0,1}\* -> {0,1}^n*
     - Eigenschaften:
@@ -94,7 +107,11 @@
       - Kollisionsresistenz: Es sollte sehr unwahrscheinlich sein, zwei unterschiedliche *m* und *m'* mit *H(m) = H(m')* zu finden.
 
 - **PKI, X509, Web-of-Trust, Zertifikate, Zertifizierungsstellen, S-MIME vs. OpenPGP:**
+![PKI](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/pki.jpg)
+![S-MIME](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/smime.jpg)
 
 - **Sichere Webseite; HTTP vs. HTTPS (TLS/SSL, Zertifikatsüberprüfung):**
+![TLS](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/tls.jpg)
 
 - **Unterschiedliche Strenge der CA's bei Vergabe von Zertifikaten:**
+![Certificates](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/cert.jpg)
