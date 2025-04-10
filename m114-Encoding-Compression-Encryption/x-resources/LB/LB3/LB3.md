@@ -99,7 +99,7 @@ DES, AES
   - **Digitale Signatur:**
     - Erzeugung: *s* = *H(m)^d* mod *n*
     - Überprüfung: *m'* = *s^e* mod *n*, vergleiche *m'* mit *H(m)* (Dabei ist *H* eine Hashfunktion, *m* die Nachricht, *d* der private Schlüssel und *e* der öffentliche Schlüssel.)
-    - ![Digitale Signatur](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/digital-signature.jpg)
+    - ![Digitale Signatur](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/digital-signature.png)
   - **Hashfunktionen:**
     - Allgemeine Funktion: *H: {0,1}\* -> {0,1}^n*
     - Eigenschaften:
@@ -107,11 +107,11 @@ DES, AES
       - Kollisionsresistenz: Es sollte sehr unwahrscheinlich sein, zwei unterschiedliche *m* und *m'* mit *H(m) = H(m')* zu finden.
 
 - **PKI, X509, Web-of-Trust, Zertifikate, Zertifizierungsstellen, S-MIME vs. OpenPGP:**
-![PKI](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/pki.jpg)
-![S-MIME](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/smime.jpg)
+![PKI](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/pki.png)
+![S-MIME](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/smime.png)
 
 - **Sichere Webseite; HTTP vs. HTTPS (TLS/SSL, Zertifikatsüberprüfung):**
-![TLS](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/tls.jpg)
+![TLS](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/tls.png)
 
 - **Unterschiedliche Strenge der CA's bei Vergabe von Zertifikaten:**
-![Certificates](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/cert.jpg)
+![Certificates](https://raw.githubusercontent.com/sxperlinx/TBZ/main/m114-Encoding-Compression-Encryption/x-resources/LB/LB3/cert.png)
