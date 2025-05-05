@@ -1,0 +1,29 @@
+services:
+  busybox1:
+    image: busybox
+    container_name: busybox1
+    command: sleep 1d
+  busybox2:
+    image: busybox
+    container_name: busybox2
+    command: sleep 1d
+  busybox3:
+    image: busybox
+    container_name: busybox3
+    command: sleep 1d
+    networks:
+      - tbz
+  busybox4:
+    image: busybox
+    container_name: busybox4
+    command: sleep 1d
+    networks:
+      - tbz
+
+networks:
+  tbz:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16
