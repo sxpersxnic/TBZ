@@ -12,18 +12,25 @@
 
 ## B) Dockerfile II
 
+### Approach I
+
 - **DB:**
   - ![Telnet](/m347-Container/x-resources/02/db-telnet.png)
   - [Dockerfile](./.docker/db.Dockerfile)
   - Commands:
     - `docker build -f .docker/db.Dockerfile -t <username>/m347:kn02b-db .`
-    - `docker run -d --name kn02b-db -p 3307:3306 <username>/m347:kn02b-db`
+    - `docker run -d --name kn02b-db -p 3306:3306 <username>/m347:kn02b-db`
 - **Web:**
   - ![Screenshot of site info.php](/m347-Container/x-resources/02/info-php.png)
   - ![Screenshot of site db.php](/m347-Container/x-resources/02/db-php.png)
   - **Commands:**
     - `docker build -f .docker/web.Dockerfile -t <username>/m347:kn02b-web .`
-    - `docker run -d --name kn02b-web -p 80:80 <username>/m347:kn02b-web`
+    - `docker run -d --name kn02b-web --link kn02b-db:kn02b-db -p 80:80 <username>/m347:kn02b-web`
   - [db.php](./php/db.php)
 
-In my approach i used docker compose, to provide a network for the connection between web and db. And because only the command `docker compose up` is needed to build and run the services.
+### Approach II
+
+> I prefer to work with docker compose, since it's faster to write, easier to execute and makes it easier to maintain. Especially when working with networks and/or volumes.
+
+- [Docker compose](./docker-compose.yml)
+- **Command:** `docker compose up`
