@@ -8,7 +8,7 @@
 
 ## B) Docker CLI (50%)
 
-**1.** Überprüfen Sie die Docker-Version. Welchen Befehl müssen Sie dafür verwenden?
+- **1.** Docker Version
 
   ```sh
   docker -v
@@ -50,77 +50,67 @@
         GitCommit:        de40ad0
   ```
 
-**2.** Suchen Sie nach de, offiziellen **ubuntu** und **nginx** Docker-Image auf Docker Hub mit dem Befehl `$ docker search`.
+- **2.** Docker search
 
-- **Ubuntu:**
+  - **Ubuntu:**
 
-  ```sh
-  docker search ubuntu
-  ```
+    ```sh
+    docker search ubuntu
+    ```
 
-- **NGINX:**
+  - **NGINX:**
 
-  ```sh
-  docker search nginx
-  ```
+    ```sh
+    docker search nginx
+    ```
 
-**3.** In Teil A mussten Sie den Befehl `docker run -d -p 80:80 docker/getting-started` ausführen. Erklären Sie die verschiedenen Parameter.
+- **3.** Erklärung des Befehls `docker run -d -p 80:80 docker/getting-started`:
 
-- `-d`: Steht für *detach*. Bedeutet das die Ausführung des Befehls bloss die ID des Containers ausgibt und den Container im Hintergrund läuft.
-- `-p 80:80`: Steht für *--publish*. Mappt den Port **80**. des Hosts auf Port **80** im Container.
-- `docker/getting-started`: Definiert das Image auf dem der neue Container basiert. In diesem Beispiel ist `docker` der Publisher des Images und `getting-started` ist das Image selbst.
+  - `-d`: Steht für *detach*. Bedeutet das die Ausführung des Befehls bloss die ID des Containers ausgibt und den Container im Hintergrund läuft.
+  - `-p 80:80`: Steht für *--publish*. Mappt den Port **80**. des Hosts auf Port **80** im Container.
+  - `docker/getting-started`: Definiert das Image auf dem der neue Container basiert. In diesem Beispiel ist `docker` der Publisher des Images und `getting-started` ist das Image selbst.
 
-**4.** Mit dem **nginx** Image verfahren Sie wie folgt. Wir zeigen, dass der Befehl `docker run`, das gleiche ist wie die drei Befehle `docker pull`, `docker create` und `docker start` hintereinander ausgeführt.
+- **4.** NGINX Container
 
-  1. Laden Sie das Image herunter mit dem Befehl `docker pull`
-  2. Erstellen Sie ein Container mit dem Befehl `docker create`. Exponieren Sie den Port 8081 mit dem Mapping auf den Port 80, so dass Sie anschliessend die URL [localhost:8081](http://localhost:8081)
-  3. Starten Sie das Image mit dem Befehl `docker start`. Evtl. müssen Sie einen laufenden Container zuerst stoppen, weil der Port bereits verwendet wird.
-  4. Erstellen Sie einen **Screenshot** der Standard-Seite von nginx mit der URL sichtbar.
+  - **Commands:**
 
-- **Commands:**
+    1. `docker pull nginx:latest` - Pulls NGINX Image from Docker Hub.
+    2. `docker create --name kn01-nginx -p 8081:80 nginx:latest` - Creates a Container named 'kn01-nginx', which maps the localhost port 8081 to port 80 in the container and uses the image 'nginx:latest' -> :latest is the tag for the images latest version.
+    3. `docker start kn01-nginx` - Starts the previously created container 'kn01-nginx'.
 
-  ```sh
-  # 1. Pulls NGINX Image from Docker Hub.
-  docker pull nginx:latest
-  # 2. Creates a Container named 'kn01-nginx', which maps the localhost port 8081 to port 80 in the container and uses the image 'nginx:latest' -> :latest is the tag for the images latest version.
-  docker create --name kn01-nginx -p 8081:80 nginx:latest
-  # 3. Starts the previously created container 'kn01-nginx'.
-  docker start kn01-nginx
-  ```
+  - **Screenshot:**
 
-- **Screenshot:**
+    ![NGINX standard page](/m347-Container/x-resources/01/nginx.png)
 
-  ![NGINX standard page](/m347-Container/x-resources/01/nginx.png)
+- **5.** `-d` (detached) vs. `-it` (interactive)
 
-**5.** Mit dem **ubuntu** Image verfahren Sie wie folgt. Wir zeigen, dass nicht jedes Image im Hintergrund ausgeführt werden kann.
+  - `docker run -d --name kn01-ubuntu-bg ubuntu`: Der Container wird im Hintergrund gestartet. Docker lädt das Image automatisch herunter, falls es nicht lokal vorhanden ist. Da Ubuntu ohne laufenden Prozess sofort beendet, wird der Container direkt in den Status „Exited“ versetzt.
+  - `docker run -it --name kn01-ubuntu-it ubuntu:latest`: Mit `-it` startet der Container interaktiv und bindet das Terminal (`tty`) an eine Shell. Man landet direkt in der Bash des Containers. Solange die Shell aktiv ist, läuft der Container.
 
-  1. Erstellen und starten Sie einen Container mit dem Befehl `docker run -d`. **Kommentieren** Sie was mit dem Container geschieht in 3-5 Sätzen. Wurde das Image automatisch heruntergeladen? Konnte es starten?
-  2. Erstellen und starten Sie einen Container mit dem Befehl `docker run -it`. **Kommentieren** Sie was nun geschieht in 3-5 Sätzen.
-
-- `docker run -d --name kn01-ubuntu-bg ubuntu`: Der Container wird im Hintergrund gestartet. Docker lädt das Image automatisch herunter, falls es nicht lokal vorhanden ist. Da Ubuntu ohne laufenden Prozess sofort beendet, wird der Container direkt in den Status „Exited“ versetzt.
-- `docker run -it --name kn01-ubuntu-it ubuntu:latest`: Mit `-it` startet der Container interaktiv und bindet das Terminal (`tty`) an eine Shell. Man landet direkt in der Bash des Containers. Solange die Shell aktiv ist, läuft der Container.
-
-**6.** Stellen Sie sicher, dass Ihr **nginx**-Container **bereits läuft**. Öffnen Sie nun nachträglich eine interaktive Shell. Der Unterschied zu vorher ist, dass Sie nicht den Container mit interactiver Shell starten, sondern eine Shell eines laufenden Containers öffnen. Der Befehl is `docker exec -t kn01-nginx /bin/bash`
-
-  1. Führen Sie den Befehl `service nginx status` aus. Erstellen Sie einen **Screenshot** des Befehls und des Resultats. Sie sehen, dass Sie sich innerhalb des Docker-Images bewegen können. ![Ausgeführter command service nginx status mit Resultat](/m347-Container/x-resources/01/service-nginx-status.png)
-  2. Beenden Sie die interaktive Shell im Docker-Container (mit dem Befehl `exit`). Beachten Sie, dass das Image automatisch wieder beendet.
-
-**7.** Überprüfen Sie den Status des Container. Erstellen Sie einen **Screenshot** des Befehls und des Resultats.
-
-![Docker container status](/m347-Container/x-resources/01/docker-ps-a.png)
-
-**8.** Stoppen Sie nun noch den Container des nginx Images mit dem entsprechenden Docker-Befehl
-
-- **Command:** `docker stop kn01-nginx`
-
-**9.** Entfernen Sie alle Container mit dem entsprechenden Docker-Befehl.
-
-- **Command:** `docker rm $(docker ps -aq)`
-
-**10.** Entfernen Sie die beiden Images von Ihrer lokalen Umgebung mit dem entsprechenden Docker-Befehl.
-
-- **Command:** `docker rmi ubuntu:latest nginx:latest`
+- **6.** Connect to a container's shell
+  > **Screenshot:**
+  >
+  > ![Ausgeführter command service nginx status mit Resultat](/m347-Container/x-resources/01/service-nginx-status.png)
+- **7.** List containers
+  > **Screenshot:**
+  >
+  > ![Docker container status](/m347-Container/x-resources/01/docker-ps-a.png)
+- **8. Command:** `docker stop kn01-nginx`
+- **9. Command:** `docker rm $(docker ps -aq)`
+- **10. Command:** `docker rmi ubuntu:latest nginx:latest`
 
 ## C) Registry und Repository (10%)
 
+![Private empty repository on Docker Hub](/m347-Container/x-resources/01/docker-hub.png)
+
 ## D) Private Repository (20%)
+
+- **Commands:**
+  1. `docker login -u <username> --password-stdin` - Login to Docker
+  2. `docker pull mariadb:latest` - Pulls the latest mariadb image
+  3. `docker tag mariadb:latest <username>/<repository>:mariadb` - Creates a tag from mariadb:latest
+  4. `docker push <username>/<repository>:mariadb` - Pushes the image to the registry '<repository>'
+
+- > **Screenshot:**
+  >
+  > ![Private Repository on Docker Hub](/m347-Container/x-resources/01/docker-hub-repo.png)

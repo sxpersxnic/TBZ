@@ -40,3 +40,15 @@ docker rm $(docker ps -aq) # Removes all containers
 docker rmi ubuntu:latest nginx:latest # Removes the specified images
 # OR
 docker rmi $(docker images -q) # Removes all images
+
+# D) Private Repository
+docker_hub_username=""
+docker login -u ${docker_hub_username} --password-stdin # Logs into Docker Hub with the provided username and password
+
+docker pull nginx:latest # Pulls the latest NGINX image
+docker tag nginx:latest ${docker_hub_username}/m347:nginx # Tags the NGINX image with the repository m347
+docker push ${docker_hub_username}/m347:nginx # Pushes the tagged image to Docker Hub
+
+docker pull mariadb:latest # Pulls the latest MariaDB image
+docker tag mariadb:latest ${docker_hub_username}/m347:mariadb # Tags the MariaDB image with the repository m347
+docker push ${docker_hub_username}/m347:mariadb # Pushes the tagged image to Docker Hub
