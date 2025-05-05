@@ -1,0 +1,31 @@
+services:
+  web:
+    container_name: kn02b-web
+    build:
+      context: .
+      dockerfile: .docker/web.Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    networks:
+      - kn02b-net
+  db:
+    container_name: kn02b-db
+    build:
+      context: .
+      dockerfile: .docker/db.Dockerfile
+    ports:
+      - "3306:3306"
+    networks:
+      - kn02b-net
+    volumes:
+      - db_data:/var/lib/mysql
+
+networks:
+  kn02b-net:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local

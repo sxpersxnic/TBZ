@@ -5,7 +5,7 @@ FROM nginx:latest
 WORKDIR /usr/share/nginx/html
 
 # COPY copies the files from the host to the container
-COPY src .
+COPY html .
 
 # EXPOSE makes the container's port available to the outside
 EXPOSE 80
