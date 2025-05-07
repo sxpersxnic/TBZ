@@ -1,4 +1,4 @@
-# ![Logo TBZ](/x-resources/logo.svg)
+# [![Logo TBZ](/x-resources/logo.svg)](https://tbz.ch)
 
 ## Gitlab
 
