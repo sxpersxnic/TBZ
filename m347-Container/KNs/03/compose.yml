@@ -14,20 +14,19 @@ services:
     container_name: busybox3
     command: sleep 1d
     networks:
-      - tbz
+      tbz:
+        ipv4_address: 172.18.0.2
   busybox4:
     image: busybox
     container_name: busybox4
     command: sleep 1d
     networks:
-      - tbz
+      tbz:
+        ipv4_address: 172.18.0.3
 
 networks:
   tbz:
     driver: bridge
     ipam:
-      driver: default
       config:
-        - subnet: 172.10.0.0/16
-        - ip_range: 172.10.5.0/24
-        - gateway: 172.10.5.254
+        - subnet: 172.18.0.0/16
