@@ -1,6 +1,6 @@
 <?php
         //database
-        $servername = "m347-kn04a-db";
+        $servername = "kn04a-db";
         $username = "root";
         $password = "tbzPass123";
         $dbname = "mysql";

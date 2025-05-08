@@ -26,7 +26,89 @@ packages:
   - lsb-release
   - unattended-upgrades
 final_message: "The system is finally up, after $UPTIME seconds"
-write_files: # Erweitern Sie diesen Teil
+write_files:
+  - path: /home/ubuntu/.docker/web.Dockerfile
+    permissions: '0644'
+    content: |
+      FROM php:8.3.20-apache
+      WORKDIR /var/www/html
+      RUN docker-php-ext-install mysqli
+      COPY /home/ubuntu/php .
+      EXPOSE 80
+  - path: /home/ubuntu/php/info.php
+    permissions: '0644'
+    content: |
+      <?php
+      phpinfo();
+      ?>
+  - path: /home/ubuntu/php/db.php
+    permissions: '0644'
+    content: |
+      <?php
+        //database
+        $servername = "kn04a-db";
+        $username = "root";
+        $password = "tbzPass123";
+        $dbname = "mysql";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "select Host, User from mysql.user;";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()){
+                echo($row["Host"] . " / " . $row["User"] . "<br />");
+        }
+        //var_dump($result);
+      ?>
+  - path: /home/ubuntu/docker-compose.yml
+    permissions: '0644'
+    content: |
+      name: kn04a
+
+      services:
+        web:
+          container_name: kn04a-web
+          build:
+            context: /home/ubuntu
+            dockerfile: .docker/web.Dockerfile
+          restart: always
+          ports:
+            - 80:80
+          depends_on:
+            - db
+          networks:
+            - backbone
+        db:
+          container_name: kn04a-db
+          image: mariadb:latest
+          environment:
+            - MARIADB_ROOT_PASSWORD=tbzPass123
+          ports:
+            - 3306:3306
+          networks:
+            - backbone
+          volumes:
+            - db_data:/var/lib/mysql
+
+      networks:
+        backbone:
+          driver: bridge
+          ipam:
+            config:
+              - subnet: 172.10.0.0/16
+                ip_range: 172.10.5.0/24
+                gateway: 172.10.5.254
+
+      volumes:
+        db_data:
+          driver: local
+
+
 runcmd:
   - mkdir -p /etc/apt/keyrings
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -36,4 +118,4 @@ runcmd:
   - systemctl enable docker
   - systemctl start docker
   # Erwetiern Sie hier die Befehle!
-
+  - docker compose -f /home/ubuntu/docker-compose.yml up -d

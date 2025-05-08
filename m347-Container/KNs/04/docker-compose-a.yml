@@ -1,8 +1,8 @@
-name: m347-kn04a
+name: kn04a
 
 services:
   web:
-    container_name: m347-kn04a-web
+    container_name: kn04a-web
     build:
       context: .
       dockerfile: .docker/web.Dockerfile
@@ -12,22 +12,27 @@ services:
     depends_on:
       - db
     networks:
-      - kn04a-net
+      - backbone
   db:
-    container_name: m347-kn04a-db
+    container_name: kn04a-db
     image: mariadb:latest
     environment:
       - MARIADB_ROOT_PASSWORD=tbzPass123
     ports:
       - 3306:3306
     networks:
-      - kn04a-net
+      - backbone
     volumes:
       - db_data:/var/lib/mysql
 
 networks:
-  kn04a-net:
+  backbone:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.10.0.0/16
+          ip_range: 172.10.5.0/24
+          gateway: 172.10.5.254
 
 volumes:
   db_data:
