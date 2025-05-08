@@ -1,0 +1,29 @@
+name: kn06
+
+services:
+  cluster:
+    image: ubuntu:latest
+    container_name: kn06-cluster
+    command: sleep 1d
+    restart: always
+  node-1:
+    image: nginx:latest
+    container_name: kn06-node-1
+    ports:
+      - 8080:80
+    depends_on:
+      - cluster
+  node-2:
+    image: nginx:latest
+    container_name: kn06-node-2
+    ports:
+      - 8081:80
+    depends_on:
+      - cluster
+  node-3:
+    image: nginx:latest
+    container_name: kn06-node-3
+    ports: 
+      - 8082:80
+    depends_on:
+      - cluster
