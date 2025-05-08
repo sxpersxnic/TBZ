@@ -1,3 +1,5 @@
+name: kn03
+
 services:
   busybox1:
     image: busybox
@@ -26,4 +28,6 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 172.18.0.0/16
+        - subnet: 172.10.0.0/16
+        - ip_range: 172.10.5.0/24
+        - gateway: 172.10.5.254
