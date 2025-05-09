@@ -25,7 +25,7 @@ var rsaTestData = []struct {
 		"the quick brown fox jumps over the lazy dog.",
 	},
 	{
-		"Encrypt full sentence from rsacipher.go main function",
+		"Encrypt full sentence",
 		"I think RSA is really great",
 	},
 }
