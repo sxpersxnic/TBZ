@@ -2,7 +2,7 @@
 
 ## A) Installation
 
-- Cloud-Init File: [here](/m165-NoSQL/aws/MongoDB/cloud-init.yml)
+- Cloud-Init File: [here](/m165-NoSQL/.aws/MongoDB/cloud-init.yml)
 
 - Screenshot von Compass: ![Screenshot von MongoDB Compass](/m165-NoSQL/x-resources/m/01/compass.png)
 
