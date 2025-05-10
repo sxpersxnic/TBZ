@@ -39,7 +39,6 @@ A `StatefulSet` manages _Pods_ with stable identity, persistence and orderd Star
 
 ## B - Demo Project
 
-
 ### Difference to A
 
 ### MongoUrl
