@@ -2,8 +2,8 @@
 
 > **Overview:**
 >
-> [A - Terms and Concepts](#a---terms-and-concepts)
-> [B - Demo Project](#b---demo-project)
+> - [A - Terms and Concepts](#a---terms-and-concepts)
+> - [B - Demo Project](#b---demo-project)
 
 ## A - Terms and Concepts
 
@@ -25,7 +25,7 @@
 
 > Services allow Clients to reach Pods over a static ip addresse (e.g. _Elastic IP by AWS_).
 
-### Which Porblem is solved by Ingress
+### Which Problem is solved by Ingress
 
 An **Ingress** is a Kubernetes-Object, which allows HTTP(S)-Routing on Application-Layer _(OSI Layer 7)_
 
@@ -39,27 +39,29 @@ A `StatefulSet` manages _Pods_ with stable identity, persistence and orderd Star
 
 ## B - Demo Project
 
-> [!NOTE]
->
-> - [Kubernetes Documentation](https://kubernetes.io/docs/home/)
-> - [Docker Hub](https://hub.docker.com)
 
-![Demo Project](https://gitlab.com/ch-tbz-it/Stud/m347/-/raw/main/Ressourcen/Images/demo_project.png)
+### Difference to A
 
-### Components to create
+### MongoUrl
 
-|Step|Components|Description|
-|----|----------|-----------|
-|1|[ConfigMap](https://gitlab.com/ch-tbz-it/Stud/m347/-/blob/main/Kubernetes/Demo%20Project/ConfigMap.md)|MongoDB Endpoint|
-|2|[Secret](https://gitlab.com/ch-tbz-it/Stud/m347/-/blob/main/Kubernetes/Demo%20Project/Secret.md)|MongoDB User and Password|
-|3|[Deployment & Service: MongoDB](https://gitlab.com/ch-tbz-it/Stud/m347/-/blob/main/Kubernetes/Demo%20Project/DeploymentAndServiceMongoDB.md)|MongoDB Application with Internal Service|
-|4|[Deployment & Service: WebApp](https://gitlab.com/ch-tbz-it/Stud/m347/-/blob/main/Kubernetes/Demo%20Project/DeploymentAndServiceWebApp.md)|WebApp with External Service|
+### `microk8s kubectl describe service webapp-service`
 
-#### Checklist
+![Node 1](../../x-resources/07/node-1-web.png)
 
-- [ ] ConfigMap
-- [ ] Secret
-- [ ] Deployment & Service: MongoDB
-- [ ] Deployment & Service: WebApp
+![Node 2](../../x-resources/07/node-2-web.png)
 
-### Installing K8s Config Files with `kubectl`
+### `microk8s kubectl describe service mongo-service`
+
+![Node 1](../../x-resources/07/node-1-mongo.png)
+
+![Node 2](../../x-resources/07/node-2-mongo.png)
+
+### Result
+
+To access the Webapp, I had to edit the security group's inbound rules to allow traffic on port 30100.
+
+![Node 1](../../x-resources/07/node-1-result.png)
+
+![Node 2](../../x-resources/07/node-2-result.png)
+
+### MongoDB Compass
