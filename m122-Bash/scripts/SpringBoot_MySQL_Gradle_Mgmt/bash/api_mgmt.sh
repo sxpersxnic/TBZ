@@ -15,7 +15,7 @@ RESET='\033[0m'
 BOLD='\033[1m'
 ITALIC='\033[3m'
 
-# Get user inputs
+# Gest user inputs
 echo -e -n "${WHITE}Enter pwd (absolute path): ${RESET}"; read PWD
 echo -e -n "${WHITE}Enter path to logs (absolute path): ${RESET}"; read LOG_FILE
 echo -e -n "${WHITE}Enter path to configuration file (absolute path): ${RESET}"; read CONF_FILE
@@ -23,7 +23,7 @@ echo -e -n "${WHITE}Enter path to database migration directory (absolute path): 
 echo -e -n "${WHITE}Enter host adress ${RESET}${PINK}(Default is 127.0.0.1)${RESET}${WHITE}: ${RESET}"; read HOST
 echo -e -n "${WHITE}Enter port on which spring boot application is runnig${RESET}${PINK}(Default is 8080)${RESET}${WHITE}: ${RESET}"; read SPRING_PORT
 
-# Validate inputs
+# Validates inputs
 for var in PWD LOG_FILE CONF_FILE MIGRATIONS_DIR; do
     if [ -z "${!var}" ]; then
         echo -e "${RED}${BOLD}Error: ${VAR} is not set!${RESET}"
@@ -31,22 +31,22 @@ for var in PWD LOG_FILE CONF_FILE MIGRATIONS_DIR; do
     fi
 done
 
-# Set default host if not provided
+# Sets default host if not provided
 if [ -z "${HOST}" ]; then
     echo -e "${YELLOW}${ITALIC}Setting host to: ${RESET}${PINK}127.0.0.1${RESET}"
     HOST="localhost"
 fi
 
-# Set default port if not provided
+# Sets default port if not provided
 if [ -z "${SPRING_PORT}" ]; then
     echo -e "${YELLOW}${ITALIC}Setting port to: ${RESET}${PINK}8080${RESET}"
     SPRING_PORT="8080"
 fi
 
-# Load configuration
+# Loads configuration
 source ${CONF_FILE}
 
-# Start MySQL server
+# Starts MySQL server
 echo -e "${YELLOW}${ITALIC}Starting MySQL server...${RESET}"
 sudo service mysql start
 if [ $? -ne 0 ]; then
@@ -54,11 +54,11 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-#Navigate to project dir
+#Navigates to project dir
 echo -e "${YELLOW}${ITALIC}Changing to directory: ${PWD}${RESET}"
 cd ${PWD}
 
-# Run database migrations
+# Runs database migrations
 if [ -n "${MIGRATIONS_DIR}" ]; then
     echo -e "${YELLOW}${ITALIC}Running database migrations...${RESET}"
     ./gradlew flywayMigrate -i
@@ -68,7 +68,7 @@ if [ -n "${MIGRATIONS_DIR}" ]; then
     fi
 fi
 
-# Run tests
+# Runs tests
 echo -e "${YELLOW}${ITALIC}Running tests...${RESET}"
 ./gradlew test
 if [ $? -ne 0 ]; then
@@ -76,21 +76,21 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Run Spring Boot application
+# Runs Spring Boot application
 echo -e "${YELLOW}${ITALIC}Running Spring Boot application...${RESET}"
 ./gradlew bootRun &
 
-# Get the process id of the last command run in the background
+# Gets the process id of the last command run in the background
 PID=$!
 
-# Wait for application to start
+# Waits for application to start
 sleep 10
 
-# Check application health
+# Checks application health
 echo -e "${YELLOW}${ITALIC}Checking application health...${RESET}"
 curl --fail http://${HOST}:${SPRING_PORT}/actuator/health || exit 1
 
-# Tail the logs
+# Tails the logs
 echo -e "${YELLOW}${ITALIC}Tailing logs...${RESET}"
 tail -f ${LOG_FILE}
 
