@@ -1,0 +1,70 @@
+name: kn08
+
+services:
+  frontend:
+    container_name: kn08-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - account
+      - buysell
+      - sendreceive
+  sendreceive:
+    container_name: kn08-send-receive
+    build:
+      context: ./send-receive
+      dockerfile: Dockerfile
+    ports:
+      - 8003:8003
+    depends_on:
+      - account
+  buysell:
+    container_name: kn08-buy-sell
+    build:
+      context: ./buy-sell
+      dockerfile: Dockerfile
+    ports:
+      - 8002:8002
+    depends_on:
+      - account
+  account:
+    container_name: kn08-account
+    build:
+      context: ./account
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - backbone
+    depends_on:
+      - database
+  database:
+    image: mariadb:latest
+    container_name: kn08-db
+    restart: always
+    env_file:
+      - ./database/.env
+    ports:
+      - 3306:3306
+    networks:
+      backbone:
+        ipv4_address: 172.31.0.10
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  db_data:
+    driver: local
+
+networks:
+  backbone:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.31.0.0/20
+          ip_range: 172.31.0.0/24
+          gateway: 172.31.0.254

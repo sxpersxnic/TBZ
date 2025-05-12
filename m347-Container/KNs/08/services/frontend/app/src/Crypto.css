@@ -1,0 +1,14 @@
+section.crypto .crypto-amount, section.crypto .crypto-label, section.crypto .crypto-name{
+  font-size: 25px;
+}
+section.crypto .crypto-label{
+  font-weight: bold;
+}
+
+section.crypto .crypto-name{
+  font-style: italic;
+}
+
+section.crypto .crypto-buysell{
+  margin-top: 30px;
+}

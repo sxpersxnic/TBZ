@@ -1,0 +1,3 @@
+module github.com/sxperlinx/TBZ/m347-Container/KNs/08/send-receive
+
+go 1.24.3
