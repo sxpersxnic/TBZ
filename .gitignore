@@ -11,3 +11,4 @@
 */**/.next
 */**/target
 x-resources/scripts
+*/**/go.sum
