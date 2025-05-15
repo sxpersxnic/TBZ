@@ -3,12 +3,7 @@ import './App.css';
 import Crypto from './Crypto';
 import Friends from './Friends';
 
-
-
 function App() {
-  //console.log(process);
-  //console.log(process.env);
-
   localStorage.setItem("userid", process.env.REACT_APP_USER_LOGGED_IN);
 
   
