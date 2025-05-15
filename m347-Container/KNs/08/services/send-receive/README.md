@@ -1,36 +1,63 @@
-# SendReceive Service
+# BuySell Service
 
 ## Description
 
-The SendReceive service is responsible for handling the sending and receiving of cryptocurrencies between users. It interacts with the database to update user balances and transaction records.
+The BuySell service enables users to buy and sell cryptocurrencies. It communicates with the `account` service to modify user's balance.
 
 ## Architecture
 
-The service is built using Go and follows a microservices architecture. It communicates with other services through HTTP requests and uses a MariaDB database for data storage.
+This microservice is built in Go and forms part of a distributed microservice system. It interacts with the `account` service over HTTP and leverages its API to update balances accordingly.
 
 ```mermaid
-graph TB
-    A[Client] --> B[SendReceive]
-    B --> C[AccountService]
-    C --> D[Database]
+graph LR
+
+  A[Frontend]
+
+  A <--> B
+  A <--> C
+
+  subgraph BuySell Service
+    subgraph Endpoints
+      B[Endpoint: POST /buy]
+      C[Endpoint: POST /sell]
+    end
+
+    B <--> D
+    C <--> E
+
+    subgraph Logic
+      D[Increase Balance]
+      E[Decrease Balance]
+      F[Interact with Account Service]
+    
+      D <--> F
+      E <--> F
+    end
+  end
+
+  F <--> G
+
+  G[Account Service]
+  H[Database]
+
+  G <--> H
 ```
 
 ## Endpoints
 
-### `/send`
+### `/buy`
 
 - **Method:** <span style="color:#ffbb00">`POST`</span>
 - **Request Body:** <pre>
 <span style="color:#ffbb00">{</span>
   <span style="color:#c43537;margin-left:1rem">"id"</span>: <span style="color:#4659b5">1</span>,
-  <span style="color:#c43537;margin-left:1rem">"receiverId"</span>: <span style="color:#4659b5">2</span>,
   <span style="color:#c43537;margin-left:1rem">"amount"</span>: <span style="color:#4659b5">10</span>
 <span style="color:#ffbb00">}</span>
 </pre>
 
 - **Request Header:** <pre>
 <span style="color:#ffbb00">{</span>
-  <span style="color:#c43537;margin-left:1rem">"Content-Type"</span>: <span style="color:#7fb546">"application/json"</span>
+  <span style="color:#c43537;margin-left:1rem">"Content-Type"</span>: <span style="color:#7fb546">"text/json"</span>
 <span style="color:#ffbb00">}</span>
 </pre>
 
@@ -49,11 +76,6 @@ graph TB
 |Variable|Description|Default Value|
 |---|---|---|
 |`ACCOUNT_SERVICE_URL`|URL of the AccountService|`http://localhost:8080`|
-|`DB_HOST`|Database host|`localhost`|
-|`DB_PORT`|Database port|`3306`|
-|`DB_USER`|Database user|`root`|
-|`DB_PASSWORD`|Database password|`tbzPass123`|
-|`DB_NAME`|Database name|`kn08`|
 
 ## Run Locally
 
@@ -63,26 +85,24 @@ go run main.go
 
 ## Docker
 
-### Dockerfile
-
-```dockerfile
-FROM golang:1.20-alpine
-WORKDIR /app
-COPY go.mod go.sum ./
-COPY . .
-RUN go mod download
-RUN go build -o send-receive main.go
-EXPOSE 8080
-CMD ["./send-receive"]
-```
+- Dockerfile: [here](./Dockerfile)
 
 ### Build and Run
 
 ```sh
-docker build -t send-receive .
+docker build -t buy-sell .
 docker run -d \ 
-  --name send-receive \
+  --name buy-sell \
   -e ACCOUNT_SERVICE_URL=http://<account-service-url>:8080 \
   -p 8081:8080 \
-  send-receive
+  buy-sell
 ```
+
+# BuySell Service
+
+## Endpoints
+
+| Endpoint | Method | Request Body | Request Headers | Response Body | Response | Description |
+| -------- | ------ | ------------ | --------------- | ------------- | -------- | ----------- |
+| `/buy`  | <span style="color:orange">POST</span> | `{ id: int, amount: int }` | Content-Type: text/json | { } | boolean | This Endpoint buys Cryptos for the user and writes it to the database |
+| `/sell`  | <span style="color:orange">POST</span> | `{ id: int, amount: int }` | Content-Type: text/json | { } | boolean | This Endpoint sells Cryptos for the user and updates the salary in the database. In case more are spent than owned, the salary is simply set to 0 |

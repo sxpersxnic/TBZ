@@ -1,63 +1,55 @@
 package main
 
 import (
-	"fmt"
-	"bytes"
-	"encoding/json"
 	"log"
 	"net/http"
-	"os"
-	"slices"
+
+	"github.com/gin-gonic/gin"
+	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/send-receive/api"
+	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/send-receive/env"
 )
 
-type Request struct {
-	ID 					int `json:"id"`
+type Transaction struct {
+	ID 			int `json:"id"`
 	ReceiverID 	int `json:"receiverId"`
-	Amount 			int `json:"amount"`
+	Amount 	int `json:"amount"`
 }
 
-func sendHandler(w http.ResponseWriter, r *http.Request) {
-	var req Request
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, "invalid json", http.StatusBadRequest)
+func sendHandler(ctx *gin.Context) {
+	var tx Transaction
+
+	if err := ctx.BindJSON(&tx); err != nil {
+		log.Printf("Error binding JSON: %v", err)
+		ctx.JSON(http.StatusBadRequest, false)
 		return
 	}
 
-	accountURL := os.Getenv("ACCOUNT_SERVICE_URL")
-	if accountURL == "" {
-		log.Fatal("ACCOUNT_SERVICE_URL not set")
-	}
-
-	isFriend := checkFriend(accountURL, req.ID, req.ReceiverID)
-	if !isFriend {
-		http.Error(w, "not a friend", http.StatusForbidden)
+	if !api.CheckFriends(tx.ID, tx.ReceiverID) {
+		ctx.JSON(http.StatusBadRequest, false)
 		return
 	}
 
-	data := map[string]int{"id": req.ID, "amount": req.Amount}
-	body, _ := json.Marshal(data)
-	http.Post(accountURL+"/RemoveCrypto", "application/json", bytes.NewBuffer(body))
-
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]bool{"success": true})
-}
-
-func checkFriend(accountURL string, senderID, receiverID int) bool {
-	resp, err := http.Get(accountURL + "/Friends/?" + toStr(senderID))
-	if err != nil {
-		return false
+	if !api.AddCrypto(tx.ReceiverID, tx.Amount) {
+		ctx.JSON(http.StatusInternalServerError, false)
+		return
 	}
-	var friends []int
-	json.NewDecoder(resp.Body).Decode(&friends)
-	return slices.Contains(friends, receiverID)
-}
 
-func toStr(i int) string {
-	return fmt.Sprintf("%d", i)
+	if !api.RemoveCrypto(tx.ID, tx.Amount) {
+		ctx.JSON(http.StatusInternalServerError, false)
+		return
+	}
+
+	log.Printf("Transaction send successful for user %d to user %d with amount %d\n", tx.ID, tx.ReceiverID, tx.Amount)
+	ctx.JSON(http.StatusOK, true)
 }
 
 func main() {
-	http.HandleFunc("/send", sendHandler)
-	log.Println("SendReceive service is running on :8003")
-	log.Fatal(http.ListenAndServe(":8003", nil))
+	env.Load()
+
+	router := gin.Default()
+
+	router.POST("/send", sendHandler)
+
+	log.Printf("SendReceive service is running at %s\n", env.GetHost())
+	router.Run(env.GetHost())
 }
