@@ -1,65 +1,58 @@
-package main;
+package main
 
 import (
-	"bytes"
-	"encoding/json"
 	"log"
 	"net/http"
-	"os"
+
+	"github.com/gin-gonic/gin"
+	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/buy-sell/api"
+	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/buy-sell/env"
 )
 
-type TransactionRequest struct {
+type Transaction struct {
 	ID 			int `json:"id"`
 	Amount 	int `json:"amount"`
 }
 
-func buyHandler(w http.ResponseWriter, r *http.Request) {
-	handleTransaction(w, r, "buy")
+func buyHandler(c *gin.Context) {
+	handleTransaction(c, "buy")
 }
 
-func sellHandler(w http.ResponseWriter, r *http.Request) {
-	handleTransaction(w, r, "sell")
+func sellHandler(c *gin.Context) {
+	handleTransaction(c, "sell")
 }
 
-func handleTransaction(w http.ResponseWriter, r *http.Request, action string) {
-	var tx TransactionRequest
+func handleTransaction(c *gin.Context, action string) {
+	var tx Transaction
 
-	if err := json.NewDecoder(r.Body).Decode(&tx); err != nil {
-		http.Error(w, "invalid json", http.StatusBadRequest)
+	if err := c.BindJSON(&tx); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid json"})
 		return
 	}
 
-	accountUrl := os.Getenv("ACCOUNT_SERVICE_URL")
-
-	if accountUrl == "" {
-		log.Fatal("ACCOUNT_SERVICE_URL not set")
-	}
-
-	var endpoint string
+	var success bool
 
 	if action == "buy" {
-		endpoint = "/AddCrypto"
+		success = api.AddCrypto(c, tx.ID, tx.Amount)
 	} else {
-		endpoint = "/RemoveCrypto"
+		success = api.RemoveCrypto(c, tx.ID, tx.Amount)
 	}
 
-	body, _ := json.Marshal(tx)
-	resp, err := http.Post(accountUrl+endpoint, "application/json", bytes.NewBuffer(body))
-
-	if err != nil || resp.StatusCode != 200 {
-		http.Error(w, "transaction failed", http.StatusInternalServerError)
+	if !success {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]bool{"success": true})
+	log.Printf("Transaction %s successful for user %d with amount %d\n", action, tx.ID, tx.Amount)
 }
 
-
 func main() {
-	http.HandleFunc("/buy", buyHandler)
-	http.HandleFunc("/sell", sellHandler)
+	env.Load()
 
-	log.Println("BuySell service is running on :8002")
-	log.Fatal(http.ListenAndServe(":8002", nil))
+	router := gin.Default()
+
+	router.POST("/buy", buyHandler)
+	router.POST("/sell", sellHandler)
+
+	log.Printf("BuySell service is running at %s\n", env.GetHost())
+	router.Run(env.GetHost())
 }
