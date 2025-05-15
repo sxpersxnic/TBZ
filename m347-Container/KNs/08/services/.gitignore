@@ -1,1 +1,15 @@
 /account/bin/appsettings.json
+packages
+.env*
+!.env.example
+dist
+build
+node_modules
+coverage
+.vscode
+.idea
+*.log
+*.tsbuildinfo
+*.tgz
+*.zip
+bin

@@ -2,51 +2,62 @@ name: kn08
 
 services:
   frontend:
-    container_name: kn08-frontend
+    container_name: frontend-app
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - 80:80
+      - 80:3000
+    networks:
+      - app
     depends_on:
       - account
       - buysell
       - sendreceive
   sendreceive:
-    container_name: kn08-send-receive
+    container_name: sendreceiveservice
     build:
       context: ./send-receive
       dockerfile: Dockerfile
+    env_file:
+      - ./send-receive/.env
     ports:
       - 8003:8003
+    networks:
+      - app
     depends_on:
       - account
   buysell:
-    container_name: kn08-buy-sell
+    container_name: buysellservice
     build:
       context: ./buy-sell
       dockerfile: Dockerfile
+    env_file:
+      - ./buy-sell/.env
     ports:
       - 8002:8002
+    networks:
+      - app
     depends_on:
       - account
   account:
-    container_name: kn08-account
+    container_name: account
     build:
       context: ./account
       dockerfile: Dockerfile
     ports:
       - 8080:8080
     networks:
+      - app
       - backbone
     depends_on:
       - database
   database:
     image: mariadb:latest
-    container_name: kn08-db
+    container_name: database
     restart: always
-    env_file:
-      - ./database/.env
+    environment:
+      - MARIADB_ROOT_PASSWORD=tbzPass123
     ports:
       - 3306:3306
     networks:
@@ -68,3 +79,10 @@ networks:
         - subnet: 172.31.0.0/20
           ip_range: 172.31.0.0/24
           gateway: 172.31.0.254
+  app:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.31.16.0/20
+          ip_range: 172.31.16.0/24
+          gateway: 172.31.16.254

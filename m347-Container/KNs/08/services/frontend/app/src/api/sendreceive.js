@@ -1,6 +1,6 @@
 const sendUrl = process.env.REACT_APP_SENDRECEIVE_SEND;
 
-function sendApiRequest(receiverId, senderId, amount) {
+async function sendApiRequest(receiverId, senderId, amount) {
     const data = {
         id: senderId,
         receiverId: receiverId,
