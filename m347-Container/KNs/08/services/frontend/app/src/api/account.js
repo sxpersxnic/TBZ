@@ -1,7 +1,10 @@
 const holdingsUrl = process.env.REACT_APP_ACCOUNT_HOLDINGS;
 const friendsUrl = process.env.REACT_APP_ACCOUNT_FRIENDS;
 
-async function holdingsApiRequest(uid) {
+/**
+ * @param {number} uid 
+ */
+function holdingsApiRequest(uid) {
 
     var theUrl = holdingsUrl.replace("<userId>", uid);
     const requestOptions = {
@@ -16,7 +19,10 @@ async function holdingsApiRequest(uid) {
         });
 }
 
-async function friendsApiRequest(uid) {
+/**
+ * @param {number} uid 
+ */
+function friendsApiRequest(uid) {
 
     var theUrl = friendsUrl.replace("<userId>", uid);
     const requestOptions = {

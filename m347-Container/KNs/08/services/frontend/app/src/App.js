@@ -6,7 +6,6 @@ import Friends from './Friends';
 function App() {
   localStorage.setItem("userid", process.env.REACT_APP_USER_LOGGED_IN);
 
-  
   return (
     <>
     <main>

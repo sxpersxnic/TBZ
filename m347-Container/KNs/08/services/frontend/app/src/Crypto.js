@@ -9,10 +9,11 @@ function Crypto() {
 
   var loadData = () => {
     {
-      let result = account.holdings(localStorage.getItem("userid"))
-      .then(data => {
-        setCrypto(data)
-      });
+      let result = account
+			.holdings(parseInt(localStorage.getItem('userid')))
+			.then((data) => {
+				setCrypto(data);
+			});
     }
   };
 
@@ -21,16 +22,22 @@ function Crypto() {
   }, []);
 
   const onClickBuy = (target) => {
-    buysell.buy(localStorage.getItem("userid"), amount)
+    const userIdStr = localStorage.getItem("userid");
+    const userId = parseInt(userIdStr);
+    const amountNum = parseInt(amount);
+    buysell.buy(userId, amountNum)
       .then(data => {
         setAmount(0);
         loadData();
       });
-    
+
   }
 
   const onClickSell = (target) => {
-    buysell.sell(localStorage.getItem("userid"), amount)
+    const userIdStr = localStorage.getItem("userid");
+    const userId = parseInt(userIdStr);
+    const amountNum = parseInt(amount);
+    buysell.sell(userId, amountNum)
     .then(data => {
       setAmount(0);
       loadData();
@@ -58,3 +65,4 @@ function Crypto() {
 }
 
 export default Crypto;
+

@@ -7,7 +7,7 @@ import './Friends.css';
 function Friends() {
   const [friends, setFriends] = useState([]);
   const [amount, setAmount] = useState(0);
-  const [friendid, setFriendId] = useState("");
+  const [friendid, setFriendId] = useState(0);
   useEffect(() => {
     let result = account.friends(localStorage.getItem("userid"))
     .then(data => {
@@ -18,10 +18,14 @@ function Friends() {
 
   const onClick = ({ target }) => setFriendId(target.id); //console.log(target); //setFriendId("hallo");
   const onClickSend = () => {
-    sendreceive.send(friendid, localStorage.getItem("userid"), amount)
+    const friendIdNum = parseInt(friendid);
+    const userIdStr = localStorage.getItem("userid");
+    const userId = parseInt(userIdStr);
+    const amountNum = parseInt(amount);
+    sendreceive.send(friendIdNum, userId, amountNum)
       .then(data => {
         setAmount(0);
-        setFriendId("");
+        setFriendId(0);
       });
     
   }

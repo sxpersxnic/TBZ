@@ -1,7 +1,11 @@
 const buyUrl = process.env.REACT_APP_BUYSELL_BUY;
 const sellUrl = process.env.REACT_APP_BUYSELL_SELL;
 
-async function buyApiRequest(uid, amount) {
+/**
+ * @param {number} uid
+ * @param {number} amount
+ */
+function buyApiRequest(uid, amount) {
     const data = {
         id: uid,
         amount: amount
@@ -18,7 +22,11 @@ async function buyApiRequest(uid, amount) {
         });
 }
 
-async function sellApiRequest(uid, amount) {
+/**
+ * @param {number} uid
+ * @param {number} amount
+ */
+function sellApiRequest(uid, amount) {
     const data = {
         id: uid,
         amount: amount

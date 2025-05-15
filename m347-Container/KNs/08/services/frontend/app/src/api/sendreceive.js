@@ -1,6 +1,11 @@
 const sendUrl = process.env.REACT_APP_SENDRECEIVE_SEND;
 
-async function sendApiRequest(receiverId, senderId, amount) {
+/**
+ * @param {number} receiverId 
+ * @param {number} senderId 
+ * @param {number} amount 
+ */
+function sendApiRequest(receiverId, senderId, amount) {
     const data = {
         id: senderId,
         receiverId: receiverId,
@@ -17,7 +22,6 @@ async function sendApiRequest(receiverId, senderId, amount) {
             alert("Failed to call the URL. Is the api up and running?");
         });
 }
-
 
 export default {
     send: sendApiRequest
