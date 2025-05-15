@@ -4,9 +4,11 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/buy-sell/api"
 	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/buy-sell/env"
+	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/buy-sell/config"
 )
 
 type Transaction struct {
@@ -49,6 +51,9 @@ func main() {
 	env.Load()
 
 	router := gin.Default()
+
+	router.Use(cors.New(config.Cors()))
+	router.Use(config.Middleware())
 
 	router.POST("/buy", buyHandler)
 	router.POST("/sell", sellHandler)
