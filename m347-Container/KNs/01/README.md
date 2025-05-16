@@ -58,13 +58,13 @@ docker version
 
 ### 2. Docker Search
 
--   **Ubuntu:**
+- **Ubuntu:**
 
     ```sh
     docker search ubuntu
     ```
 
--   **NGINX:**
+- **NGINX:**
 
     ```sh
     docker search nginx
@@ -78,9 +78,9 @@ docker version
 docker run -d -p 80:80 docker/getting-started
 ```
 
--   `-d`: _detach_ — runs the container in the background and returns the container ID.
--   `-p 80:80`: _--publish_ — maps port **80** of the host to port **80** of the container.
--   `docker/getting-started`: the image to use (publisher: `docker`, image: `getting-started`).
+- `-d`: _detach_ — runs the container in the background and returns the container ID.
+- `-p 80:80`: _--publish_ — maps port **80** of the host to port **80** of the container.
+- `docker/getting-started`: the image to use (publisher: `docker`, image: `getting-started`).
 
 ### 4. NGINX Container
 
@@ -96,10 +96,10 @@ docker run -d -p 80:80 docker/getting-started
 
 ### 5. `-d` (detached) vs. `-it` (interactive)
 
--   `docker run -d --name kn01-ubuntu-bg ubuntu`  
+- `docker run -d --name kn01-ubuntu-bg ubuntu`  
     Runs the container in the background. If the image does not exist locally, Docker pulls it automatically. Since Ubuntu stops without a running process, the container status is instantly set to "Exited".
 
--   `docker run -it --name kn01-ubuntu-it ubuntu:latest`  
+- `docker run -it --name kn01-ubuntu-it ubuntu:latest`  
     The `-it` flag (_interactive_) starts the container interactively and binds the terminal (`tty`) to a shell. On startup, you land directly in the shell (e.g., Bash, Zsh, Fish, etc.). As long as the shell is active, the container keeps running.
 
 ### 6. Connect to a Container's Shell
@@ -152,4 +152,3 @@ docker rmi ubuntu:latest nginx:latest
 ### Screenshot
 
 ![Private Repository on Docker Hub](/m347-Container/x-resources/01/docker-hub-repo.png)
-
