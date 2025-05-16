@@ -34,3 +34,5 @@
 	5. `show tables;`: Zeigt alle Tables der Datenbank 'Kampus'.
 
 - Collections vs. Tables:
+
+	Tables are used in relational databases, while collections are used in NoSQL databases like MongoDB. Tables have a fixed schema, while collections are schema-less and can store documents with different structures. This allows for more flexibility in data storage and retrieval in NoSQL databases.
