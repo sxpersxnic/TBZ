@@ -5,7 +5,7 @@ metadata:
   labels:
     app: webapp
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: webapp
@@ -49,4 +49,4 @@ spec:
     - protocol: TCP
       port: 3000
       targetPort: 3000
-      nodePort: 30100
+      nodePort: 32000

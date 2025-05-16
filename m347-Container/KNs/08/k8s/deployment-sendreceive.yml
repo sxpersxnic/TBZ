@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sendreceive-deployment
+  labels:
+    app: sendreceive
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sendreceive
+  template:
+    metadata:
+      labels:
+        app: sendreceive
+    spec:
+      containers:
+        - name: sendreceiveservice
+          image: sxnic/kn08:sendreceive
+          ports:
+            - containerPort: 8003
+          env:
+            - name: ACCOUNT_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: account-env
+                  key: account-url
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: sendreceive-env
+                  key: sendreceive-port
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sendreceive-service
+spec:
+  selector:
+    app: sendreceive
+  ports:
+    - protocol: TCP
+      port: 8003
+      targetPort: 8003
+  type: NodePort
+  nodePort: 30100
