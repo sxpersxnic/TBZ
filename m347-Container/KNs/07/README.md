@@ -112,3 +112,31 @@ spec:
 			targetPort: 27017
 			nodePort: 32017
 ```
+
+### Modification steps
+
+1. Modifying `deployment-web.yml`:
+	- Replicas (Deployment): `replicas: 1` -> `replicas: 3`
+	- NodePort (Service): `nodePort: 30100` -> `nodePort: 32000`
+2. Applying the changes in master node:
+
+	```sh
+	kubectl apply -f deployment-web.yml
+	```
+
+3. Checking the status of the pods:
+
+	```sh
+	kubectl describe service webapp-service
+	```
+
+#### Screenshots
+
+- Webapp:
+![Node 1](../../x-resources/07/node-1-result-2.png)
+
+- `kubectl describe service webapp-service`:
+
+	The result shows that **3** replicas of the webapp are running. At `Endpoints` you can see that there are now three addresses listed, previously there was only one.
+
+	![Node 2](../../x-resources/07/node-2-web-2.png)

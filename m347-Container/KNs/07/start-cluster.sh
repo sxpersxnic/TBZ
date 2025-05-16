@@ -19,10 +19,3 @@ aws ec2 start-instances --instance-ids $AWS_EC2_INSTANCE_MASTER_ID $AWS_EC2_INST
 echo "[+] Instances starting..."
 sleep 30
 echo "[+] Instances started"
-
-ping -c 3 $AWS_EC2_INSTANCE_MASTER_IP | grep -q "64 bytes from" && echo "[+] Master instance is reachable" || echo "[!] Master instance is not reachable";
-ping -c 3 $AWS_EC2_INSTANCE_NODE1_IP | grep -q "64 bytes from" && echo "[+] Node 1 instance is reachable" || echo "[!] Node 1 instance is not reachable";
-ping -c 3 $AWS_EC2_INSTANCE_NODE2_IP | grep -q "64 bytes from" && echo "[+] Node 2 instance is reachable" || echo "[!] Node 2 instance is not reachable";
-ping -c 3 $AWS_EC2_INSTANCE_NODE3_IP | grep -q "64 bytes from" && echo "[+] Node 3 instance is reachable" || echo "[!] Node 3 instance is not reachable";
-
-echo "[+] Instances reachable"
