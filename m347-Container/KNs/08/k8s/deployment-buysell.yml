@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buysell-deployment
+  labels:
+    app: buysell
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: buysell
+  template:
+    metadata:
+      labels:
+        app: buysell
+    spec:
+      containers:
+        - name: buysell
+          image: sxnic/kn08:buysell
+          ports:
+            - containerPort: 8002
+          env:
+            - name: ACCOUNT_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: account-env
+                  key: account-url
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: buysell-env
+                  key: buysell-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: buysell-service
+spec:
+  selector:
+    app: buysell
+  ports:
+    - protocol: TCP
+      port: 8002
+      targetPort: 8002
+  type: NodePort
+  nodePort: 30100
