@@ -14,8 +14,6 @@
 - **Replicas** define, how many instances of a **Pod** should run parallel. They are defined in the `Deployment` (or `StatefulSet`), in order to reach _High Availability (HA)_ and _Load Distribution_.
 
 > **Example:** When you define `replicas: 3`, Kubernetes creates **tree identical Pods** of the defined App.
->
->
 
 ### Service vs. Deployment
 
@@ -41,7 +39,17 @@ A `StatefulSet` manages _Pods_ with stable identity, persistence and orderd Star
 
 ### Difference to A
 
+In A is explained, that for production applications with persistent data, like databases, a `StatefulSet` should be used instead of a `Deployment`.
+
+#### Reasoning
+
+- For a simple **demo environment**, a Deployment is sufficient because no high availability or persitent storage is required.
+- The focus is on **functionality and demonstration**, not on data integrity or failover.
+- Using a StatefulSet requires **additional configuration effort** (e.g., persistent Volume Claims, headless Services), which is unnecessary for a basic demo.
+
 ### MongoUrl
+
+The value `mongo-service` is correct, because it is the name of the **Service** that exposes the MongoDB database. The name of the **Service** is used as a DNS name within the Kubernetes cluster to access the MongoDB instance. The same can be done with Containers, so you don't have to set a static IP address.
 
 ### `microk8s kubectl describe service webapp-service`
 
@@ -64,3 +72,43 @@ To access the Webapp, I had to edit the security group's inbound rules to allow 
 ![Node 2](../../x-resources/07/node-2-result.png)
 
 ### MongoDB Compass
+
+#### Reason
+
+The `mongo-service` is defined as an **internal ClusterIP service**.
+
+	```yml
+	apiVersion: v1
+	kind: Service
+	metadata:
+		name: mongo-service
+	spec:
+		selector:
+			app: mongo
+		ports:
+			- protocol: TCP
+				port: 27017
+				targetPort: 27017
+	```
+
+This means it is only accessible from within the **Kubernetes Cluster** and not exposed externally. There is no **NodePort, LoadBalancer, or Ingress** configured to expose port `27017` to the outside world.
+
+#### Solution
+
+To make it accessible from outside the cluser, the service type has to be changed to `NodePort` or `LoadBalancer`.
+
+	```yml
+	apiVersion: v1
+	kind: Service
+	metadata:
+		name: mongo-service
+	spec:
+		type: NodePort
+		selector:
+			app: mongo
+		ports:
+			- protocol: TCP
+				port: 27017
+				targetPort: 27017
+				nodePort: 32017
+	```
