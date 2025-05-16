@@ -12,7 +12,7 @@ USER1="user1"
 USER1_PASS="user1pass"
 
 echo "[+] Creating user1 in MongoDB"
-mongosh --authenticationDatabase "${AUTH_DB}" -u "${ADMIN_USER}" -p "${ADMIN_PASS}" <<EOF
+mongosh --authenticationDatabase "${AUTH_DB}" -u "${ADMIN_USER}" -p "${ADMIN_PASS}" <<EOF >
 use ${TARGET_DB}
 db.createUser({
 	user: "${USER1}",
@@ -28,13 +28,13 @@ USER2="user2"
 USER2_PASS="user2pass"
 
 echo "[+] Creating user2 in MongoDB"
-mongosh --authenticationDatabase "${AUTH_DB}" -u "${ADMIN_USER}" -p "${ADMIN_PASS}" <<EOF
-use ${TARGET_DB}
+mongosh --authenticationDatabase "${AUTH_DB}" -u "${ADMIN_USER}" -p "${ADMIN_PASS}" <<EOF >
+use ${AUTH_DB}
 db.createUser({
 	user: "${USER2}",
 	pwd: "${USER2_PASS}",
 	roles: [
-		{ role: "readWrite", db: "${AUTH_DB}" },
+		{ role: "readWrite", db: "${TARGET_DB}" },
 	]
 })
 EOF

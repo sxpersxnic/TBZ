@@ -49,4 +49,9 @@
 
 ## D. Rechte und Rollen
 
+- Screenshot mit falscher Authentifizierungsquelle: ![Screenshot mit falscher Authentifizierungsquelle](/m165-NoSQL/x-resources/m/01/failed-auth.png)
 - [Script](./create-users.sh)
+- Screenshot Benutzer 1: ![Screenshot Benutzer 1](/m165-NoSQL/x-resources/m/01/user1.png)
+- Screenshot Benutzer 1 Read: ![Screenshot Benutzer 1](/m165-NoSQL/x-resources/m/01/user1-r.png)
+- Screenshot Benutzer 2: ![Screenshot Benutzer 2](/m165-NoSQL/x-resources/m/01/user2.png)
+- Screenshot Benutzer 2 Read Write: ![Screenshot Benutzer 2](/m165-NoSQL/x-resources/m/01/user2-rw.png)
