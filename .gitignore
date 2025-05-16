@@ -1,4 +1,3 @@
-/m346-gitlab
 */**/*.env*
 !*/**/*.env.example
 */**/.terraform*
@@ -11,3 +10,5 @@
 */**/build
 */**/.next
 */**/target
+x-resources/scripts
+*/**/go.sum

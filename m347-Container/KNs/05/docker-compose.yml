@@ -1,0 +1,28 @@
+name: kn05c
+
+services:
+  nginx1:
+    image: nginx:latest
+    container_name: kn05c-1
+    volumes:
+      - type: volume
+        source: kn05c_data
+        target: /data
+      - type: bind
+        source: ./target
+        target: /host_data
+      - type: tmpfs
+        target: /tmpfs_data
+    ports:
+      - 8080:80
+  nginx2:
+    image: nginx:latest
+    container_name: kn05c-2
+    volumes:
+      - kn05c_data:/data
+    ports:
+      - 8081:80
+
+volumes:
+  kn05c_data:
+    driver: local

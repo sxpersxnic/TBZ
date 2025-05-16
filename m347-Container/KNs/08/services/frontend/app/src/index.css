@@ -1,0 +1,53 @@
+body{
+  margin:0;
+  margin-bottom:40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  background-color: white;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+span.link{
+  color:blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+section{
+  margin-top: 50px;
+}
+
+.form-group{
+  clear: both;
+}
+.form-group label{
+  display: block;
+  width: 150px;
+  float:left;
+  height: 30px;
+  margin: 10px 0 0 0;
+}
+.form-group input,
+.form-group select,
+.form-group option{
+  float: left;
+  height: 30px;
+  margin:0;
+  padding:0 5px;
+  line-height: 10px;
+  font-size: 16px;
+}
+
+.form-group input.size-auto,
+.form-group select.auto-medium{
+  min-width: 100px;
+}
+
+.form-group input.size-medium,
+.form-group select.size-medium{
+  min-width: 400px;
+}
