@@ -1,0 +1,11 @@
+[{
+  "_id": {
+    "$oid": "681dbff576f177b8dcc85a20"
+  },
+  "name": "Melvin Kampus",
+  "age": 17,
+  "created_at": {
+    "$date": "2025-05-16T00:00:00.000Z"
+  },
+  "height": 1.83
+}]
