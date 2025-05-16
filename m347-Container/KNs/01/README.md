@@ -1,14 +1,18 @@
 # KN01: Docker Grundlagen
 
-## A) Installation (20%)
+## A - Installation
 
-- **Screenshots:**
-  1. Webseite mit Container: ![Screenshot von Docker Webseite, mit einem Container](/m347-Container/x-resources/01/website.png)
-  2. Docker Desktop mit Container: ![Screenshot von Docker Desktop, mit einem Container](/m347-Container/x-resources/01/desktop.png)
+### Screenshots
 
-## B) Docker CLI (50%)
+  1. **Getting Started** Website of Docker hosted in a Container:
+    ![Screenshot of Docker's 'Getting Started' Website hosted in a Container](/m347-Container/x-resources/01/website.png)
 
-- **1.** Docker Version
+  2. Docker Desktop Dashboard, showing the **Getting Started** Container:
+    ![Screenshot von Docker Desktop, mit einem Container](/m347-Container/x-resources/01/desktop.png)
+
+## B - Docker CLI
+
+### 1. Docker Version
 
   ```sh
   docker -v
@@ -50,54 +54,63 @@
         GitCommit:        de40ad0
   ```
 
-- **2.** Docker search
+### 2. Docker search
 
-  - **Ubuntu:**
+- **Ubuntu:**
 
-    ```sh
-    docker search ubuntu
-    ```
+  ```sh
+  docker search ubuntu
+  ```
 
-  - **NGINX:**
+- **NGINX:**
 
-    ```sh
-    docker search nginx
-    ```
+  ```sh
+  docker search nginx
+  ```
 
-- **3.** Erklärung des Befehls `docker run -d -p 80:80 docker/getting-started`:
+### 3. Explanation
 
-  - `-d`: Steht für *detach*. Bedeutet das die Ausführung des Befehls bloss die ID des Containers ausgibt und den Container im Hintergrund läuft.
-  - `-p 80:80`: Steht für *--publish*. Mappt den Port **80**. des Hosts auf Port **80** im Container.
-  - `docker/getting-started`: Definiert das Image auf dem der neue Container basiert. In diesem Beispiel ist `docker` der Publisher des Images und `getting-started` ist das Image selbst.
+**Command:** `docker run -d -p 80:80 docker/getting-started`
 
-- **4.** NGINX Container
+- `-d`: Stands for *detach*. This means the execution of the command only returns the ID of the started Container and the Container runs in the background.
+- `-p 80:80`: Stands for *--publish*. Mapps the port **80** of the *Host* to the port **80** of the Container.
+- `docker/getting-started`: Defines the Image which the new Container will be based on. In this example `docker` is the publisher of the Image and `getting-started` is the Image itself.
 
-  - **Commands:**
+### 4. NGINX Container
 
-    1. `docker pull nginx:latest` - Pulls NGINX Image from Docker Hub.
-    2. `docker create --name kn01-nginx -p 8081:80 nginx:latest` - Creates a Container named 'kn01-nginx', which maps the localhost port 8081 to port 80 in the container and uses the image 'nginx:latest' -> :latest is the tag for the images latest version.
-    3. `docker start kn01-nginx` - Starts the previously created container 'kn01-nginx'.
+#### Commands
 
-  - **Screenshot:**
+1. `docker pull nginx:latest` - Pulls NGINX Image from Docker Hub.
+2. `docker create --name kn01-nginx -p 8081:80 nginx:latest` - Creates a Container named 'kn01-nginx', which maps the localhost port 8081 to port 80 in the container and uses the image 'nginx:latest' -> :latest is the tag for the images latest version.
+3. `docker start kn01-nginx` - Starts the previously created container 'kn01-nginx'.
 
-    ![NGINX standard page](/m347-Container/x-resources/01/nginx.png)
+#### Screenshot
 
-- **5.** `-d` (detached) vs. `-it` (interactive)
+![NGINX standard page](/m347-Container/x-resources/01/nginx.png)
 
-  - `docker run -d --name kn01-ubuntu-bg ubuntu`: Der Container wird im Hintergrund gestartet. Docker lädt das Image automatisch herunter, falls es nicht lokal vorhanden ist. Da Ubuntu ohne laufenden Prozess sofort beendet, wird der Container direkt in den Status „Exited“ versetzt.
-  - `docker run -it --name kn01-ubuntu-it ubuntu:latest`: Mit `-it` startet der Container interaktiv und bindet das Terminal (`tty`) an eine Shell. Man landet direkt in der Bash des Containers. Solange die Shell aktiv ist, läuft der Container.
+### 5. `-d` (detached) vs. `-it` (interactive)
 
-- **6.** Connect to a container's shell
-  > **Screenshot:**
-  >
-  > ![Ausgeführter command service nginx status mit Resultat](/m347-Container/x-resources/01/service-nginx-status.png)
-- **7.** List containers
-  > **Screenshot:**
-  >
-  > ![Docker container status](/m347-Container/x-resources/01/docker-ps-a.png)
-- **8. Command:** `docker stop kn01-nginx`
-- **9. Command:** `docker rm $(docker ps -aq)`
-- **10. Command:** `docker rmi ubuntu:latest nginx:latest`
+- `docker run -d --name kn01-ubuntu-bg ubuntu`: The Container runs in the background. Docker pulls the Image automatically, if it doesn't exist locally. Because Ubuntu stops without running process, the Container is instantly set to status "Exited".
+
+- `docker run -it --name kn01-ubuntu-it ubuntu:latest`: With the flag `-it` *(interactive)* starts the Container interactiv and binds the Terminal (`tty`) to a Shell. On start up, you land directly in the Shell *(e.g. Bash, Zsh, Fish etc. )*. As long as the Shell is active, the Container keeps running.
+
+### 6. Connect to a container's shell
+
+> **Screenshot:**
+>
+> ![Executed command 'service nginx status' with result](/m347-Container/x-resources/01/service-nginx-status.png)
+
+### 7. List containers
+
+> **Screenshot:**
+>
+> ![Docker container status](/m347-Container/x-resources/01/docker-ps-a.png)
+
+### 8. Command: `docker stop kn01-nginx`
+
+### 9. Command: `docker rm $(docker ps -aq)`
+
+### 10. Command: `docker rmi ubuntu:latest nginx:latest`
 
 ## C) Registry und Repository (10%)
 
@@ -105,12 +118,13 @@
 
 ## D) Private Repository (20%)
 
-- **Commands:**
-  1. `docker login -u <username> --password-stdin` - Login to Docker
-  2. `docker pull mariadb:latest` - Pulls the latest mariadb image
-  3. `docker tag mariadb:latest <username>/<repository>:mariadb` - Creates a tag from mariadb:latest
-  4. `docker push <username>/<repository>:mariadb` - Pushes the image to the registry '<repository>'
+### Commands
 
-- > **Screenshot:**
-  >
-  > ![Private Repository on Docker Hub](/m347-Container/x-resources/01/docker-hub-repo.png)
+1. `docker login -u <username> --password-stdin` - Login to Docker
+2. `docker pull mariadb:latest` - Pulls the latest mariadb image
+3. `docker tag mariadb:latest <username>/<repository>:mariadb` - Creates a tag from mariadb:latest
+4. `docker push <username>/<repository>:mariadb` - Pushes the image to the registry '<repository>'
+
+> **Screenshot:**
+>
+> ![Private Repository on Docker Hub](/m347-Container/x-resources/01/docker-hub-repo.png)
