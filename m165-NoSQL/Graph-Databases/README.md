@@ -34,7 +34,7 @@ Graphdatenbanken sind besonders sinnvoll bei:
 
 | Merkmal | Graphdatenbank | Relationale Datenbank |
 |---------|----------------|-----------------------|
-| Struktur | KNoten + Kanten | Tabellen |
+| Struktur | Knoten + Kanten | Tabellen |
 | Fokus | Beziehungen | Entitäten |
 | Abfragen | Traversierung entlang Kanten | Joins zwischen Tabellen |
 | Komplexe Beziehungen | Sehr effizient | Performanceproblem bei JOINs |
