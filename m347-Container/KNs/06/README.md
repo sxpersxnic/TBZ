@@ -22,7 +22,7 @@ While `microk8s` manages the MicroK8s-Cluster, `microk8s kubectl` is used for in
 
 ### Explanation
 
-The first lines of `microk8s status` indicate wther MicroK8s is running and wether it is a **High Availability (HA)** Cluster. *HA:yes* means that multiple Master-Nodes work in the Cluster, to guarantee reliability. It also shows us which nodes are on *standby* and which are *master* nodes.
+The first lines of `microk8s status` indicate wether MicroK8s is running and wether it is a **High Availability (HA)** Cluster. *HA:yes* means that multiple Master-Nodes work in the Cluster, to guarantee reliability. It also shows us which nodes are on *standby* and which are *master* nodes.
 
 ![High-Availability](../../x-resources/06/high-availability.png)
 
@@ -38,7 +38,7 @@ The first lines of `microk8s status` indicate wther MicroK8s is running and weth
 
 #### Explanation
 
-The Node was added as *Worker*. This means it is **not** part of the etcd-Cluster and **does not take any control** (no scheduling, no API-Server etc.). This gets visible in `microk8s status`, because only the **Master** get listed as HA-Control-Plane-Nodes.
+The Node was added as *Worker*. This means it is **not** part of the etcd-Cluster and **does not take any control** (no scheduling, no API-Server etc.). This gets visible in `microk8s status`, because only the **Master** gets listed as HA-Control-Plane-Node.
 
 ### `microk8s kubectl get nodes` - Master vs. Worker
 
