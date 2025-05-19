@@ -64,8 +64,8 @@ To keep it simple, the configuration for each service, is in the service's [**de
 
 ### Secret configuration file
 
-- [MariaDB](./secrets/mariadb-secret.yml)
-
 > [!WARNING]
 >
 > I just added this in case it would be useful, it will probably be removed in further commits.
+
+- [MariaDB](./secrets/mariadb-secret.yml)
