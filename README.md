@@ -1,52 +1,71 @@
 # [![Logo TBZ](/x-resources/logo.svg)](https://tbz.ch)
 
-## Gitlab
+## Overview
+
+- [Links](#links)
+- [Modules](#modules)
+  - [1st Year](#1st-year---202324) 
+  - [2nd Year](#2nd-year---202425) 
+  - [3rd Year](#3rd-year---202526) 
+  - [4th Year](#4th-year---202627) 
+- [License](#license)
+
+## Links
 
 - [Gitlab](https://gitlab.com/ch-tbz-it/Stud)
+- [Modulbaukasten](https://www.modulbaukasten.ch/?d=Informatiker%2Fin-EFZ-Applikationsentwicklung-(ab-2021))
 
 ## Modules
 
-|Semester|Number|Name|Link|
-|--------|------|----|----|
-|1|**231**|Datenschutz|-|
-|1|**431**|Projekt|-|
-|1|**162**|MySQL|-|
-|1|**319**|Java|-|
-|---|---|---|---|
-|2|**122**|Bash|[Link](./m122-Bash)|
-|2|**164**|Datenbanken|-|
-|2|**293**|HTML|[Link](./m293-Html)|
-|2|**117**|Networks|[Link](./m117-Networks)|
-|---|---|---|---|
-|3|**426**|Scrum|[Link](./m426-Scrum)|
-|3|**322**|UI/UX|-|
-|3|**346**|Cloud|[Link](./m346-Cloud)|
-|3|**320**|Object Oriented Programming|[Link](./m320-OOP)|
-|---|---|---|---|
-|4|**114**|Encoding, Compression and Encryption|[Link](./m114-Encoding-Compression-Encryption)|
-|4|**254**|Business Processes|[Link](./m254-Business-Processes)|
-|4|**165**|NoSQL|[Link](./m165-NoSQL)|
-|4|**347**|Container|[Link](./m347-Container)|
-|---|---|---|---|
-|5||||
-|5||||
-|5||||
-|5||||
-|---|---|---|---|
-|6||||
-|6||||
-|6||||
-|6||||
-|---|---|---|---|
-|7||||
-|7||||
-|7||||
-|7||||
-|---|---|---|---|
-|8||||
-|8||||
-|8||||
-|8||||
+### 1st Year - 2023/24
+
+|Semester|Number|Description|Link|Status|
+|--------|------|-----------|----|------|
+|HS|**231**|Datenschutz und Datensicherheit anwenden|-|**Done**|
+|HS|**431**|Aufträge im eigenen Berufsumfeld selbstständig durchführen|-|**Done**|
+|HS|**162**|Daten analysieren und modellieren|-|**Done**|
+|HS|**319**|Applikationen entwerfen und implementieren|-|**Done**|
+|FS|**122**|Abläufe mit einer Scriptsprache automatisieren|[Link](./m122-Bash)|**Done**|
+|FS|**164**|Datenbanken erstellen und Daten einfügen|-|**Done**|
+|FS|**293**|Webauftritt erstellen und veröffentlichen|[Link](./m293-Html)|**Done**|
+|FS|**117**|Informatik- und Netzinfrastruktur für ein kleines Unternehmen realisieren|[Link](./m117-Networks)|**Done**|
+
+---
+
+### 2nd Year - 2024/25
+
+|Semester|Number|Description|Link|Status|
+|--------|------|-----------|----|------|
+|HS|**426**|Software mit agilen Methoden entwickeln|[Link](./m426-Scrum)|**Done**|
+|HS|**322**|Benutzerschnittstellen entwerfen und implementieren|-|**Done**|
+|HS|**346**|Cloud Lösungen konzipieren und realisieren|[Link](./m346-Cloud)|**Done**|
+|HS|**320**|Objektorientiert Programmieren|[Link](./m320-OOP)|**Done**|
+|FS|**114**|Codierungs-, Kompressions- und Verschlüsselungsverfahren einsetzen|[Link](./m114-Encoding-Compression-Encryption)|**Done**|
+|FS|**254**|Geschäftsprozesse im eigenen Berufsumfeld beschreiben|[Link](./m254-Business-Processes)|**Done**|
+|FS|**165**|NoSQL-Datenbanken einsetzen|[Link](./m165-NoSQL)|***Current***|
+|FS|**347**|Dienst mit Container anwenden|[Link](./m347-Container)|***Current***|
+
+---
+
+### 3rd Year - 2025/26
+
+|Semester|Number|Description|Link|Status|
+|--------|------|-----------|----|------|
+|HS|**450**|Applikationen testen|[Link](./m450-Testing)|**Coming**|
+|HS|**306**|Kleinprojekte im eigenen Berufsumfeld abwickeln|[Link](./m306-Projects)|**Coming**|
+|FS|**183**|Applikationssicherheit implementieren|[Link](./m183-App-Security)|**Coming**|
+|FS|**323**|Funktional Programmieren|[Link](./m323-FP)|**Coming**|
+
+---
+
+### 4th Year - 2026/27
+
+|Semester|Number|Description|Link|Status|
+|--------|------|-----------|----|------|
+|HS|**324**|DevOps-Prozesse mit Tools unterstützen|[Link](./m324-DevOps)|**Coming**|
+|HS|**321**|Verteilte Systeme programmieren|[Link](./m321-Distributed-Systems)|**Coming**|
+|FS|**241**|Innovative ICT-Lösungen initialisieren|[Link](./m241-Init-ICT-Solutions)|**Coming**|
+|FS|**245**|Innovative ICT-Lösungen umsetzen|[Link](./m245-Impl-ICT-Solutions)|**Coming**|
 
 ## License
 
