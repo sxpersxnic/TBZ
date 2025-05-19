@@ -81,14 +81,14 @@ The `mongo-service` is defined as an **internal ClusterIP service**.
 apiVersion: v1
 kind: Service
 metadata:
-	name: mongo-service
+  name: mongo-service
 spec:
-	selector:
-		app: mongo
-	ports:
-		- protocol: TCP
-			port: 27017
-			targetPort: 27017
+  selector:
+    app: mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
 ```
 
 This means it is only accessible from within the **Kubernetes Cluster** and not exposed externally. There is no **NodePort, LoadBalancer, or Ingress** configured to expose port `27017` to the outside world.
@@ -101,16 +101,16 @@ To make it accessible from outside the cluser, the service type has to be change
 apiVersion: v1
 kind: Service
 metadata:
-	name: mongo-service
+  name: mongo-service
 spec:
-	type: NodePort
-	selector:
-		app: mongo
-	ports:
-		- protocol: TCP
-			port: 27017
-			targetPort: 27017
-			nodePort: 32017
+  type: NodePort
+  selector:
+    app: mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+      nodePort: 32017
 ```
 
 ### Modification steps
