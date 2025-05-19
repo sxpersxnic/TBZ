@@ -2,8 +2,8 @@
 
 > **Overview:**
 >
-> - [A. Terms and Concepts](#a.-terms-and-concepts)
-> - [B. Demo Project](#b.-demo-project)
+> - [A. Terms and Concepts](#a-terms-and-concepts)
+> - [B. Demo Project](#b-demo-project)
 
 ## A. Terms and Concepts
 
