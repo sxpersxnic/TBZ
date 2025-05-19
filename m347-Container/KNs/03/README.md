@@ -1,6 +1,6 @@
 # KN03: Netzwerk, Sicherheit
 
-## A) Eigenes Netzwerk
+## A. Eigenes Netzwerk
 
 1. **Addressing:**
 
