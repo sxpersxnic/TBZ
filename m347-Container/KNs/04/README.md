@@ -1,8 +1,8 @@
 # KN04: Docker Compose
 
-## A) Docker Compose: Lokal (60%)
+## A. Docker Compose: Lokal
 
-### Teil a)
+### Teil a
 
 - Screenshot of [info.php](http://localhost/info.php)
 
@@ -23,7 +23,7 @@
 	- **4. Container starten:** Die erstellten Container werden gestartet.
 	- **5. Logs anzeigen:** Die Logs der gestarteten Container werden im Terminal angezeigt. (Nur wenn ohne `-d`/`--detach` ausgeführt)
 
-### Teil b)
+### Teil b
 
 - info.php:
 
@@ -39,7 +39,7 @@
 
 	> Das Problem ist, dass im verwendeten Image für den Webserver, wurde die db.php Datei bereits kopiert. Demnach ist der Servername für die Datenbank falsch konfiguriert. Das Problem könnte man entweder mit Environment Variables lösen, so dass der Servername im Compose file gesetzt wird, oder man könnte einen neuen Layer des Images erstellen, indem man ein Dockerfile erstellt und im `FROM` Abschnitt das vorherig genutzte Image referenziert.
 
-## B) Docker Compose: Cloud
+## B. Docker Compose: Cloud
 
 - info.php:
 
