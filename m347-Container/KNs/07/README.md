@@ -2,10 +2,10 @@
 
 > **Overview:**
 >
-> - [A - Terms and Concepts](#a---terms-and-concepts)
-> - [B - Demo Project](#b---demo-project)
+> - [A. Terms and Concepts](#a.-terms-and-concepts)
+> - [B. Demo Project](#b.-demo-project)
 
-## A - Terms and Concepts
+## A. Terms and Concepts
 
 ### Pods vs. Replicas
 
@@ -35,7 +35,7 @@ A `StatefulSet` manages _Pods_ with stable identity, persistence and orderd Star
 > [!NOTE]
 > Example: StatefulSet is used in Kafka-Cluster, where each Broker requires a personal ID and Storage.
 
-## B - Demo Project
+## B. Demo Project
 
 ### Difference to A
 
@@ -133,7 +133,8 @@ spec:
 #### Screenshots
 
 - Webapp:
-![Node 1](../../x-resources/07/node-1-result-2.png)
+
+	![Node 1](../../x-resources/07/node-1-result-2.png)
 
 - `kubectl describe service webapp-service`:
 
