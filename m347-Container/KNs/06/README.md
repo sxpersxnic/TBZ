@@ -4,13 +4,13 @@
 >	- [A - Installation](#a---installation)
 >	- [B - Understanding of Clusters](#b---understanding-of-clusters)
 
-## A - Installation
+## A. Installation
 
 ### Nodes
 
 ![List of master and connected nodes](../../x-resources/06/nodes.png)
 
-## B - Understanding of Clusters
+## B. Understanding of Clusters
 
 ### `microk8s` vs. `microk8s kubectl`
 
@@ -43,6 +43,7 @@ The Node was added as *Worker*. This means it is **not** part of the etcd-Cluste
 ### `microk8s kubectl get nodes` - Master vs. Worker
 
 ![Master](../../x-resources/06/master.png)
+
 ![Worker](../../x-resources/06/worker.png)
 
 The Worker node is not a node of the master at *172.31.0.10* while the other nodes are still master nodes.
