@@ -1,0 +1,43 @@
+---
+title: "Konzeptionelles Datenmodell"
+id: 793a2800-90c5-4942-8375-60d4f79c95a2
+---
+erDiagram
+	BAND {
+		string name
+		string genre
+		string country
+		int fans
+		date formationDate
+	}
+
+	ALBUM {
+		string title
+		date releaseDate
+		int sales
+	}
+
+	SONG {
+		string title
+		int duration
+		string lyrics
+	}
+
+	MEMBER {
+		string name
+		string instrument
+		int age
+	}
+
+	CONCERT {
+		string location
+		date date
+		int visitors
+		float ticketPrice
+	}
+
+	BAND ||--o{ ALBUM : produces
+	BAND ||--o{ CONCERT : performs
+	ALBUM ||--o{ SONG : contains
+	MEMBER ||--o{ BAND : "is member of"
+	SONG }o--o{ CONCERT : "performed in"
