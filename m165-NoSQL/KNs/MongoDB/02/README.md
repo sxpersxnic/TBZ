@@ -1,93 +1,68 @@
-# MongoDB 02: Datenmodellierung
+# MongoDB 02: Data Modelling
 
-## A. Konzeptionelles Datenmodell
+## A. Conceptual Data Model
 
-### Mermaid Markdown Diagramm
+### Diagram
 
-```mermaid
----
-title: "Konzeptionelles Datenmodell"
----
+![Conceptual Data Model](/m165-NoSQL/x-resources/m/02/conceptual.png)
 
-erDiagram
-	BAND {
-		string name
-		string genre
-		string country
-		int fans
-		date formationDate
-	}
+### Explanation
 
-	ALBUM {
-		string title
-		date releaseDate
-		int sales
-	}
+**Entities:**
+- **BAND**: Represents a musical group.
+- **MUSICIAN**: Represents a member of a band.
+- **ALBUM**: Represents a music album.
+- **SONG**: Represents a song.
 
-	SONG {
-		string title
-		int duration
-		string lyrics
-	}
+**Relationships:**
+- **BAND** employs **MUSICIAN**: A band can have multiple musicians.
+- **BAND** produces **ALBUM**: A band can produce multiple albums.
+- **ALBUM** contains **SONG**: An album can contain multiple songs.
+- **MUSICIAN** performs **SONG**: A musician can perform multiple songs.
+- **SONG** is performed by **MUSICIAN**: A song can be performed by multiple musicians.
 
-	MEMBER {
-		string name
-		string instrument
-		int age
-	}
+## B. Logical Data Model
 
-	CONCERT {
-		string location
-		date date
-		int visitors
-		float ticketPrice
-	}
+### Diagram
 
-	BAND ||--o{ ALBUM : produces
-	BAND ||--o{ CONCERT : performs
-	ALBUM ||--o{ SONG : contains
-	MEMBER ||--o{ BAND : "is member of"
-	SONG }o--o{ CONCERT : "performed in"
+**Original File:** [Logical Data Model](/m165-NoSQL/x-resources/m/02/logical-model.dmm)
 
-```
+![Logical Data Model](/m165-NoSQL/x-resources/m/02/logical.png)
 
-### Bild des Diagramms
+### Explanation
 
-![Konzeptionelles Datenmodell](/m165-NoSQL/x-resources/m/02/conceptual-data-model.png)
+- **BAND**:
+	- `id`: Unique identifier.
+	- `name`: Name of the band.
+	- `formed`: Date the band was formed.
+	- `genre`: Genre of the band.
+- **MUSICIAN**:
+	- `id`: Unique identifier.
+	- `name`: Name of the musician.
+	- `birth_date`: Date of birth of the musician.
+	- `instrument`: Instrument played by the musician.
+- **ALBUM**:
+	- `id`: Unique identifier.
+	- `title`: Title of the album.
+	- `release_date`: Release date of the album.
+	- `band_id`: Foreign key referencing the band.
+- **SONG**:
+	- `id`: Unique identifier.
+	- `title`: Title of the song.
+	- `duration`: Duration of the song in seconds.
+	- `album_id`: Foreign key referencing the album.
 
-### Erklärung der Entitäten
+**Relationships**:
+- **BAND** employs **MUSICIAN**: 1:N relationship.
+- **BAND** produces **ALBUM**: 1:N relationship.
+- **ALBUM** contains **SONG**: 1:N relationship.
+- **MUSICIAN** performs **SONG**: N:M relationship.
 
-- **BAND**
-  - **Beschreibung:** Repräsentiert eine Musikgruppe.
-  - **Attribute:**
-- **ALBUM**
-  - **Beschreibung:** Veröffentlichung einer Band.
-  - **Attribute:**
-- **SONG**
-  - **Beschreibung:** Repräsentiert eine Musikgruppe.
-  - **Attribute:**
-- **MEMBER**
-  - **Beschreibung:** Repräsentiert eine Musikgruppe.
-  - **Attribute:**
-- **CONCERT**
-  - **Beschreibung:** Repräsentiert eine Musikgruppe.
-  - **Attribute:**
 
-...
+## C. Physical Data Model
 
-## B. Logisches Modell für MongoDB
+- [Script for creating the database](./db-init.js)
 
-### Bild des logischen Modells
+### Screenshot
 
-![Logisches Modell](https://raw.githubusercontent.com/andreaskeller/m165-NoSQL/main/KNs/MongoDB/02/logical_model.png)
-
-### Original Datei
-
-- [Here](./model.drawio)
-
-### Erklärung des Modells
-
-...
-
-## C. Anwendung des Schemas in MongoDB
-
+![Collections in MongoDB Compass](/m165-NoSQL/x-resources/m/02/collections.png)

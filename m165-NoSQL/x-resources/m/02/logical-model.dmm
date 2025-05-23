@@ -1,0 +1,649 @@
+{
+	"tables": {
+		"feb44998-f74e-468c-a515-2790b1235eb1": {
+			"id": "feb44998-f74e-468c-a515-2790b1235eb1",
+			"visible": true,
+			"name": "Band",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "63409cc6-4a43-4a92-9c9b-9d5984b1372c",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "06539f67-f981-47b3-b788-672494babe9a",
+					"name": "name",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "822ba481-4284-4a3d-9e79-95c0bc456c09",
+					"name": "formed",
+					"datatype": "date",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "1ea96f32-6cfa-4f04-810b-ce1a05c2c6c2",
+					"name": "genre",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": false,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [
+				"1b9e1681-c5a8-4b99-baf0-8c3cbcefd17f",
+				"a6ea5076-0211-46f2-904e-95563d3d994b"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "c78b654c-37d4-42b6-a558-58baef2675f9",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "94698377-8d1a-4943-9a75-2f5fe1f9a429",
+							"colid": "63409cc6-4a43-4a92-9c9b-9d5984b1372c"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"082ae848-b612-4fad-ac09-be3d4a1636db": {
+			"id": "082ae848-b612-4fad-ac09-be3d4a1636db",
+			"visible": true,
+			"name": "Musician",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "81722c21-ed6c-4b87-b44f-44b1898f5cc0",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "64227ef0-a9a2-46db-a3aa-f9b4c06c0703",
+					"name": "name",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "8253ab5f-252d-4e81-95fa-24dfffa38faf",
+					"name": "birth_date",
+					"datatype": "date",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "c65a2310-3b5e-4764-aa46-48eb176eb6d2",
+					"name": "instrument",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "1e616320-08be-4ad2-abf8-1c7de6c2a023",
+					"name": "Band",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": true,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [
+				"a6ea5076-0211-46f2-904e-95563d3d994b"
+			],
+			"lines": [],
+			"keys": [
+				{
+					"id": "291cf748-146a-4fe0-8126-ed012a6c58d0",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "844592c1-4e82-455b-bc18-72cfee388a19",
+							"colid": "81722c21-ed6c-4b87-b44f-44b1898f5cc0"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"7d60cbcc-ac35-455e-b99a-f58ff3a633ff": {
+			"id": "7d60cbcc-ac35-455e-b99a-f58ff3a633ff",
+			"visible": true,
+			"name": "Album",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "d2164460-db16-4c00-bd47-33d96a56fd2a",
+					"name": "_id",
+					"datatype": "objectId",
+					"param": "",
+					"pk": true,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "31825031-cda4-4a89-b580-a7125a649fef",
+					"name": "title",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "ddb3b3f7-fffc-492c-9846-208811a14cfe",
+					"name": "release_date",
+					"datatype": "date",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "d6bcf811-0b81-4acd-b0cf-e0af18107f7d",
+					"name": "Band",
+					"datatype": "objectId",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": true,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "fbd2da98-ac7a-4186-820c-b66dbebb65bb",
+					"name": "songs",
+					"datatype": "d5328211-e0ff-4db6-8e72-60e54a1bc40d",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": true,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [
+				"1b9e1681-c5a8-4b99-baf0-8c3cbcefd17f"
+			],
+			"lines": [
+				"5be28334-2309-4a4f-9aa3-6d0a981f0c9a"
+			],
+			"keys": [
+				{
+					"id": "19895bcf-4d20-43f6-a8fe-943e984786d9",
+					"name": "Primary",
+					"isPk": true,
+					"cols": [
+						{
+							"id": "354fcd21-08fd-4734-a187-730dc2b5ebaf",
+							"colid": "d2164460-db16-4c00-bd47-33d96a56fd2a"
+						}
+					]
+				}
+			],
+			"indexes": [],
+			"embeddable": false,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		},
+		"d5328211-e0ff-4db6-8e72-60e54a1bc40d": {
+			"id": "d5328211-e0ff-4db6-8e72-60e54a1bc40d",
+			"visible": true,
+			"name": "object",
+			"desc": "",
+			"estimatedSize": "",
+			"cols": [
+				{
+					"id": "29d4c964-f93e-447e-b231-bfc857b343a7",
+					"name": "title",
+					"datatype": "string",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				},
+				{
+					"id": "8cca2cc5-d5ba-482d-909c-29c1fcb38924",
+					"name": "duration",
+					"datatype": "int",
+					"param": "",
+					"pk": false,
+					"nn": true,
+					"list": false,
+					"fk": false,
+					"comment": "",
+					"data": "",
+					"enum": "",
+					"validation": "",
+					"pattern": false,
+					"estimatedSize": "",
+					"any": ""
+				}
+			],
+			"relations": [],
+			"lines": [
+				"5be28334-2309-4a4f-9aa3-6d0a981f0c9a"
+			],
+			"keys": [
+				{
+					"id": "56a2fc77-0482-4993-a20f-549e90ac4154",
+					"name": "Primary",
+					"isPk": true,
+					"cols": []
+				}
+			],
+			"indexes": [],
+			"embeddable": true,
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"validationLevel": "na",
+			"validationAction": "na",
+			"collation": "",
+			"others": "",
+			"size": "",
+			"max": "",
+			"validation": "",
+			"capped": false
+		}
+	},
+	"relations": {
+		"1b9e1681-c5a8-4b99-baf0-8c3cbcefd17f": {
+			"id": "1b9e1681-c5a8-4b99-baf0-8c3cbcefd17f",
+			"name": "Band_Album",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "c78b654c-37d4-42b6-a558-58baef2675f9",
+			"parent": "feb44998-f74e-468c-a515-2790b1235eb1",
+			"child": "7d60cbcc-ac35-455e-b99a-f58ff3a633ff",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "4fda1f8b-6944-414a-badf-fb94c4c2c76f",
+					"parentcol": "63409cc6-4a43-4a92-9c9b-9d5984b1372c",
+					"childcol": "d6bcf811-0b81-4acd-b0cf-e0af18107f7d"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent",
+			"linegraphics": "default"
+		},
+		"a6ea5076-0211-46f2-904e-95563d3d994b": {
+			"id": "a6ea5076-0211-46f2-904e-95563d3d994b",
+			"name": "Band_Musician",
+			"desc": "",
+			"type": "identifying",
+			"parent_key": "c78b654c-37d4-42b6-a558-58baef2675f9",
+			"parent": "feb44998-f74e-468c-a515-2790b1235eb1",
+			"child": "082ae848-b612-4fad-ac09-be3d4a1636db",
+			"c_mp": "true",
+			"c_mch": "true",
+			"c_p": "one",
+			"c_ch": "many",
+			"c_cp": "",
+			"c_cch": "",
+			"cols": [
+				{
+					"id": "659442f0-d413-4794-9360-a5ed53e50a84",
+					"parentcol": "63409cc6-4a43-4a92-9c9b-9d5984b1372c",
+					"childcol": "1e616320-08be-4ad2-abf8-1c7de6c2a023"
+				}
+			],
+			"generate": true,
+			"generateCustomCode": true,
+			"customCode": "",
+			"relationColor": "transparent",
+			"linegraphics": "default"
+		}
+	},
+	"notes": {},
+	"lines": {
+		"5be28334-2309-4a4f-9aa3-6d0a981f0c9a": {
+			"id": "5be28334-2309-4a4f-9aa3-6d0a981f0c9a",
+			"name": "containment-line",
+			"desc": "",
+			"style": "dotted",
+			"parent": "7d60cbcc-ac35-455e-b99a-f58ff3a633ff",
+			"child": "d5328211-e0ff-4db6-8e72-60e54a1bc40d",
+			"parentTableColId": "fbd2da98-ac7a-4186-820c-b66dbebb65bb",
+			"childTableColId": "",
+			"lineColor": "transparent",
+			"markerStart": "diamondStart",
+			"markerEnd": "none",
+			"linegraphics": "default",
+			"generate": true,
+			"code": "",
+			"caption": ""
+		}
+	},
+	"model": {
+		"name": "logical-model",
+		"id": "a72ad379-95cd-439b-8452-82e9faa98fc3",
+		"activeDiagram": "e7fbcb9d-5b14-4945-8d21-21bc5e5350e7",
+		"desc": "",
+		"path": "",
+		"type": "MONGODB",
+		"version": 1,
+		"parentTableInFkCols": true,
+		"caseConvention": "under",
+		"replaceSpace": "_",
+		"color": "transparent",
+		"sideSelections": true,
+		"isDirty": true,
+		"storedin": {
+			"major": 10,
+			"minor": 0,
+			"extra": 0
+		},
+		"laststoredin": {
+			"major": 10,
+			"minor": 0,
+			"extra": 0
+		},
+		"writeFileParam": false,
+		"authorName": "",
+		"companyDetails": "",
+		"companyUrl": "",
+		"def_coltopk": true,
+		"def_validationLevel": "na",
+		"def_validationAction": "na",
+		"def_collation": "",
+		"def_others": "",
+		"connectionVersion": "",
+		"lastSaved": 1748004678455
+	},
+	"otherObjects": {},
+	"diagrams": {
+		"e7fbcb9d-5b14-4945-8d21-21bc5e5350e7": {
+			"name": "Main Diagram",
+			"description": "",
+			"id": "e7fbcb9d-5b14-4945-8d21-21bc5e5350e7",
+			"keysgraphics": true,
+			"linegraphics": "detailed",
+			"zoom": 1,
+			"background": "transparent",
+			"lineColor": "transparent",
+			"isOpen": true,
+			"main": true,
+			"diagramItems": {
+				"feb44998-f74e-468c-a515-2790b1235eb1": {
+					"referencedItemId": "feb44998-f74e-468c-a515-2790b1235eb1",
+					"x": 76,
+					"y": 245,
+					"gHeight": 99,
+					"gWidth": 176,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"082ae848-b612-4fad-ac09-be3d4a1636db": {
+					"referencedItemId": "082ae848-b612-4fad-ac09-be3d4a1636db",
+					"x": 399,
+					"y": 232,
+					"gHeight": 117,
+					"gWidth": 203,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"7d60cbcc-ac35-455e-b99a-f58ff3a633ff": {
+					"referencedItemId": "7d60cbcc-ac35-455e-b99a-f58ff3a633ff",
+					"x": 52,
+					"y": 425,
+					"gHeight": 117,
+					"gWidth": 205,
+					"color": "#ffffff",
+					"background": "#03a9f4",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				},
+				"d5328211-e0ff-4db6-8e72-60e54a1bc40d": {
+					"referencedItemId": "d5328211-e0ff-4db6-8e72-60e54a1bc40d",
+					"x": 357,
+					"y": 515,
+					"gHeight": 63,
+					"gWidth": 173,
+					"color": "transparent",
+					"background": "transparent",
+					"resized": false,
+					"autoExpand": true,
+					"backgroundOpacity": "10",
+					"collapsed": false
+				}
+			},
+			"scroll": {
+				"x": 0,
+				"y": 0
+			},
+			"type": "erd",
+			"showHorizontal": true,
+			"showDescriptions": true,
+			"showIndicators": true,
+			"showProgress": true,
+			"lineWidth": "2",
+			"boxSize": "0",
+			"boxSpacing": "2",
+			"boxAlign": "center",
+			"showIndicatorCaptions": true,
+			"showEstimatedSize": false,
+			"showSchemaContainer": true,
+			"showEmbeddedInParents": true,
+			"showCardinalityCaptions": true,
+			"showRelationshipNames": false,
+			"showLineCaptions": false,
+			"showColumns": true,
+			"showColumnDataTypes": true,
+			"showSampleData": false,
+			"showTableIndexes": true,
+			"showTableDescriptions": false,
+			"showRelations": true,
+			"backgroundImage": "na",
+			"descriptionsColor": "transparent",
+			"embeddedSpacing": "2",
+			"showMainIcon": true,
+			"showLabels": true,
+			"showCustomizations": false,
+			"showExportDimensions": false,
+			"showCompleted": true
+		}
+	},
+	"diagramsOrder": [],
+	"order": [],
+	"collapsedTreeItems": [],
+	"reverseStats": {}
+}
