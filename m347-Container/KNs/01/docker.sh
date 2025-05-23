@@ -43,7 +43,7 @@ docker rmi $(docker images -q) # Removes all images
 
 # D) Private Repository
 docker_hub_username=""
-docker login -u ${docker_hub_username} --password-stdin # Logs into Docker Hub with the provided username and password
+docker login -u ${docker_hub_username} # Logs into Docker Hub with the provided username and password
 
 docker pull nginx:latest # Pulls the latest NGINX image
 docker tag nginx:latest ${docker_hub_username}/m347:nginx # Tags the NGINX image with the repository m347
