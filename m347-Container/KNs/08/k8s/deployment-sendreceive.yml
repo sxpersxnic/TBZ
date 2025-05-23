@@ -33,5 +33,6 @@ spec:
     selector:
         app: kn08-sendreceive
     ports:
-        - port: 8003
+        - protocol: TCP
+          port: 8003
           targetPort: 8003

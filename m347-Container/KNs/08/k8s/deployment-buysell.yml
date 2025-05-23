@@ -33,5 +33,6 @@ spec:
     selector:
         app: kn08-buysell
     ports:
-        - port: 8002
+        - protocol: TCP
+          port: 8002
           targetPort: 8002
