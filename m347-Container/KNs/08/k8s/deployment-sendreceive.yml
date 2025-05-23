@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: kn08-sendreceive
+    namespace: kn08
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: kn08-sendreceive
+    template:
+        metadata:
+            labels:
+                app: kn08-sendreceive
+        spec:
+            containers:
+                - name: kn08-sendreceive
+                  image: sxnic/kn08-sendreceive:v2
+                  ports:
+                      - containerPort: 8003
+                  env:
+                      - name: PORT
+                        value: "8003"
+                      - name: ACCOUNT_SERVICE_URL
+                        value: "http://kn08-account.kn08.svc.cluster.local:8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: kn08-sendreceive
+    namespace: kn08
+spec:
+    selector:
+        app: kn08-sendreceive
+    ports:
+        - port: 8003
+          targetPort: 8003

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: kn08-account
+    namespace: kn08
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: kn08-account
+    template:
+        metadata:
+            labels:
+                app: kn08-account
+        spec:
+            containers:
+                - name: account
+                  image: sxnic/kn08-account:v2
+                  ports:
+                      - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: kn08-account
+    namespace: kn08
+spec:
+    selector:
+        app: kn08-account
+    ports:
+        - port: 8080
+          targetPort: 8080
