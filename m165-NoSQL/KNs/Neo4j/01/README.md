@@ -8,7 +8,7 @@
 
 ### Diagram
 
-- [Original File](/m165-NoSQL/x-resources/n/01/logical-model)
+- [Original File](/m165-NoSQL/x-resources/n/01/logical-model.drawio)
 - **Diagram:**
 
   ![Image of logical model](/m165-NoSQL/x-resources/n/01/logical-model.png)
