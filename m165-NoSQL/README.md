@@ -17,7 +17,7 @@
 
 ### MongoDB
 
-- [X] [KN-M-01](KNs/MongoDB/01)
+- [x] [KN-M-01](KNs/MongoDB/01)
 - [x] [KN-M-02](KNs/MongoDB/02)
 - [x] [KN-M-03](KNs/MongoDB/03)
 - [ ] [KN-M-04](KNs/MongoDB/04)
@@ -27,7 +27,7 @@
 
 ### Neo4j
 
-- [ ] [KN-N-01](KNs/Neo4j/01)
+- [x] [KN-N-01](KNs/Neo4j/01)
 - [ ] [KN-N-02](KNs/Neo4j/02)
 - [ ] [KN-N-03](KNs/Neo4j/03)
 
@@ -42,7 +42,9 @@
 
 ## Roadmap
 
-- [X] [KN-M-01](KNs/MongoDB/01)
+- [x] [KN-M-01](KNs/MongoDB/01)
 - [x] [KN-M-02](KNs/MongoDB/02)
 - [x] [KN-M-03](KNs/MongoDB/03)
-- [ ] [KN-N-01](KNs/Neo4j/01)
+- [x] [KN-N-01](KNs/Neo4j/01)
+- [ ] [KN-N-02](KNs/Neo4j/02)
+- [ ] [KN-C-01](KNs/Cassandra/01)
