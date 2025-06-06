@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-    name: kn08-frontend-env
+    name: frontend-env
     namespace: kn08
 data:
-    REACT_APP_ACCOUNT_HOLDINGS: "http://kn08-account.kn08.svc.cluster.local:8080/Account/Cryptos/?userid=<userid>"
-    REACT_APP_ACCOUNT_FRIENDS: "http://kn08-account.kn08.svc.cluster.local:8080/Account/Friends/?userid=<userid>"
-    REACT_APP_BUYSELL_BUY: "http://kn08-buysell.kn08.svc.cluster.local:8002/buy"
-    REACT_APP_BUYSELL_SELL: "http://kn08-buysell.kn08.svc.cluster.local:8002/sell"
-    REACT_APP_SENDRECEIVE_SEND: "http://kn08-sendreceive.kn08.svc.cluster.local:8003/send"
+    REACT_APP_ACCOUNT_HOLDINGS: "http://127.0.0.1:8080/Account/Cryptos/?userid=<userid>"
+    REACT_APP_ACCOUNT_FRIENDS: "http://127.0.0.1:8080/Account/Friends/?userid=<userid>"
+    REACT_APP_BUYSELL_BUY: "http://127.0.0.1:8002/buy"
+    REACT_APP_BUYSELL_SELL: "http://127.0.0.1:8002/sell"
+    REACT_APP_SENDRECEIVE_SEND: "http://127.0.0.1:8003/send"
     REACT_APP_USER_LOGGED_IN: "1"

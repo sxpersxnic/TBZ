@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: buysell-env
+    namespace: kn08
+data:
+    port: "8002"

@@ -1,17 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: kn08-frontend
+    name: frontend-deployment
     namespace: kn08
+    labels:
+        app: frontend
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: kn08-frontend
+            app: frontend
     template:
         metadata:
             labels:
-                app: kn08-frontend
+                app: frontend
         spec:
             containers:
                 - name: frontend
@@ -20,17 +22,17 @@ spec:
                       - containerPort: 3000
                   envFrom:
                       - configMapRef:
-                          name: kn08-frontend-env
+                          name: frontend-env
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: kn08-frontend
+    name: frontend-service
     namespace: kn08
 spec:
     type: NodePort
     selector:
-        app: kn08-frontend
+        app: frontend
     ports:
         - protocol: TCP
           port: 3000
