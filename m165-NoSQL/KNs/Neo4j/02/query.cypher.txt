@@ -1,0 +1,18 @@
+MATCH (n)
+OPTIONAL MATCH (n)-[r]->(m)
+RETURN n, r, m
+
+MATCH (a:Actor {name: 'Leonardo DiCaprio'})-[:ACTED_IN]->(m:Movie)
+RETURN m.title, m.releaseYear
+
+MATCH (d:Director)-[:DIRECTED]->(m:Movie)
+WHERE m.releaseYear > 2000
+RETURN DISTINCT d.name
+
+MATCH (a:Actor)
+WHERE NOT (a)-[:ACTED_IN]->(:Movie {title: 'Titanic'})
+RETURN a.name
+
+MATCH (m:Movie)
+OPTIONAL MATCH (d:Director)-[:DIRECTED]->(m)
+RETURN m.title, d.name

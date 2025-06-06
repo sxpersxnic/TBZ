@@ -1,0 +1,36 @@
+CREATE
+  // Actors
+  (a1:Actor {name: 'Leonardo DiCaprio', birthYear: 1974}),
+  (a2:Actor {name: 'Kate Winslet', birthYear: 1975}),
+  (a3:Actor {name: 'Brad Pitt', birthYear: 1963}),
+  (a4:Actor {name: 'Morgan Freeman', birthYear: 1937}),
+  (a5:Actor {name: 'Tom Hanks', birthYear: 1956}),
+
+  // Movies
+  (m1:Movie {title: 'Titanic', releaseYear: 1997}),
+  (m2:Movie {title: 'Inception', releaseYear: 2010}),
+  (m3:Movie {title: 'Fight Club', releaseYear: 1999}),
+  (m4:Movie {title: 'The Shawshank Redemption', releaseYear: 1994}),
+  (m5:Movie {title: 'Forrest Gump', releaseYear: 1994}),
+
+  // Directors
+  (d1:Director {name: 'James Cameron', birthYear: 1954}),
+  (d2:Director {name: 'Christopher Nolan', birthYear: 1970}),
+  (d3:Director {name: 'David Fincher', birthYear: 1962}),
+  (d4:Director {name: 'Frank Darabont', birthYear: 1959}),
+  (d5:Director {name: 'Robert Zemeckis', birthYear: 1951}),
+
+  // Relationships: Actor acts in Movie
+  (a1)-[:ACTED_IN]->(m1),
+  (a2)-[:ACTED_IN]->(m1),
+  (a1)-[:ACTED_IN]->(m2),
+  (a3)-[:ACTED_IN]->(m3),
+  (a4)-[:ACTED_IN]->(m4),
+  (a5)-[:ACTED_IN]->(m5),
+
+  // Relationships: Director directs Movie
+  (d1)-[:DIRECTED]->(m1),
+  (d2)-[:DIRECTED]->(m2),
+  (d3)-[:DIRECTED]->(m3),
+  (d4)-[:DIRECTED]->(m4),
+  (d5)-[:DIRECTED]->(m5)

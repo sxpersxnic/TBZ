@@ -48,3 +48,11 @@
 - [x] [KN-N-01](KNs/Neo4j/01)
 - [ ] [KN-N-02](KNs/Neo4j/02)
 - [ ] [KN-C-01](KNs/Cassandra/01)
+
+# ACID (SQL) vs. BASE (NoSQL)
+
+> ACID (Atomicity, Consistency, Isolation, Durability) is a set of properties that guarantee reliable processing of database transactions. BASE (Basically Available, Soft state, Eventually consistent) is an alternative to ACID that allows for more flexibility and scalability in distributed systems.
+
+# CAP Theorem
+
+> The CAP theorem states that a distributed data store can only provide two of the following three guarantees at the same time: consistency, availability, and partition tolerance.
