@@ -1,0 +1,29 @@
+// use band_mgmt;
+
+// 1. User with read-only access. authDB: band_mgmt
+// Test: mongo "mongodb://readonlyUser:readonly123@165.ieh5rli.mongodb.net/band_mgmt?authSource=band_mgmt"
+db.createUser({
+	user: "readonlyUser",
+	pwd: "readonlyPassword",
+	roles: [
+		{
+			role: "read",
+			db: "band_mgmt"
+		}
+	]
+});
+
+// use admin;
+
+// 2. User with read and write access. authDB: band_mgmt
+// Test: mongo "mongodb://rwUser:rw123@165.ieh5rli.mongodb.net/band_mgmt?authSource=admin"
+db.createUser({
+	user: "rwUser",
+	pwd: "rwPassword",
+	roles: [
+		{
+			role: "readWrite",
+			db: "band_mgmt"
+		}
+	]
+});
