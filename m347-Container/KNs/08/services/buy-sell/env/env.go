@@ -8,12 +8,20 @@ import (
 )
 
 func GetAccountServiceURL() string {
-	accountUrl := os.Getenv("ACCOUNT_SERVICE_URL")
+	accountHost := os.Getenv("ACCOUNT_SERVICE_HOST")
+	accountPort := os.Getenv("ACCOUNT_SERVICE_PORT")
 
-	if accountUrl == "" {
-		log.Println("ACCOUNT_SERVICE_URL not set, defaulting to http://account:8080")
-		accountUrl = "http://account:8080"
+	if accountHost == "" {
+		log.Println("ACCOUNT_SERVICE_HOST not set, defaulting to localhost")
+		accountUrl = "localhost"
 	}
+
+	if accountPort == "" {
+		log.Println("ACCOUNT_SERVICE_PORT not set, defaulting to 8080")
+		accountUrl = "8080"
+	}
+
+	accountUrl := fmt.Sprintf("%s:%s", accountHost, accountPort)
 
 	return accountUrl
 }

@@ -1,4 +1,8 @@
-const sendUrl = process.env.REACT_APP_SENDRECEIVE_SEND;
+const sendHost = process.env.REACT_APP_SENDRECEIVE_HOST;
+const sendPort = process.env.REACT_APP_SENDRECEIVE_PORT;
+const sendReceiveUrl = "http://" + sendHost + ":" + sendPort;
+
+const sendUrl = sendReceiveUrl + "/send";
 
 /**
  * @param {number} receiverId 
