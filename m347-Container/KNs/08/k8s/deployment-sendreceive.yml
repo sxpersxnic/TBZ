@@ -24,11 +24,16 @@ spec:
                             configMapKeyRef:
                                 name: sendreceive-config
                                 key: sendreceive-port
-                      - name: ACCOUNT_SERVICE_URL
+                      - name: ACCOUNT_SERVICE_HOST
                         valueFrom:
                             configMapKeyRef:
                                 name: account-config
-                                key: account-url
+                                key: account-host
+                      - name: ACCOUNT_SERVICE_PORT
+                        valueFrom:
+                            configMapKeyRef:
+                                name: account-config
+                                key: account-port
 ---
 apiVersion: v1
 kind: Service

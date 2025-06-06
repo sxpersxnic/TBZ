@@ -4,5 +4,5 @@ metadata:
     name: buysell-config
     namespace: kn08
 data:
+    buysell-host: buysell-service
     buysell-port: "8002"
-    buysell-url: buysell-service

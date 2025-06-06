@@ -4,5 +4,5 @@ metadata:
     name: sendreceive-config
     namespace: kn08
 data:
+    sendreceive-host: sendreceive-service
     sendreceive-port: "8003"
-    sendreceive-url: sendreceive-service

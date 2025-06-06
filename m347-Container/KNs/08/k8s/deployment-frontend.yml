@@ -20,9 +20,42 @@ spec:
                   image: sxnic/kn08-frontend:v1
                   ports:
                       - containerPort: 3000
-                  envFrom:
-                      - configMapRef:
+                  env:
+                    - name: REACT_APP_ACCOUNT_HOST
+                      valueFrom:
+                        configMapKeyRef:
+                          name: account-config
+                          key: account-host
+                    - name: REACT_APP_ACCOUNT_PORT
+                      valueFrom:
+                        configMapKeyRef:
+                          name: account-config
+                          key: account-port
+                    - name: REACT_APP_BUYSELL_HOST
+                      valueFrom:
+                        configMapKeyRef:
+                          name: buysell-config
+                          key: buysell-host
+                    - name: REACT_APP_BUYSELL_PORT
+                      valueFrom:
+                        configMapKeyRef:
+                          name: buysell-config
+                          key: buysell-port
+                    - name: REACT_APP_SENDRECEIVE_HOST
+                      valueFrom:
+                        configMapKeyRef:
+                          name: sendreceive-config
+                          key: sendreceive-host
+                    - name: REACT_APP_SENDRECEIVE_PORT
+                      valueFrom:
+                        configMapKeyRef:
+                          name: sendreceive-config
+                          key: sendreceive-port
+                    - name: REACT_APP_USER_LOGGED_IN
+                      valueFrom:
+                        configMapKeyRef:
                           name: frontend-config
+                          key: logged-in-user-id
 ---
 apiVersion: v1
 kind: Service

@@ -4,4 +4,5 @@ metadata:
     name: account-config
     namespace: kn08
 data:
-    account-url: account-service
+    account-host: account-service
+    account-port: "8080"
