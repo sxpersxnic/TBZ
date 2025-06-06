@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-    name: frontend-env
+    name: frontend-config
     namespace: kn08
 data:
-    REACT_APP_ACCOUNT_HOLDINGS: "http://127.0.0.1:8080/Account/Cryptos/?userid=<userid>"
+    REACT_APP_ACCOUNT_HOLDINGS: "http://account-service/Account/Cryptos/?userid=<userid>"
     REACT_APP_ACCOUNT_FRIENDS: "http://127.0.0.1:8080/Account/Friends/?userid=<userid>"
-    REACT_APP_BUYSELL_BUY: "http://127.0.0.1:8002/buy"
+    REACT_APP_BUYSELL_BUY: "http://buysell-service/buy"
     REACT_APP_BUYSELL_SELL: "http://127.0.0.1:8002/sell"
     REACT_APP_SENDRECEIVE_SEND: "http://127.0.0.1:8003/send"
     REACT_APP_USER_LOGGED_IN: "1"

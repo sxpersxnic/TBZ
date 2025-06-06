@@ -21,14 +21,14 @@ spec:
                   env:
                       - name: PORT
                         valueFrom:
-                            configMapRef:
-                                name: sendreceive-env
-                                key: port
+                            configMapKeyRef:
+                                name: sendreceive-config
+                                key: sendreceive-port
                       - name: ACCOUNT_SERVICE_URL
                         valueFrom:
-                            configMapRef:
-                                name: account-env
-                                key: url
+                            configMapKeyRef:
+                                name: account-config
+                                key: account-url
 ---
 apiVersion: v1
 kind: Service

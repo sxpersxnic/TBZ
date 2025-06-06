@@ -23,14 +23,14 @@ spec:
                   env:
                       - name: PORT
                         valueFrom:
-                            configMapRef:
-                                name: buysell-env
-                                key: port
+                            configMapKeyRef:
+                                name: buysell-config
+                                key: buysell-port
                       - name: ACCOUNT_SERVICE_URL
                         valueFrom:
-                            configMapRef:
-                                name: account-env
-                                key: url
+                            configMapKeyRef:
+                                name: account-config
+                                key: account-url
 ---
 apiVersion: v1
 kind: Service
