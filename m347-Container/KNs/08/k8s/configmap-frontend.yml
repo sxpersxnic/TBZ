@@ -4,8 +4,8 @@ metadata:
     name: frontend-config
     namespace: kn08
 data:
-    REACT_APP_ACCOUNT_HOLDINGS: "http://10.1.57.218:8080/Account/Cryptos/?userid="
-    REACT_APP_ACCOUNT_FRIENDS: "http://10.1.57.218:8080/Account/Friends/?userid="
+    REACT_APP_ACCOUNT_HOLDINGS: "http://10.1.57.218:8080/Account/Cryptos/?userid=1"
+    REACT_APP_ACCOUNT_FRIENDS: "http://10.1.57.218:8080/Account/Friends/?userid=1"
     REACT_APP_BUYSELL_BUY: "http://10.1.187.150:8002/buy"
     REACT_APP_BUYSELL_SELL: "http://10.1.187.150:8002/sell"
     REACT_APP_SENDRECEIVE_SEND: "http://10.1.29.87:8003/send"
