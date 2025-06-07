@@ -6,9 +6,9 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/buy-sell/api"
-	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/buy-sell/env"
-	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/buy-sell/config"
+	"github.com/sxpersxnic/buy-sell/api"
+	"github.com/sxpersxnic/buy-sell/env"
+	"github.com/sxpersxnic/buy-sell/config"
 )
 
 type Transaction struct {
