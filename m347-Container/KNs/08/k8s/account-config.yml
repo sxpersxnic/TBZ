@@ -4,4 +4,4 @@ metadata:
   name: account-config
   namespace: kn08
 data:
-	account-url: "http://account-service.kn08.svc.cluster.local"
+  account-url: "http://account-service.kn08.svc.cluster.local"

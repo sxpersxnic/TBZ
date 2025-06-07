@@ -30,13 +30,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-	name: sendreceive-service
-	namespace: kn08
+  name: sendreceive-service
+  namespace: kn08
 spec:
-	type: ClusterIP
-	selector:
-		app: sendreceive
+  type: ClusterIP
+  selector:
+    app: sendreceive
 	ports:
-		- protocol: TCP
-			port: 80
-			targetPort: 8080
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
