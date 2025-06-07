@@ -84,6 +84,8 @@ db.createCollection("albums", {
   }
 });
 
+/* -------------------------------------------------------------------- */
+
 // Sample Data
 const bandId = ObjectId();
 db.bands.insertOne({

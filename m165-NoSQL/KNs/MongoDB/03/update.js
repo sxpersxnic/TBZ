@@ -5,6 +5,8 @@ db.bands.updateOne(
   { $set: { genre: "Alternative Rock" } }
 );
 
+/* -------------------------------------------------------------------- */
+
 db.musicians.updateMany(
   {
     $or: [
@@ -16,6 +18,8 @@ db.musicians.updateMany(
     $set: { instrument: "Vocals & Guitar" }
   }
 );
+
+/* -------------------------------------------------------------------- */
 
 db.albums.replaceOne(
   { title: "Nevermind" },

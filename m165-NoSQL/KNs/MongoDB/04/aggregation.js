@@ -10,7 +10,6 @@ db.bands.aggregate([
 
 /* -------------------------------------------------------------------- */
 
-
 // 2. aggregation with $match, $project, $sort, return of several documents
 // Explanation: Filters guitarists, shows only relevant fields without _id,
 // and sorts in ascending order by date of birth.
@@ -21,7 +20,6 @@ db.musicians.aggregate([
 ]);
 
 /* -------------------------------------------------------------------- */
-
 
 // 3. aggregation with $sum for counting (count)
 // Explanation: Groups albums by band ID and counts albums.

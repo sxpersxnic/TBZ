@@ -9,6 +9,8 @@ db.bands.insertMany([
 	{ _id: bandId3, name: "The Rolling Stones", formed: new Date("1962-07-12"), genre: "Rock" }
 ]);
 
+/* -------------------------------------------------------------------- */
+
 const musicianId1 = new ObjectId();
 const musicianId2 = new ObjectId();
 const musicianId3 = new ObjectId();
@@ -17,6 +19,8 @@ db.musicians.insertMany([
 	{ _id: musicianId2, name: "John Lennon", birth_date: new Date("1940-10-09"), instrument: "Vocals/Guitar", Band: bandId2 },
 	{ _id: musicianId3, name: "Mick Jagger", birth_date: new Date("1943-07-26"), instrument: "Vocals", Band: bandId3 }
 ]);
+
+/* -------------------------------------------------------------------- */
 
 const albumId1 = new ObjectId();
 const albumId2 = new ObjectId();
@@ -73,6 +77,8 @@ db.albums.insertMany([
 		]
 	}
 ]);
+
+/* -------------------------------------------------------------------- */
 
 db.albums.insertOne({
 	_id: albumId4,
