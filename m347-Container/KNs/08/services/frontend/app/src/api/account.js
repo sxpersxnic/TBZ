@@ -1,6 +1,4 @@
-const accountHost = process.env.REACT_APP_ACCOUNT_HOST;
-const accountPort = process.env.REACT_APP_ACCOUNT_PORT;
-const accountUrl = "http://" + accountHost + ":" + accountPort;
+const accountUrl = process.env.REACT_APP_ACCOUNT_URL;
 const holdingsUrl = accountUrl + "/Account/Cryptos/?userid=<userId>";
 const friendsUrl = accountUrl + "/Account/Friends/?userid=<userId>";
 
