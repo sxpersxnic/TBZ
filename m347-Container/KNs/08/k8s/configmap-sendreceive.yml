@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-    name: sendreceive-config
-    namespace: kn08
-data:
-    sendreceive-host: sendreceive-service
-    sendreceive-port: "8003"

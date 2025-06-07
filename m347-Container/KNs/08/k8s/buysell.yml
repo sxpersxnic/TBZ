@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buysell-deployment
+  namespace: kn08
+  labels:
+		app: buysell
+spec:
+	replicas: 1
+	selector:
+		matchLabels:
+			app: buysell
+	template:
+		metadata:
+			labels:
+				app: buysell
+		spec:
+			containers:
+				- name: buysell
+					image: sxnic/kn08-buysell:latest
+					ports:
+						- containerPort: 8080
+				env:
+					- name: ACCOUNT_SERVICE_URL
+						valueFrom:
+							configMapKeyRef:
+								name: account-config
+								key: account-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+	name: buysell-service
+	namespace: kn08
+spec:
+	type: ClusterIP
+	selector:
+		app: buysell
+	ports:
+		- protocol: TCP
+			port: 80
+			targetPort: 8080

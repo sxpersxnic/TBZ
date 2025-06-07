@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: kn08
+data:
+    user-id: "1"
