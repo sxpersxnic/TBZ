@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sendreceive-config
+  namespace: kn08
+data:
+	sendreceive-url: "http://sendreceive-service.kn08.svc.cluster.local"

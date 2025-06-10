@@ -1,5 +1,6 @@
-const holdingsUrl = process.env.REACT_APP_ACCOUNT_HOLDINGS;
-const friendsUrl = process.env.REACT_APP_ACCOUNT_FRIENDS;
+const accountUrl = process.env.REACT_APP_ACCOUNT_URL;
+const holdingsUrl = accountUrl + "/Account/Cryptos/?userid=<userId>";
+const friendsUrl = accountUrl + "/Account/Friends/?userid=<userId>";
 
 /**
  * @param {number} uid 
@@ -15,7 +16,7 @@ function holdingsApiRequest(uid) {
     return fetch(theUrl, requestOptions)
         .then(response => response.json())
         .catch(error => {
-            alert("Failed to call the URL. Is the api up and running?");
+            alert("Failed to call the Account URL. Is the api up and running?");
         });
 }
 
@@ -33,7 +34,7 @@ function friendsApiRequest(uid) {
     return fetch(theUrl, requestOptions)
         .then(response => response.json())
         .catch(error => {
-            alert("Failed to call the URL. Is the api up and running?");
+            alert("Failed to call the Account URL. Is the api up and running?");
         });
 }
 

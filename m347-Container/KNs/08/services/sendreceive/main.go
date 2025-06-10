@@ -6,9 +6,9 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/send-receive/api"
-	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/send-receive/config"
-	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/send-receive/env"
+	"github.com/sxpersxnic/send-receive/api"
+	"github.com/sxpersxnic/send-receive/config"
+	"github.com/sxpersxnic/send-receive/env"
 )
 
 type Transaction struct {

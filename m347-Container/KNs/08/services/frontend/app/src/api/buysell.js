@@ -1,5 +1,6 @@
-const buyUrl = process.env.REACT_APP_BUYSELL_BUY;
-const sellUrl = process.env.REACT_APP_BUYSELL_SELL;
+const buySellUrl = process.env.REACT_APP_BUYSELL_URL;
+const buyUrl = buySellUrl + "/buy";
+const sellUrl = buySellUrl + "/sell";
 
 /**
  * @param {number} uid

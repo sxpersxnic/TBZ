@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sendreceive-deployment
+  namespace: kn08
+  labels:
+		app: sendreceive
+spec:
+	replicas: 1
+	selector:
+		matchLabels:
+			app: sendreceive
+	template:
+		metadata:
+			labels:
+				app: sendreceive
+		spec:
+			containers:
+				- name: sendreceive
+					image: sxnic/kn08-sendreceive:latest
+					ports:
+						- containerPort: 8080
+				env:
+					- name: ACCOUNT_SERVICE_URL
+						valueFrom:
+							configMapKeyRef:
+								name: account-config
+								key: account-url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sendreceive-service
+  namespace: kn08
+spec:
+  type: ClusterIP
+  selector:
+    app: sendreceive
+	ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
