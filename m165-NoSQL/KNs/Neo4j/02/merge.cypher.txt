@@ -1,0 +1,2 @@
+MERGE (a:Actor {name: 'Morgan Freeman'})
+RETURN a

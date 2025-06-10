@@ -11,26 +11,26 @@ func GetAccountServiceURL() string {
 	accountUrl := os.Getenv("ACCOUNT_SERVICE_URL")
 
 	if accountUrl == "" {
-		log.Println("ACCOUNT_SERVICE_URL not set, defaulting to http://account:8080")
-		accountUrl = "http://account:8080"
+		log.Println("ACCOUNT_SERVICE_URL not set, defaulting to 'http://account-service.kn08.svc.cluster.local'")
+		accountUrl = "http://account-service.kn08.svc.cluster.local"
 	}
 
 	return accountUrl
 }
 
 func GetHost() string {
-	return fmt.Sprintf("0.0.0.0%s", GetPort())
+	return fmt.Sprintf("0.0.0.0:%s", GetPort())
 }
 
 func GetPort() string {
-	portNum := os.Getenv("PORT")
+	port := os.Getenv("PORT")
 
-	if portNum == "" {
-		log.Println("PORT not set, defaulting to 8003")
-		portNum = "8003"
+	if port == "" {
+		log.Println("PORT not set, defaulting to 8080")
+		port = "8080"
 	}
 
-	return fmt.Sprintf(":%s", portNum)
+	return port
 }
 
 func Load() {

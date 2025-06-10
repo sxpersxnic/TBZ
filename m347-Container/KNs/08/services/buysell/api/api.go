@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/sxperlinx/TBZ/m347-Container/KNs/08/buy-sell/env"
+	"github.com/sxpersxnic/buy-sell/env"
 )
 
 func AddCrypto(c *gin.Context, userId int, amount int) bool {

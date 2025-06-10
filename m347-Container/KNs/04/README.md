@@ -50,3 +50,11 @@
 	> [db.php](/m347-Container/x-resources/04/db-php-c.png)
 
 - Cloud-Init: [docker-cloud-init.yml](./.docker/docker-cloud-init.yml)
+
+- **Screenshot:** info.php
+
+	> ![Screenshot of info.php](/m347-Container/x-resources/04/info-php-cloud.png)
+
+- **Screenshot:** db.php
+
+	> ![Screenshot of db.php](/m347-Container/x-resources/04/db-php-cloud.png)

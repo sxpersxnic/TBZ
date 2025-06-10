@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: buysell-config
+  namespace: kn08
+data:
+	buysell-url: "http://buysell-service.kn08.svc.cluster.local"

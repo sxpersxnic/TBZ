@@ -19,7 +19,6 @@ WORKDIR /app
 
 COPY --from=builder /usr/local/bin/app .
 
-ARG PORT
 ARG ACCOUNT_SERVICE_URL
 
 ENV	GIN_MODE=release

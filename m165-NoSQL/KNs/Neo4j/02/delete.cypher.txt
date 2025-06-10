@@ -1,0 +1,5 @@
+MATCH (a:Actor {name: 'Brad Pitt'})
+DELETE a
+
+MATCH (a:Actor {name: 'Brad Pitt'})
+DETACH DELETE a

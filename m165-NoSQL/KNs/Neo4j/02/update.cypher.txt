@@ -1,0 +1,12 @@
+MATCH (a:Actor {name: 'Tom Hanks'})
+SET a.birthYear = 1957
+RETURN a.name, a.birthYear
+
+MATCH (d:Director {name: 'Christopher Nolan'})
+CREATE (m:Movie {title: 'Interstellar', releaseYear: 2014})
+CREATE (d)-[:DIRECTED]->(m)
+RETURN m.title, d.name
+
+MATCH (m:Movie {title: 'Fight Club'})
+SET m.title = 'Fight Club (1999)'
+RETURN m.title

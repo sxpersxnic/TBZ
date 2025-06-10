@@ -1,0 +1,2 @@
+UNWIND ['Leonardo DiCaprio', 'Kate Winslet', 'Brad Pitt'] AS actorName
+CREATE (:Actor {name: actorName})

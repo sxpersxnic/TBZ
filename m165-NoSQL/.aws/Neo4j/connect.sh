@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-EC2_IP='3.225.21.238'
+EC2_IP='52.204.228.129'
 USER='ubuntu'
 
 # Connect to the EC2 instance

@@ -1,4 +1,5 @@
-const sendUrl = process.env.REACT_APP_SENDRECEIVE_SEND;
+const sendReceiveUrl = process.env.REACT_APP_SENDRECEIVE_URL;
+const sendUrl = sendReceiveUrl + "/send";
 
 /**
  * @param {number} receiverId 
