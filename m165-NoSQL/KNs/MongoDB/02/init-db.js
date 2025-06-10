@@ -1,4 +1,4 @@
-use band_mgmt;
+// use band_mgmt;
 
 db.createCollection("bands", {
   validator: {
@@ -12,6 +12,9 @@ db.createCollection("bands", {
         },
         "formed": {
           "bsonType": "date"
+        },
+        "origin": {
+          "bsonType": "string"
         },
         "genre": {
           "bsonType": "string"
@@ -80,6 +83,8 @@ db.createCollection("albums", {
     }
   }
 });
+
+/* -------------------------------------------------------------------- */
 
 // Sample Data
 const bandId = ObjectId();
