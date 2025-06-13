@@ -27,10 +27,11 @@ metadata:
   name: account-service
   namespace: kn08
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: account
   ports:
     - protocol: TCP
       port: 8080
       targetPort: 8080
+      nodePort: 30081
