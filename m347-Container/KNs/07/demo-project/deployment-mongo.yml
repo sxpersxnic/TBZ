@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongo-deployment
+  namespace: kn07
   labels:
     app: mongo
 spec:
@@ -36,6 +37,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mongo-service
+  namespace: kn07
 spec:
   selector:
     app: mongo

@@ -4,55 +4,55 @@ metadata:
   name: frontend-deployment
   namespace: kn08
   labels:
-		app: frontend
+    app: frontend
 spec:
-	replicas: 1
-	selector:
-		matchLabels:
-			app: frontend
-	template:
-		metadata:
-			labels:
-				app: frontend
-		spec:
-			containers:
-				- name: frontend
-					image: sxnic/kn08-frontend:latest
-					ports:
-						- containerPort: 3000
-				env:
-					- name: REACT_APP_ACCOUNT_URL
-						valueFrom:
-							configMapKeyRef:
-								name: account-config
-								key: account-url
-					- name: REACT_APP_BUYSELL_URL
-						valueFrom:
-							configMapKeyRef:
-								name: buysell-config
-								key: buysell-url
-					- name: REACT_APP_SENDRECEIVE_URL
-						valueFrom:
-							configMapKeyRef:
-								name: sendreceive-config
-								key: sendreceive-url
-					- name: REACT_APP_USER_LOGGED_IN
-						valueFrom:
-							configMapKeyRef:
-								name: frontend-config
-								key: user-id
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: sxnic/kn08-frontend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_ACCOUNT_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: account-config
+                  key: account-url
+            - name: REACT_APP_BUYSELL_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: buysell-config
+                  key: buysell-url
+            - name: REACT_APP_SENDRECEIVE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: sendreceive-config
+                  key: sendreceive-url
+            - name: REACT_APP_USER_LOGGED_IN
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-config
+                  key: user-id
 ---
 apiVersion: v1
 kind: Service
 metadata:
-	name: frontend-service
-	namespace: kn08
+  name: frontend-service
+  namespace: kn08
 spec:
-	type: NodePort
-	selector:
-		app: frontend
-	ports:
-		- protocol: TCP
-			port: 3000
-			targetPort: 3000
-			nodePort: 30080
+  type: NodePort
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30080

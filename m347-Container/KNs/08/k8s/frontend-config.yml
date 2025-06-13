@@ -4,4 +4,4 @@ metadata:
   name: frontend-config
   namespace: kn08
 data:
-    user-id: "1"
+  user-id: "1"
