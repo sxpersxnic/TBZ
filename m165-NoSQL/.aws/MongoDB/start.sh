@@ -1,7 +1,7 @@
 #!/usr/bin/sh
 
 EC2_IP="52.204.228.129"
-INSTANCE_ID="i-0aa96cefac15e1692"
+INSTANCE_ID="i-063a1fef4da8e64cf"
 
 echo "[+] Instance starting..."
 aws ec2 start-instances --instance-ids ${INSTANCE_ID}
