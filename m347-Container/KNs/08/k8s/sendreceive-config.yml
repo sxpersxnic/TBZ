@@ -4,4 +4,4 @@ metadata:
   name: sendreceive-config
   namespace: kn08
 data:
-	sendreceive-url: "http://sendreceive-service.kn08.svc.cluster.local"
+  sendreceive-url: "http://sendreceive-service.kn08.svc.cluster.local"

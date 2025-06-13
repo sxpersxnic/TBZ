@@ -4,4 +4,4 @@ metadata:
   name: buysell-config
   namespace: kn08
 data:
-	buysell-url: "http://buysell-service.kn08.svc.cluster.local"
+  buysell-url: "http://buysell-service.kn08.svc.cluster.local"
