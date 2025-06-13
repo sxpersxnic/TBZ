@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kn07
+  labels:
+    app.kubernetes.io/name: kn07
+    app.kubernetes.io/managed-by: microk8s
