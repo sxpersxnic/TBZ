@@ -1,4 +1,4 @@
-// use band_mgmt;
+use band_mgmt;
 
 // 1. User with read-only access. authDB: band_mgmt
 // Test: mongo "mongodb://readonlyUser:readonly123@165.ieh5rli.mongodb.net/band_mgmt?authSource=band_mgmt"
@@ -13,7 +13,7 @@ db.createUser({
 	]
 });
 
-// use admin;
+use admin;
 
 // 2. User with read and write access. authDB: band_mgmt
 // Test: mongo "mongodb://rwUser:rw123@165.ieh5rli.mongodb.net/band_mgmt?authSource=admin"
