@@ -14,7 +14,8 @@ func AddCrypto(c *gin.Context, userId int, amount int) bool {
 	resp, err := http.Post(env.GetAccountServiceURL()+"/AddCrypto?userId="+fmt.Sprint(userId)+"&amount="+fmt.Sprint(amount), "application/json", nil)
 
 	if err != nil || resp.StatusCode != http.StatusOK {
-		http.Error(c.Writer, "transaction failed", http.StatusInternalServerError)
+		errMsg := fmt.Sprintf("Error adding crypto for user %d: %v, status %d", userId, err, resp.StatusCode)
+		http.Error(c.Writer, errMsg, http.StatusInternalServerError)
 		return false
 	}
 	defer resp.Body.Close()
@@ -36,7 +37,8 @@ func RemoveCrypto(c *gin.Context, userId int, amount int) bool {
 	resp, err := http.Post(env.GetAccountServiceURL()+"/RemoveCrypto?userId="+fmt.Sprint(userId)+"&amount="+fmt.Sprint(amount), "application/json", nil)
 
 	if err != nil || resp.StatusCode != http.StatusOK {
-		http.Error(c.Writer, "transaction failed", http.StatusInternalServerError)
+		errMsg := fmt.Sprintf("Error removing crypto for user %d: %v, status %d", userId, err, resp.StatusCode)
+		http.Error(c.Writer, errMsg, http.StatusInternalServerError)
 		return false
 	}
 	defer resp.Body.Close()

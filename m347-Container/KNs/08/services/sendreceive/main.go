@@ -55,6 +55,7 @@ func main() {
 
 	router.POST("/send", sendHandler)
 
+log.Printf("Account service URL: %s\n", env.GetAccountServiceURL())
 	log.Printf("SendReceive service is running at %s\n", env.GetHost())
 	router.Run(env.GetHost())
 }

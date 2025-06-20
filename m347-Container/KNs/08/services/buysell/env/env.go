@@ -11,11 +11,11 @@ func GetAccountServiceURL() string {
 	accountUrl := os.Getenv("ACCOUNT_SERVICE_URL")
 
 	if accountUrl == "" {
-		log.Println("ACCOUNT_SERVICE_URL not set, defaulting to 'http://account-service.kn08.svc.cluster.local'")
-		accountUrl = "http://account-service.kn08.svc.cluster.local"
+		log.Println("ACCOUNT_SERVICE_URL not set, defaulting to 'http://localhost:8080'")
+		accountUrl = "http://localhost:8080"
 	}
 
-	return accountUrl
+	return fmt.Sprintf("%s/Account", accountUrl)
 }
 
 func GetHost() string {
