@@ -1,0 +1,62 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCpP/VqcY7n2W2qOQHbWXQ27GfyXUKlMyccvPhXduw74fwPTH6Mjh5jrCm0HMebBqS79N/4EcewMJPfOxbkUDX54NJ5+pT4E3bs8LPYa1uq1ipOOLUnP5l0ogf4xVqYp9zU7YNoGW5bIaLn39I5/aLZtedqrGyBc52IQQ/UADbn9cGCnHx43KJPocHRfvMpFYn46hzOLqxIqVKEqMfn1NaWPqIXyZVGN7goxRN7aovqn5ihNKRyx7waNXdmIcbrBv3A1b2Ziwyq8BPveWnywyt788OJBtX38Z9esW5gis3PtGyD2Bj49ITu+JIVJbDQ3wVW/ah3o63thfSuhISQTTh4AOIygqTl5TD3Q6YWcMwN7enMc5Q2ToMzxXbIlO1lAujHRkZXgaRd8pMFHshwEjjd9ODff8vVQV8pkgWZj7lIPK407UCm1uC4ogO7BOLaCiCYzmb7x/SwM60P1OUQdIIxNGpauRQ4HJ7VeeHWcQ8DqUjG0WxiN64x++0+HkLoVuKQVw8zzPlV6G8ULPaM79JWf/SKR1pqnYHOVe/Lw/BTBYDjwwG231TYshB3N93sYFTInzC5ai6hlrUOEVQs4v5AqCCtDc3dIcbtB2d1WLTIPSQ0CnX5X5S9oLlh2t7QSkcahNr7Fv8MOS47Vj4xfjJ1bfCC27LEkqLupqoRV0JCmQ== sxnic@sxnic
+ssh_pwauth: false
+disable_root: false
+package_update: true
+packages:
+  - golang
+  - git
+  - screen
+
+write_files:
+  - path: /home/ubuntu/metrics/main.go
+    permissions: '0755'
+    content: |
+        package main
+
+        import (
+            "math/rand"
+            "net/http"
+            "time"
+
+            "github.com/prometheus/client_golang/prometheus"
+            "github.com/prometheus/client_golang/prometheus/promhttp"
+        )
+
+        var (
+            randomGauge = prometheus.NewGauge(
+                prometheus.GaugeOpts{
+                    Name: "tbz_random_metric",
+                    Help: "Random value between 0 and 100",
+                })
+        )
+
+        func init() {
+            prometheus.MustRegister(randomGauge)
+            go func() {
+                for {
+                    randomGauge.Set(float64(rand.Intn(101))) // 0–100
+                    time.Sleep(10 * time.Second)
+                }
+            }()
+        }
+
+        func main() {
+            http.Handle("/metrics", promhttp.Handler())
+            http.ListenAndServe(":2112", nil)
+        }
+
+runcmd:
+  - mkdir -p /home/ubuntu/metrics
+  - cd /home/ubuntu/metrics
+  - sudo go mod init metrics
+  - sudo go get github.com/prometheus/client_golang/prometheus
+  - sudo go get github.com/prometheus/client_golang/prometheus/promhttp
+  - sudo go run main.go &

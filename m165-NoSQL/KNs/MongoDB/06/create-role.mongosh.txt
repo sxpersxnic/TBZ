@@ -1,0 +1,25 @@
+use band_mgmt;
+
+db.createRole({
+	role: "validationAdmin",
+	privileges: [
+		{
+			resource: { db: "band_mgmt", collection: "" },
+			actions: ["collMod", "find", "insert", "update"]
+		}
+	],
+	roles: []
+});
+
+db.createUser(
+	{
+		user: "bandMgmtValidationAdmin",
+		pwd: "bandPass123",
+		roles: [
+			{
+				role: "validationAdmin",
+				db: "band_mgmt"
+			}
+		]
+	}
+);

@@ -21,7 +21,7 @@
 - [x] [KN-M-02](KNs/MongoDB/02)
 - [x] [KN-M-03](KNs/MongoDB/03)
 - [x] [KN-M-04](KNs/MongoDB/04)
-- [ ] [KN-M-05](KNs/MongoDB/05)
+- [x] [KN-M-05](KNs/MongoDB/05)
 - [ ] [KN-M-06](KNs/MongoDB/06)
 - [ ] [KN-M-07](KNs/MongoDB/07)
 
@@ -46,6 +46,7 @@
 - [x] [KN-M-02](KNs/MongoDB/02)
 - [x] [KN-M-03](KNs/MongoDB/03)
 - [x] [KN-M-04](KNs/MongoDB/04)
+- [x] [KN-M-05](KNs/MongoDB/05)
 - [x] [KN-N-01](KNs/Neo4j/01)
 - [ ] [KN-N-02](KNs/Neo4j/02)
 - [ ] [KN-C-01](KNs/Cassandra/01)
