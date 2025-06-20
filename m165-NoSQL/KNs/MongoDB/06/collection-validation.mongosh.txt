@@ -1,0 +1,20 @@
+use band_mgmt;
+
+db.runCommand({
+	collMod: "bands",
+	validator: {
+		$jsonSchema: {
+			bsonType: "object",
+			required: ["_id", "formed", "genre", "name"],
+			properties: {
+				_id: { bsonType: "objectId" },
+				formed: { bsonType: "date" },
+				genre: { bsonType: "string" },
+				name: { bsonType: "string" },
+				origin: { bsonType: "string" }
+			}
+		}
+	},
+	validationLevel: "strict",
+	validationAction: "error"
+});
