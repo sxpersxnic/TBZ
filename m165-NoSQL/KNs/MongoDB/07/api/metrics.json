@@ -1,0 +1,58 @@
+[
+  {
+    "name": "cpu_usage",
+    "value": 75.5,
+    "unit": "percent",
+    "description": "Current CPU usage percentage",
+    "timestamp": "2025-06-20T10:30:00Z"
+  },
+  {
+    "name": "memory_usage",
+    "value": 8.2,
+    "unit": "GB",
+    "description": "Current memory usage in gigabytes",
+    "timestamp": "2025-06-20T10:30:00Z"
+  },
+  {
+    "name": "disk_space",
+    "value": 45.8,
+    "unit": "GB",
+    "description": "Available disk space in gigabytes",
+    "timestamp": "2025-06-20T10:30:00Z"
+  },
+  {
+    "name": "network_throughput",
+    "value": 125.3,
+    "unit": "Mbps",
+    "description": "Current network throughput in megabits per second",
+    "timestamp": "2025-06-20T10:30:00Z"
+  },
+  {
+    "name": "active_connections",
+    "value": 42,
+    "unit": "count",
+    "description": "Number of active network connections",
+    "timestamp": "2025-06-20T10:30:00Z"
+  },
+  {
+    "name": "response_time",
+    "value": 245,
+    "unit": "ms",
+    "description": "Average API response time in milliseconds",
+    "timestamp": "2025-06-20T10:30:00Z"
+  },
+  {
+    "name": "error_rate",
+    "value": 0.8,
+    "unit": "percent",
+    "description": "Error rate percentage over the last hour",
+    "timestamp": "2025-06-20T10:30:00Z"
+  },
+  {
+    "name": "requests_per_minute",
+    "value": 1240,
+    "unit": "count",
+    "description": "Number of requests processed per minute",
+    "timestamp": "2025-06-20T10:30:00Z"
+  }
+]
