@@ -4,7 +4,7 @@ SET time_zone = "+00:00";
 
 CREATE Database m347kn08;
 
-use m347kn08;
+USE m347kn08;
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
@@ -40,3 +40,7 @@ insert into friends(user_id1, user_id2) values (3,4);
 
 insert into friends(user_id1, user_id2) values (5,2);
 insert into friends(user_id1, user_id2) values (5,4);
+
+CREATE USER 'admin'@'%' IDENTIFIED BY 'tbzPass123';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;

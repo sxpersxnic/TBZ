@@ -58,6 +58,7 @@ func main() {
 	router.POST("/buy", buyHandler)
 	router.POST("/sell", sellHandler)
 
+	log.Printf("Account service URL: %s\n", env.GetAccountServiceURL())
 	log.Printf("BuySell service is running at %s\n", env.GetHost())
 	router.Run(env.GetHost())
 }

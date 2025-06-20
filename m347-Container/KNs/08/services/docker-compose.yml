@@ -2,41 +2,71 @@ name: kn08
 
 services:
   frontend:
-    container_name: frontend-app
-    image: sxnic/kn08-frontend:v1
+    container_name: frontend
+    image: sxnic/kn08-frontend:latest
     ports:
       - 80:3000
+    environment:
+      - REACT_APP_ACCOUNT_URL=http://localhost:8080
+      - REACT_APP_BUYSELL_URL=http://localhost:8002
+      - REACT_APP_SENDRECEIVE_URL=http://localhost:8003
+      - REACT_APP_USER_LOGGED_IN=1
     networks:
-      - app
+      app:
+        ipv4_address: 172.31.16.10
     depends_on:
       - account
       - buysell
       - sendreceive
   sendreceive:
-    container_name: sendreceiveservice
-    image: sxnic/kn08-sendreceive:v2
+    container_name: sendreceive
+    image: sxnic/kn08-sendreceive:latest
+    environment:
+      - ACCOUNT_SERVICE_URL=http://172.31.16.11:8080
+      - PORT=8003
     ports:
       - 8003:8003
     networks:
-      - app
+      app:
+        ipv4_address: 172.31.16.13
     depends_on:
       - account
   buysell:
-    container_name: buysellservice
-    image: sxnic/kn08-buysell:v2
+    container_name: buysell
+    image: sxnic/kn08-buysell:latest
+    environment:
+      - ACCOUNT_SERVICE_URL=http://172.31.16.11:8080
+      - PORT=8002
     ports:
       - 8002:8002
     networks:
-      - app
+      app:
+        ipv4_address: 172.31.16.12
     depends_on:
       - account
   account:
     container_name: account
-    image: sxnic/kn08-account:v2
+    image: sxnic/kn08-account:local
     ports:
       - 8080:8080
     networks:
-      - app
+      app:
+        ipv4_address: 172.31.16.11
+    depends_on:
+      - db
+  db:
+    container_name: db
+    image: mariadb:latest
+    environment:
+      - MARIADB_ROOT_PASSWORD=tbzPass123
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      app:
+        ipv4_address: 172.31.16.14
 networks:
   app:
     driver: bridge
@@ -45,3 +75,6 @@ networks:
         - subnet: 172.31.16.0/20
           ip_range: 172.31.16.0/24
           gateway: 172.31.16.254
+volumes:
+  db_data:
+    driver: local
