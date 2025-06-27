@@ -243,14 +243,14 @@ docker swarm join-token --rotate worker
 **Joining as Worker Node:**
 ```bash
 # Run this command on the machine you want to add as a worker
-docker swarm join --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-8vxv8rssmk743ojnwacrr2e7c \
+docker swarm join --token <token> \
     192.168.1.100:2377
 ```
 
 **Joining as Manager Node:**
 ```bash
 # Run this command on the machine you want to add as a manager
-docker swarm join --token SWMTKN-1-49nj1cmql0jkz5s954yi3oex3nedyz0fb0xx14ie39trti4wxv-dj52sjbd0lxhxsf3qfra8wq2e \
+docker swarm join --token <token> \
     192.168.1.100:2377
 ```
 
