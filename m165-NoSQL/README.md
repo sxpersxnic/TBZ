@@ -6,14 +6,13 @@
 >
 > \- [MongoDB](https://www.mongodb.com/resources/basics/databases/nosql-explained)
 
-
 ## Overview
 
 ### Cassandra
 
 - [ ] [KN-C-01](KNs/Cassandra/01)
 - [ ] [KN-C-02](KNs/Cassandra/02)
-- [ ] [KN-03](KNs/Cassandra/03)
+- [ ] [KN-C-03](KNs/Cassandra/03)
 
 ### MongoDB
 
@@ -22,8 +21,8 @@
 - [x] [KN-M-03](KNs/MongoDB/03)
 - [x] [KN-M-04](KNs/MongoDB/04)
 - [x] [KN-M-05](KNs/MongoDB/05)
-- [ ] [KN-M-06](KNs/MongoDB/06)
-- [ ] [KN-M-07](KNs/MongoDB/07)
+- [x] [KN-M-06](KNs/MongoDB/06)
+- [x] [KN-M-07](KNs/MongoDB/07)
 
 ### Neo4j
 
@@ -33,8 +32,8 @@
 
 ### Prometheus
 
-- [ ] [KN-P-01](KNs/Prometheus/01)
-- [ ] [KN-P-02](KNs/Prometheus/02)
+- [x] [KN-P-01](KNs/Prometheus/01)
+- [x] [KN-P-02](KNs/Prometheus/02)
 
 ### Redis
 
@@ -47,9 +46,11 @@
 - [x] [KN-M-03](KNs/MongoDB/03)
 - [x] [KN-M-04](KNs/MongoDB/04)
 - [x] [KN-M-05](KNs/MongoDB/05)
+- [x] [KN-M-06](KNs/MongoDB/06)
+- [x] [KN-M-07](KNs/MongoDB/07)
+- [x] [KN-P-01](KNs/Prometheus/01)
+- [x] [KN-P-02](KNs/Prometheus/02)
 - [x] [KN-N-01](KNs/Neo4j/01)
-- [ ] [KN-N-02](KNs/Neo4j/02)
-- [ ] [KN-C-01](KNs/Cassandra/01)
 
 # ACID (SQL) vs. BASE (NoSQL)
 
