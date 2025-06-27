@@ -18,7 +18,8 @@ vendor/
 go.work
 
 # Environment variables
-.env
+.env*
+!.env.example
 
 # IDE files
 .vscode/
