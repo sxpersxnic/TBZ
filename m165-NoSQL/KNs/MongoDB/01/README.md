@@ -2,9 +2,9 @@
 
 ## A. Installation
 
-- Cloud-Init File: [here](/m165-NoSQL/.aws/MongoDB/cloud-init.yml)
+- Cloud-Init File: [cloud-init.yml](../../../.aws/MongoDB/cloud-init.yml)
 
-- Screenshot von Compass: ![Screenshot von MongoDB Compass](/m165-NoSQL/x-resources/m/01/compass.png)
+- Screenshot von Compass: ![Screenshot von MongoDB Compass](../../../x-res/m/01/compass.png)
 
 - Erklärung Connection String: Bei dem Parameter `authSource` handelt es sich um die Datenbank, in der die Benutzer gespeichert sind. Bei MongoDB ist dies standardmäßig die `admin`-Datenbank. Der Parameter `retryWrites` sorgt dafür, dass Schreiboperationen bei einem Fehler automatisch wiederholt werden. Der Parameter `w=majority` sorgt dafür, dass die Schreiboperationen erst dann als erfolgreich gelten, wenn sie auf der Mehrheit der Replikate durchgeführt wurden.
 
@@ -14,15 +14,15 @@
 
 - **mongod.conf Screenshot:**
 
-	![Screenshot von MongoDB Shell](/m165-NoSQL/x-resources/m/01/mongod-conf.png)
+	![Screenshot von MongoDB Shell](../../../x-res/m/01/mongod-conf.png)
 
 ## B. Erste Schritte GUI
 
-- Einzufügendes Dokument: ![JSON eines MongoDB Dokument](/m165-NoSQL/x-resources/m/01/json.png)
+- Einzufügendes Dokument: ![JSON eines MongoDB Dokument](../../../x-res/m/01/json.png)
 
-- Eingefügtes Dokument: ![Eingefügtes JSON Dokument in MongoDB Compass](/m165-NoSQL/x-resources/m/01/document.png)
+- Eingefügtes Dokument: ![Eingefügtes JSON Dokument in MongoDB Compass](../../../x-res/m/01/document.png)
 
-- Export Datei: [here](./Kampus.Melvin.json)
+- Export Datei: [json](./Name.Prename.json)
 
 - Erklärung Datentypen: Bei einem Datum besteht das Risiko, dass der Wert versehentlich als String gespeichert/intepretiert wird und so zu Fehler führen kann, wenn Applikationen sich darauf verlassen, dass der richtige Datentyp verwendet wird und z.B. kein Parsing vornehmen.
 
@@ -30,11 +30,11 @@
 
 - MongoDB-Shell in Compass:
 
-	![MongoDB-Shell in Compass](/m165-NoSQL/x-resources/m/01/mongosh.png)
+	![MongoDB-Shell in Compass](../../../x-res/m/01/mongosh.png)
 
 - MongoDB-Shell auf AWS Linux-Server:
 
-	![MongoDB-Shell auf AWS Linux-Server](/m165-NoSQL/x-resources/m/01/aws.png)
+	![MongoDB-Shell auf AWS Linux-Server](../../../x-res/m/01/aws.png)
 
 - Erklärung Befehle 1-5:
 	1. `show dbs;`: Zeigt alle Datenbanken des Clusters an.
@@ -49,9 +49,9 @@
 
 ## D. Rechte und Rollen
 
-- Screenshot mit falscher Authentifizierungsquelle: ![Screenshot mit falscher Authentifizierungsquelle](/m165-NoSQL/x-resources/m/01/failed-auth.png)
+- Screenshot mit falscher Authentifizierungsquelle: ![Screenshot mit falscher Authentifizierungsquelle](../../../x-res/m/01/failed-auth.png)
 - [Script](./create-users.sh)
-- Screenshot Benutzer 1: ![Screenshot Benutzer 1](/m165-NoSQL/x-resources/m/01/user1.png)
-- Screenshot Benutzer 1 Read: ![Screenshot Benutzer 1](/m165-NoSQL/x-resources/m/01/user1-r.png)
-- Screenshot Benutzer 2: ![Screenshot Benutzer 2](/m165-NoSQL/x-resources/m/01/user2.png)
-- Screenshot Benutzer 2 Read Write: ![Screenshot Benutzer 2](/m165-NoSQL/x-resources/m/01/user2-rw.png)
+- Screenshot Benutzer 1: ![Screenshot Benutzer 1](../../../x-res/m/01/user1.png)
+- Screenshot Benutzer 1 Read: ![Screenshot Benutzer 1](../../../x-res/m/01/user1-r.png)
+- Screenshot Benutzer 2: ![Screenshot Benutzer 2](../../../x-res/m/01/user2.png)
+- Screenshot Benutzer 2 Read Write: ![Screenshot Benutzer 2](../../../x-res/m/01/user2-rw.png)

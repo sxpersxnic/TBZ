@@ -189,13 +189,18 @@
 ## B. Validierung hinterlegen und testen
 
 - **Screenshot of valid Validation:**
-	![Valid Validation](/m165-NoSQL/x-resources/m/06/valid-validation.png)
+	![Valid Validation](../../../x-res/m/06/valid-validation.png)
 
 - **Commands:**
-	- [Create Validation](./collection-validation.mongosh.txt)
-	- [Create Validation Role](./collection-validation.mongosh.txt)
-	- Read Validation: `db.getCollectionInfos()`
+
+  - [Create Validation](./collection-validation.mongosh.txt)
+  - [Create Validation Role](./collection-validation.mongosh.txt)
+  - Read Validation: `db.getCollectionInfos()`
+
 - **Screenshot of invalid Validation:**
-	![Invalid Validation](/m165-NoSQL/x-resources/m/06/invalid-insert.png)
+
+	![Invalid Validation](../../../x-res/m/06/invalid-insert.png)
+
 - **Screenshot of valid Validation:**
-	![Valid Validation](/m165-NoSQL/x-resources/m/06/valid-insert.png)
+
+	![Valid Validation](../../../x-res/m/06/valid-insert.png)
