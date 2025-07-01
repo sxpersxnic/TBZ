@@ -24,9 +24,9 @@
     ```
 
 - **Screenshot: Docker Desktop showing image kn02a**
-  ![Screenshot: Docker Desktop showing image kn02a](/m347-Container/x-resources/02/desktop.png)
+  ![Screenshot: Docker Desktop showing image kn02a](../../x-res/02/desktop.png)
 - **Screenshot: Website running in container**
-  ![Screenshot: Website running in container](/m347-Container/x-resources/02/www.png)
+  ![Screenshot: Website running in container](../../x-res/02/www.png)
 
 ## B. Dockerfile II
 
@@ -35,7 +35,7 @@
 - **Database (DB):**
 
   - **Screenshot: Telnet to DB**
-    ![Screenshot: Telnet to DB](/m347-Container/x-resources/02/db-telnet.png)
+    ![Screenshot: Telnet to DB](../../x-res/02/db-telnet.png)
   - [DB Dockerfile](./.docker/db.Dockerfile)
   - **Build & Run:**
 
@@ -47,9 +47,9 @@
 - **Web:**
 
   - **Screenshot: info.php**
-    ![Screenshot: info.php](/m347-Container/x-resources/02/info-php.png)
+    ![Screenshot: info.php](../../x-res/02/info-php.png)
   - **Screenshot: db.php**
-    ![Screenshot: db.php](/m347-Container/x-resources/02/db-php.png)
+    ![Screenshot: db.php](../../x-res/02/db-php.png)
   - [db.php](./php/db.php)
   - **Build & Run:**
 

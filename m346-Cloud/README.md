@@ -1,6 +1,6 @@
-# [m346 - Cloud](https://gitlab.com/ch-tbz-it/Stud/m346/m346/-/tree/main/Kompetenznachweise?ref_type=heads) #
+# [m346 - Cloud](https://gitlab.com/ch-tbz-it/Stud/m346/m346/-/tree/main/Kompetenznachweise?ref_type=heads)
 
-## Gewichtung #
+## Gewichtung
 
 | KN | Punkte | Deadline | Done |
 |----|--------|----------|------|
@@ -16,5 +16,3 @@
 | KN09 | 4 | 24.01.2025 | [x] |
 | KN10 | 2 | 31.01.2025 | [x] |
 | **Total** | **29.4** |||
-
----

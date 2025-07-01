@@ -1,40 +1,39 @@
-# KN04 06.12.2024 #
+# KN04
 
-## A) Cloud-init ##
+## A. Cloud-init
 
-**Dokumenterte YAML-Datei:** [File](./Cloud-Init/Cloud-init.yml)
+**Dokumenterte YAML-Datei:** [File](./cloud-init/cloud-init.yml)
 
-## B) SSH-Key und Cloud-init ##
+## B. SSH-Key und Cloud-init
 
-- [Config-File](./Cloud-Init/aws_2.yml)
-  
+- [Config-File](./cloud-init/aws_2.yml)
+
 - Screenshot "Key pair assigned at launch":
-  
-    ![Key pair assigned at launch](/m346-Cloud/Images/KN04/KEY-ASSIGNED-AT-LAUNCH.png)
-  
+
+    ![Key pair assigned at launch](../../x-res/04/KEY-ASSIGNED-AT-LAUNCH.png)
+
 - Screenshot SSh-Cmd mit erstem Schlüssel
-  
-    ![Screenshot SSh-Cmd mit erstem Schlüssel](/m346-Cloud/Images/KN04/SSH-CMD-KEY-1.png)
-  
+
+    ![Screenshot SSh-Cmd mit erstem Schlüssel](../../x-res/04/SSH-CMD-KEY-1.png)
+
 - Screenshot SSh-Cmd mit zweitem Schlüssel
-  
-    ![Screenshot SSh-Cmd mit zweitem Schlüssel](/m346-Cloud/Images/KN04/SSH-CMD-KEY-2.png)
-  
+
+    ![Screenshot SSh-Cmd mit zweitem Schlüssel](../../x-res/04/SSH-CMD-KEY-2.png)
+
 - Screenshot Cloud-Init-Log
-  
-    ![Screenshot Cloud-Init-Log](/m346-Cloud/Images/KN04/CLOUD-INIT-LOG.png)
 
-## C) Template ##
+    ![Screenshot Cloud-Init-Log](../../x-res/04/CLOUD-INIT-LOG.png)
 
-[YML Template](./Cloud-Init/template.yml)
+## C. Template
 
-## D) Installation automatisieren ##
+[YML Template](./cloud-init/template.yml)
+
+## D. Installation automatisieren
 
 ### Webserver
 
-**cloud-init-web.yml:** [Here](/m346-Cloud/KNs/04-Cloud_init-Automatisierung/Cloud-Init/cloud-init-web.yml)
+**cloud-init-web.yml:** [File](./cloud-init/cloud-init-web.yml)
 
 ### DB Server
 
-**cloud-init-db.yml:** [Here](/m346-Cloud/KNs/04-Cloud_init-Automatisierung/Cloud-Init/cloud-init-db.yml)
-
+**cloud-init-db.yml:** [File](./cloud-init/cloud-init-db.yml)

@@ -1,14 +1,14 @@
-# KN02 22.11.2024
+# KN02
 
-## A) Umgang mit AWS Kurs (20%)
+## A. Umgang mit AWS Kurs (20%)
 
-*-*
+\-
 
-## B) Instanz erstellen (40%)
+## B. Instanz erstellen (40%)
 
 ### AWS EC2 Instanz
 
-![Screenshot von AWS EC2 Instanzen](/m346-Cloud/Images/KN02/AWS_KN02_EC2.png)
+![Screenshot von AWS EC2 Instanzen](../../x-res/02/AWS_KN02_EC2.png)
 
 ### Details
 
@@ -22,24 +22,22 @@
 - **Grösse des RAM:** 957Mi
 - **Anzahl (v)CPUs:** 1
 
-### Abgabe
-
-## C) Zugriff mit SSH-Key (40%)
+## C. Zugriff mit SSH-Key (40%)
 
 ### Command
 
 ```sh
-ssh -i "C:\Users\sxpersxnic\.ssh\sxnic1.pem" ubuntu@ec2-23-21-28-114.compute-1.amazonaws.com
+ssh -i "~/.ssh/id_rsa" ubuntu@<Public-IP>
 ```
 
 ### Screenshot Key-1
 
-![Screenshot mit dem ssh-Befehl und des Resultats unter Verwendung des ersten Schlüssels](/m346-Cloud/Images/KN02/AWS_KN02_EC2_KEY1.png)
+![Screenshot mit dem ssh-Befehl und des Resultats unter Verwendung des ersten Schlüssels](../../x-res/02/AWS_KN02_EC2_KEY1.png)
 
 ### Screenshot Key-2
 
-![Screenshot mit dem ssh-Befehl und des Resultats unter Verwendung des zweiten Schlüssels](/m346-Cloud/Images/KN02/AWS_KN02_EC2_KEY2.png)
+![Screenshot mit dem ssh-Befehl und des Resultats unter Verwendung des zweiten Schlüssels](../../x-res/02/AWS_KN02_EC2_KEY2.png)
 
 ### Screenshot Instance-Details
 
-![Screenshot der Instanz-Detail (oder Liste), so dass der verwendete Schlüssel sichtbar ist.](/m346-Cloud/Images/KN02/AWS_KN02_EC2_KEY_USED.png)
+![Screenshot der Instanz-Detail (oder Liste), so dass der verwendete Schlüssel sichtbar ist.](../../x-res/02/AWS_KN02_EC2_KEY_USED.png)
