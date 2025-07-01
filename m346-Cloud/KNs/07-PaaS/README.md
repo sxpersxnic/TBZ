@@ -1,10 +1,10 @@
-# KN07 20.12.2024 #
+# KN07
 
-## A) Datenbank im PAAS Modell ##
+## A. Datenbank im PAAS Modell
 
-![Screenshot MySQL Workbench mit ausgeführtem Query](/m346-Cloud/Images/KN07/MYSQL-QUERY.png)
+![Screenshot MySQL Workbench mit ausgeführtem Query](../../x-res/07/MYSQL-QUERY.png)
 
-### Vorteile PAAS/SAAS ###
+### Vorteile PAAS/SAAS
 
 Eine Datenbank lokal zu installieren ist sinnvoll für die Entwicklungsumgebung.
 In der Produktion, ist es jedoch nicht gerade nützlich,
@@ -20,16 +20,16 @@ Nun ist die Datenbank nur über die private Addresse erreichbar.
 Dies ist viel sicherer,
 da nun keine Queries direkt gegen die Datenbank ausgeführt werden können.
 
-## B) PAAS Applikationen erstellen ##
+## B. PAAS Applikationen erstellen
 
-![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-1.png)
-![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-2.png)
-![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-3.png)
-![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-4.png)
-![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-5.png)
-![Screenshot für die veränderten Bereiche](/m346-Cloud/Images/KN07/CONFIG-6.png)
+![Screenshot für die veränderten Bereiche](../../x-res/07/CONFIG-1.png)
+![Screenshot für die veränderten Bereiche](../../x-res/07/CONFIG-2.png)
+![Screenshot für die veränderten Bereiche](../../x-res/07/CONFIG-3.png)
+![Screenshot für die veränderten Bereiche](../../x-res/07/CONFIG-4.png)
+![Screenshot für die veränderten Bereiche](../../x-res/07/CONFIG-5.png)
+![Screenshot für die veränderten Bereiche](../../x-res/07/CONFIG-6.png)
 
-### Erläuterung Auswahlen ###
+### Erläuterung Auswahlen
 
 **Platform: Go, why?**
 Go is a cloud-native language, developed for cloud-computing. Thats why i chose Golang.
@@ -47,19 +47,19 @@ Since the educational Budget isnt very high,
 i chose to waste as few resources as possible.
 
 **Database: mysql, why?**
-Since the only options to choose from were either not 
+Since the only options to choose from were either not
 enabling database or creating a new one,
 i rather chose to create a new one than not having a database.
 I couldn't figure out how i can connect my already existing RDS MariaDB Database.
 
-## C) Erstellte Ressourcen/Objekte und CloudFormation ##
+## C. Erstellte Ressourcen/Objekte und CloudFormation
 
-![Beanstalk Application](/m346-Cloud/Images/KN07/BEANS.png)
+![Beanstalk Application](../../x-res/07/BEANS.png)
 
-### CloudFormation vs. Cloud-Init ###
+### CloudFormation vs. Cloud-Init
 
 While cloud-init works as a script, CloudFormation uses predefined templates stored in your account. Cloud-init defined what inside an instance must be configured, CloudFormation Templates define Hardware, Network and scaling configurations.
 
-![Screenshot der automatisch erstellten EC2-Objekte](/m346-Cloud/Images/KN07/EC2.png)
+![Screenshot der automatisch erstellten EC2-Objekte](../../x-res/07/EC2.png)
 
-![Screenshot der CloudFormation Ressourcen für PAAS Anwendung](/m346-Cloud/Images/KN07/CLOUDFORMATION.png)
+![Screenshot der CloudFormation Ressourcen für PAAS Anwendung](../../x-res/07/CLOUDFORMATION.png)
