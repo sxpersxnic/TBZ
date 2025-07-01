@@ -1,6 +1,6 @@
 # KN01: Docker Grundlagen
 
-**Collection of used commands:** [here](./docker.sh)
+**Collection of used commands:** [Script](./docker.sh)
 
 ---
 
@@ -10,11 +10,11 @@
 
 1. **Getting Started** Website of Docker, hosted in a Container:
 
-    ![Screenshot of Docker's 'Getting Started' Website hosted in a Container](/m347-Container/x-resources/01/website.png)
+    ![Screenshot of Docker's 'Getting Started' Website hosted in a Container](../../x-res/01/website.png)
 
 2. **Docker Desktop Dashboard**, showing the **Getting Started** Container:
 
-    ![Screenshot von Docker Desktop, mit einem Container](/m347-Container/x-resources/01/desktop.png)
+    ![Screenshot von Docker Desktop, mit einem Container](../../x-res/01/desktop.png)
 
 ---
 
@@ -24,40 +24,43 @@
 
 ```sh
 docker -v
+
 # Output:
-# Docker version 27.5.1-1, build 9f9e4058019a37304dc6572ffcbb409d529b59d8
+
+Docker version 27.5.1-1, build 9f9e4058019a37304dc6572ffcbb409d529b59d8
 
 # Or
 
 docker version
+
 # Output:
-# Client:
-#   Version:           27.5.1-1
-#   API version:       1.47
-#   Go version:        go1.22.11
-#   Git commit:        9f9e4058019a37304dc6572ffcbb409d529b59d8
-#   Built:             Tue Jan 21 23:46:20 UTC 2025
-#   OS/Arch:           linux/amd64
-#   Context:           default
-#
-# Server:
-#   Engine:
-#     Version:          27.5.1-1
-#     API version:      1.47 (minimum version 1.24)
-#     Go version:       go1.22.11
-#     Git commit:       4c9b3b011ae4c30145a7b344c870bdda01b454e2
-#     Built:            Tue Jan 21 23:46:50 2025
-#     OS/Arch:          linux/amd64
-#     Experimental:     false
-#   containerd:
-#     Version:          1.7.26-1
-#     GitCommit:        753481ec61c7c8955a23d6ff7bc8e4daed455734
-#   runc:
-#     Version:          1.1.15-1
-#     GitCommit:        bc20cb4497af9af01bea4a8044f1678ffca2745c
-#   docker-init:
-#     Version:          0.19.0
-#     GitCommit:        de40ad0
+
+Client:
+  Version:           27.5.1-1
+  API version:       1.47
+  Go version:        go1.22.11
+  Git commit:        9f9e4058019a37304dc6572ffcbb409d529b59d8
+  Built:             Tue Jan 21 23:46:20 UTC 2025
+  OS/Arch:           linux/amd64
+  Context:           default
+Server:
+  Engine:
+    Version:          27.5.1-1
+    API version:      1.47 (minimum version 1.24)
+    Go version:       go1.22.11
+    Git commit:       4c9b3b011ae4c30145a7b344c870bdda01b454e2
+    Built:            Tue Jan 21 23:46:50 2025
+    OS/Arch:          linux/amd64
+    Experimental:     false
+  containerd:
+    Version:          1.7.26-1
+    GitCommit:        753481ec61c7c8955a23d6ff7bc8e4daed455734
+  runc:
+    Version:          1.1.15-1
+    GitCommit:        bc20cb4497af9af01bea4a8044f1678ffca2745c
+  docker-init:
+    Version:          0.19.0
+    GitCommit:        de40ad0
 ```
 
 ### 2. Docker Search
@@ -96,27 +99,27 @@ docker run -d -p 80:80 docker/getting-started
 
 #### Screenshot
 
-![NGINX standard page](/m347-Container/x-resources/01/nginx.png)
+![NGINX standard page](../../x-res/01/nginx.png)
 
 ### 5. `-d` (detached) vs. `-it` (interactive)
 
-- `docker run -d --name kn01-ubuntu-bg ubuntu`  
+- `docker run -d --name kn01-ubuntu-bg ubuntu`
     Runs the container in the background. If the image does not exist locally, Docker pulls it automatically. Since Ubuntu stops without a running process, the container status is instantly set to "Exited".
 
-- `docker run -it --name kn01-ubuntu-it ubuntu:latest`  
+- `docker run -it --name kn01-ubuntu-it ubuntu:latest`
     The `-it` flag (_interactive_) starts the container interactively and binds the terminal (`tty`) to a shell. On startup, you land directly in the shell (e.g., Bash, Zsh, Fish, etc.). As long as the shell is active, the container keeps running.
 
 ### 6. Connect to a Container's Shell
 
 > **Screenshot:**
 >
-> ![Executed command 'service nginx status' with result](/m347-Container/x-resources/01/service-nginx-status.png)
+> ![Executed command 'service nginx status' with result](../../x-res/01/service-nginx-status.png)
 
 ### 7. List Containers
 
 > **Screenshot:**
 >
-> ![Docker container status](/m347-Container/x-resources/01/docker-ps-a.png)
+> ![Docker container status](../../x-res/01/docker-ps-a.png)
 
 ### 8. Stop a Container
 
@@ -140,19 +143,19 @@ docker rmi ubuntu:latest nginx:latest
 
 ## C. Registry und Repository (10%)
 
-![Private empty repository on Docker Hub](/m347-Container/x-resources/01/docker-hub.png)
+![Private empty repository on Docker Hub](../../x-res/01/docker-hub.png)
 
 ---
 
 ## D. Private Repository (20%)
 
-### Commands
+### Commands to push an image to a private repository on Docker Hub
 
 1. `docker login -u <username> --password-stdin` — Login to Docker
 2. `docker pull mariadb:latest` — Pulls the latest MariaDB image
 3. `docker tag mariadb:latest <username>/<repository>:mariadb` — Creates a tag from mariadb:latest
 4. `docker push <username>/<repository>:mariadb` — Pushes the image to the registry `<repository>`
 
-### Screenshot
+### Screenshot of the private repository on Docker Hub
 
-![Private Repository on Docker Hub](/m347-Container/x-resources/01/docker-hub-repo.png)
+![Private Repository on Docker Hub](../../x-res/01/docker-hub-repo.png)
