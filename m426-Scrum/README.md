@@ -1,7 +1,5 @@
 # PH-Studio Blog WebApp for TBZ Module 426
 
-Visit: [Here](https://m426-ph-studio-xi.vercel.app/)
-
 ## About
 
 ### Connect to your friends like never before
@@ -71,7 +69,8 @@ On your profile, select the *Trash-Icon*, on the right of the post.
 1. Clone the Repository
 
 ```sh
-   git clone https://github.com/sxpersxnic/m426-ph-studio.git
+   git clone https://github.com/sxpersxnic/TBZ.git
+   cd TBZ/m426-Scrum
 ```
 
 2. Set the Environment variables according to `.env.example`
@@ -82,6 +81,11 @@ On your profile, select the *Trash-Icon*, on the right of the post.
 7. Import the Repository to *Vercel*
 8. Upload your `.env` to Vercel `your-project > Settings > Environment Variables`
 9. Setup a *PostgreSQL* Database on Vercel `your-project > Storage`
+
+> [!IMPORTANT]
+>
+> Vercels PostgreSQL Database service is not available anymore. Use the [Neon](https://neon.tech/) service instead.
+
 10. Seed your database by either navigating to the api route in your current deployment `url-to-your-deployment/api/seed`.
     If you prefer to seed the database locally, read the following guide to get your app running locally.
 
@@ -90,7 +94,8 @@ On your profile, select the *Trash-Icon*, on the right of the post.
 1. Clone the Repository
 
 ```sh
-git clone https://github.com/sxpersxnic/m426-ph-studio.git
+git clone https://github.com/sxpersxnic/TBZ.git
+cd TBZ/m426-Scrum
 ```
 
 2. Setup a *PostgreSQL* Database, see [Postgres Guide](https://www.postgresql.org/docs/current/tutorial-start.html)
