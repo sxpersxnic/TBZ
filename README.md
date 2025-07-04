@@ -51,7 +51,7 @@
 
 |Semester|Number|Description|Link|Status|
 |--------|------|-----------|----|------|
-|HS|**450**|Applikationen testen|[Link](./m450-Testing)|**Coming**|
+|HS|**450**|Applikationen testen|[Link](./m450-Application-Testing)|**Coming**|
 |HS|**306**|Kleinprojekte im eigenen Berufsumfeld abwickeln|[Link](./m306-Projects)|**Coming**|
 |FS|**183**|Applikationssicherheit implementieren|[Link](./m183-App-Security)|**Coming**|
 |FS|**323**|Funktional Programmieren|[Link](./m323-FP)|**Coming**|
