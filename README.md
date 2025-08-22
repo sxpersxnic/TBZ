@@ -42,8 +42,8 @@
 |HS|**320**|Objektorientiert Programmieren|[Link](./m320-OOP)|**Done**|
 |FS|**114**|Codierungs-, Kompressions- und Verschlüsselungsverfahren einsetzen|[Link](./m114-Encoding-Compression-Encryption)|**Done**|
 |FS|**254**|Geschäftsprozesse im eigenen Berufsumfeld beschreiben|[Link](./m254-Business-Processes)|**Done**|
-|FS|**165**|NoSQL-Datenbanken einsetzen|[Link](./m165-NoSQL)|***Current***|
-|FS|**347**|Dienst mit Container anwenden|[Link](./m347-Container)|***Current***|
+|FS|**165**|NoSQL-Datenbanken einsetzen|[Link](./m165-NoSQL)|**Done**|
+|FS|**347**|Dienst mit Container anwenden|[Link](./m347-Container)|**Done**|
 
 ---
 
@@ -51,8 +51,8 @@
 
 |Semester|Number|Description|Link|Status|
 |--------|------|-----------|----|------|
+|HS|**306**|Kleinprojekte im eigenen Berufsumfeld abwickeln|[Link](./m306-Projects)|**Current**|
 |HS|**450**|Applikationen testen|[Link](./m450-Application-Testing)|**Coming**|
-|HS|**306**|Kleinprojekte im eigenen Berufsumfeld abwickeln|[Link](./m306-Projects)|**Coming**|
 |FS|**183**|Applikationssicherheit implementieren|[Link](./m183-App-Security)|**Coming**|
 |FS|**323**|Funktional Programmieren|[Link](./m323-FP)|**Coming**|
 
