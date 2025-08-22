@@ -1,6 +1,12 @@
 # PH-Studio Blog WebApp for TBZ Module 426
 
-Visit: [Here](https://m426-ph-studio-xi.vercel.app/)
+## Overview
+
+- [About](#about)
+- [Get Started with Vercel](#get-started-with-vercel)
+- [Get Started Locally](#get-started-locally)
+- [Technical details](#technical-details)
+- [License](#license)
 
 ## About
 
@@ -16,7 +22,7 @@ Our App comes with many easy to use features, that make your experience even bet
 
 Blog about your life with simple posts. In the Navigationbar, click on the *Plus-Icon* to get to the *Createform*. Enter your title to catch viewers and tell them your story in the body of your post:
 
-![Screenshot of the Createform](/m426-Scrum/public/doc/CREATEFORM.png)
+![Screenshot of the Createform](./public/doc/CREATEFORM.png)
 
 #### Edit
 
@@ -24,7 +30,7 @@ You forgot to mention something in your post? Nothing to worry about!
 
 You can now edit your posts by simply navigating to your profile. Click on the *User-Icon* to get to your profile. Now to the right of the screen you see a *Pencil-Icon*. By clicking the *Pencil-Icon* you get to the *Editform*. Now you can savely edit your post!
 
-![Screenshot of the Editform](/m426-Scrum/public/doc/EDITFORM.png)
+![Screenshot of the Editform](./public/doc/EDITFORM.png)
 
 #### View
 
@@ -33,29 +39,29 @@ You can view posts in many different ways:
 1. Home
    You can discover most recent posts    on the *Homepage*.
 
-   ![Screenshot of the Homepage](/m426-Scrum/public/doc/HOMEPAGE.png)
+   ![Screenshot of the Homepage](./public/doc/HOMEPAGE.png)
 
 2. Profile
    If you rather want to view the        posts of a specific user, click on    there profile picture or username     to get to their profile. There you    will find all posts of that user
 
-   ![Screenshot of the Profilepage](/m426-Scrum/public/doc/PROFILEPAGE.png)
+   ![Screenshot of the Profilepage](./public/doc/PROFILEPAGE.png)
 
 3. Post view
    To actually read the content of a     post, click on the title of the       post preview, it does not matter      from where you do this. This          action will take you to the post,     where you can read everything         about it!
 
-   ![Screenshot of the Postpage](/m426-Scrum/public/doc/POSTPAGE.png)
+   ![Screenshot of the Postpage](./public/doc/POSTPAGE.png)
 
 #### Sort
 
 By default, the posts on the *Homepage*, are sorted by the creation date of the posts. If you prefer to sort them by the username of the author, simply select your preference through the *Sort-Dropdown* on the *Homepage*.
 
-![Screenshot of the Sort-Dropdown](/m426-Scrum/public/doc/SORT.png)
+![Screenshot of the Sort-Dropdown](./public/doc/SORT.png)
 
 #### Search
 
 If you know only the username of a person or the title of a post you would like to read. Enter the term you search for in the *Searchfield* on the *Homepage*.
 
-![Screenshot of the Searchfield](/m426-Scrum/public/doc/SEARCH.png)
+![Screenshot of the Searchfield](./public/doc/SEARCH.png)
 
 #### Delete
 
@@ -64,15 +70,16 @@ When you have posts you would not like to be on your profile, delete them and no
 Navigate to your profile by clicking the *User-Icon* in the Navigationbar.
 On your profile, select the *Trash-Icon*, on the right of the post.
 
-![Screenshot of the Delete feature](/m426-Scrum/public/doc/DELETE.png)
+![Screenshot of the Delete feature](./public/doc/DELETE.png)
 
 ## Get Started with Vercel
 
 1. Clone the Repository
 
-```sh
-   git clone https://github.com/sxpersxnic/m426-ph-studio.git
-```
+   ```sh
+   git clone https://github.com/sxpersxnic/TBZ.git
+   cd TBZ.
+   ```
 
 2. Set the Environment variables according to `.env.example`
 3. Create an account on [Vercel](https://vercel.com/login)
@@ -82,6 +89,11 @@ On your profile, select the *Trash-Icon*, on the right of the post.
 7. Import the Repository to *Vercel*
 8. Upload your `.env` to Vercel `your-project > Settings > Environment Variables`
 9. Setup a *PostgreSQL* Database on Vercel `your-project > Storage`
+
+   > [!IMPORTANT]
+   >
+   > Vercels PostgreSQL Database service is not available anymore. Use the [Neon](https://neon.tech/) service instead.
+
 10. Seed your database by either navigating to the api route in your current deployment `url-to-your-deployment/api/seed`.
     If you prefer to seed the database locally, read the following guide to get your app running locally.
 
@@ -89,9 +101,10 @@ On your profile, select the *Trash-Icon*, on the right of the post.
 
 1. Clone the Repository
 
-```sh
-git clone https://github.com/sxpersxnic/m426-ph-studio.git
-```
+   ```sh
+   git clone https://github.com/sxpersxnic/TBZ.git
+   cd TBZ.
+   ```
 
 2. Setup a *PostgreSQL* Database, see [Postgres Guide](https://www.postgresql.org/docs/current/tutorial-start.html)
 3. Set the Environment variables according to `.env.example` in a new file `.env.local`
@@ -120,9 +133,9 @@ git clone https://github.com/sxpersxnic/m426-ph-studio.git
      bun dev
    ```
 
-7. Finally seed your database by navigating to the api route `http://localhost:3000/api/seed` .
+6. Finally seed your database by navigating to the api route `http://localhost:3000/api/seed` .
 
-Don't worry if you want to deploy your project later on, just follow the guide above.
+Don't worry if you want to deploy your project later on, just follow the [guide above](#get-started-with-vercel).
 
 ## Technical details
 

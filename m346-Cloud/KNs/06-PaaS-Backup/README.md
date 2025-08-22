@@ -1,57 +1,56 @@
-# KN06 20.12.2024 #
+# KN06
 
-## A) Installation App ##
+## A. Installation App
 
 - **Reverse Proxy:**
 
-    Das Reverse Proxy wird verwendet um Requests über das HTTP-Protokoll 
+    Das Reverse Proxy wird verwendet um Requests über das HTTP-Protokoll
     von Port 80 auf den Port der Java Applikation (5001) umzuleiten.
 
 - **Screenshot Swagger-URL:**
   
-  ![Swagger Website](/m346-Cloud/Images/KN06/SWAGGER-URL.png)
+  ![Swagger Website](../../x-res/06/SWAGGER-URL.png)
 
 - **Screenshot Swagger endpoints (Products: Java, GetProducts: .NET):**
 
-  ![Swagger Website](/m346-Cloud/Images/KN06/SWAGGER-PRODUCTS.png)
+  ![Swagger Website](../../x-res/06/SWAGGER-PRODUCTS.png)
 
 - **Screenshot MongoDB:**
 
-  ![Screenshot MongoDB Collections](/m346-Cloud/Images/KN06/MONGODB.png)
+  ![Screenshot MongoDB Collections](../../x-res/06/MONGODB.png)
 
 - **Cloud init. Don't do in productive environment:**
-    - Nginx configuration is placed in a user directory
-    - Passwordless sudo access
-    - SSH configuration risks -> `ssh_pwauth: false`
-    - Root login enabled -> Risk of unauthorized access
-  
-## B) Verticale scaling ##
+  - Nginx configuration is placed in a user directory
+  - Passwordless sudo access
+  - SSH configuration risks -> `ssh_pwauth: false`
+  - Root login enabled -> Risk of unauthorized access
+
+## B. Verticale scaling
 
 - **Instance resources:**
-    - **Before:**
+  - **Before:**
 
-    ![Resources of EC2 Instance before scaling](/m346-Cloud/Images/KN06/BEFORE-SCALING.png)
+    ![Resources of EC2 Instance before scaling](../../x-res/06/BEFORE-SCALING.png)
 
-    - **After:**
+  - **After:**
 
-    ![Resources of EC2 Instance after scaling](/m346-Cloud/Images/KN06/AFTER-SCALING.png)
-
+    ![Resources of EC2 Instance after scaling](../../x-res/06/AFTER-SCALING.png)
 
 - **Scaling when running instance?**
   The Disk Volume can be modified. Modifying the instance type is not possible
   while the instance is running tough.
 
 - **Explanation**
-    - **Disk Volume:**
-        - **Step 1:** Go to EC2 > Elastic Block Store > Volumes
-        - **Step 2:** Identify attached resource
-        - **Step 3:** Select Volumne > Actions > Modify Volume  
-    - **Instance Type:**
-        - **Step 1:** Stop instance if running.
-        - **Step 2:** Select instance > Actions > Instance Settings > Change instance type
-        - **Step 3:** Change instance type
+  - **Disk Volume:**
+    - **Step 1:** Go to EC2 > Elastic Block Store > Volumes
+    - **Step 2:** Identify attached resource
+    - **Step 3:** Select Volumne > Actions > Modify Volume
+  - **Instance Type:**
+    - **Step 1:** Stop instance if running.
+    - **Step 2:** Select instance > Actions > Instance Settings > Change instance type
+    - **Step 3:** Change instance type
 
-## C) Horizontal scaling ##
+## C. Horizontal scaling
 
 - **Explanation DNS:**
 
@@ -75,7 +74,7 @@
   request, the *DNS*-Server has the Domain cached, so when you revisit that
   website the *DNS*-Server will be like: 'Ouh yea app.tbz-m346.ch, yes i know them!'.
 
-  **Important:** app.tbz-m346.ch isn't the domain. tbz-m346.ch is the root domain 
+  **Important:** app.tbz-m346.ch isn't the domain. tbz-m346.ch is the root domain
   and app.tbz-m346.ch is just a sub-domain.
 
   To configure your DNS so you can actually use your domain,
@@ -84,5 +83,4 @@
 
 - **Screenshot Swagger-Call through LoadBalancer URL:**
 
-  ![Swagger-Call through LoadBalancer URL](/m346-Cloud/Images/KN06/LOADBALANCER.png)
-  
+  ![Swagger-Call through LoadBalancer URL](../../x-res/06/LOADBALANCER.png)

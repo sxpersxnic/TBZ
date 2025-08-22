@@ -1,9 +1,9 @@
 # KN07: Kubernetes II
 
-> **Overview:**
->
-> - [A. Terms and Concepts](#a-terms-and-concepts)
-> - [B. Demo Project](#b-demo-project)
+## Overview
+
+- [A. Terms and Concepts](#a-terms-and-concepts)
+- [B. Demo Project](#b-demo-project)
 
 ## A. Terms and Concepts
 
@@ -53,23 +53,23 @@ The value `mongo-service` is correct, because it is the name of the **Service** 
 
 ### `microk8s kubectl describe service webapp-service`
 
-![Node 1](../../x-resources/07/node-1-web.png)
+![Node 1](../../x-res/07/node-1-web.png)
 
-![Node 2](../../x-resources/07/node-2-web.png)
+![Node 2](../../x-res/07/node-2-web.png)
 
 ### `microk8s kubectl describe service mongo-service`
 
-![Node 1](../../x-resources/07/node-1-mongo.png)
+![Node 1](../../x-res/07/node-1-mongo.png)
 
-![Node 2](../../x-resources/07/node-2-mongo.png)
+![Node 2](../../x-res/07/node-2-mongo.png)
 
 ### Result
 
 To access the Webapp, I had to edit the security group's inbound rules to allow traffic on port 30100.
 
-![Node 1](../../x-resources/07/node-1-result.png)
+![Node 1](../../x-res/07/node-1-result.png)
 
-![Node 2](../../x-resources/07/node-2-result.png)
+![Node 2](../../x-res/07/node-2-result.png)
 
 ### MongoDB Compass
 
@@ -134,10 +134,10 @@ spec:
 
 - Webapp:
 
-	![Node 1](../../x-resources/07/node-1-result-2.png)
+	![Node 1](../../x-res/07/node-1-result-2.png)
 
 - `kubectl describe service webapp-service`:
 
 	The result shows that **3** replicas of the webapp are running. At `Endpoints` you can see that there are now three addresses listed, previously there was only one.
 
-	![Node 2](../../x-resources/07/node-2-web-2.png)
+	![Node 2](../../x-res/07/node-2-web-2.png)

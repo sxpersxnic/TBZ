@@ -4,7 +4,7 @@
 
 Docker Swarm is Docker's native clustering and orchestration solution that enables the management of a cluster of Docker engines as a single virtual system. It provides high availability, load balancing, and service discovery capabilities for containerized applications. Docker Swarm transforms individual Docker hosts into a unified cluster, allowing administrators to deploy and manage services seamlessly across multiple nodes.
 
-The architecture follows a manager-worker model where manager nodes handle cluster management tasks and worker nodes execute containerized workloads. This distributed approach ensures fault tolerance and scalability for production environments.
+The platform implements a manager-worker architectural model wherein manager nodes assume responsibility for cluster management operations, while worker nodes execute containerized workloads. This distributed architecture ensures both fault tolerance and horizontal scalability, making it suitable for production environments requiring reliability and performance.
 
 Think of Docker Swarm as an upgrade - from managing individual containers on one machine to orchestrating containers across multiple machines as if they were one powerful system. While Docker Compose helps you define multi-container applications on a single host, Docker Swarm extends this capability to multiple hosts with built-in clustering, load balancing, and high availability.
 
@@ -44,6 +44,8 @@ Before initializing a Docker Swarm cluster, ensure the following requirements ar
 - **Port 2377**: Used for cluster management communications between manager nodes
 - **Port 7946**: Used for communication among nodes (container network discovery)
 - **Port 4789**: Used for overlay network traffic between containers
+
+The Docker Swarm architecture implements a distributed system design that ensures high availability and efficient workload distribution across multiple nodes.
 
 ### Basic Cluster Architecture
 
@@ -219,23 +221,23 @@ flowchart TD
 
 ### Services
 
-Services represent the desired state of applications running in the swarm. They define how containers should be deployed, including the number of replicas, resource constraints, and update strategies. Services abstract the underlying infrastructure complexity and provide declarative application management.
+Services define the desired state of applications operating within the swarm cluster. They specify deployment parameters including replica count, resource constraints, and update strategies. Services provide an abstraction layer that conceals infrastructure complexity while enabling declarative application management.
 
 ### Tasks
 
-Tasks are atomic units of work assigned to nodes within the swarm. Each task corresponds to a running container and includes all necessary information for container execution, including image specification, resource requirements, and networking configuration.
+Tasks represent atomic units of work distributed to nodes throughout the swarm. Each task corresponds to a running container instance and encapsulates all essential execution information, including image specifications, resource requirements, and network configurations.
 
 ### Nodes
 
-Nodes are individual Docker engines participating in the swarm cluster. Manager nodes handle cluster orchestration responsibilities, while worker nodes execute assigned tasks. The distinction between node types enables separation of control plane and data plane operations.
+Nodes constitute individual Docker engines participating in the swarm cluster. Manager nodes assume cluster orchestration responsibilities, while worker nodes execute assigned tasks. This architectural separation enables clear distinction between control plane and data plane operations.
 
 ### Networks
 
-Docker Swarm creates overlay networks that span multiple hosts, enabling secure communication between services regardless of their physical location. These software-defined networks provide built-in load balancing and service discovery mechanisms.
+Docker Swarm establishes overlay networks that span multiple hosts, facilitating secure inter-service communication regardless of physical node location. These software-defined networks incorporate built-in load balancing and service discovery mechanisms.
 
 ### Secrets and Configs
 
-Swarm provides secure mechanisms for managing sensitive information and configuration data. Secrets store sensitive data such as passwords and certificates, while configs handle non-sensitive configuration files. Both resources are encrypted at rest and in transit.
+Swarm implements secure mechanisms for managing sensitive information and configuration data. Secrets handle sensitive data such as passwords and certificates, while configs manage non-sensitive configuration files. Both resource types maintain encryption at rest and during transit.
 
 ```mermaid
 graph LR
@@ -247,7 +249,7 @@ graph LR
         Secret[Secret Management]
         Config[Configuration]
     end
-    
+
     Service -->|Creates| Task
     Task -->|Runs on| Node
     Node -->|Connected via| Network
@@ -257,17 +259,17 @@ graph LR
 
 ## Docker Swarm Commands
 
-Docker Swarm operations are managed through the Docker CLI using specific command sets. As your instructor, I'll explain each command with practical examples and real-world context.
+Docker Swarm operations are administered through the Docker CLI using specialized command sets. This section provides comprehensive coverage of essential commands for cluster management, service deployment, and operational maintenance.
 
 ### Cluster Management Commands
 
-These commands control the fundamental cluster operations - think of them as the foundation commands you'll use to build and maintain your swarm.
+These commands provide fundamental cluster operation capabilities, serving as the foundation for building and maintaining swarm infrastructure.
 
 #### Initializing a Swarm Cluster
 
-**Command:** `docker swarm init`
+**Primary Command:** `docker swarm init`
 
-```bash
+```sh
 # Basic initialization
 docker swarm init
 
@@ -278,96 +280,107 @@ docker swarm init --advertise-addr 192.168.1.100
 docker swarm init --advertise-addr 192.168.1.100 --data-path-port 7777
 ```
 
-**What happens when you run this command:**
-1. The current Docker host becomes the first manager node
-2. A new swarm cluster is created with this node as the leader
-3. Join tokens are generated for both workers and managers
-4. The node starts listening on port 2377 for cluster management traffic
+**Command Execution Process:**
 
-**Parameters Explained:**
-- `--advertise-addr`: Specifies the IP address other nodes should use to connect to this manager. Critical in multi-network environments
-- `--data-path-port`: Changes the port used for data path traffic between nodes (default: 4789)
+1. The current Docker host assumes the role of first manager node
+2. A new swarm cluster is established with this node as the leader
+3. Join tokens are generated for both worker and manager nodes
+4. The node begins listening on port 2377 for cluster management communications
 
-**Real-world tip**: Always use `--advertise-addr` in production to avoid connectivity issues when nodes have multiple network interfaces.
+**Parameter Specifications:**
+
+- `--advertise-addr`: Designates the IP address for inter-node communication. Essential in multi-network environments
+- `--data-path-port`: Modifies the port used for data path traffic between nodes (default: 4789)
+
+**Best Practice**: Always specify `--advertise-addr` in production environments to prevent connectivity issues when nodes possess multiple network interfaces.
 
 #### Adding Nodes to the Cluster
 
-**Getting Join Tokens:**
-```bash
-# Get worker join token
+**Obtaining Join Tokens:**
+
+```sh
+# Retrieve worker join token
 docker swarm join-token worker
 
-# Get manager join token
+# Retrieve manager join token
 docker swarm join-token manager
 
-# Rotate tokens for security (invalidates old tokens)
+# Rotate tokens for security purposes (invalidates existing tokens)
 docker swarm join-token --rotate worker
 ```
 
-**Joining as Worker Node:**
-```bash
-# Run this command on the machine you want to add as a worker
+**Worker Node Addition:**
+
+```sh
+# Execute on the target machine for worker node addition
 docker swarm join --token <token> \
     192.168.1.100:2377
 ```
 
-**Joining as Manager Node:**
-```bash
-# Run this command on the machine you want to add as a manager
+**Manager Node Addition:**
+
+```sh
+# Execute on the target machine for manager node addition
 docker swarm join --token <token> \
     192.168.1.100:2377
 ```
 
-**Understanding Join Process:**
-1. The joining node contacts the manager at the specified IP and port
-2. Authentication occurs using the join token
-3. The manager adds the node to the cluster
+**Node Addition Process:**
+
+1. The joining node establishes contact with the manager at the specified IP and port
+2. Authentication occurs utilizing the join token
+3. The manager incorporates the node into the cluster
 4. The new node downloads the current cluster state
-5. The node becomes available for task assignment (workers) or management duties (managers)
+5. The node becomes available for task assignment (workers) or management responsibilities (managers)
 
-#### Leaving the Swarm
+#### Removing Nodes from the Swarm
 
-**From Worker Node:**
-```bash
-# Gracefully leave the swarm
+**Worker Node Removal:**
+
+```sh
+# Graceful swarm departure
 docker swarm leave
 ```
 
-**From Manager Node:**
-```bash
-# Force leave (required for manager nodes)
+**Manager Node Removal:**
+
+```sh
+# Forced departure (required for manager nodes)
 docker swarm leave --force
 
-# Alternative: First demote, then leave
+# Alternative approach: Demotion followed by departure
 docker node demote <node-id>
 docker swarm leave
 ```
 
-**What happens during leave:**
-- Worker nodes: Stop receiving new tasks, existing tasks continue until completion
-- Manager nodes: Triggers leader election if the leaving node was the leader
-- All associated resources (networks, secrets) become inaccessible to the leaving node
+**Node Removal Process:**
+
+- **Worker nodes**: Cease receiving new task assignments; existing tasks continue until completion
+- **Manager nodes**: Initiates leader election process if the departing node was the current leader
+- All associated resources (networks, secrets) become inaccessible to the departing node
 
 ### Service Management Commands
 
-Services are the core of application deployment in Swarm. These commands help you define, deploy, and manage your applications.
+Services constitute the primary component of application deployment within Docker Swarm. These commands facilitate service definition, deployment, and ongoing management.
 
 #### Creating Services
 
 **Basic Service Creation:**
-```bash
-# Simple service with one replica
+
+```sh
+# Single replica service
 docker service create --name web nginx:alpine
 
-# Service with multiple replicas
+# Multi-replica service
 docker service create --name web --replicas 3 nginx:alpine
 
-# Service with published ports (accessible from outside the cluster)
+# Service with published ports (external cluster access)
 docker service create --name web --replicas 3 --publish 8080:80 nginx:alpine
 ```
 
 **Advanced Service Creation:**
-```bash
+
+```sh
 # Service with resource constraints
 docker service create \
   --name web \
@@ -395,59 +408,65 @@ docker service create \
   myapp:latest
 ```
 
-**Service Creation Parameters Explained:**
-- `--name`: Human-readable service name for management
-- `--replicas`: Number of identical containers to run
-- `--publish`: Port mapping (host:container) for external access
-- `--limit-*`: Maximum resources a container can use
-- `--reserve-*`: Resources guaranteed to be available
-- `--constraint`: Rules for node selection
-- `--env`: Environment variables passed to containers
+**Service Creation Parameter Specifications:**
 
-#### Listing and Inspecting Services
+- `--name`: Descriptive service identifier for administrative purposes
+- `--replicas`: Quantity of identical container instances to deploy
+- `--publish`: Port mapping configuration (host:container) for external accessibility
+- `--limit-*`: Maximum resource allocation per container
+- `--reserve-*`: Guaranteed resource allocation per container
+- `--constraint`: Node selection criteria and rules
+- `--env`: Environment variables propagated to container instances
 
-**List Services:**
-```bash
-# Show all services
+#### Service Inspection and Listing
+
+**Service Enumeration:**
+
+```sh
+# Display all services
 docker service ls
 
-# Show services with additional details
+# Display services with enhanced detail formatting
 docker service ls --format "table {{.Name}}\t{{.Mode}}\t{{.Replicas}}\t{{.Image}}"
 ```
 
-**Inspect Service Details:**
-```bash
-# View detailed service configuration
+**Detailed Service Inspection:**
+
+```sh
+# View comprehensive service configuration
 docker service inspect web
 
-# View service configuration in human-readable format
+# View service configuration in readable format
 docker service inspect --pretty web
 
-# List tasks (container instances) for a service
+# List tasks (container instances) for specific service
 docker service ps web
 
-# Show tasks including historical/failed tasks
+# Display tasks including historical and failed instances
 docker service ps --no-trunc web
 ```
 
-**Understanding Service Output:**
-- `docker service ls` shows current vs. desired replica count
+**Service Output Interpretation:**
+
+- `docker service ls` displays current versus desired replica counts
 - `docker service ps` shows individual task status and node placement
-- `docker service inspect` reveals the complete service specification
+- `docker service inspect` reveals complete service specification details
 
-#### Updating Services
+#### Service Updates and Scaling
 
-**Scaling Services:**
-```bash
-# Scale up to 5 replicas
+**Service Scaling Operations:**
+
+```sh
+# Scale service to 5 replicas
 docker service scale web=5
 
-# Scale multiple services simultaneously
+# Scale multiple services concurrently
 docker service scale web=5 api=3 db=1
 ```
 
-**Updating Service Images:**
-```bash
+**Service Image Updates:**
+
+```sh
 # Rolling update to new image version
 docker service update --image nginx:1.21 web
 
@@ -461,7 +480,8 @@ docker service update \
 ```
 
 **Advanced Service Updates:**
-```bash
+
+```sh
 # Update environment variables
 docker service update --env-add NEW_VAR=value web
 
@@ -475,63 +495,69 @@ docker service update --publish-add 9090:90 web
 docker service update --constraint-add 'node.labels.type==compute' web
 ```
 
-**Update Strategy Parameters:**
-- `--update-parallelism`: Number of containers updated simultaneously
-- `--update-delay`: Wait time between batches of updates
-- `--update-failure-action`: What to do if update fails (pause, continue, rollback)
+**Update Strategy Parameter Specifications:**
+
+- `--update-parallelism`: Number of containers updated concurrently
+- `--update-delay`: Interval between update batches
+- `--update-failure-action`: Response to update failures (pause, continue, rollback)
 - `--rollback`: Revert to previous service configuration
 
 #### Service Rollback and Removal
 
-**Rolling Back Services:**
-```bash
+**Service Rollback Operations:**
+
+```sh
 # Rollback to previous configuration
 docker service rollback web
 
-# Rollback with custom settings
+# Rollback with custom parameters
 docker service update --rollback \
   --rollback-parallelism 1 \
   --rollback-delay 10s \
   web
 ```
 
-**Removing Services:**
-```bash
-# Remove a single service
+**Service Removal Operations:**
+
+```sh
+# Remove individual service
 docker service rm web
 
 # Remove multiple services
 docker service rm web api database
 
-# Force remove (skip graceful shutdown)
+# Force removal (bypass graceful shutdown)
 docker service rm --force web
 ```
 
 ### Node Management Commands
 
-Node management commands help you control cluster membership and node behavior.
+Node management commands provide control over cluster membership and node operational behavior.
 
-#### Listing and Inspecting Nodes
+#### Node Inspection and Listing
 
-**List Nodes:**
-```bash
-# Show all nodes in cluster
+**Node Enumeration:**
+
+```sh
+# Display all cluster nodes
 docker node ls
 
-# Show nodes with custom formatting
+# Display nodes with custom formatting
 docker node ls --format "table {{.Hostname}}\t{{.Status}}\t{{.Availability}}\t{{.ManagerStatus}}"
 ```
 
-**Inspect Node Details:**
-```bash
-# View detailed node information
+**Detailed Node Inspection:**
+
+```sh
+# View comprehensive node information
 docker node inspect node-1
 
-# View node info in human-readable format
+# View node information in readable format
 docker node inspect --pretty node-1
 ```
 
-**Node Status Indicators:**
+**Node Status Classifications:**
+
 - **Status**: Ready (healthy), Down (unreachable), Unknown (status unclear)
 - **Availability**: Active (accepts tasks), Pause (no new tasks), Drain (no tasks)
 - **Manager Status**: Leader, Reachable, Unreachable (for manager nodes only)
@@ -539,7 +565,8 @@ docker node inspect --pretty node-1
 #### Promoting and Demoting Nodes
 
 **Node Role Changes:**
-```bash
+
+```sh
 # Promote worker to manager
 docker node promote worker-1
 
@@ -551,13 +578,15 @@ docker node promote worker-1 worker-2 worker-3
 ```
 
 **Why promote/demote nodes:**
+
 - **Promote**: Add management capacity, improve fault tolerance
 - **Demote**: Reduce management overhead, prepare for node removal
 
 #### Managing Node Availability
 
 **Drain Nodes (Graceful Maintenance):**
-```bash
+
+```sh
 # Drain node for maintenance (stops scheduling new tasks)
 docker node update --availability drain worker-1
 
@@ -569,6 +598,7 @@ docker node update --availability active worker-1
 ```
 
 **Node Draining Process:**
+
 1. New tasks stop being assigned to the drained node
 2. Existing tasks are gracefully moved to other available nodes
 3. Node remains in cluster but doesn't run application containers
@@ -577,7 +607,8 @@ docker node update --availability active worker-1
 #### Node Labels and Constraints
 
 **Adding Labels to Nodes:**
-```bash
+
+```sh
 # Add custom labels for scheduling decisions
 docker node update --label-add storage=ssd node-1
 docker node update --label-add environment=production node-1
@@ -588,7 +619,8 @@ docker node update --label-rm storage node-1
 ```
 
 **Using Labels with Services:**
-```bash
+
+```sh
 # Deploy service only to SSD nodes
 docker service create \
   --name fast-db \
@@ -609,7 +641,8 @@ Swarm networks enable service-to-service communication across the cluster.
 #### Creating and Managing Networks
 
 **Create Overlay Network:**
-```bash
+
+```sh
 # Basic overlay network
 docker network create --driver overlay my-network
 
@@ -625,7 +658,8 @@ docker network create \
 ```
 
 **Attach Services to Networks:**
-```bash
+
+```sh
 # Create service on specific network
 docker service create \
   --name web \
@@ -640,6 +674,7 @@ docker service update --network-rm my-network web
 ```
 
 **Network Types in Swarm:**
+
 - **bridge**: Default single-host networking (like regular Docker)
 - **overlay**: Multi-host networking for swarm services
 - **host**: Service uses host's network directly
@@ -652,7 +687,8 @@ Secure management of sensitive and configuration data.
 #### Managing Secrets
 
 **Create Secrets:**
-```bash
+
+```sh
 # Create secret from standard input
 echo "mysecretpassword" | docker secret create db_password -
 
@@ -664,7 +700,8 @@ docker secret create api_key ./api.key --label environment=production
 ```
 
 **Use Secrets in Services:**
-```bash
+
+```sh
 # Mount secret as file in container
 docker service create \
   --name webapp \
@@ -680,7 +717,8 @@ docker service create \
 ```
 
 **Secret Management:**
-```bash
+
+```sh
 # List secrets
 docker secret ls
 
@@ -694,7 +732,8 @@ docker secret rm db_password
 #### Managing Configs
 
 **Create Configs:**
-```bash
+
+```sh
 # Create config from file
 docker config create nginx_config ./nginx.conf
 
@@ -707,7 +746,8 @@ EOF
 ```
 
 **Use Configs in Services:**
-```bash
+
+```sh
 # Mount config as file
 docker service create \
   --name web \
@@ -717,112 +757,14 @@ docker service create \
 # Mount multiple configs
 docker service create \
   --name app \
-  --config src=# Docker Swarm
-
-## Overview
-
-Docker Swarm is Docker's native clustering and orchestration solution that enables the management of a cluster of Docker engines as a single virtual system. It provides high availability, load balancing, and service discovery capabilities for containerized applications. Docker Swarm transforms individual Docker hosts into a unified cluster, allowing administrators to deploy and manage services across multiple nodes seamlessly.
-
-The architecture follows a manager-worker model where manager nodes handle cluster management tasks and worker nodes execute containerized workloads. This distributed approach ensures fault tolerance and scalability for production environments.
-
-Think of Docker Swarm as upgrading from managing individual containers on a single machine to orchestrating containers across multiple machines as if they were one powerful system. While Docker Compose helps you define multi-container applications on a single host, Docker Swarm extends this capability across multiple hosts with built-in clustering, load balancing, and high availability.
-
-- [Getting Started](#getting-started)
-- [Docker Swarm vs. Docker Compose](#docker-swarm-vs-docker-compose)
-- [Docker Swarm Resources](#docker-swarm-resources)
-- [Docker Swarm vs. Kubernetes](#docker-swarm-vs-kubernetes)
-- [Docker Swarm Commands](#docker-swarm-commands)
-
-## Getting Started
-
-To setup a Docker Swarm cluster, follow the [official tutorial](https://docs.docker.com/engine/swarm/swarm-tutorial) by Docker.
-
-### Understanding the Learning Journey
-
-As Docker users, you're already familiar with running containers on a single host. Docker Swarm represents the next evolution in your containerization journey. Instead of manually managing containers across multiple servers, Swarm allows you to treat multiple Docker hosts as a single, powerful cluster.
-
-Consider this progression:
-1. **Single Container**: `docker run nginx`
-2. **Multi-Container Application**: `docker-compose up` (single host)
-3. **Multi-Host Orchestration**: Docker Swarm (multiple hosts)
-
-### Prerequisites
-
-Before initializing a Docker Swarm cluster, ensure the following requirements are met:
-
-- Docker Engine version 1.12 or higher installed on all nodes
-- Network connectivity between all nodes on ports 2377 (cluster management), 7946 (node communication), and 4789 (overlay network traffic)
-- Sufficient system resources allocated for both Docker daemon and containerized applications
-
-**Port Explanation:**
-- **Port 2377**: Used for cluster management communications between manager nodes
-- **Port 7946**: Used for communication among nodes (container network discovery)
-- **Port 4789**: Used for overlay network traffic between containers
-
-### Basic Cluster Architecture
-
-```mermaid
-graph TB
-    subgraph "Docker Swarm Cluster"
-        subgraph "Manager Nodes"
-            M1[Manager Node 1<br/>Leader]
-            M2[Manager Node 2<br/>Follower]
-            M3[Manager Node 3<br/>Follower]
-        end
-        
-        subgraph "Worker Nodes"
-            W1[Worker Node 1]
-            W2[Worker Node 2]
-            W3[Worker Node 3]
-            W4[Worker Node 4]
-        end
-        
-        M1 -.->|Raft Consensus| M2
-        M2 -.->|Raft Consensus| M3
-        M3 -.->|Raft Consensus| M1
-        
-        M1 -->|Task Assignment| W1
-        M1 -->|Task Assignment| W2
-        M2 -->|Task Assignment| W3
-        M3 -->|Task Assignment| W4
-    end
-    
-    Client[Docker CLI] -->|Commands| M1
-```
-
-### Understanding the Architecture
-
-**Manager Nodes**: Think of these as the "brains" of your cluster. They make decisions about where to place containers, handle API requests, and maintain the cluster state. The leader is elected through Raft consensus algorithm, ensuring high availability.
-
-**Worker Nodes**: These are the "muscles" of your cluster. They receive instructions from managers and run the actual containers. Worker nodes report back to managers about the health and status of their containers.
-
-**Key Architectural Concepts:**
-- **Raft Consensus**: Ensures all manager nodes agree on cluster state, preventing split-brain scenarios
-- **Leader Election**: One manager acts as the leader, others are followers ready to take over if needed
-- **Task Distribution**: Managers intelligently distribute workloads across available worker nodes
-
-### Service Deployment Flow
-
-```mermaid
-sequenceDiagram
-    participant CLI as Docker CLI
-    participant Manager as Manager Node
-    participant Scheduler as Scheduler
-    participant Worker as Worker Node
-    
-    CLI->>Manager: docker service create
-    Manager->>Manager: Validate service definition
-    Manager->>Scheduler: Request task scheduling
-    Scheduler->>Scheduler: Select appropriate nodes
-    Scheduler->>Worker: Assign tasks
-    Worker->>Worker: Pull image & start container
-    Worker-->>Manager: Report task status
-    Manager-->>CLI: Service creation confirmation
+  --config source=app_config,target=/app/config.yml \
+  --config source=nginx_config,target=/etc/nginx/nginx.conf \
+  myapp:latest
 ```
 
 ## Docker Swarm vs. Docker Compose
 
-Understanding the relationship between Docker Compose and Docker Swarm is crucial for choosing the right tool for your specific use case. Both tools work with multi-container applications but serve different purposes and scales.
+Understanding the relationship between Docker Compose and Docker Swarm is essential for selecting the appropriate tool for specific use cases. Both tools facilitate multi-container applications but serve different purposes and operational scales.
 
 ### Conceptual Comparison
 
@@ -833,13 +775,13 @@ graph LR
         LocalDev[Local Development]
         SimpleApps[Simple Multi-Container Apps]
     end
-    
+
     subgraph "Docker Swarm Scope"
         MultiHost[Multiple Hosts]
         Production[Production Clusters]
         ScalableApps[Scalable Distributed Apps]
     end
-    
+
     SingleHost -->|Scale Up| MultiHost
     LocalDev -->|Production Ready| Production
     SimpleApps -->|High Availability| ScalableApps
@@ -848,6 +790,7 @@ graph LR
 ### Key Differences Explained
 
 **Docker Compose:**
+
 - **Purpose**: Define and run multi-container applications on a single Docker host
 - **Scope**: Development environments, testing, single-machine deployments
 - **File Format**: docker-compose.yml with services, networks, and volumes
@@ -856,6 +799,7 @@ graph LR
 - **High Availability**: None - single point of failure
 
 **Docker Swarm:**
+
 - **Purpose**: Orchestrate containers across multiple Docker hosts
 - **Scope**: Production environments, distributed applications, clustering
 - **File Format**: Can use docker-compose.yml files with `docker stack deploy`
@@ -868,12 +812,14 @@ graph LR
 The beauty of Docker Swarm is that it can use your existing docker-compose.yml files with minimal modifications:
 
 **Docker Compose Command:**
-```bash
+
+```sh
 docker-compose up -d
 ```
 
 **Docker Swarm Equivalent:**
-```bash
+
+```sh
 docker stack deploy -c docker-compose.yml myapp
 ```
 
@@ -885,7 +831,7 @@ flowchart TD
     Question1{Single Machine Sufficient?}
     Question2{High Availability Required?}
     Question3{Development Environment?}
-    
+
     Start --> Question1
     Question1 -->|Yes| Question2
     Question1 -->|No| Swarm[Use Docker Swarm]
@@ -893,18 +839,20 @@ flowchart TD
     Question2 -->|Yes| Swarm
     Question3 -->|Yes| Compose[Use Docker Compose]
     Question3 -->|No| Swarm
-    
+
     style Compose fill:#90EE90
     style Swarm fill:#FFB6C1
 ```
 
 **Use Docker Compose when:**
+
 - Developing applications locally
 - Running applications on a single server
 - Prototyping and testing
 - Simple production deployments without high availability requirements
 
 **Use Docker Swarm when:**
+
 - Production environments requiring high availability
 - Applications that need to scale beyond a single machine
 - Multiple team members need to access the same application cluster
@@ -912,241 +860,17 @@ flowchart TD
 
 ### Feature Comparison Table
 
-| Feature | Docker Compose | Docker Swarm |
-|---------|----------------|--------------|
-| **Deployment Scope** | Single host | Multiple hosts |
-| **High Availability** | No | Yes |
-| **Load Balancing** | External (nginx, etc.) | Built-in |
-| **Service Discovery** | Container names/aliases | Built-in DNS |
-| **Rolling Updates** | Manual restart | Automated |
-| **Scaling** | Single machine limits | Cluster-wide |
-| **Secrets Management** | Environment variables/files | Built-in secrets |
-| **Configuration Complexity** | Simple | Moderate |
-| **Learning Curve** | Low | Medium |
-
-Docker Swarm utilizes several key resources to manage containerized applications effectively:
-
-### Services
-
-Services represent the desired state of applications running in the swarm. They define how containers should be deployed, including the number of replicas, resource constraints, and update strategies. Services abstract the underlying infrastructure complexity and provide declarative application management.
-
-### Tasks
-
-Tasks are atomic units of work assigned to nodes within the swarm. Each task corresponds to a running container and includes all necessary information for container execution, including image specification, resource requirements, and networking configuration.
-
-### Nodes
-
-Nodes are individual Docker engines participating in the swarm cluster. Manager nodes handle cluster orchestration responsibilities, while worker nodes execute assigned tasks. The distinction between node types enables separation of control plane and data plane operations.
-
-### Networks
-
-Docker Swarm creates overlay networks that span multiple hosts, enabling secure communication between services regardless of their physical location. These software-defined networks provide built-in load balancing and service discovery mechanisms.
-
-### Secrets and Configs
-
-Swarm provides secure mechanisms for managing sensitive information and configuration data. Secrets store sensitive data such as passwords and certificates, while configs handle non-sensitive configuration files. Both resources are encrypted at rest and in transit.
-
-```mermaid
-graph LR
-    subgraph "Swarm Resources"
-        Service[Service Definition]
-        Task[Task Instance]
-        Node[Swarm Node]
-        Network[Overlay Network]
-        Secret[Secret Management]
-        Config[Configuration]
-    end
-    
-    Service -->|Creates| Task
-    Task -->|Runs on| Node
-    Node -->|Connected via| Network
-    Service -->|Uses| Secret
-    Service -->|Uses| Config
-```
-
-## Docker Swarm vs. Kubernetes
-
-Both Docker Swarm and Kubernetes serve as container orchestration platforms, yet they differ significantly in complexity, feature sets, and operational approaches.
-
-### Architecture Comparison
-
-```mermaid
-graph TB
-    subgraph "Docker Swarm Architecture"
-        SwarmManager[Manager Nodes<br/>- Raft Consensus<br/>- Built-in Load Balancer<br/>- Service Discovery]
-        SwarmWorker[Worker Nodes<br/>- Task Execution<br/>- Container Runtime]
-        SwarmManager --> SwarmWorker
-    end
-    
-    subgraph "Kubernetes Architecture"
-        K8sMaster[Control Plane<br/>- API Server<br/>- etcd<br/>- Scheduler<br/>- Controller Manager]
-        K8sNode[Worker Nodes<br/>- kubelet<br/>- kube-proxy<br/>- Container Runtime]
-        K8sMaster --> K8sNode
-    end
-```
-
-### Feature Comparison
-
-**Docker Swarm Advantages:**
-- Simplified setup and configuration process
-- Native integration with Docker ecosystem
-- Lower resource overhead and operational complexity
-- Built-in service discovery and load balancing
-- Straightforward rolling updates and rollbacks
-
-**Kubernetes Advantages:**
-- Extensive ecosystem and third-party integrations
-- Advanced scheduling capabilities and resource management
-- Comprehensive monitoring and logging solutions
-- Robust auto-scaling mechanisms
-- Declarative configuration management through YAML manifests
-
-**Use Case Recommendations:**
-- Docker Swarm: Suitable for small to medium-scale deployments, development environments, and organizations prioritizing simplicity
-- Kubernetes: Preferred for large-scale production environments, complex microservices architectures, and scenarios requiring advanced orchestration features
-
-### Deployment Complexity
-
-```mermaid
-graph LR
-    subgraph "Deployment Complexity Scale"
-        Simple[Simple Applications<br/>Docker Swarm Recommended]
-        Medium[Medium Complexity<br/>Either Platform Suitable]
-        Complex[Complex Microservices<br/>Kubernetes Recommended]
-    end
-    
-    Simple -->|Increasing Complexity| Medium
-    Medium -->|Increasing Complexity| Complex
-    
-    style Simple fill:#90EE90
-    style Medium fill:#FFE4B5
-    style Complex fill:#FFB6C1
-```
-
-## Docker Swarm Commands
-
-Docker Swarm operations are managed through the Docker CLI using specific command sets for cluster initialization, service management, and monitoring.
-
-### Cluster Management Commands
-
-**Initialize Swarm:**
-```bash
-docker swarm init --advertise-addr <MANAGER-IP>
-```
-
-**Join Worker Node:**
-```bash
-docker swarm join --token <WORKER-TOKEN> <MANAGER-IP>:2377
-```
-
-**Join Manager Node:**
-```bash
-docker swarm join --token <MANAGER-TOKEN> <MANAGER-IP>:2377
-```
-
-**Leave Swarm:**
-```bash
-docker swarm leave --force  # Manager nodes
-docker swarm leave          # Worker nodes
-```
-
-### Service Management Commands
-
-**Create Service:**
-```bash
-docker service create --name <service-name> --replicas <count> <image>
-docker service create --name web --replicas 3 --publish 8080:80 nginx
-```
-
-**List Services:**
-```bash
-docker service ls
-docker service ps <service-name>  # List tasks for specific service
-```
-
-**Update Service:**
-```bash
-docker service update --replicas <new-count> <service-name>
-docker service update --image <new-image> <service-name>
-```
-
-**Remove Service:**
-```bash
-docker service rm <service-name>
-```
-
-### Node Management Commands
-
-**List Nodes:**
-```bash
-docker node ls
-docker node inspect <node-id>
-```
-
-**Promote/Demote Nodes:**
-```bash
-docker node promote <node-id>
-docker node demote <node-id>
-```
-
-**Update Node Availability:**
-```bash
-docker node update --availability drain <node-id>   # Drain node
-docker node update --availability active <node-id>  # Activate node
-```
-
-### Network and Secret Management
-
-**Create Overlay Network:**
-```bash
-docker network create --driver overlay <network-name>
-```
-
-**Create Secret:**
-```bash
-echo "secret-data" | docker secret create <secret-name> -
-docker service create --secret <secret-name> <image>
-```
-
-**Create Config:**
-```bash
-docker config create <config-name> <config-file>
-docker service create --config <config-name> <image>
-```
-
-### Service Command Workflow
-
-```mermaid
-flowchart TD
-    Start([Docker Service Command]) 
-    Init{Command Type?}
-    
-    Init -->|create| Create[docker service create]
-    Init -->|update| Update[docker service update]
-    Init -->|scale| Scale[docker service scale]
-    Init -->|remove| Remove[docker service rm]
-    
-    Create --> ValidateImage[Validate Image]
-    ValidateImage --> Schedule[Schedule Tasks]
-    Schedule --> Deploy[Deploy Containers]
-    
-    Update --> RollingUpdate[Rolling Update Strategy]
-    RollingUpdate --> HealthCheck[Health Check]
-    HealthCheck --> Complete[Update Complete]
-    
-    Scale --> AdjustReplicas[Adjust Replica Count]
-    AdjustReplicas --> Rebalance[Rebalance Tasks]
-    
-    Remove --> GracefulShutdown[Graceful Shutdown]
-    GracefulShutdown --> Cleanup[Resource Cleanup]
-    
-    Deploy --> End([Command Complete])
-    Complete --> End
-    Rebalance --> End
-    Cleanup --> End
-```
-
-These commands provide comprehensive control over Docker Swarm cluster operations, enabling administrators to manage containerized applications efficiently across distributed environments.
+| Feature                      | Docker Compose              | Docker Swarm     |
+| ---------------------------- | --------------------------- | ---------------- |
+| **Deployment Scope**         | Single host                 | Multiple hosts   |
+| **High Availability**        | No                          | Yes              |
+| **Load Balancing**           | External (nginx, etc.)      | Built-in         |
+| **Service Discovery**        | Container names/aliases     | Built-in DNS     |
+| **Rolling Updates**          | Manual restart              | Automated        |
+| **Scaling**                  | Single machine limits       | Cluster-wide     |
+| **Secrets Management**       | Environment variables/files | Built-in secrets |
+| **Configuration Complexity** | Simple                      | Moderate         |
+| **Learning Curve**           | Low                         | Medium           |
 
 ## Getting Started
 

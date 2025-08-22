@@ -1,38 +1,38 @@
-# KN03 22.11.2024
+# KN03
 
-## A) Installation Web- & Databaseserver
+## A. Installation Web- & Databaseserver
 
-In AWS EC2 Machine run bash script: [Here](https://github.com/sxpersxnic/m346/tree/main/KNs/03-IaaS-AWS/script.sh)
+In AWS EC2 Machine run bash script: [Script](script.sh)
 
 ### Webseiten
 
 #### Index.html
 
-![index.html Seite](/m346-Cloud/Images/KN03/INDEX-HTML.png)
+![index.html Seite](../../x-res/03/INDEX-HTML.png)
 
 #### Info.php
 
-![info.php Seite](/m346-Cloud/Images/KN03/INFO-PHP.png)
+![info.php Seite](../../x-res/03/INFO-PHP.png)
 
 #### Db.php
 
-![db.php Seite](/m346-Cloud/Images/KN03/DB-PHP.png)
+![db.php Seite](../../x-res/03/DB-PHP.png)
 
 ### EC2
 
 #### Instanz infos
 
-![Instanz Details](/m346-Cloud/Images/KN03/INSTANCE-DETAILS.png)
+![Instanz Details](../../x-res/03/INSTANCE-DETAILS.png)
 
 #### Security Group
 
-![Details Security group](/m346-Cloud/Images/KN03/SECURITY-GROUP.png)
+![Details Security group](../../x-res/03/SECURITY-GROUP.png)
 
 ### MySQL CLI
 
 #### Query
 
-![MySQL Query](/m346-Cloud/Images/KN03/MYSQL-QUERY.png)
+![MySQL Query](../../x-res/03/MYSQL-QUERY.png)
 
 #### Explanation
 

@@ -4,15 +4,15 @@
 
 ### Addressing
 
-> ![IP addresses of Busybox{1..4}](/m347-Container/x-resources/03/busybox.png)
+> ![IP addresses of Busybox{1..4}](../../x-res/03/busybox.png)
 
 ### Busybox1 with the same Default-Gateway as Busybox2
 
-> ![Information of Busybox1](/m347-Container/x-resources/03/busybox1.png)
+> ![Information of Busybox1](../../x-res/03/busybox1.png)
 
 ### Busybox3 with the same Default-Gateway as Busybox4
 
-> ![Information of Busybox3](/m347-Container/x-resources/03/busybox3.png)
+> ![Information of Busybox3](../../x-res/03/busybox3.png)
 
 ### Gemeinsamkeiten und Unterschiede
 
