@@ -38,12 +38,12 @@
 |--------|------|-----------|----|------|
 |HS|**426**|Software mit agilen Methoden entwickeln|[m426](./m426-Scrum)|**Done**|
 |HS|**322**|Benutzerschnittstellen entwerfen und implementieren|-|**Done**|
-|HS|**346**|Cloud Lösungen konzipieren und realisieren|[m346](./m346-Cloud)|**Done**|
-|HS|**320**|Objektorientiert Programmieren|[m320](./m320-OOP)|**Done**|
-|FS|**114**|Codierungs-, Kompressions- und Verschlüsselungsverfahren einsetzen|[m114](./m114-Encoding-Compression-Encryption)|**Done**|
-|FS|**254**|Geschäftsprozesse im eigenen Berufsumfeld beschreiben|[m254](./m254-Business-Processes)|**Done**|
-|FS|**165**|NoSQL-Datenbanken einsetzen|[m165](./m165-NoSQL)|**Done**|
-|FS|**347**|Dienst mit Container anwenden|[m374](./m347-Container)|**Done**|
+|HS|**346**|Cloud Lösungen konzipieren und realisieren|[Link](./m346-Cloud)|**Done**|
+|HS|**320**|Objektorientiert Programmieren|[Link](./m320-OOP)|**Done**|
+|FS|**114**|Codierungs-, Kompressions- und Verschlüsselungsverfahren einsetzen|[Link](./m114-Encoding-Compression-Encryption)|**Done**|
+|FS|**254**|Geschäftsprozesse im eigenen Berufsumfeld beschreiben|[Link](./m254-Business-Processes)|**Done**|
+|FS|**165**|NoSQL-Datenbanken einsetzen|[Link](./m165-NoSQL)|**Done**|
+|FS|**347**|Dienst mit Container anwenden|[Link](./m347-Container)|**Done**|
 
 ---
 
@@ -51,10 +51,10 @@
 
 |Semester|Number|Description|Link|Status|
 |--------|------|-----------|----|------|
-|HS|**450**|Applikationen testen|[m450](./m450-Testing)|***Soon***|
-|HS|**306**|Kleinprojekte im eigenen Berufsumfeld abwickeln|[m306](./m306-Projects)|***Soon***|
-|FS|**183**|Applikationssicherheit implementieren|[m183](./m183-App-Security)|**Coming**|
-|FS|**323**|Funktional Programmieren|[m323](./m323-FP)|**Coming**|
+|HS|**306**|Kleinprojekte im eigenen Berufsumfeld abwickeln|[Link](./m306-Projects)|**Current**|
+|HS|**450**|Applikationen testen|[Link](./m450-Application-Testing)|**Coming**|
+|FS|**183**|Applikationssicherheit implementieren|[Link](./m183-App-Security)|**Coming**|
+|FS|**323**|Funktional Programmieren|[Link](./m323-FP)|**Coming**|
 
 ---
 
