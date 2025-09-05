@@ -13,8 +13,6 @@
 
 ## Disclaimer
 
-## Disclaimer
-
 This repository is a **personal project** created for learning and school-related exercises.  
 It is **not an official repository of the [TBZ](https://tbz.ch)**, nor is it maintained, endorsed, or affiliated with the school in any way.  
 
@@ -80,4 +78,5 @@ All code, notes, and materials here represent my own work.
 ## License
 
 This repository is licensed with the [MIT](LICENSE) license.
+
 
