@@ -10,4 +10,3 @@
 
 - Inline Documentation
 - React-Components are documented with Storybook
-- Minimum 80% Documentation Coverage
