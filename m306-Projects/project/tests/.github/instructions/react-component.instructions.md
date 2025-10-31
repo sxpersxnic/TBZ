@@ -2,6 +2,9 @@
 applyTo: 'react-components/*.jsx'
 ---
 
+Context:
+	- Path: `m306-Projects/project/tests/react-components/`
+
 # React-Components Storybook Documentation
 
 - Each React component must be documented using Storybook.

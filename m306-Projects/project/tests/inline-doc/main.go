@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+// main is the entry point of the application.
+// It demonstrates the usage of the Calculator and Logger types by performing
+// various arithmetic operations and logging the results.
 func main() {
 	logger, err := NewLogger("INFO")
 
@@ -41,6 +44,7 @@ func main() {
 	logger.Info("Application finished")
 }
 
+// formatFloat formats a float64 number to a string with two decimal places.
 func formatFloat(f float64) string {
 	return fmt.Sprintf("%.2f", f)
 }
