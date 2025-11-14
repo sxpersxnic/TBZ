@@ -42,3 +42,7 @@ An error refers to a mistake or fault in the code that leads to incorrect behavi
 ### Deficiency
 
 A deficiency, on the other hand, refers to a lack or inadequacy in the software that prevents it from meeting certain requirements or standards. It may not necessarily be due to a mistake but rather an omission or failure to include necessary features, functionalities, or performance criteria. Deficiencies can result in the software not fulfilling user needs or business objectives.
+
+## Exercise 3
+
+- [main.go](exercise-3/main.go)
