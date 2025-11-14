@@ -32,3 +32,13 @@ Tests can be executed in various environments, including:
 - Virtual Machines or Containers
 
 ## Exercise 2
+
+Difference between Error and Deficiency
+
+### Error
+
+An error refers to a mistake or fault in the code that leads to incorrect behavior or results. It is often unintentional and can be due to various reasons such as typos, logical mistakes, or incorrect assumptions made by the developer. Errors can lead to bugs, crashes, or unexpected outcomes in the software.
+
+### Deficiency
+
+A deficiency, on the other hand, refers to a lack or inadequacy in the software that prevents it from meeting certain requirements or standards. It may not necessarily be due to a mistake but rather an omission or failure to include necessary features, functionalities, or performance criteria. Deficiencies can result in the software not fulfilling user needs or business objectives.
