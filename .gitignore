@@ -12,3 +12,8 @@
 */**/target
 x-resources/scripts
 */**/go.sum
+
+# Maven
+
+mvnw*
+.mvn
