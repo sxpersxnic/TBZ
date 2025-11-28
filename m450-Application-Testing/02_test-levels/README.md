@@ -1,42 +1,85 @@
 # Test Levels
 
+## Levels of Testing
+
+- Unit / Component Testing
+- Integration Testing
+- System Testing
+- Acceptance Testing
+
+---
+
 ## Exercise 1
 
-[calculator](exercise-1)
+- Which test levels have we encountered so far?
+ 	- Student 1:
+  		- Unit Testing
+  		- Integration Testing
+  		- Acceptance Testing
+ 	- Student 2:
+  		- Acceptance Testing
+
+- When are tests executed?
+  - Student 1:
+ 	  - During development (Unit Testing)
+    		- CI pipelines (Unit/Integration Testing)
+  - Student 2:
+ 	  - Manually after development (Acceptance Testing)
+    		- User Acceptance Testing once per month
+
+- Do we have dedicated testing or QA teams?
+  - Student 1: No
+  - Student 2: No
+
+- How does our testing lifecycle look like?
+  - Student 1:
+ 	  - Client defines requirements
+    - Developer implements features and writes Unit Tests
+    - CI runs tests on each commit
+
+  - Student 2: We don't have a formal testing lifecycle.
 
 ## Exercise 2
 
-### JUnit 5 Summary
+### Testing approach
 
-#### Overview
+**Definition**:
 
-- JUnit Platform - Test engine launcher
-- JUnit Jupiter - New test API (what developers use)
-- JUnit Vintage - For legacy JUnit 3/4 tests
+A testing approach describes the overall philosophy, strategy, or mindset applied when designing and executing tests. It defines _how_ testing is performed at a high level.
 
-#### Common Features
+**Dependency**:
 
-1. `@Test` - Defines a standard test method.
-2. Assertions - Used to check expected results
-3. `@BeforeEach` and `@AfterEach` - Setup and teardown methods for each test.
-4. `@BeforeAll` and `@AfterAll` - Setup and teardown methods for the entire test class.
-5. Parameterized Tests - Run the same test with different inputs.
-6. `@DisplayName` - Custom names for test methods.
-7. Test Suite - Group test classes together.
+- Testing approach -> affects testing levels and selection of techniques.
 
-#### Useful Annotations Overview
+### Testing levels
 
-|Annotation|Purpose|
-|----------|-------|
-|`@Test`|Marks a test method|
-|`@BeforeEach`|Run before each test|
-|`@AfterEach`|Run after each test|
-|`@BeforeAll`|Run once before all tests|
-|`@AfterAll`|Run once after all tests|
-|`@Disabled`|Skip a test|
-|`@ParameterizedTest`|Multiple inputs, one test|
-|`@ValueSource`, `@CsvSource`, `@MethodSource`|Data providers|
+**Definition**:
 
-## Exercise 3
+Testing levels are the stages at which software is tested during development. Each level focuses on a different granularity.
 
+**Dependency**:
 
+- Testing levels <- influenced by the approach
+- Testing levels -> use specific types and techniques
+
+### Testing types, techniques and tactics
+
+**Definition**:
+
+These describe _what_ is being tested and _how_ the _tests_ are designed.
+
+**Dependency**:
+
+These choices depend no:
+
+- The testing approach (e.g., risk-based -> more boundary tests, more exploratory sessions)
+- The testing level (unit tests often need white-box techniques, system tests use black-box)
+
+### Summary of dependencies
+
+- Testing approach -> influences testing levels
+- Testing levels -> determine context for testing types, techniques, and tactics
+
+- **Approach** sets the philosophy
+- **Levels** define the scope
+- **Types/Techniques/Tactics** define the concrete execution

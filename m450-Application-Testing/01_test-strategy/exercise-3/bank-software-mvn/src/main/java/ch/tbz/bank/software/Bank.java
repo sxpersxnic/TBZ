@@ -1,26 +1,26 @@
 package ch.tbz.bank.software;
 
-
 import java.util.ArrayList;
+
 public class Bank {
 
-    private ArrayList<Account> accounts = new ArrayList<>();
+    private final ArrayList<Account> accounts = new ArrayList<>();
 
     public Bank() {
 
     }
 
-    public Account createAccount(String name, Currency currency, double startBalance) {
-        Account a = new Account(name, currency, startBalance);
+    public Account createAccount(final String name, final Currency currency, final double startBalance) {
+        final Account a = new Account(name, currency, startBalance);
         addAccount(a);
         return a;
     }
 
-    private void addAccount(Account a) {
+    private void addAccount(final Account a) {
         accounts.add(a);
     }
 
-    public void deleteAccount(Account a) {
+    public void deleteAccount(final Account a) {
         System.out.println("Konto mit Nummer " + a.getId() + " wurde gelöscht.");
         accounts.remove(a);
 //      The following doesn't work, is copy of a; no passing by reference in Java
@@ -28,8 +28,8 @@ public class Bank {
 //      a = null;
     }
 
-    public Account getAccount(int nr) {
-        for (Account a : accounts) {
+    public Account getAccount(final int nr) {
+        for (final Account a : accounts) {
             if (a.getId() == nr) {
                 return a;
             }
@@ -41,7 +41,7 @@ public class Bank {
         return null;
     }
 
-    public void printAccountDetails(Account a) {
+    public void printAccountDetails(final Account a) {
         if (!accounts.contains(a)) {
             System.out.println("Das Konto " +a.getId() + " existiert nicht mehr!");
             return;
@@ -52,18 +52,18 @@ public class Bank {
         System.out.printf("Kontostand: %.2f %s\n", a.getBalance(), a.getCurrency());
     }
 
-    public void printBalance(Account a) {
+    public void printBalance(final Account a) {
         System.out.printf("Neuer Kontostand: %.2f %s\n", a.getBalance(), a.getCurrency());
     }
 
     public void printAccountsList() {
-        for (Account a: accounts) {
+        for (final Account a: accounts) {
             System.out.println("Nr. " + a.getId() + ": " + a.getUserLastName() + " (" + a.getCurrency() + ")");
         }
     }
 
-    public void printOtherAccounts(Account acc) {
-        for (Account a: accounts) {
+    public void printOtherAccounts(final Account acc) {
+        for (final Account a: accounts) {
             if (a != acc) {
                 System.out.println("Nr. " + a.getId() + ": " + a.getUserLastName());
             }
