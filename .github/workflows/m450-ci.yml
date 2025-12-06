@@ -12,7 +12,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: m450-Application-Testing/06_ci-cd-pipelines/recipe-planner-fronend-and-backend/recipe-planner-backend
+        working-directory: m450-Application-Testing/x-res/apps/recipe-planner-fronend-and-backend/recipe-planner-backend
 
     steps:
       - name: Checkout repository
@@ -37,19 +37,19 @@ jobs:
         if: always()
         with:
           name: test-results
-          path: m450-Application-Testing/06_ci-cd-pipelines/recipe-planner-fronend-and-backend/recipe-planner-backend/target/surefire-reports/
+          path: m450-Application-Testing/x-res/apps/recipe-planner-fronend-and-backend/recipe-planner-backend/target/surefire-reports/
 
       - name: Upload Surefire Report
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: surefire-report
-          path: m450-Application-Testing/06_ci-cd-pipelines/recipe-planner-fronend-and-backend/recipe-planner-backend/target/site/
+          path: m450-Application-Testing/x-res/apps/recipe-planner-fronend-and-backend/recipe-planner-backend/target/site/
 
       - name: Publish Test Report
         uses: dorny/test-reporter@v1
         if: always()
         with:
           name: Maven Tests
-          path: m450-Application-Testing/06_ci-cd-pipelines/recipe-planner-fronend-and-backend/recipe-planner-backend/target/surefire-reports/*.xml
+          path: m450-Application-Testing/x-res/apps/recipe-planner-fronend-and-backend/recipe-planner-backend/target/surefire-reports/*.xml
           reporter: java-junit
