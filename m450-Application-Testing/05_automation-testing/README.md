@@ -11,7 +11,7 @@ I created an automated test suite that calls the exposed REST endpoints, asserts
 
 ### Solution
 
-[Solution](./spring-boot-angular-basic-lw2/src/test/java/ch/tbz/m450/testing/tools/api/APITest.java)
+[Solution](../x-res/apps/spring-boot-angular-basic-lw2/src/test/java/ch/tbz/m450/testing/tools/api/APITest.java)
 
 ### Result
 

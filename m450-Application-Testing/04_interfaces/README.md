@@ -1,3 +1,3 @@
 # Interfaces
 
-Code: [AddressBook](./addressbook-backend-v1-1)
+Code: [AddressBook](../x-res/apps/addressbook-backend-v1-1)
