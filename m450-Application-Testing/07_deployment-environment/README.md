@@ -27,4 +27,45 @@
 
 ## Exercise 2
 
-## Exercise 3
+### What Solution I would choose
+
+I choose **Terraform + Kubernetes**, with focus on the automated setup of a **staging- or production-environment**.
+
+### Example Use-Case: Deployment of a Microservice Application
+
+Assuming, I have a small microservice application (e.g. Web-Frontend + API + PostgreSQL + Redis). I want to setup an environment in the cloud or a VPS-Cluster: Load-Balancer, VMs or Container-Cluster, Network, DB-Instance, etc.
+
+**Approach**:
+
+1. **Terraform for Infrastructure Provisioning**:
+	- Network (VPC / Subnets), Security Groups / Firewalls
+	- VMs or Container Cluster (e.g. managed k8s)
+	- Load-Balancer / Ingress / Storage / Database Service
+2. Creating **Kubernetes Cluster** directly with Terraform (managed or self-managed).
+3. Deployment of the Microservices into the k8s Cluster (via Kubernetes manifests or Helm charts).
+4. Everything is defined as code - versioned, reproducible, with `terraform plan/apply`.
+
+**What I can realistically do in a lesson (45min)**:
+
+- Base terraform script that creates a VM or a Kubernetes cluster
+- Kubernetes manfest/Helm for my microservices
+- Deployment with `terraform apply` and a simple smoke test (is the API reachable? DB connected?)
+
+**Expected Challenges**:
+
+- Correctly configuring the Network / Security (Ports, Firewalls, Load-Balancer)
+- Managing secrets / credentials (DB passwords, API keys etc.)
+- Kubernetes complexity (resources, yaml, deployments, services)
+- State management in terraform, if applicable remote state
+
+**When & Why**:
+
+- When I have multiple environments (Staging, Prod evtl. QA) - consistent, reproducible infrastructure
+- When an application consists of multiple components (DB, Cache, API, Load-Balancer, external services etc.)
+- When scalability, reliability, maintainability and infrastructure availability over time is important
+
+For simple personal or small projects with few components, that setup might be overkill. For _serious_ deployments (e.g. webservice, SaaS, microservices, Cloud-Native apps) it is a solid foundation.
+
+## Exercise 3 (Optional Challenge)
+
+- [Setup](./demo-app/setup)
