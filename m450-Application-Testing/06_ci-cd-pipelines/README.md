@@ -8,4 +8,8 @@
 
 ## Exercise 2
 
+- [Surefire Reports](../x-res/apps/recipe-planner-fronend-and-backend/recipe-planner-backend/target/surefire-reports)
+
 ## Exercise 3
+
+- [GitHub Action (CI Pipeline)](../../.github/workflows/m450-ci.yml)
