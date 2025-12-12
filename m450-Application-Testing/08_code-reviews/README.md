@@ -7,7 +7,7 @@
 **Frontend:**
 
 ```sh
-cd ../x-res/apps/recipe-planner-fronend-and-backend/recipe-planner-fronend
+cd ../x-res/apps/recipe-planner-fronend-and-backend/recipe-planner-frontend
 npm install
 npm start # starts the frontend at http://localhost:3000
 ```
