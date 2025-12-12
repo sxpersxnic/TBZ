@@ -17,3 +17,9 @@ x-resources/scripts
 
 mvnw*
 .mvn
+
+# PHP
+
+*/**/vendor/
+*/**/.phpunit.result.cache
+*/**/composer.lock
