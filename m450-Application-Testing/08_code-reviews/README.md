@@ -24,4 +24,5 @@ mvn spring-boot:run # starts the backend at http://localhost:8080
 
 - Code reviews require the reviewer to know the context of the application well.
 - GitHub provides a feature to request reviews from specific copilot. This features speeds up the review process.
-- 
+- The more code a pull request contains, the harder it is to review it properly.
+- Code reviews can be done in pairs, where one developer writes the code and the other reviews it in real-time.
