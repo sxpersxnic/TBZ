@@ -20,6 +20,8 @@ mvn clean install
 mvn spring-boot:run # starts the backend at http://localhost:8080
 ```
 
-## Exercise 1
+## Conclusion
 
-## Exercise 2
+- Code reviews require the reviewer to know the context of the application well.
+- GitHub provides a feature to request reviews from specific copilot. This features speeds up the review process.
+- 
