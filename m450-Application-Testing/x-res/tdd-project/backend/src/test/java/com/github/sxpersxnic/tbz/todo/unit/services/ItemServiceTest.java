@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,6 +36,7 @@ class ItemServiceTest {
         testItem.setId(testId);
         testItem.setTitle("Test Item");
         testItem.setDescription("Test Description");
+        testItem.setTags(new HashSet<>(Set.of("tag1", "tag2")));
     }
 
     // ==================== findAll ====================
@@ -49,6 +48,7 @@ class ItemServiceTest {
         item2.setId(UUID.randomUUID());
         item2.setTitle("Item 2");
         item2.setDescription("Description 2");
+        item2.setTags(new HashSet<>(Set.of("tag3", "tag4")));
 
         List<Item> items = List.of(testItem, item2);
         when(itemRepository.findAll()).thenReturn(items);
@@ -90,6 +90,8 @@ class ItemServiceTest {
         assertTrue(result.isPresent());
         assertEquals(testItem.getId(), result.get().getId());
         assertEquals(testItem.getTitle(), result.get().getTitle());
+        assertEquals(testItem.getDescription(), result.get().getDescription());
+        assertEquals(testItem.getTags(), result.get().getTags());
         verify(itemRepository, times(1)).findById(testId);
     }
 
@@ -115,11 +117,13 @@ class ItemServiceTest {
         Item newItem = new Item();
         newItem.setTitle("New Item");
         newItem.setDescription("New Description");
+        newItem.setTags(new HashSet<>(Set.of("tagA", "tagB")));
 
         Item savedItem = new Item();
         savedItem.setId(UUID.randomUUID());
         savedItem.setTitle(newItem.getTitle());
         savedItem.setDescription(newItem.getDescription());
+        savedItem.setTags(newItem.getTags());
 
         when(itemRepository.save(newItem)).thenReturn(savedItem);
 
@@ -131,6 +135,7 @@ class ItemServiceTest {
         assertNotNull(result.getId());
         assertEquals(newItem.getTitle(), result.getTitle());
         assertEquals(newItem.getDescription(), result.getDescription());
+        assertEquals(newItem.getTags(), result.getTags());
         verify(itemRepository, times(1)).save(newItem);
     }
 
@@ -142,11 +147,13 @@ class ItemServiceTest {
         Item updatedData = new Item();
         updatedData.setTitle("Updated Title");
         updatedData.setDescription("Updated Description");
+        updatedData.setTags(new HashSet<>(Set.of("updatedTag1", "updatedTag2")));
 
         Item updatedItem = new Item();
         updatedItem.setId(testId);
         updatedItem.setTitle(updatedData.getTitle());
         updatedItem.setDescription(updatedData.getDescription());
+        updatedItem.setTags(updatedData.getTags());
 
         when(itemRepository.findById(testId)).thenReturn(Optional.of(testItem));
         when(itemRepository.save(any(Item.class))).thenReturn(updatedItem);
