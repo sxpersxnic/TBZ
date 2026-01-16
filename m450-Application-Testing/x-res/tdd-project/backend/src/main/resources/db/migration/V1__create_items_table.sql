@@ -2,5 +2,6 @@
 CREATE TABLE items (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     title VARCHAR(50) NOT NULL UNIQUE,
-    description VARCHAR(200)
+    description VARCHAR(200),
+    is_completed BOOLEAN DEFAULT false
 );

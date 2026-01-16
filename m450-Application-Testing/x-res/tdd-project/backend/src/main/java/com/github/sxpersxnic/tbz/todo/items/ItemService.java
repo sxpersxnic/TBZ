@@ -31,6 +31,7 @@ public class ItemService {
                 .map(existingItem -> {
                     existingItem.setTitle(updatedData.getTitle());
                     existingItem.setDescription(updatedData.getDescription());
+                    existingItem.setCompleted(updatedData.isCompleted());
                     return itemRepository.save(existingItem);
                 });
     }
