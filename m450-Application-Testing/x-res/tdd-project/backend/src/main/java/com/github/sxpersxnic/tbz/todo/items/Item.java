@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -21,4 +23,7 @@ public class Item {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "tags")
+    private Set<String> tags = new HashSet<>();
 }

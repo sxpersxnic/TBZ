@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +29,8 @@ class ItemIntegrationTest {
     private static final String BASE_PATH = "/api/items";
     private static final String EXISTING_ITEM_ID = "11111111-1111-1111-1111-111111111111";
     private static final String EXISTING_ITEM_TITLE = "Buy groceries";
+    private static final String EXISTING_ITEM_DESCRIPTION = "Milk, eggs, bread, and butter";
+    private static final Set<String> EXISTING_ITEM_TAGS = Set.of("shopping", "urgent");
     private static final String NON_EXISTING_ID = "99999999-9999-9999-9999-999999999999";
 
     // ==================== READ ====================
@@ -45,7 +49,9 @@ class ItemIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(EXISTING_ITEM_ID))
-                .andExpect(jsonPath("$.title").value(EXISTING_ITEM_TITLE));
+                .andExpect(jsonPath("$.title").value(EXISTING_ITEM_TITLE))
+                .andExpect(jsonPath("$.description").value(EXISTING_ITEM_DESCRIPTION))
+                .andExpect(jsonPath("$.tags", containsInAnyOrder(EXISTING_ITEM_TAGS.toArray())));
     }
 
     @Test

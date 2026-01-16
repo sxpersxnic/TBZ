@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 public class ItemRequestDTO {
@@ -15,4 +18,6 @@ public class ItemRequestDTO {
     @NotBlank(message = "Description must not be blank")
     @Size(max = 200, message = "Description must be equal or less than 200 characters")
     private String description;
+
+    private Set<String> tags = new HashSet<>();
 }
