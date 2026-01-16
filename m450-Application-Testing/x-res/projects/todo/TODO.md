@@ -8,6 +8,8 @@
 - [ ] Items can be tagged
 - [ ] Items can be assigned to users
 
+- [ ] CI pipeline for automated testing (unit tests, integration tests, surefire reports)
+
 ## Frontend
 
 - [ ] List all items
