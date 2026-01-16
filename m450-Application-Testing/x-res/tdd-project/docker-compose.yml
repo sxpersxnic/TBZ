@@ -14,17 +14,17 @@ services:
         condition: service_healthy
     networks:
       - todo-network
-  frontend:
-    build: ./frontend
-    container_name: todo-app-frontend
-    ports:
-      - '3000:3000'
-    depends_on:
-      - backend
-    networks:
-      - todo-network
+  # frontend:
+  #   build: ./frontend
+  #   container_name: todo-app-frontend
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     - backend
+  #   networks:
+  #     - todo-network
   db:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     container_name: todo-app-db
     ports:
       - '5432:5432'
