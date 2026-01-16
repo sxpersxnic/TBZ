@@ -20,4 +20,6 @@ public class ItemRequestDTO {
     private String description;
 
     private Set<String> tags = new HashSet<>();
+
+    private String assignedUserId;
 }

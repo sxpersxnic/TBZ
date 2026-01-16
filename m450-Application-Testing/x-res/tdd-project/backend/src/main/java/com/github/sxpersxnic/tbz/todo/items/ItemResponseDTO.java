@@ -9,6 +9,7 @@ import java.util.*;
 @Setter
 public class ItemResponseDTO {
     private UUID id;
+    private UUID assignedUserId;
     private String title;
     private String description;
     private Set<String> tags = new HashSet<>();

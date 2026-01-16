@@ -26,4 +26,7 @@ public class Item {
 
     @Column(name = "tags")
     private Set<String> tags = new HashSet<>();
+
+    @Column(name = "assigned_user_id")
+    private UUID assignedUserId;
 }

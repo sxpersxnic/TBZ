@@ -37,6 +37,7 @@ class ItemServiceTest {
         testItem.setTitle("Test Item");
         testItem.setDescription("Test Description");
         testItem.setTags(new HashSet<>(Set.of("tag1", "tag2")));
+        testItem.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
     }
 
     // ==================== findAll ====================
@@ -49,6 +50,7 @@ class ItemServiceTest {
         item2.setTitle("Item 2");
         item2.setDescription("Description 2");
         item2.setTags(new HashSet<>(Set.of("tag3", "tag4")));
+        item2.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
 
         List<Item> items = List.of(testItem, item2);
         when(itemRepository.findAll()).thenReturn(items);
@@ -115,15 +117,18 @@ class ItemServiceTest {
     void create_shouldSaveAndReturnItem() {
         // Given
         Item newItem = new Item();
+        newItem.setId(UUID.randomUUID());
         newItem.setTitle("New Item");
         newItem.setDescription("New Description");
         newItem.setTags(new HashSet<>(Set.of("tagA", "tagB")));
+        newItem.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
 
         Item savedItem = new Item();
         savedItem.setId(UUID.randomUUID());
         savedItem.setTitle(newItem.getTitle());
         savedItem.setDescription(newItem.getDescription());
         savedItem.setTags(newItem.getTags());
+        savedItem.setAssignedUserId(newItem.getAssignedUserId());
 
         when(itemRepository.save(newItem)).thenReturn(savedItem);
 
@@ -136,6 +141,7 @@ class ItemServiceTest {
         assertEquals(newItem.getTitle(), result.getTitle());
         assertEquals(newItem.getDescription(), result.getDescription());
         assertEquals(newItem.getTags(), result.getTags());
+        assertEquals(newItem.getAssignedUserId(), result.getAssignedUserId());
         verify(itemRepository, times(1)).save(newItem);
     }
 
@@ -148,12 +154,14 @@ class ItemServiceTest {
         updatedData.setTitle("Updated Title");
         updatedData.setDescription("Updated Description");
         updatedData.setTags(new HashSet<>(Set.of("updatedTag1", "updatedTag2")));
+        updatedData.setAssignedUserId(UUID.randomUUID());
 
         Item updatedItem = new Item();
         updatedItem.setId(testId);
         updatedItem.setTitle(updatedData.getTitle());
         updatedItem.setDescription(updatedData.getDescription());
         updatedItem.setTags(updatedData.getTags());
+        updatedItem.setAssignedUserId(updatedData.getAssignedUserId());
 
         when(itemRepository.findById(testId)).thenReturn(Optional.of(testItem));
         when(itemRepository.save(any(Item.class))).thenReturn(updatedItem);
@@ -166,6 +174,7 @@ class ItemServiceTest {
         assertEquals(testId, result.get().getId());
         assertEquals(updatedData.getTitle(), result.get().getTitle());
         assertEquals(updatedData.getDescription(), result.get().getDescription());
+        assertEquals(updatedData.getAssignedUserId(), result.get().getAssignedUserId());
         verify(itemRepository, times(1)).findById(testId);
         verify(itemRepository, times(1)).save(any(Item.class));
     }
