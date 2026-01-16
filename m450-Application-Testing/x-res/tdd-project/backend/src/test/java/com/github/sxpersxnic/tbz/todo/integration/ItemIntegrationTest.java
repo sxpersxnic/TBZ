@@ -27,6 +27,7 @@ class ItemIntegrationTest {
     private static final String BASE_PATH = "/api/items";
     private static final String EXISTING_ITEM_ID = "11111111-1111-1111-1111-111111111111";
     private static final String EXISTING_ITEM_TITLE = "Buy groceries";
+    private static final String EXISTING_ITEM_ASSIGNED_USER_ID = "11111111-1111-4111-a111-111111111111";
     private static final String NON_EXISTING_ID = "99999999-9999-9999-9999-999999999999";
 
     // ==================== READ ====================
@@ -45,7 +46,8 @@ class ItemIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(EXISTING_ITEM_ID))
-                .andExpect(jsonPath("$.title").value(EXISTING_ITEM_TITLE));
+                .andExpect(jsonPath("$.title").value(EXISTING_ITEM_TITLE))
+                .andExpect(jsonPath("$.assignedUserId").value(EXISTING_ITEM_ASSIGNED_USER_ID));
     }
 
     @Test
@@ -62,7 +64,8 @@ class ItemIntegrationTest {
         String requestBody = """
                 {
                     "title": "New test item",
-                    "description": "This is a new test item"
+                    "description": "This is a new test item",
+                    "assignedUserId": "11111111-1111-4111-a111-111111111111"
                 }
                 """;
 
@@ -72,7 +75,8 @@ class ItemIntegrationTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.title").value("New test item"))
-                .andExpect(jsonPath("$.description").value("This is a new test item"));
+                .andExpect(jsonPath("$.description").value("This is a new test item"))
+                .andExpect(jsonPath("$.assignedUserId").value(EXISTING_ITEM_ASSIGNED_USER_ID));
     }
 
     @Test
@@ -80,7 +84,8 @@ class ItemIntegrationTest {
         String requestBody = """
                 {
                     "title": "",
-                    "description": "Description without title"
+                    "description": "Description without title",
+                    "assignedUserId": "11111111-1111-4111-a111-111111111111"
                 }
                 """;
 
@@ -128,7 +133,8 @@ class ItemIntegrationTest {
         String requestBody = """
                 {
                     "title": "Updated groceries list",
-                    "description": "Updated description with more items"
+                    "description": "Updated description with more items",
+                    "assignedUserId": "11111111-1111-4111-a111-111111111111"
                 }
                 """;
 
@@ -138,7 +144,8 @@ class ItemIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(EXISTING_ITEM_ID))
                 .andExpect(jsonPath("$.title").value("Updated groceries list"))
-                .andExpect(jsonPath("$.description").value("Updated description with more items"));
+                .andExpect(jsonPath("$.description").value("Updated description with more items"))
+                .andExpect(jsonPath("$.assignedUserId").value(EXISTING_ITEM_ASSIGNED_USER_ID));
     }
 
     @Test
@@ -146,7 +153,8 @@ class ItemIntegrationTest {
         String requestBody = """
                 {
                     "title": "Non-existing item update",
-                    "description": "This should fail"
+                    "description": "This should fail",
+                    "assignedUserId": "11111111-1111-4111-a111-111111111111"
                 }
                 """;
 
@@ -161,7 +169,8 @@ class ItemIntegrationTest {
         String requestBody = """
                 {
                     "title": "",
-                    "description": "Invalid update"
+                    "description": "Invalid update",
+                    "assignedUserId": "11111111-1111-4111-a111-111111111111"
                 }
                 """;
 

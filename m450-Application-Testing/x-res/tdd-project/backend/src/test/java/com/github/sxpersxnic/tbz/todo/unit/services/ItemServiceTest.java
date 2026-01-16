@@ -38,6 +38,7 @@ class ItemServiceTest {
         testItem.setId(testId);
         testItem.setTitle("Test Item");
         testItem.setDescription("Test Description");
+        testItem.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
     }
 
     // ==================== findAll ====================
@@ -49,6 +50,7 @@ class ItemServiceTest {
         item2.setId(UUID.randomUUID());
         item2.setTitle("Item 2");
         item2.setDescription("Description 2");
+        item2.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
 
         List<Item> items = List.of(testItem, item2);
         when(itemRepository.findAll()).thenReturn(items);
@@ -115,11 +117,14 @@ class ItemServiceTest {
         Item newItem = new Item();
         newItem.setTitle("New Item");
         newItem.setDescription("New Description");
+        newItem.setId(UUID.randomUUID());
+        newItem.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
 
         Item savedItem = new Item();
         savedItem.setId(UUID.randomUUID());
         savedItem.setTitle(newItem.getTitle());
         savedItem.setDescription(newItem.getDescription());
+        savedItem.setAssignedUserId(newItem.getAssignedUserId());
 
         when(itemRepository.save(newItem)).thenReturn(savedItem);
 
@@ -131,6 +136,7 @@ class ItemServiceTest {
         assertNotNull(result.getId());
         assertEquals(newItem.getTitle(), result.getTitle());
         assertEquals(newItem.getDescription(), result.getDescription());
+        assertEquals(newItem.getAssignedUserId(), result.getAssignedUserId());
         verify(itemRepository, times(1)).save(newItem);
     }
 
@@ -142,11 +148,13 @@ class ItemServiceTest {
         Item updatedData = new Item();
         updatedData.setTitle("Updated Title");
         updatedData.setDescription("Updated Description");
+        updatedData.setAssignedUserId(UUID.randomUUID());
 
         Item updatedItem = new Item();
         updatedItem.setId(testId);
         updatedItem.setTitle(updatedData.getTitle());
         updatedItem.setDescription(updatedData.getDescription());
+        updatedItem.setAssignedUserId(updatedData.getAssignedUserId());
 
         when(itemRepository.findById(testId)).thenReturn(Optional.of(testItem));
         when(itemRepository.save(any(Item.class))).thenReturn(updatedItem);
@@ -159,6 +167,7 @@ class ItemServiceTest {
         assertEquals(testId, result.get().getId());
         assertEquals(updatedData.getTitle(), result.get().getTitle());
         assertEquals(updatedData.getDescription(), result.get().getDescription());
+        assertEquals(updatedData.getAssignedUserId(), result.get().getAssignedUserId());
         verify(itemRepository, times(1)).findById(testId);
         verify(itemRepository, times(1)).save(any(Item.class));
     }
