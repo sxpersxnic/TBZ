@@ -9,6 +9,7 @@ import java.util.UUID;
 @Setter
 public class ItemResponseDTO {
     private UUID id;
+    private UUID assignedUserId;
     private String title;
     private String description;
 }

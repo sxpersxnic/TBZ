@@ -21,4 +21,7 @@ public class Item {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "assigned_user_id")
+    private UUID assignedUserId;
 }

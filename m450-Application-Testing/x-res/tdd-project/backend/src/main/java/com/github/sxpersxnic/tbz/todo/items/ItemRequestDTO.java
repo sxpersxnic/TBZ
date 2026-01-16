@@ -15,4 +15,6 @@ public class ItemRequestDTO {
     @NotBlank(message = "Description must not be blank")
     @Size(max = 200, message = "Description must be equal or less than 200 characters")
     private String description;
+
+    private String assignedUserId;
 }
