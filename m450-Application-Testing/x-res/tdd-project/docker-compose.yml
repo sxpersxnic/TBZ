@@ -1,7 +1,8 @@
+name: todo-app
 services:
-  app:
-    build: .
-    container_name: todo-app
+  backend:
+    build: ./backend
+    container_name: todo-app-backend
     ports:
       - '8080:8080'
     environment:
@@ -13,10 +14,18 @@ services:
         condition: service_healthy
     networks:
       - todo-network
-
+  frontend:
+    build: ./frontend
+    container_name: todo-app-frontend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    networks:
+      - todo-network
   db:
     image: postgres:16-alpine
-    container_name: todo-db
+    container_name: todo-app-db
     ports:
       - '5432:5432'
     environment:
