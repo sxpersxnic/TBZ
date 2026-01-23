@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 public class ItemRequestDTO {
@@ -18,4 +21,7 @@ public class ItemRequestDTO {
 
     @NotBlank(message = "Completed must not be blank")
     private boolean isCompleted;
+    private Set<String> tags = new HashSet<>();
+
+    private String assignedUserId;
 }

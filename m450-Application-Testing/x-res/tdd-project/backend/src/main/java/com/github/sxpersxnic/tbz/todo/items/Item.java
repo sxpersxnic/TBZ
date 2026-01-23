@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -24,4 +26,9 @@ public class Item {
 
     @Column(name = "is_completed")
     private boolean isCompleted;
+    @Column(name = "tags")
+    private Set<String> tags = new HashSet<>();
+
+    @Column(name = "assigned_user_id")
+    private UUID assignedUserId;
 }
