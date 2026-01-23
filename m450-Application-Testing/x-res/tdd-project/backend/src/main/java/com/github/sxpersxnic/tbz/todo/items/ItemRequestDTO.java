@@ -19,7 +19,6 @@ public class ItemRequestDTO {
     @Size(max = 200, message = "Description must be equal or less than 200 characters")
     private String description;
 
-    @NotBlank(message = "Completed must not be blank")
     private boolean isCompleted;
     private Set<String> tags = new HashSet<>();
 
