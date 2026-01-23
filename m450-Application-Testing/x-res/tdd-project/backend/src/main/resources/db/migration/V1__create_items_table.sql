@@ -6,5 +6,5 @@ CREATE TABLE items (
     description VARCHAR(200),
     is_completed BOOLEAN NOT NULL DEFAULT false,
     due_date TIMESTAMP DEFAULT NULL,
-    priority VARCHAR(20) DEFAULT 'MEDIUM'
+    priority VARCHAR(20) DEFAULT 'MEDIUM' CHECK (priority IN ('HIGH', 'MEDIUM', 'LOW'))
 );
