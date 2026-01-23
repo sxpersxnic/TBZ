@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -21,4 +23,10 @@ public class Item {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "is_completed")
+    private boolean isCompleted;
+
+    @Column(name = "due_date")
+    private LocalDateTime dueDate;
 }

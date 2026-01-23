@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class ItemRequestDTO {
@@ -15,4 +17,9 @@ public class ItemRequestDTO {
     @NotBlank(message = "Description must not be blank")
     @Size(max = 200, message = "Description must be equal or less than 200 characters")
     private String description;
+
+    @NotBlank(message = "Completed must not be blank")
+    private boolean isCompleted;
+
+    private LocalDateTime dueDate;
 }
