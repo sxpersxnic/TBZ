@@ -2,7 +2,7 @@
 
 ## Backend
 
-- [ ] Item has status "Comleted" (boolean)
+- [ ] Item has status "Completed" (boolean)
 - [ ] Item has priority ("Low", "Medium", "High")
 - [ ] Item has due date
 - [ ] Items can be tagged
