@@ -170,6 +170,6 @@ class ItemMapperTest {
         assertNotNull(result);
         assertEquals(requestDTO.getTitle(), result.getTitle());
         assertNull(result.getDescription());
-        assertEquals(result.isCompleted(), result.isCompleted());
+        assertEquals(requestDTO.isCompleted(), result.isCompleted());
     }
 }
