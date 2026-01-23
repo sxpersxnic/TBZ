@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,4 +24,8 @@ public class ItemRequestDTO {
     private boolean isCompleted;
 
     private LocalDateTime dueDate;
+    private boolean isCompleted;
+    private Set<String> tags = new HashSet<>();
+
+    private String assignedUserId;
 }

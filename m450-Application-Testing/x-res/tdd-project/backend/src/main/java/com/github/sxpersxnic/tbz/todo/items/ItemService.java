@@ -31,6 +31,9 @@ public class ItemService {
                 .map(existingItem -> {
                     existingItem.setTitle(updatedData.getTitle());
                     existingItem.setDescription(updatedData.getDescription());
+                    existingItem.setCompleted(updatedData.isCompleted());
+                    existingItem.setAssignedUserId(updatedData.getAssignedUserId());
+                    existingItem.setTags(updatedData.getTags());
                     return itemRepository.save(existingItem);
                 });
     }

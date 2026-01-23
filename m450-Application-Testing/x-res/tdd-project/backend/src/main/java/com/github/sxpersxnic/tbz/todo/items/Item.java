@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -28,4 +30,9 @@ public class Item {
 
     @Column(name = "due_date")
     private LocalDateTime dueDate;
+    @Column(name = "tags")
+    private Set<String> tags = new HashSet<>();
+
+    @Column(name = "assigned_user_id")
+    private UUID assignedUserId;
 }
