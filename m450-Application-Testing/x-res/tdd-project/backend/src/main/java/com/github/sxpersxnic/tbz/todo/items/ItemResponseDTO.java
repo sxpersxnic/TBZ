@@ -12,5 +12,6 @@ public class ItemResponseDTO {
     private UUID assignedUserId;
     private String title;
     private String description;
+    private boolean isCompleted;
     private Set<String> tags = new HashSet<>();
 }

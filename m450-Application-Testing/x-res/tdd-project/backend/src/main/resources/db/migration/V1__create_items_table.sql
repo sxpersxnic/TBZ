@@ -4,5 +4,6 @@ CREATE TABLE items (
     assigned_user_id UUID,
     title VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(200),
+    is_completed BOOLEAN NOT NULL DEFAULT false,
     tags TEXT[] DEFAULT ARRAY[]::TEXT[]
 );

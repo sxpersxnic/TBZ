@@ -24,6 +24,8 @@ public class Item {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "is_completed")
+    private boolean isCompleted;
     @Column(name = "tags")
     private Set<String> tags = new HashSet<>();
 

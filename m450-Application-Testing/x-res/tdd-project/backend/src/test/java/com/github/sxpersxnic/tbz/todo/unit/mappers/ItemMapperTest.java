@@ -31,6 +31,7 @@ class ItemMapperTest {
         item.setId(UUID.randomUUID());
         item.setTitle("Test Item");
         item.setDescription("Test Description");
+        item.setCompleted(false);
 
         // When
         ItemResponseDTO result = mapper.toDTO(item);
@@ -40,6 +41,7 @@ class ItemMapperTest {
         assertEquals(item.getId(), result.getId());
         assertEquals(item.getTitle(), result.getTitle());
         assertEquals(item.getDescription(), result.getDescription());
+        assertEquals(item.isCompleted(), result.isCompleted());
     }
 
     @Test
@@ -58,6 +60,7 @@ class ItemMapperTest {
         item.setId(UUID.randomUUID());
         item.setTitle("Test Item");
         item.setDescription(null);
+        item.setCompleted(false);
 
         // When
         ItemResponseDTO result = mapper.toDTO(item);
@@ -67,6 +70,7 @@ class ItemMapperTest {
         assertEquals(item.getId(), result.getId());
         assertEquals(item.getTitle(), result.getTitle());
         assertNull(result.getDescription());
+        assertEquals(item.isCompleted(), result.isCompleted());
     }
 
     // ==================== toDTO (list) ====================
@@ -78,11 +82,13 @@ class ItemMapperTest {
         item1.setId(UUID.randomUUID());
         item1.setTitle("Item 1");
         item1.setDescription("Description 1");
+        item1.setCompleted(false);
 
         Item item2 = new Item();
         item2.setId(UUID.randomUUID());
         item2.setTitle("Item 2");
         item2.setDescription("Description 2");
+        item2.setCompleted(false);
 
         List<Item> items = List.of(item1, item2);
 
@@ -94,8 +100,10 @@ class ItemMapperTest {
         assertEquals(2, result.size());
         assertEquals(item1.getId(), result.get(0).getId());
         assertEquals(item1.getTitle(), result.get(0).getTitle());
+        assertEquals(item1.isCompleted(), result.get(0).isCompleted());
         assertEquals(item2.getId(), result.get(1).getId());
         assertEquals(item2.getTitle(), result.get(1).getTitle());
+        assertEquals(item2.isCompleted(), result.get(1).isCompleted());
     }
 
     @Test
@@ -125,6 +133,7 @@ class ItemMapperTest {
         ItemRequestDTO requestDTO = new ItemRequestDTO();
         requestDTO.setTitle("New Item");
         requestDTO.setDescription("New Description");
+        requestDTO.setCompleted(false);
 
         // When
         Item result = mapper.fromDTO(requestDTO);
@@ -134,6 +143,7 @@ class ItemMapperTest {
         assertNull(result.getId()); // ID should not be set from request
         assertEquals(requestDTO.getTitle(), result.getTitle());
         assertEquals(requestDTO.getDescription(), result.getDescription());
+        assertEquals(requestDTO.isCompleted(), result.isCompleted());
     }
 
     @Test
@@ -151,6 +161,7 @@ class ItemMapperTest {
         ItemRequestDTO requestDTO = new ItemRequestDTO();
         requestDTO.setTitle("New Item");
         requestDTO.setDescription(null);
+        requestDTO.setCompleted(false);
 
         // When
         Item result = mapper.fromDTO(requestDTO);
@@ -159,5 +170,6 @@ class ItemMapperTest {
         assertNotNull(result);
         assertEquals(requestDTO.getTitle(), result.getTitle());
         assertNull(result.getDescription());
+        assertEquals(requestDTO.isCompleted(), result.isCompleted());
     }
 }
