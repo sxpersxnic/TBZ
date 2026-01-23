@@ -70,7 +70,7 @@ class ItemMapperTest {
         assertEquals(item.getId(), result.getId());
         assertEquals(item.getTitle(), result.getTitle());
         assertNull(result.getDescription());
-        assertEquals(result.isCompleted(), result.isCompleted());
+        assertEquals(item.isCompleted(), result.isCompleted());
     }
 
     // ==================== toDTO (list) ====================
