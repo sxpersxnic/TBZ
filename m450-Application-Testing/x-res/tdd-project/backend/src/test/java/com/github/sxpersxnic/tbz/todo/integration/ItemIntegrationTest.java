@@ -32,6 +32,7 @@ class ItemIntegrationTest {
     private static final String EXISTING_ITEM_DESCRIPTION = "Milk, eggs, bread, and butter";
     private static final Set<String> EXISTING_ITEM_TAGS = Set.of("shopping", "urgent");
     private static final String EXISTING_ITEM_ASSIGNED_USER_ID = "11111111-1111-4111-a111-111111111111";
+    private static final String EXISTING_ITEM_PRIORITY = "HIGH";
     private static final String NON_EXISTING_ID = "99999999-9999-9999-9999-999999999999";
 
     // ==================== READ ====================
@@ -52,6 +53,7 @@ class ItemIntegrationTest {
                 .andExpect(jsonPath("$.id").value(EXISTING_ITEM_ID))
                 .andExpect(jsonPath("$.title").value(EXISTING_ITEM_TITLE))
                 .andExpect(jsonPath("$.description").value(EXISTING_ITEM_DESCRIPTION))
+                .andExpect(jsonPath("$.priority").value(EXISTING_ITEM_PRIORITY))
                 .andExpect(jsonPath("$.tags", containsInAnyOrder(EXISTING_ITEM_TAGS.toArray())))
                 .andExpect(jsonPath("$.assignedUserId").value(EXISTING_ITEM_ASSIGNED_USER_ID));
     }
@@ -71,6 +73,7 @@ class ItemIntegrationTest {
                 {
                     "title": "New test item",
                     "description": "This is a new test item",
+                    "priority": "MEDIUM",
                     "assignedUserId": "11111111-1111-4111-a111-111111111111"
                 }
                 """;
@@ -82,6 +85,7 @@ class ItemIntegrationTest {
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.title").value("New test item"))
                 .andExpect(jsonPath("$.description").value("This is a new test item"))
+                .andExpect(jsonPath("$.priority").value("MEDIUM"))
                 .andExpect(jsonPath("$.assignedUserId").value(EXISTING_ITEM_ASSIGNED_USER_ID));
     }
 
@@ -122,7 +126,8 @@ class ItemIntegrationTest {
         String requestBody = String.format("""
                 {
                     "title": "%s",
-                    "description": "Duplicate title test"
+                    "description": "Duplicate title test",
+                    "priority": "MEDIUM"
                 }
                 """, EXISTING_ITEM_TITLE);
 
@@ -140,6 +145,7 @@ class ItemIntegrationTest {
                 {
                     "title": "Updated groceries list",
                     "description": "Updated description with more items",
+                    "priority": "LOW",
                     "assignedUserId": "11111111-1111-4111-a111-111111111111"
                 }
                 """;
@@ -151,6 +157,7 @@ class ItemIntegrationTest {
                 .andExpect(jsonPath("$.id").value(EXISTING_ITEM_ID))
                 .andExpect(jsonPath("$.title").value("Updated groceries list"))
                 .andExpect(jsonPath("$.description").value("Updated description with more items"))
+                .andExpect(jsonPath("$.priority").value("LOW"))
                 .andExpect(jsonPath("$.assignedUserId").value(EXISTING_ITEM_ASSIGNED_USER_ID));
     }
 
@@ -160,6 +167,7 @@ class ItemIntegrationTest {
                 {
                     "title": "Non-existing item update",
                     "description": "This should fail",
+                    "priority": "MEDIUM",
                     "assignedUserId": "11111111-1111-4111-a111-111111111111"
                 }
                 """;

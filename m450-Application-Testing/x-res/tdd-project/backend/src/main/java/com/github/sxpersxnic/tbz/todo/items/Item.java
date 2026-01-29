@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -23,6 +24,16 @@ public class Item {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "is_completed")
+    private boolean isCompleted;
+
+    @Column(name = "due_date")
+    private LocalDateTime dueDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "priority")
+    private Priority priority;
 
     @Column(name = "tags")
     private Set<String> tags = new HashSet<>();

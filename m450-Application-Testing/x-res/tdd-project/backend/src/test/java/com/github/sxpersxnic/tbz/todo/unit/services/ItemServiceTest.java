@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.github.sxpersxnic.tbz.todo.items.Item;
 import com.github.sxpersxnic.tbz.todo.items.ItemRepository;
 import com.github.sxpersxnic.tbz.todo.items.ItemService;
+import com.github.sxpersxnic.tbz.todo.items.Priority;
 
 @ExtendWith(MockitoExtension.class)
 class ItemServiceTest {
@@ -36,6 +38,9 @@ class ItemServiceTest {
         testItem.setId(testId);
         testItem.setTitle("Test Item");
         testItem.setDescription("Test Description");
+        testItem.setCompleted(false);
+        testItem.setDueDate(LocalDateTime.of(2026, 1, 15, 12, 0));
+        testItem.setPriority(Priority.MEDIUM);
         testItem.setTags(new HashSet<>(Set.of("tag1", "tag2")));
         testItem.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
     }
@@ -49,6 +54,9 @@ class ItemServiceTest {
         item2.setId(UUID.randomUUID());
         item2.setTitle("Item 2");
         item2.setDescription("Description 2");
+        item2.setCompleted(true);
+        item2.setDueDate(LocalDateTime.of(2026, 2, 1, 18, 0));
+        item2.setPriority(Priority.HIGH);
         item2.setTags(new HashSet<>(Set.of("tag3", "tag4")));
         item2.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
 
@@ -61,6 +69,10 @@ class ItemServiceTest {
         // Then
         assertNotNull(result);
         assertEquals(2, result.size());
+        assertFalse(result.get(0).isCompleted());
+        assertTrue(result.get(1).isCompleted());
+        assertEquals(testItem.getDueDate(), result.get(0).getDueDate());
+        assertEquals(item2.getDueDate(), result.get(1).getDueDate());
         verify(itemRepository, times(1)).findAll();
     }
 
@@ -92,6 +104,9 @@ class ItemServiceTest {
         assertTrue(result.isPresent());
         assertEquals(testItem.getId(), result.get().getId());
         assertEquals(testItem.getTitle(), result.get().getTitle());
+        assertEquals(testItem.isCompleted(), result.get().isCompleted());
+        assertEquals(testItem.getDueDate(), result.get().getDueDate());
+        assertEquals(testItem.getPriority(), result.get().getPriority());
         assertEquals(testItem.getDescription(), result.get().getDescription());
         assertEquals(testItem.getTags(), result.get().getTags());
         verify(itemRepository, times(1)).findById(testId);
@@ -120,6 +135,9 @@ class ItemServiceTest {
         newItem.setId(UUID.randomUUID());
         newItem.setTitle("New Item");
         newItem.setDescription("New Description");
+        newItem.setCompleted(true);
+        newItem.setDueDate(LocalDateTime.of(2026, 3, 10, 9, 30));
+        newItem.setPriority(Priority.HIGH);
         newItem.setTags(new HashSet<>(Set.of("tagA", "tagB")));
         newItem.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
 
@@ -127,6 +145,9 @@ class ItemServiceTest {
         savedItem.setId(UUID.randomUUID());
         savedItem.setTitle(newItem.getTitle());
         savedItem.setDescription(newItem.getDescription());
+        savedItem.setCompleted(newItem.isCompleted());
+        savedItem.setDueDate(newItem.getDueDate());
+        savedItem.setPriority(newItem.getPriority());
         savedItem.setTags(newItem.getTags());
         savedItem.setAssignedUserId(newItem.getAssignedUserId());
 
@@ -140,6 +161,9 @@ class ItemServiceTest {
         assertNotNull(result.getId());
         assertEquals(newItem.getTitle(), result.getTitle());
         assertEquals(newItem.getDescription(), result.getDescription());
+        assertTrue(result.isCompleted());
+        assertEquals(newItem.getDueDate(), result.getDueDate());
+        assertEquals(newItem.getPriority(), result.getPriority());
         assertEquals(newItem.getTags(), result.getTags());
         assertEquals(newItem.getAssignedUserId(), result.getAssignedUserId());
         verify(itemRepository, times(1)).save(newItem);
@@ -153,6 +177,9 @@ class ItemServiceTest {
         Item updatedData = new Item();
         updatedData.setTitle("Updated Title");
         updatedData.setDescription("Updated Description");
+        updatedData.setCompleted(true);
+        updatedData.setDueDate(LocalDateTime.of(2026, 4, 5, 14, 0));
+        updatedData.setPriority(Priority.LOW);
         updatedData.setTags(new HashSet<>(Set.of("updatedTag1", "updatedTag2")));
         updatedData.setAssignedUserId(UUID.randomUUID());
 
@@ -160,6 +187,9 @@ class ItemServiceTest {
         updatedItem.setId(testId);
         updatedItem.setTitle(updatedData.getTitle());
         updatedItem.setDescription(updatedData.getDescription());
+        updatedItem.setCompleted(updatedData.isCompleted());
+        updatedItem.setDueDate(updatedData.getDueDate());
+        updatedItem.setPriority(updatedData.getPriority());
         updatedItem.setTags(updatedData.getTags());
         updatedItem.setAssignedUserId(updatedData.getAssignedUserId());
 
@@ -174,6 +204,9 @@ class ItemServiceTest {
         assertEquals(testId, result.get().getId());
         assertEquals(updatedData.getTitle(), result.get().getTitle());
         assertEquals(updatedData.getDescription(), result.get().getDescription());
+        assertTrue(result.get().isCompleted());
+        assertEquals(updatedData.getDueDate(), result.get().getDueDate());
+        assertEquals(updatedData.getPriority(), result.get().getPriority());
         assertEquals(updatedData.getAssignedUserId(), result.get().getAssignedUserId());
         verify(itemRepository, times(1)).findById(testId);
         verify(itemRepository, times(1)).save(any(Item.class));
@@ -185,6 +218,8 @@ class ItemServiceTest {
         UUID nonExistingId = UUID.randomUUID();
         Item updatedData = new Item();
         updatedData.setTitle("Updated Title");
+        updatedData.setCompleted(true);
+        updatedData.setDueDate(LocalDateTime.of(2026, 5, 1, 10, 0));
 
         when(itemRepository.findById(nonExistingId)).thenReturn(Optional.empty());
 
