@@ -32,6 +32,7 @@ public class ItemService {
                     existingItem.setTitle(updatedData.getTitle());
                     existingItem.setDescription(updatedData.getDescription());
                     existingItem.setCompleted(updatedData.isCompleted());
+                    existingItem.setPriority(updatedData.getPriority());
                     existingItem.setAssignedUserId(updatedData.getAssignedUserId());
                     existingItem.setTags(updatedData.getTags());
                     return itemRepository.save(existingItem);

@@ -126,7 +126,8 @@ class ItemIntegrationTest {
         String requestBody = String.format("""
                 {
                     "title": "%s",
-                    "description": "Duplicate title test"
+                    "description": "Duplicate title test",
+                    "priority": "MEDIUM"
                 }
                 """, EXISTING_ITEM_TITLE);
 
@@ -166,6 +167,7 @@ class ItemIntegrationTest {
                 {
                     "title": "Non-existing item update",
                     "description": "This should fail",
+                    "priority": "MEDIUM",
                     "assignedUserId": "11111111-1111-4111-a111-111111111111"
                 }
                 """;
