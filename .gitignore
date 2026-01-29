@@ -12,3 +12,18 @@
 */**/target
 x-resources/scripts
 */**/go.sum
+
+# Maven
+
+mvnw*
+.mvn
+
+# PHP
+
+*/**/vendor/
+*/**/.phpunit.result.cache
+*/**/composer.lock
+
+# m450 x-res
+m450-Application-Testing/x-res/apps/*
+!m450-Application-Testing/x-res/apps/*.zip
