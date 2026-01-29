@@ -15,5 +15,6 @@ public class ItemResponseDTO {
     private String description;
     private boolean isCompleted;
     private LocalDateTime dueDate;
+    private Priority priority;
     private Set<String> tags = new HashSet<>();
 }

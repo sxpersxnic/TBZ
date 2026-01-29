@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.github.sxpersxnic.tbz.todo.items.Item;
 import com.github.sxpersxnic.tbz.todo.items.ItemRepository;
 import com.github.sxpersxnic.tbz.todo.items.ItemService;
+import com.github.sxpersxnic.tbz.todo.items.Priority;
 
 @ExtendWith(MockitoExtension.class)
 class ItemServiceTest {
@@ -39,6 +40,7 @@ class ItemServiceTest {
         testItem.setDescription("Test Description");
         testItem.setCompleted(false);
         testItem.setDueDate(LocalDateTime.of(2026, 1, 15, 12, 0));
+        testItem.setPriority(Priority.MEDIUM);
         testItem.setTags(new HashSet<>(Set.of("tag1", "tag2")));
         testItem.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
     }
@@ -54,6 +56,7 @@ class ItemServiceTest {
         item2.setDescription("Description 2");
         item2.setCompleted(true);
         item2.setDueDate(LocalDateTime.of(2026, 2, 1, 18, 0));
+        item2.setPriority(Priority.HIGH);
         item2.setTags(new HashSet<>(Set.of("tag3", "tag4")));
         item2.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
 
@@ -103,6 +106,7 @@ class ItemServiceTest {
         assertEquals(testItem.getTitle(), result.get().getTitle());
         assertEquals(testItem.isCompleted(), result.get().isCompleted());
         assertEquals(testItem.getDueDate(), result.get().getDueDate());
+        assertEquals(testItem.getPriority(), result.get().getPriority());
         assertEquals(testItem.getDescription(), result.get().getDescription());
         assertEquals(testItem.getTags(), result.get().getTags());
         verify(itemRepository, times(1)).findById(testId);
@@ -133,6 +137,7 @@ class ItemServiceTest {
         newItem.setDescription("New Description");
         newItem.setCompleted(true);
         newItem.setDueDate(LocalDateTime.of(2026, 3, 10, 9, 30));
+        newItem.setPriority(Priority.HIGH);
         newItem.setTags(new HashSet<>(Set.of("tagA", "tagB")));
         newItem.setAssignedUserId(UUID.fromString("11111111-1111-4111-a111-111111111111"));
 
@@ -142,6 +147,7 @@ class ItemServiceTest {
         savedItem.setDescription(newItem.getDescription());
         savedItem.setCompleted(newItem.isCompleted());
         savedItem.setDueDate(newItem.getDueDate());
+        savedItem.setPriority(newItem.getPriority());
         savedItem.setTags(newItem.getTags());
         savedItem.setAssignedUserId(newItem.getAssignedUserId());
 
@@ -157,6 +163,7 @@ class ItemServiceTest {
         assertEquals(newItem.getDescription(), result.getDescription());
         assertTrue(result.isCompleted());
         assertEquals(newItem.getDueDate(), result.getDueDate());
+        assertEquals(newItem.getPriority(), result.getPriority());
         assertEquals(newItem.getTags(), result.getTags());
         assertEquals(newItem.getAssignedUserId(), result.getAssignedUserId());
         verify(itemRepository, times(1)).save(newItem);
@@ -172,6 +179,7 @@ class ItemServiceTest {
         updatedData.setDescription("Updated Description");
         updatedData.setCompleted(true);
         updatedData.setDueDate(LocalDateTime.of(2026, 4, 5, 14, 0));
+        updatedData.setPriority(Priority.LOW);
         updatedData.setTags(new HashSet<>(Set.of("updatedTag1", "updatedTag2")));
         updatedData.setAssignedUserId(UUID.randomUUID());
 
@@ -181,6 +189,7 @@ class ItemServiceTest {
         updatedItem.setDescription(updatedData.getDescription());
         updatedItem.setCompleted(updatedData.isCompleted());
         updatedItem.setDueDate(updatedData.getDueDate());
+        updatedItem.setPriority(updatedData.getPriority());
         updatedItem.setTags(updatedData.getTags());
         updatedItem.setAssignedUserId(updatedData.getAssignedUserId());
 
@@ -197,6 +206,7 @@ class ItemServiceTest {
         assertEquals(updatedData.getDescription(), result.get().getDescription());
         assertTrue(result.get().isCompleted());
         assertEquals(updatedData.getDueDate(), result.get().getDueDate());
+        assertEquals(updatedData.getPriority(), result.get().getPriority());
         assertEquals(updatedData.getAssignedUserId(), result.get().getAssignedUserId());
         verify(itemRepository, times(1)).findById(testId);
         verify(itemRepository, times(1)).save(any(Item.class));

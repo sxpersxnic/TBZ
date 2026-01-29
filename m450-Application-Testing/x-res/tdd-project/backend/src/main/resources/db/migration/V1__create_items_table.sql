@@ -4,7 +4,8 @@ CREATE TABLE items (
     assigned_user_id UUID,
     title VARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(200),
-    due_date TIMESTAMP DEFAULT NULL,
     is_completed BOOLEAN NOT NULL DEFAULT false,
+    due_date TIMESTAMP DEFAULT NULL,
+    priority VARCHAR(20) DEFAULT 'MEDIUM' CHECK (priority IN ('HIGH', 'MEDIUM', 'LOW')),
     tags TEXT[] DEFAULT ARRAY[]::TEXT[]
 );

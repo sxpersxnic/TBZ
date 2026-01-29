@@ -30,6 +30,11 @@ public class Item {
 
     @Column(name = "due_date")
     private LocalDateTime dueDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "priority")
+    private Priority priority;
+
     @Column(name = "tags")
     private Set<String> tags = new HashSet<>();
 

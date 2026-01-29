@@ -1,5 +1,6 @@
 package com.github.sxpersxnic.tbz.todo.items;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -19,6 +20,9 @@ public class ItemRequestDTO {
     @NotBlank(message = "Description must not be blank")
     @Size(max = 200, message = "Description must be equal or less than 200 characters")
     private String description;
+
+    @NotNull(message = "Priority must not be null")
+    private Priority priority;
 
     private LocalDateTime dueDate;
     private boolean isCompleted;
