@@ -1,0 +1,66 @@
+name: M450 TDD Project CI Pipeline
+
+on:
+  push:
+    branches:
+      - m450-tdd-project
+      - m450-tdd-project-dev
+      - m450-tdd-project-feature/*
+jobs:
+  test:
+    name: Run Tests and Generate Report
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: m450-Application-Testing/x-res/tdd-project/backend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run tests
+        run: ./gradlew test
+
+      - name: Generate JaCoCo Report
+        run: ./gradlew jacocoTestReport
+        if: always()
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: m450-Application-Testing/x-res/tdd-project/backend/build/test-results/
+
+      - name: Upload JaCoCo Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jacoco-report
+          path: m450-Application-Testing/x-res/tdd-project/backend/build/reports/jacoco/
+
+      - name: Upload HTML Test Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: html-test-report
+          path: m450-Application-Testing/x-res/tdd-project/backend/build/reports/tests/
+
+      - name: Publish Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Gradle Tests
+          path: m450-Application-Testing/x-res/tdd-project/backend/build/test-results/test/*.xml
+          reporter: java-junit
