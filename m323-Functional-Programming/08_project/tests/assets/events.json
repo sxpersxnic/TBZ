@@ -1,0 +1,49 @@
+[
+  {
+    "FileAdded": {
+      "path": "/home/user/Downloads/report_2024.pdf",
+      "size_bytes": 2411724,
+      "timestamp": 1736899200
+    }
+  },
+  {
+    "FileAdded": {
+      "path": "/home/user/Downloads/installer.dmg",
+      "size_bytes": 188743680,
+      "timestamp": 1735344000
+    }
+  },
+  {
+    "FileAdded": {
+      "path": "/home/user/Downloads/old_backup.zip",
+      "size_bytes": 545259520,
+      "timestamp": 1734566400
+    }
+  },
+  {
+    "FileRemoved": {
+      "path": "/home/user/Downloads/installer.dmg",
+      "timestamp": 1740441600
+    }
+  },
+  {
+    "FileMoved": {
+      "from": "/home/user/Desktop/notes.txt",
+      "to": "/home/user/Documents/notes_archive.txt",
+      "timestamp": 1740873600
+    }
+  },
+  {
+    "FileAdded": {
+      "path": "/home/user/Downloads/video_recording.mp4",
+      "size_bytes": 734003200,
+      "timestamp": 1741046400
+    }
+  },
+  {
+    "FileRemoved": {
+      "path": "/home/user/Downloads/old_backup.zip",
+      "timestamp": 1741046400
+    }
+  }
+]
