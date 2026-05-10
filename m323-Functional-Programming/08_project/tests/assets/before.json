@@ -1,0 +1,11 @@
+{
+  "entries": [
+    { "path": "/home/user/Downloads/report_2024.pdf",   "size_bytes": 2411724,  "timestamp": 1736899200 },
+    { "path": "/home/user/Downloads/installer.dmg",     "size_bytes": 188743680, "timestamp": 1735344000 },
+    { "path": "/home/user/Downloads/old_backup.zip",   "size_bytes": 545259520, "timestamp": 1734566400 },
+    { "path": "/home/user/Desktop/notes.txt",          "size_bytes": 3812,      "timestamp": 1738972800 },
+    { "path": "/home/user/Desktop/screenshot_001.png", "size_bytes": 655360,    "timestamp": 1739836800 },
+    { "path": "/home/user/Documents/project/main.rs",  "size_bytes": 8192,      "timestamp": 1740355200 },
+    { "path": "/home/user/Documents/project/lib.rs",   "size_bytes": 5120,      "timestamp": 1740355200 }
+  ]
+}

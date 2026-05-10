@@ -1,0 +1,12 @@
+{
+  "entries": [
+    { "path": "/home/user/Downloads/report_2024.pdf",          "size_bytes": 2411724,  "timestamp": 1736899200 },
+    { "path": "/home/user/Desktop/screenshot_001.png",         "size_bytes": 655360,   "timestamp": 1739836800 },
+    { "path": "/home/user/Documents/project/main.rs",          "size_bytes": 8192,     "timestamp": 1740355200 },
+    { "path": "/home/user/Documents/project/lib.rs",           "size_bytes": 5120,     "timestamp": 1740355200 },
+    { "path": "/home/user/Documents/notes_archive.txt",        "size_bytes": 3812,     "timestamp": 1740873600 },
+    { "path": "/home/user/Downloads/thesis_draft.docx",        "size_bytes": 1245184,  "timestamp": 1740960000 },
+    { "path": "/home/user/Downloads/video_recording.mp4",      "size_bytes": 734003200,"timestamp": 1741046400 },
+    { "path": "/home/user/Downloads/random_script.sh",         "size_bytes": 512,      "timestamp": 1741046400 }
+  ]
+}
