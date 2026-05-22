@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSRF Vulnerability Demonstration</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+        background-color: #f8f9fa;
+        color: #2c3e50;
+        line-height: 1.6;
+      }
+
+      .navbar {
+        background: white;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 16px 20px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .navbar-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .navbar h1 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px 20px;
+      }
+
+      .intro-section {
+        background: white;
+        border-radius: 6px;
+        padding: 24px;
+        margin-bottom: 24px;
+        border: 1px solid #e0e0e0;
+      }
+
+      .intro-section h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        color: #2c3e50;
+      }
+
+      .intro-section p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 12px;
+      }
+
+      .scenario {
+        background: white;
+        border-radius: 6px;
+        padding: 24px;
+        margin-bottom: 24px;
+        border: 1px solid #e0e0e0;
+      }
+
+      .scenario h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #2c3e50;
+      }
+
+      .scenario-description {
+        background: #f0f4f8;
+        padding: 12px;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        border-left: 4px solid #0066cc;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 0;
+        border-bottom: 2px solid #e0e0e0;
+        margin-bottom: 24px;
+      }
+
+      .tab-button {
+        background: none;
+        color: #666;
+        border: none;
+        padding: 12px 16px;
+        cursor: pointer;
+        font-weight: 500;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s;
+        font-size: 14px;
+      }
+
+      .tab-button:hover {
+        color: #333;
+        background: #f5f5f5;
+      }
+
+      .tab-button.active {
+        color: #0066cc;
+        border-bottom-color: #0066cc;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #2c3e50;
+        font-size: 14px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        font-family: 'Courier New', monospace;
+        transition: all 0.2s;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #0066cc;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+      }
+
+      .button-group {
+        display: flex;
+        gap: 8px;
+        margin: 16px 0;
+        flex-wrap: wrap;
+      }
+
+      button {
+        background: #0066cc;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      button:hover {
+        background: #0052a3;
+      }
+
+      button:active {
+        transform: scale(0.98);
+      }
+
+      button.secondary {
+        background: #6c757d;
+      }
+
+      button.secondary:hover {
+        background: #5a6268;
+      }
+
+      button.success {
+        background: #28a745;
+      }
+
+      button.success:hover {
+        background: #218838;
+      }
+
+      .example-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .example-buttons button {
+        font-size: 13px;
+        padding: 8px 12px;
+        margin: 0;
+        text-align: left;
+        white-space: normal;
+      }
+
+      .status {
+        padding: 12px;
+        border-radius: 4px;
+        margin: 16px 0;
+        display: none;
+        font-size: 14px;
+        border-left: 4px solid;
+      }
+
+      .status.active {
+        display: block;
+      }
+
+      .status.success {
+        background: #d4edda;
+        color: #155724;
+        border-left-color: #28a745;
+      }
+
+      .status.error {
+        background: #f8d7da;
+        color: #721c24;
+        border-left-color: #dc3545;
+      }
+
+      .status.loading {
+        background: #d1ecf1;
+        color: #0c5460;
+        border-left-color: #17a2b8;
+      }
+
+      .output {
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 12px;
+        margin: 16px 0;
+        max-height: 400px;
+        overflow-y: auto;
+        display: none;
+        font-size: 12px;
+      }
+
+      .output.active {
+        display: block;
+      }
+
+      .output pre {
+        font-family: 'Courier New', monospace;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin: 0;
+      }
+
+      /* Step indicator styles */
+      .steps {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .step {
+        padding: 8px 10px;
+        border-radius: 6px;
+        background: #f0f2f5;
+        color: #333;
+        font-size: 13px;
+        border: 1px solid #e0e0e0;
+        opacity: 0.9;
+        min-width: 140px;
+        text-align: center;
+      }
+
+      .step.active {
+        background: #0066cc;
+        color: white;
+        border-color: #0052a3;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+      }
+
+      .step.done {
+        background: #e6f4ea;
+        color: #155724;
+        border-color: #c3e6cb;
+      }
+
+      /* Blocked step (validation stopped the flow) */
+      .step.blocked {
+        background: #f8d7da;
+        color: #721c24;
+        border-color: #dc3545;
+        box-shadow: 0 2px 6px rgba(220, 53, 69, 0.08);
+      }
+
+      /* Progress bar */
+      .progress {
+        position: relative;
+        height: 10px;
+        background: #e9ecef;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-top: 12px;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #0066cc;
+        transition: width 420ms ease, background-color 240ms ease;
+      }
+
+      .progress-bar.blocked {
+        background: #dc3545;
+      }
+
+      .progress-label {
+        position: absolute;
+        right: 8px;
+        top: -20px;
+        font-size: 12px;
+        color: #333;
+        background: transparent;
+      }
+
+      .explanation {
+        background: #e7f3ff;
+        border-left: 4px solid #0066cc;
+        padding: 12px;
+        border-radius: 4px;
+        margin: 16px 0;
+        font-size: 14px;
+        color: #0033aa;
+      }
+
+      .warning-box {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 12px;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: #856404;
+      }
+
+      .key-point {
+        background: #f0f0f0;
+        border-left: 4px solid #666;
+        padding: 12px;
+        border-radius: 4px;
+        margin: 12px 0;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .comparison-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 16px 0;
+      }
+
+      .comparison-item {
+        padding: 12px;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .comparison-item.vulnerable {
+        background: #ffe6e6;
+        border-left: 4px solid #dc3545;
+      }
+
+      .comparison-item.safe {
+        background: #e6ffe6;
+        border-left: 4px solid #28a745;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 16px;
+        margin: 16px 0;
+      }
+
+      .info-card {
+        background: #f8f9fa;
+        padding: 16px;
+        border-radius: 4px;
+        border: 1px solid #e0e0e0;
+      }
+
+      .info-card h4 {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #2c3e50;
+        font-size: 14px;
+      }
+
+      .info-card p {
+        font-size: 13px;
+        color: #666;
+        margin: 0;
+      }
+
+      .service-list {
+        list-style: none;
+      }
+
+      .service-list li {
+        padding: 8px 0;
+        font-size: 14px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .service-list li:last-child {
+        border-bottom: none;
+      }
+
+      .service-port {
+        color: #0066cc;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-content">
+        <h1>SSRF Vulnerability Demonstration</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="scenario">
+        <div class="tabs">
+          <button class="tab-button active" onclick="switchTab('vulnerable')">Vulnerable Endpoint (No
+            Protection)</button>
+          <button class="tab-button" onclick="switchTab('safe')">Protected Endpoint (With Validation)</button>
+        </div>
+
+        <!-- Vulnerable Tab -->
+        <div id="vulnerable" class="tab-content active">
+          <div class="scenario-description">
+            This endpoint accepts any URL and fetches it without any validation. An attacker can trick this service into
+            accessing internal services that should be private.
+          </div>
+
+          <div class="form-group">
+            <label>URL to fetch:</label>
+            <input type="text" id="vulnerable-url" placeholder="http://example.com/api/data"
+              value="http://api:3001/api/data">
+          </div>
+
+          <div class="button-group">
+            <button onclick="fetchVulnerable()">Send Request</button>
+            <button class="secondary" onclick="clearVulnerable()">Clear</button>
+          </div>
+
+          <div class="steps" id="vulnerable-steps">
+            <div class="step" id="vulnerable-step-1">1. Prepare request</div>
+            <div class="step" id="vulnerable-step-2">2. No validation — server forwards</div>
+            <div class="step" id="vulnerable-step-3">3. Server forwards to target</div>
+            <div class="step" id="vulnerable-step-4">4. Awaiting target response</div>
+            <div class="step" id="vulnerable-step-5">5. Response from target</div>
+          </div>
+          <div class="progress" id="vulnerable-progress" aria-label="Vulnerable request progress">
+            <div class="progress-bar" id="vulnerable-progress-bar"></div>
+          </div>
+
+          <div class="explanation">
+            <strong>Try These Examples:</strong>
+            <div class="example-buttons">
+              <button onclick="setUrlAndFetch('vulnerable', 'http://api:3001/api/data')">
+                API (works)
+              </button>
+              <button onclick="setUrlAndFetch('vulnerable', 'http://internal-secret-service:3002/api/secret')">
+                Internal Secret Service (security risk!)
+              </button>
+              <button onclick="setUrlAndFetch('vulnerable', 'http://internal-secret-service:3002/api/credentials')">
+                Database Credentials (leaked!)
+              </button>
+            </div>
+          </div>
+
+          <div id="vulnerable-status" class="status"></div>
+          <div id="vulnerable-output" class="output"></div>
+        </div>
+
+        <!-- Safe Tab -->
+        <div id="safe" class="tab-content">
+          <div class="scenario-description">
+            This endpoint validates all URLs before making requests. It blocks access to private networks and internal
+            services, preventing SSRF attacks.
+          </div>
+
+          <div class="form-group">
+            <label>URL to fetch:</label>
+            <input type="text" id="safe-url" placeholder="http://example.com/api/data" value="http://api:3001/api/data">
+          </div>
+
+          <div class="button-group">
+            <button class="success" onclick="fetchSafe()">Send Request</button>
+            <button class="secondary" onclick="clearSafe()">Clear</button>
+          </div>
+
+          <div class="steps" id="safe-steps">
+            <div class="step" id="safe-step-1">1. Prepare request</div>
+            <div class="step" id="safe-step-2">2. Server validation (blocked if internal)</div>
+            <div class="step" id="safe-step-3">3. Forward to target (only if allowed)</div>
+            <div class="step" id="safe-step-4">4. Awaiting target response</div>
+            <div class="step" id="safe-step-5">5. Response from target</div>
+          </div>
+          <div class="progress" id="safe-progress" aria-label="Protected request progress">
+            <div class="progress-bar" id="safe-progress-bar"></div>
+          </div>
+          <div class="explanation">
+            <strong>Try These Examples:</strong>
+            <div class="example-buttons">
+              <button onclick="setUrlAndFetch('safe', 'http://api:3001/api/data')">
+                API (allowed)
+              </button>
+              <button onclick="setUrlAndFetch('safe', 'http://internal-secret-service:3002/api/secret')">
+                Internal Secret Service (blocked!)
+              </button>
+              <button onclick="setUrlAndFetch('safe', 'http://127.0.0.1:3000/api/info')">
+                Localhost (blocked!)
+              </button>
+            </div>
+          </div>
+
+          <div id="safe-status" class="status"></div>
+          <div id="safe-output" class="output"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function switchTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        event.target.classList.add('active');
+      }
+
+      function setUrlAndFetch(endpoint, url) {
+        const inputId = endpoint === 'vulnerable' ? 'vulnerable-url' : 'safe-url';
+        document.getElementById(inputId).value = url;
+        if (endpoint === 'vulnerable') {
+          fetchVulnerable();
+        } else {
+          fetchSafe();
+        }
+      }
+
+      async function fetchVulnerable() {
+        const url = document.getElementById('vulnerable-url').value.trim();
+        if (!url) {
+          showStatus('vulnerable', 'Enter a URL', 'error');
+          return;
+        }
+        await performFetch('/api/fetch', url, 'vulnerable');
+      }
+
+      async function fetchSafe() {
+        const url = document.getElementById('safe-url').value.trim();
+        if (!url) {
+          showStatus('safe', 'Enter a URL', 'error');
+          return;
+        }
+        await performFetch('/api/fetch-safe', url, 'safe');
+      }
+
+      async function performFetch(endpoint, url, tab) {
+        try {
+          // reset UI steps for a fresh run
+          resetSteps(tab);
+          resetProgress(tab);
+
+          // Step 1: prepare
+          setActiveStep(tab, 1);
+          setProgress(tab, 20);
+          showStatus(tab, 'Preparing request...', 'loading');
+          await new Promise(r => setTimeout(r, 320));
+
+          // Step 2: server-side validation (simulated visually here)
+          setActiveStep(tab, 2);
+          setProgress(tab, 40);
+          if (tab === 'safe') {
+            showStatus(tab, 'Server validation in progress...', 'loading');
+          } else {
+            showStatus(tab, 'No server validation — request will be forwarded', 'loading');
+          }
+          await new Promise(r => setTimeout(r, 420));
+
+          // Send request to our backend which will perform validation and (maybe) forward
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url })
+          });
+
+          const data = await response.json().catch(() => ({}));
+
+          // If protected endpoint blocked the request, show blocked at validation step
+          if (tab === 'safe' && !response.ok) {
+            setBlockedStep(tab, 2, data.error || `Blocked (status ${response.status})`);
+            setProgress(tab, 40, true);
+            showOutput(tab, data);
+            showStatus(tab, `Blocked: ${data.error || 'Request blocked by server'}`, 'error');
+            return;
+          }
+
+          // For vulnerable flow or allowed safe flow: animate forwarding -> awaiting -> received
+          setActiveStep(tab, 3);
+          setProgress(tab, 65);
+          if (tab === 'safe') {
+            showStatus(tab, 'Forwarding to target (allowed)', 'loading');
+          } else {
+            showStatus(tab, 'Forwarding to target (no validation)', 'loading');
+          }
+          await new Promise(r => setTimeout(r, 360));
+
+          setActiveStep(tab, 4);
+          setProgress(tab, 82);
+          showStatus(tab, 'Awaiting response from target...', 'loading');
+          await new Promise(r => setTimeout(r, 360));
+
+          setActiveStep(tab, 5);
+          setProgress(tab, 100);
+
+          if (response.ok) {
+            showStatus(tab, `Success - Status ${data.status}`, 'success');
+            showOutput(tab, data);
+          } else {
+            showStatus(tab, `Error: ${data.error || 'Request failed'}`, 'error');
+            showOutput(tab, data);
+          }
+        } catch (error) {
+          // mark validation as failed when exceptions occur
+          setBlockedStep(tab, 2, error.message);
+          showStatus(tab, `Error: ${error.message}`, 'error');
+          showOutput(tab, { error: error.message });
+        }
+      }
+
+      function setActiveStep(tab, idx) {
+        const base = `${tab}-step-`;
+        for (let i = 1; i <= 5; i++) {
+          const el = document.getElementById(`${base}${i}`);
+          if (!el) continue;
+          el.classList.remove('active', 'done', 'blocked');
+          if (i < idx) el.classList.add('done');
+          if (i === idx) el.classList.add('active');
+        }
+      }
+
+      function resetSteps(tab) {
+        const base = `${tab}-step-`;
+        for (let i = 1; i <= 5; i++) {
+          const el = document.getElementById(`${base}${i}`);
+          if (!el) continue;
+          el.classList.remove('active', 'done', 'blocked');
+        }
+      }
+
+      function resetProgress(tab) {
+        const bar = document.getElementById(`${tab}-progress-bar`);
+        if (!bar) return;
+        bar.classList.remove('blocked');
+        bar.style.width = '0%';
+      }
+
+      function setProgress(tab, percent, blocked = false) {
+        const bar = document.getElementById(`${tab}-progress-bar`);
+        if (!bar) return;
+        bar.classList.toggle('blocked', blocked);
+        bar.style.width = `${percent}%`;
+      }
+
+      function setBlockedStep(tab, idx, reason) {
+        const base = `${tab}-step-`;
+        for (let i = 1; i <= 5; i++) {
+          const el = document.getElementById(`${base}${i}`);
+          if (!el) continue;
+          el.classList.remove('active', 'done');
+          el.classList.remove('blocked');
+          if (i < idx) el.classList.add('done');
+          if (i === idx) el.classList.add('active', 'blocked');
+        }
+      }
+
+      function showStatus(tab, message, type) {
+        const statusEl = document.getElementById(`${tab}-status`);
+        statusEl.textContent = message;
+        statusEl.className = `status active ${type}`;
+      }
+
+      function showOutput(tab, data) {
+        const outputEl = document.getElementById(`${tab}-output`);
+        outputEl.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        outputEl.classList.add('active');
+      }
+
+      function clearVulnerable() {
+        document.getElementById('vulnerable-url').value = '';
+        const statusEl = document.getElementById('vulnerable-status');
+        statusEl.className = 'status';
+        statusEl.textContent = '';
+        document.getElementById('vulnerable-output').classList.remove('active');
+        resetSteps('vulnerable');
+        resetProgress('vulnerable');
+      }
+
+      function clearSafe() {
+        document.getElementById('safe-url').value = '';
+        const statusEl = document.getElementById('safe-status');
+        statusEl.className = 'status';
+        statusEl.textContent = '';
+        document.getElementById('safe-output').classList.remove('active');
+        resetSteps('safe');
+        resetProgress('safe');
+      }
+    </script>
+  </body>
+
+</html>
