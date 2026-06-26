@@ -1,13 +1,18 @@
+const escapeHtml = require('escape-html');
 const db = require('../fw/db');
 
 async function getHtml() {
-    let conn = await db.connectDB();
-    let html = '';
-    let [result,fields] = await conn.query("SELECT users.ID, users.username, users.password, roles.title FROM users inner join permissions on users.ID = permissions.userID inner join roles on permissions.roleID = roles.ID order by username");
+    try {
+        const rows = await db.executeStatement(
+            `SELECT u.ID, u.username, r.title
+             FROM users u
+             INNER JOIN permissions p ON u.ID = p.userID
+             INNER JOIN roles r ON p.roleID = r.ID
+             ORDER BY u.username`
+        );
 
-    html += `
+        let html = `
     <h2>User List</h2>
-
     <table>
         <tr>
             <th>ID</th>
@@ -15,14 +20,20 @@ async function getHtml() {
             <th>Role</th>
         </tr>`;
 
-    result.map(function (record) {
-        html += `<tr><td>`+record.ID+`</td><td>`+record.username+`</td><td>`+record.title+`</td><input type='hidden' name='password' value='`+record.password+`' /></tr>`;
-    });
+        for (const row of rows) {
+            html += `<tr>
+            <td>${escapeHtml(String(row.ID))}</td>
+            <td>${escapeHtml(row.username)}</td>
+            <td>${escapeHtml(row.title)}</td>
+        </tr>`;
+        }
 
-    html += `
-    </table>`;
-
-    return html;
+        html += `\n    </table>`;
+        return html;
+    } catch (err) {
+        console.error('Admin users error:', err);
+        return '<p>Error loading user list</p>';
+    }
 }
 
-module.exports = { html: getHtml() };
+module.exports = { html: getHtml };

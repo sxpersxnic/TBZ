@@ -1,85 +1,33 @@
 const axios = require('axios');
-const querystring = require('querystring');
+
+const ALLOWED_PROVIDERS = ['/search/v2/'];
 
 async function getHtml(req) {
-    if (req.body.provider === undefined || req.body.terms === undefined || req.body.userid === undefined){
-        return "Not enough information provided";
+    if (!req.body.provider || !req.body.terms || !req.body.userid) {
+        return 'Not enough information provided';
     }
 
-    let provider = req.body.provider;
-    let terms = req.body.terms;
-    let userid = req.body.userid;
+    const provider = req.body.provider;
+    const terms    = req.body.terms;
+    const userid   = req.session?.userid;
 
-    await sleep(1000); // this is a long, long search!!
-
-    let theUrl='http://localhost:3000'+provider+'?userid='+userid+'&terms='+terms;
-    let result = await callAPI('GET', theUrl, false);
-    return result;
-}
-
-async function callAPI(method, url, data){
-    let noResults = 'No results found!';
-    let result;
-
-    switch (method){
-        case "POST":
-            if (data) {
-                result = await axios.post(url, data)
-                    .then(response => {
-                        return response.data;
-                    })
-                    .catch(error => {
-                        return noResults;
-                    });
-            } else {
-                result = await axios.post(url)
-                    .then(response => {
-                        return response.data;
-                    })
-                    .catch(error => {
-                        return noResults;
-                    });
-            }
-            break;
-        case "PUT":
-            if (data) {
-                result = await axios.put(url, data)
-                    .then(response => {
-                        return response.data;
-                    })
-                    .catch(error => {
-                        return noResults;
-                    });
-            } else {
-                result = await axios.put(url)
-                    .then(response => {
-                        return response.data;
-                    })
-                    .catch(error => {
-                        return noResults;
-                    });
-            }
-            break;
-        default:
-            if (data)
-                url = url+'?'+querystring.stringify(data);
-
-            result = await axios.get(url)
-                .then(response => {
-                    return response.data;
-                })
-                .catch(error => {
-                    return noResults;
-                });
+    if (!userid) {
+        return 'Unauthorised';
     }
 
-    return result ? result : noResults;
-}
+    if (!ALLOWED_PROVIDERS.includes(provider)) {
+        return 'Invalid search provider';
+    }
 
-function sleep(ms) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
+    // Build URL from whitelisted path only — never from user-supplied input
+    const url = `http://localhost:3000${provider}?userid=${encodeURIComponent(userid)}&terms=${encodeURIComponent(terms)}`;
+
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch {
+        return 'No results found!';
+    }
 }
 
 module.exports = { html: getHtml };

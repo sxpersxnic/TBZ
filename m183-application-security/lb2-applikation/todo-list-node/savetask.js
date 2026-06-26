@@ -1,35 +1,40 @@
 const db = require('./fw/db');
 
 async function getHtml(req) {
-    let html = '';
-    let taskId = '';
+    const { title, state, id } = req.body;
 
-    // see if the id exists in the database
-    if (req.body.id !== undefined && req.body.id.length !== 0) {
-        taskId = req.body.id;
-        let stmt = await db.executeStatement('select ID, title, state from tasks where ID = ' + taskId);
-        if (stmt.length === 0) {
-            taskId = '';
-        }
+    if (title === undefined || state === undefined) {
+        return "<span class='info info-error'>No update was made</span>";
     }
 
-    if (req.body.title !== undefined && req.body.state !== undefined){
-        let state = req.body.state;
-        let title = req.body.title;
-        let userid = req.cookies.userid;
+    // userid comes from the server-side session — never from user input
+    const userid = req.session.userid;
 
-        if (taskId === ''){
-            stmt = db.executeStatement("insert into tasks (title, state, userID) values ('"+title+"', '"+state+"', '"+userid+"')");
+    try {
+        if (!id || id.length === 0) {
+            await db.executeStatement(
+                'INSERT INTO tasks (title, state, userID) VALUES (?, ?, ?)',
+                [title, state, userid]
+            );
         } else {
-            stmt = db.executeStatement("update tasks set title = '"+title+"', state = '"+state+"' where ID = "+taskId);
+            // Verify the task belongs to this user before updating
+            const existing = await db.executeStatement(
+                'SELECT ID FROM tasks WHERE ID = ? AND userID = ?',
+                [id, userid]
+            );
+            if (existing.length === 0) {
+                return "<span class='info info-error'>Task not found</span>";
+            }
+            await db.executeStatement(
+                'UPDATE tasks SET title = ?, state = ? WHERE ID = ? AND userID = ?',
+                [title, state, id, userid]
+            );
         }
-
-        html += "<span class='info info-success'>Update successfull</span>";
-    } else {
-        html += "<span class='info info-error'>No update was made</span>";
+        return "<span class='info info-success'>Update successfull</span>";
+    } catch (err) {
+        console.error('Savetask error:', err);
+        return "<span class='info info-error'>An error occurred</span>";
     }
-
-    return html;
 }
 
-module.exports = { html: getHtml }
+module.exports = { html: getHtml };
