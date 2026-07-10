@@ -35,20 +35,18 @@ Dependencies) und funktionale Defekte (Suche und Delete sind nicht funktionsfäh
 |----|--------|----------|-------|
 | F-01 | IDOR: fremde Tasks über `/edit?id=` lesbar | **Hoch** | A01 |
 | F-02 | Passwörter im Klartext in DB-Seed (+ Plaintext-Login-Fallback) | **Hoch** | A02 |
-| F-03 | PHP-Variante vollständig ungehärtet & verwundbar | **Hoch** *(bedingt)* | A01–A07 |
-| F-04 | Applikation verbindet als DB-`root` (kein Least Privilege) | Mittel | A05 |
-| F-05 | Keine Security-Header / kein CSP (helmet fehlt) | Mittel | A05 |
-| F-06 | Kein Brute-Force-Schutz / Rate-Limiting am Login | Mittel | A07 |
-| F-07 | Veraltete Dependencies mit bekannten CVEs | Mittel | A06 |
-| F-08 | User-Enumeration am Login (unterschiedliche Fehlermeldungen) | Niedrig–Mittel | A07 |
-| F-09 | Keine Session-Regeneration beim Login (Session Fixation) | Niedrig–Mittel | A07 |
-| F-10 | Logout via GET ohne CSRF-Token | Niedrig | A01 |
-| F-11 | Session-Cookie ohne `Secure`-Flag / keine HTTPS-Option | Niedrig | A05 |
-| F-12 | jQuery 3.4.0 vom CDN ohne SRI (bekannte XSS-CVEs) | Niedrig | A06/A08 |
-| F-13 | Kein Body-Size-Limit (DoS-Fläche) | Niedrig | A05 |
+| F-03 | Applikation verbindet als DB-`root` (kein Least Privilege) | Mittel | A05 |
+| F-04 | Keine Security-Header / kein CSP (helmet fehlt) | Mittel | A05 |
+| F-05 | Kein Brute-Force-Schutz / Rate-Limiting am Login | Mittel | A07 |
+| F-06 | Veraltete Dependencies mit bekannten CVEs | Mittel | A06 |
+| F-07 | User-Enumeration am Login (unterschiedliche Fehlermeldungen) | Niedrig–Mittel | A07 |
+| F-08 | Keine Session-Regeneration beim Login (Session Fixation) | Niedrig–Mittel | A07 |
+| F-09 | Logout via GET ohne CSRF-Token | Niedrig | A01 |
+| F-10 | Session-Cookie ohne `Secure`-Flag / keine HTTPS-Option | Niedrig | A05 |
+| F-11 | jQuery 3.4.0 vom CDN ohne SRI (bekannte XSS-CVEs) | Niedrig | A06/A08 |
+| F-12 | Kein Body-Size-Limit (DoS-Fläche) | Niedrig | A05 |
 | I-01 | Suche funktional defekt (interner Aufruf ohne Session) | Info/Funktion | – |
 | I-02 | Delete-Link zeigt auf nicht existierende Route | Info/Funktion | – |
-| I-03 | `ssrf-demo` bewusst verwundbar + Bypässe im „safe"-Endpoint | Info | A10 |
 
 ---
 
