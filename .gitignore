@@ -31,3 +31,5 @@ m450-Application-Testing/x-res/apps/*
 # Scala
 .bsp
 .scala-build
+
+*.local*
