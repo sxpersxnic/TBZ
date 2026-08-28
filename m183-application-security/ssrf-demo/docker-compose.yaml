@@ -1,0 +1,87 @@
+name: m183-ssrf-demo
+
+services:
+  # Vulnerable Web Application with SSRF endpoint
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: ssrf-web-app
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: development
+    networks:
+      - ssrf-network
+    depends_on:
+      - api
+      - internal-secret-service
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '--quiet',
+          '--tries=1',
+          '--spider',
+          'http://localhost:3000/api/info',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Public API Service (accessible from everywhere)
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: ssrf-public-api
+    ports:
+      - '3001:3001'
+    environment:
+      NODE_ENV: development
+    networks:
+      - ssrf-network
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '--quiet',
+          '--tries=1',
+          '--spider',
+          'http://localhost:3001/health',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Internal Secret Service (only accessible via SSRF or internally)
+  internal-secret-service:
+    build:
+      context: ./internal-secret-service
+      dockerfile: Dockerfile
+    container_name: ssrf-internal-secret-service
+    ports:
+      - '3002:3002'
+    environment:
+      NODE_ENV: development
+    networks:
+      - ssrf-network
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '--quiet',
+          '--tries=1',
+          '--spider',
+          'http://localhost:3002/health',
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  ssrf-network:
+    driver: bridge
