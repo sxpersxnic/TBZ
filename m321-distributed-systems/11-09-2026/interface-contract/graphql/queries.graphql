@@ -1,0 +1,38 @@
+# All books
+
+query {
+	books {
+		id
+		title
+		publicationYear
+	}
+}
+
+# One book by ID inclusive author
+
+query {
+	book(id: "1") {
+		id
+		title
+		description
+		publicationYear
+		authors {
+			id
+			name
+		}
+	}
+}
+
+# One author by ID inclusive books
+
+query {
+	author(id: "1") {
+		id
+		name
+		birthDate
+		books {
+			id
+			title
+		}
+	}
+}

@@ -1,0 +1,24 @@
+# Create book
+
+mutation {
+	createBook(
+		input: {
+			title: "Der Herr der Ringe"
+			description: "Ein Fantasy-Roman ueber Mittelerde."
+			publicationYear: 1954
+			authorIds: ["1"]
+		}
+	) {
+		id
+		title
+		authors {
+			name
+		}
+	}
+}
+
+# Delete book
+
+mutation {
+	deleteBook(id: "1")
+}
