@@ -27,7 +27,7 @@
 
 **Region:** East US
 
-![Gesamte Kostenschätzung](/m346-Cloud/Images/KN10/AZURE.png)
+![Gesamte Kostenschätzung](../../../x-res/10/AZURE.png)
 
 ## Erklärung der Auswahl ##
 

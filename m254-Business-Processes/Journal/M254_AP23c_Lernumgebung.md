@@ -1,8 +1,7 @@
 
-
 | Camunda 7 [Installation](https://gitlab.com/ch-tbz-it/Stud/m254/-/tree/main/Unterlagen/Camunda7?ref_type=heads) [Beispiele](https://gitlab.com/ch-tbz-it/Stud/m254/-/tree/main/Unterlagen/Camunda7/Beispiele?ref_type=heads) BPMN        [Symbole](https://www.lucidchart.com/pages/de/symbole-und-notation-BPMN) / [Poster](https://tbzedu.sharepoint.com/sites/campus/students/it/Forms/AllItems.aspx?id=%2Fsites%2Fcampus%2Fstudents%2Fit%2F%5Fread%2Donly%2FM254%2FNotationsarten%2FBPMN%2F80%20%2D%20Posters%2FBPMN2%5F0%5FPoster%5FDE%2Epdf&viewid=3e30d9fa%2D675a%2D4d83%2Dbf11%2D88e808c85e44&parent=%2Fsites%2Fcampus%2Fstudents%2Fit%2F%5Fread%2Donly%2FM254%2FNotationsarten%2FBPMN%2F80%20%2D%20Posters) OMG-Spec [BPMN](https://www.omg.org/spec/BPMN)    /  [DMN](https://www.omg.org/spec/DMN) | ![][image1] |
-| :---- | :---- |
-| [**MS Teams**](https://teams.microsoft.com/l/channel/19%3AZmZ7XWVaY3GtOOxq2E-P5Nvug9gxFhEJLVPRe0umcw01%40thread.tacv2/?groupId=1c3760b7-b252-42ed-a8f9-0c808256586c&tenantId=f733fdc5-1255-4d8d-b793-2bc7aca0f214) |  |
+| :--- | :--- |
+| [**MS Teams**](https://teams.microsoft.com/l/channel/19%3AZmZ7XWVaY3GtOOxq2E-P5Nvug9gxFhEJLVPRe0umcw01%40thread.tacv2/?groupId=1c3760b7-b252-42ed-a8f9-0c808256586c&tenantId=f733fdc5-1255-4d8d-b793-2bc7aca0f214) | |
 
 ## 21.02.2025
 
@@ -16,19 +15,19 @@
 5. Auftrag: Geschäftsprozess “[Neue Arbeitskraft anstellen](https://docs.google.com/document/d/1NFuU621Pv_nVFsIUeJuFKz1hPU7wrK0MOmA8Oap7MG8/edit#)” darstellen ⇒ [Abgabe](https://tbzedu.sharepoint.com/:f:/r/sites/IT_AP23c_M254/Freigegebene%20Dokumente/General/Abgaben/Neue%20MA%20anstellen?csf=1&web=1&e=TIIFXU)
 
 6. [Notationsarten](https://docs.google.com/presentation/d/1ZrFv27W4dsqakcKd50o9b4Hv33-HKByvA10WcwVlvgE/edit#slide=id.g6e22cfc202_0_28) für Geschäftsprozesse  
-     
+
 7. [http://BPMN.io](https://demo.bpmn.io/) für die Erfassung von Geschäftsprozessen  
 8. [Erklärungsvideos](https://www.youtube.com/playlist?list=PL2MUfsxasfQ0Yqkz9641SoGPgXMZh6YUA) über die BPMN-Symbole anschauen (ca. 55 Min., Part 1-6)  
 1. Prozess [Rechnung verbuchen](https://docs.google.com/document/d/1Qt2imLeQkmpkr6U26QYAl5f8zHbDiQdMKezxmHTnXNs/edit#heading=h.p5kqo9a7rv0t) lesen, erklären und erfassen
 
 9. Prozess [Pizzakurier](https://tbzedu.sharepoint.com/:u:/r/sites/campus/students/it/_read-only/M254/Notationsarten/BPMN/20%20-%20BPMN%20%C3%9Cbungen/pizzakurier-demo.bpmn?csf=1&web=1&e=3QdbS8) lesen  
-10. Camunda Modeler installieren ⇒ [Link](https://camunda.com/de/download/modeler/)  
-    	& Token Simulator Plugin ⇒ [Link](https://github.com/camunda/camunda-modeler-token-simulation-plugin)
+10. Camunda Modeler installieren ⇒ [Camunda Modeler](https://camunda.com/de/download/modeler/)  
+        & Token Simulator Plugin ⇒ [Token Simulation Plugin](https://github.com/camunda/camunda-modeler-token-simulation-plugin)
 
-11. Camunda als “Process Engine” ⇒ Installation [Camunda7](https://gitlab.com/ch-tbz-it/Stud/m254/-/tree/main/Unterlagen/Camunda7)   
+11. Camunda als “Process Engine” ⇒ Installation [Camunda7](https://gitlab.com/ch-tbz-it/Stud/m254/-/tree/main/Unterlagen/Camunda7)
 12. Kleinen Prozess implementieren  
-      
-13. Gegebenen Prozess [Fahrradreparatur](https://docs.google.com/document/d/1vdDgpJwQSdu1S0ZR-QEtlL-z0k_n6c3wHCgR0w_vrqI/edit#heading=h.q2d56yu5hmjo) abbilden ⇒ [Ablage](https://tbzedu.sharepoint.com/:f:/r/sites/IT_AP23c_M254/Freigegebene%20Dokumente/General/Abgaben/GP_Fahrradreparatur?csf=1&web=1&e=b4nMb1) unter Namen   
+
+13. Gegebenen Prozess [Fahrradreparatur](https://docs.google.com/document/d/1vdDgpJwQSdu1S0ZR-QEtlL-z0k_n6c3wHCgR0w_vrqI/edit#heading=h.q2d56yu5hmjo) abbilden ⇒ [Ablage](https://tbzedu.sharepoint.com/:f:/r/sites/IT_AP23c_M254/Freigegebene%20Dokumente/General/Abgaben/GP_Fahrradreparatur?csf=1&web=1&e=b4nMb1) unter Namen
     “*M254\_{Klasse}\_Fahrrad\_{Nachname1-Nachname2}.bpmn*” **und** “\*.svg”
 
 [https://tinyurl.com/pe22c-m254-6](https://tinyurl.com/pe22c-m254-6)  

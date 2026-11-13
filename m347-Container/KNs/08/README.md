@@ -9,5 +9,5 @@
 - **Frontend:** [React App](./services/frontend)
 - **Account Service:** [.NET](./services/account)
 - **Database:** [MariaDB - MySQL](./services/database)
-- **SendReceive Service:** [Gin Gonic](./services/send-receive)
-- **BuySell Service:** [Gin Gonic](./services/buy-sell)
+- **SendReceive Service:** [Gin Gonic](./services/sendreceive)
+- **BuySell Service:** [Gin Gonic](./services/buysell)

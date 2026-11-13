@@ -11,7 +11,7 @@
 
 - **Pods** are the smallest executable Unit in Kubernetes. A Pod contains a single or multiple containers, which run together on a node and share network/IP aswell.
 
-- **Replicas** define, how many instances of a **Pod** should run parallel. They are defined in the `Deployment` (or `StatefulSet`), in order to reach _High Availability (HA)_ and _Load Distribution_.
+- **Replicas** define, how many instances of a **Pod** should run parallel. They are defined in the `Deployment` (or `StatefulSet`), in order to reach *High Availability (HA)* and *Load Distribution*.
 
 > **Example:** When you define `replicas: 3`, Kubernetes creates **tree identical Pods** of the defined App.
 
@@ -21,17 +21,17 @@
 
 - A **Service** is a Networkobject, which allows access to a group of pods, usual over a interne or exeterne DNS and a static IP-Addresse.
 
-> Services allow Clients to reach Pods over a static ip addresse (e.g. _Elastic IP by AWS_).
+> Services allow Clients to reach Pods over a static ip addresse (e.g. *Elastic IP by AWS*).
 
 ### Which Problem is solved by Ingress
 
-An **Ingress** is a Kubernetes-Object, which allows HTTP(S)-Routing on Application-Layer _(OSI Layer 7)_
+An **Ingress** is a Kubernetes-Object, which allows HTTP(S)-Routing on Application-Layer *(OSI Layer 7)*
 
 > Without **Ingress**, we would have to create a NodePort or LoadBalancer for each service. Ingress consolidates this under one IP/DNS + path/host-based routing.
 
 ### Whats a Statefulset for?
 
-A `StatefulSet` manages _Pods_ with stable identity, persistence and orderd Start/Shutdown.
+A `StatefulSet` manages *Pods* with stable identity, persistence and orderd Start/Shutdown.
 > [!NOTE]
 > Example: StatefulSet is used in Kafka-Cluster, where each Broker requires a personal ID and Storage.
 
@@ -116,28 +116,28 @@ spec:
 ### Modification steps
 
 1. Modifying `deployment-web.yml`:
-	- Replicas (Deployment): `replicas: 1` -> `replicas: 3`
-	- NodePort (Service): `nodePort: 30100` -> `nodePort: 32000`
+    - Replicas (Deployment): `replicas: 1` -> `replicas: 3`
+    - NodePort (Service): `nodePort: 30100` -> `nodePort: 32000`
 2. Applying the changes in master node:
 
-	```sh
+    ```sh
 	kubectl apply -f deployment-web.yml
-	```
+    ```
 
 3. Checking the status of the pods:
 
-	```sh
+    ```sh
 	kubectl describe service webapp-service
-	```
+    ```
 
 #### Screenshots
 
 - Webapp:
 
-	![Node 1](../../x-res/07/node-1-result-2.png)
+    ![Node 1](../../x-res/07/node-1-result-2.png)
 
 - `kubectl describe service webapp-service`:
 
-	The result shows that **3** replicas of the webapp are running. At `Endpoints` you can see that there are now three addresses listed, previously there was only one.
+    The result shows that **3** replicas of the webapp are running. At `Endpoints` you can see that there are now three addresses listed, previously there was only one.
 
-	![Node 2](../../x-res/07/node-2-web-2.png)
+    ![Node 2](../../x-res/07/node-2-web-2.png)

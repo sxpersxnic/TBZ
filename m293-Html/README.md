@@ -1,25 +1,48 @@
-# Module 293 HTML & CSS
+# M293 – Webauftritt erstellen und veröffentlichen
 
-## Workflow
+> **HTML & CSS** · Year 1 (2023/24) · Spring semester (FS) · Done
 
-- Exercise: E.g. T1: Entwicklertools
-- Assigned to: Name of person who is assigned to exercise
-- Status: 
-    1. Backlog = Not started yet
-    2. In Progress = Somebody is working on the exercise
-    3. Done = Is done and pushed to remote: [Github](https://github.com/sxpersxnic/TBZ/m293-Html)
+Building and publishing a website with plain HTML and CSS: development tools, publishing, HTTP, HTML elements and CSS layouts.
 
-|       Exercise        | Assigned to | Status      |
-|-----------------------|-------------|-------------|
-| T1: Entwicklertools   | Name1      | Done        |
-| T2: Publishing        | Name1      | Done        |
-| T3: Http              | Name1      | Done        |             
-| T4: Optimierung       |             | Backlog     |             
-| H1: BasicElements     | Name1      | Done        |
-| H2: Container         | Name2     | Done        |
-| H3: Formulare         | Name2     | In Progress |
-| H4: Media             |             | Backlog     |
-| D1: Styling mit Css   | Name2     | Done        |
-| D2: Layouts mit Css   | Name1      | Done        |
-| D3: Responsive design | Name1      | In Progress |
-| D4: Advanced Css      |             | Backlog     |
+## Contents
+
+### Project
+
+| Section | Description |
+| --- | --- |
+| [Project](./0-Project/) | Project website with HTML, CSS and optional vanilla JavaScript |
+
+### T – Tools and technology
+
+| Exercise | Description | Status |
+| --- | --- | --- |
+| [T1](./T/T1_Entwicklungsumgebung/) | Development environment and browser developer tools | Done |
+| [T2](./T/T2_Publishing/) | Web hosting and publishing via FTP / SFTP | Done |
+| [T3](./T/T3_HTTP/) | HTTP protocol, requests and responses ([summary](./T/T3_HTTP/SUMMARY.md)) | Done |
+| T4 | Optimisation | Not started |
+
+### H – HTML
+
+| Exercise | Description | Status |
+| --- | --- | --- |
+| [H1](./H/H1_BasicElements/) | HTML basics and document structure | Done |
+| [H2](./H/H2_Containers/) | Container elements | Done |
+| [H3](./H/H3_Formulare/) | Forms | In progress |
+| H4 | Media | Not started |
+
+### D – Design with CSS
+
+| Exercise | Description | Status |
+| --- | --- | --- |
+| [D1](./D/D1/) | Styling with CSS | Done |
+| [D2](./D/D2/) | Layouts with CSS | Done |
+| [D3](./D/D3/) | Responsive design | In progress |
+| D4 | Advanced CSS | Not started |
+
+## Resources
+
+- [Course material (TBZ GitLab)](https://gitlab.com/ch-tbz-it/Stud/m293)
+
+---
+
+[← Back to overview](../README.md)

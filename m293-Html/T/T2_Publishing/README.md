@@ -14,8 +14,6 @@ TBZ Informatik Modul 293 - Webauftritt erstellen und veröffentlichen
 - Ich kann ein Tool für Continous Integration von Web-Applikationen nennen.
 - Ich kann die CI/CD Tools von Gitlab oder Github anwenden.
 
-
-
 ## Webhosting
 
 Unter Webhosting versteht man die Bereitstellung von Speicherplatz auf einem Webserver, der es Ihnen erlaubt eine Webseite im Internet zu publizieren. Dies kann auf verschiedene Arten geschehen, z.B.
@@ -40,14 +38,15 @@ Ein einfaches FTP-Tool bieten alle Windows- Linux, Mac und Unix-Systeme schon se
 Um Dateien zu übertragen, werden die folgenden Angaben benötigt:
 
 | Name | Beispiel | Beschreibung |
-| --------- | ------------- | -------------------------------- |
-| server | ftp.example.org | Server auf den sie die Dateien übertragen möchten. Oft ist der server name der gleiche wie die publizierte webseite, z.B. *www.example.org* |
+| --- | --- | --- |
+| server | ftp.example.org | Server auf den sie die Dateien übertragen möchten. Oft ist der server name der gleiche wie die publizierte webseite, z.B. *<www.example.org>* |
 | port | 21 | Der typische Port für FTP ist 21, er kann aber auf einen beliebigen Port geändert werden. Der Server, Client und die Firewall muss einfach entsprechend eingerichtet werden. |
 | username | admin | Der Benutzername, um sich einzuloggen. |
 | password | xxxxx | Das Passwort, um sich einzuloggen. |
 | path | /www | Oft müssen sie auf dem Server in ein Unterverzeichnis navigieren, welches als Webroot-Verzeichnis dient. Es kann aber auch sein, dass der Pfad "/" ist. Dies bedeutet, dass ihre Webseite direkt im Hauptverzeichnis ihres FTP-Accounts liegt. |
 
 Hier ist eine Anleitung für die beiden Dateien (run.bat und scriptdatei.ftp)
+
 - <https://www.lautenbacher.io/allgemein/ftp-skripte-in-verbindung-mit-batch-skripten-unter-windows>
 - <https://www.axel-hahn.de/batch/batchecke/beispiel-ftp>
 
@@ -65,8 +64,6 @@ Damit man Dateien mit FTP sicher übertragen kann, wurde das Protokoll gesichert
 
 Weitere Details können sie gerne [hier nachlesen](https://www.ftptoday.com/blog/explicit-ftps-vs-implicit-ftps-what-you-need-to-know).
 
-
-
 ## Secure File Transfer Protocol (SFTP)
 
 SFTP verwendet nicht FTP, sondern SSH (Secure Shell) als Protokoll, welches Verschlüsselung unterstützt. SSH wurde ursprünglich als Alternative zu telnet und rlogin entwickelt.
@@ -79,8 +76,6 @@ Quellen:
 - <https://www.ssh.com/academy/ssh/sftp>
 - <https://www.goanywhere.com/blog/2011/10/20/sftp-ftps-secure-ftp-transfers>
 
-
-
 ## Tools für Upload und Automatisierung
 
 Die verschiedenen Betriebssysteme bieten alle FTP Tools in ihrer Umgebung an (CMD, Bash, etc). Windows FTP.exe auch das built-in Tool von MacOs unterstützen aber kein SSL/TLS. Zusätzliche Applikationen sind notwendig.
@@ -92,8 +87,6 @@ Am Besten werden zusätzliche Applikationen wie [FileZilla](https://filezilla-pr
 **WinSCP** unterstützt [Command Line Tools](https://winscp.net/eng/docs/scripting) und kann daher für eine Automatisierung verwendet werden. WinSCP wird nur **für Windows** angeboten.
 
 **Cyberduck** ist eine Alternative zu WinSCP, welche auch unter MacOS unterstützt wird und [Command Line Tools](https://docs.duck.sh/cli/) anbietet.
-
-
 
 ## Continous Integration / Continous Deployment (CI / CD)
 
@@ -113,9 +106,7 @@ Umfangreiche CI/CD Prozess werden kaum lokal durch den Entwickler ausgelöst, so
 - Jenkins: Open Source und wohl eines der verbreitetsten Tools überhaupt.
 - Teamcity: von JetBrains und unterstützt ebenfalls eine grosse Bandbreite von Technologien.
 - Bamboo: Von Atlassian und ist zusammen mit JIRA entsprechend gewachsen.
-- Azure DevOps Server: Speziell für die Azure Cloud Umgebung.   
-
-
+- Azure DevOps Server: Speziell für die Azure Cloud Umgebung.
 
 ## Checkpoints
 

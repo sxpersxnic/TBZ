@@ -7,6 +7,7 @@
 The DTO pattern is used in our API to define the data we either expect to receive
 from the client or the data we will send to the client.
 The advantages:
+
 - The **client** knows what to send as request and what to except as response.
 - The **server** knows what to expect to receive as request and what to send as response.
 - Sensitive data e.g. a password can be excluded from the response,
@@ -17,6 +18,7 @@ The advantages:
 
 The Mapper pattern is used in our API to convert DTOs to entities and vice versa.
 The advantages:
+
 - The code is more **readable and **maintainable**.
 - Whole **objects** can be passed to the **mapper** but only the necessary data will be used.
 - The mapper can be used to convert **multiple objects at once**.

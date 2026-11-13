@@ -23,8 +23,8 @@
     - **White:** '-'
     - **Black:** 'o'
 
-    | Bits| Decs | Val. |
-    |-----|------|------|
+    | Bits | Decs | Val. |
+    | --- | --- | --- |
     | 010 | 2 | -- |
     | 100 | 4 | oooo |
     | 011 | 3 | --- |
@@ -53,31 +53,31 @@
 
     **Result:**
 
-    |0|1|2|3|4|5|6|7|8|
-    |-|-|-|-|-|-|-|-|-|
-    |**1**|-|-|o|o|o|o|-|-|
-    |**2**|-|o|o|o|o|o|o|-|
-    |**3**|-|o|o|-|-|o|o|-|
-    |**4**|-|o|o|-|-|o|o|-|
-    |**5**|-|o|o|o|o|o|o|-|
-    |**6**|-|o|o|o|o|o|o|-|
-    |**7**|-|o|o|-|-|o|o|-|
-    |**8**|-|o|o|-|-|o|o|-|
+    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+    | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+    | **1** | - | - | o | o | o | o | - | - |
+    | **2** | - | o | o | o | o | o | o | - |
+    | **3** | - | o | o | - | - | o | o | - |
+    | **4** | - | o | o | - | - | o | o | - |
+    | **5** | - | o | o | o | o | o | o | - |
+    | **6** | - | o | o | o | o | o | o | - |
+    | **7** | - | o | o | - | - | o | o | - |
+    | **8** | - | o | o | - | - | o | o | - |
 
 ## Huffman-Speed
 
-    |Char|Häufigkeit|
-    |----|----------|
-    |E|2|
-    |S|2|
-    |U|2|
-    |B|1|
-    |R|1|
-    |U|1|
-    |F|1|
-    |C|1|
-    |H|1|
-    |L|1|
+    | Char | Häufigkeit |
+    | --- | --- |
+    | E | 2 |
+    | S | 2 |
+    | U | 2 |
+    | B | 1 |
+    | R | 1 |
+    | U | 1 |
+    | F | 1 |
+    | C | 1 |
+    | H | 1 |
+    | L | 1 |
 
     - (B,1) + (R,1) -> (BR,2)
     - (F,2) + (C,1) -> (FC,2)
@@ -157,54 +157,54 @@
 
     1. Rotation
 
-        |**A**|N|A|N|A|S|
-        |-----|-|-|-|-|-|
-        |S|**A**|N|A|N|A|
-        |A|S|**A**|N|A|N|
-        |N|A|S|**A**|N|A|
-        |A|N|A|S|**A**|N|
-        |N|A|N|A|S|**A**|
+        | **A** | N | A | N | A | S |
+        | --- | --- | --- | --- | --- | --- |
+        | S | **A** | N | A | N | A |
+        | A | S | **A** | N | A | N |
+        | N | A | S | **A** | N | A |
+        | A | N | A | S | **A** | N |
+        | N | A | N | A | S | **A** |
 
     2. Alphabetisch sortieren
 
-        |**A**|N|A|N|A|S|
-        |-----|-|-|-|-|-|
-        |A|N|A|S|**A**|N|
-        |A|S|**A**|N|A|N|
-        |N|A|N|A|S|**A**|
-        |N|A|S|**A**|N|A|
-        |S|**A**|N|A|N|A|
+        | **A** | N | A | N | A | S |
+        | --- | --- | --- | --- | --- | --- |
+        | A | N | A | S | **A** | N |
+        | A | S | **A** | N | A | N |
+        | N | A | N | A | S | **A** |
+        | N | A | S | **A** | N | A |
+        | S | **A** | N | A | N | A |
 
     3. Letzte Spalte und Position des Originals werden übermittelt
 
-        |A|N|A|N|A|**S**|
-        |-|-|-|-|-|-----|
-        |A|N|A|S|A|**N**|
-        |A|S|A|N|A|**N**|
-        |N|A|N|A|S|**A**|
-        |N|A|S|A|N|**A**|
-        |S|A|N|A|N|**A**|
+        | A | N | A | N | A | **S** |
+        | --- | --- | --- | --- | --- | --- |
+        | A | N | A | S | A | **N** |
+        | A | S | A | N | A | **N** |
+        | N | A | N | A | S | **A** |
+        | N | A | S | A | N | **A** |
+        | S | A | N | A | N | **A** |
 
     **return: SNNAAA1 | S2N3A1**
 
     - b. Sie erhalten den Code **IICRTGH6** in der Burrows-Wheeler-Transformation. Welches Wort verbirgt sich dahinter?
 
-    |C|X|X|X|X|X|I|
-    |G|R|I|C|X|X|I|
-    |H|X|X|X|X|X|C|
-    |I|C|X|X|X|X|R|
-    |I|G|R|I|C|H|T|
+    | C | X | X | X | X | X | I |
+    | G | R | I | C | X | X | I |
+    | H | X | X | X | X | X | C |
+    | I | C | X | X | X | X | R |
+    | I | G | R | I | C | H | T |
     |R|I|C|X|X|X|G| <-
-    |T|I|G|R|I|C|H|
+    | T | I | G | R | I | C | H |
 
-    | | | | | | |     |
-    |-|-|-|-|-|-|-----|
-    |C|H|T|I|G|R|**I**|
-    |G|R|I|C|H|T|**I**|
-    |H|T|I|G|R|I|**C**|
-    |I|C|H|T|I|G|**R**|
-    |I|G|R|I|C|H|**T**|
-    |**R**|**I**|**C**|**H**|**T**|**I**|**G**|
-    |T|I|G|R|I|C|**H**|
+    | | | | | | | |
+    | --- | --- | --- | --- | --- | --- | --- |
+    | C | H | T | I | G | R | **I** |
+    | G | R | I | C | H | T | **I** |
+    | H | T | I | G | R | I | **C** |
+    | I | C | H | T | I | G | **R** |
+    | I | G | R | I | C | H | **T** |
+    | **R** | **I** | **C** | **H** | **T** | **I** | **G** |
+    | T | I | G | R | I | C | **H** |
 
     **Antwort: RICHTIG**

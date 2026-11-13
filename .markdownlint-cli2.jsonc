@@ -1,0 +1,47 @@
+// Markdown formatting rules for the TBZ repository.
+// Run: npx markdownlint-cli2@0.20.0 --fix
+{
+  "config": {
+    "default": true,
+
+    // Consistent markers and emphasis
+    "MD004": { "style": "dash" },
+    "MD049": { "style": "asterisk" },
+    "MD050": { "style": "asterisk" },
+
+    // Keep two-space hard line breaks, leave tabs inside code untouched
+    "MD009": { "br_spaces": 2 },
+    "MD010": { "code_blocks": false, "spaces_per_tab": 4 },
+    "MD060": { "style": "compact" },
+
+    // Disabled: notes legitimately use long lines, inline HTML, several H1s,
+    // repeated headings (one per exercise), separate consecutive blockquotes,
+    // custom numbering and nested-list indentation that a reflow could break.
+    "MD001": false,
+    "MD005": false,
+    "MD007": false,
+    "MD013": false,
+    "MD024": false,
+    "MD025": false,
+    "MD028": false,
+    "MD029": false,
+    "MD033": false,
+    "MD036": false,
+    "MD040": false,
+    "MD041": false,
+    "MD045": false,
+    "MD046": false,
+    "MD053": false
+  },
+  "ignores": [
+    "**/node_modules/**",
+    "**/vendor/**",
+    "**/target/**",
+    "**/dist/**",
+    "**/build/**",
+    "x-res/**",
+    "**/x-res/**",
+    ".claude/**",
+    ".remember/**"
+  ]
+}

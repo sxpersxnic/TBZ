@@ -33,7 +33,7 @@ Graphdatenbanken sind besonders sinnvoll bei:
 ## Graph Database vs. Relational Database
 
 | Merkmal | Graphdatenbank | Relationale Datenbank |
-|---------|----------------|-----------------------|
+| --- | --- | --- |
 | Struktur | Knoten + Kanten | Tabellen |
 | Fokus | Beziehungen | Entitäten |
 | Abfragen | Traversierung entlang Kanten | Joins zwischen Tabellen |
@@ -67,11 +67,11 @@ Graphdatenbanken sind besonders sinnvoll bei:
 
 ## Famous Graph Databases
 
-|Produkt|Beschreibung|
-|-------|-----------|
-|Neo4j|Marktführer für Property-Graphen|
-|ArangoDB|Multi-Modell, unterstützt auch Graph|
-|Amazon Neptune|Cloudbasierte Graphdatenbank von AWS|
-|OrientDB|Open Source mit mehreren Modi|
-|JanusGraph|Hochskalierbar, für Big Data geeignet|
-|Dgraph|Native Graphdatenbank, skalierbar|
+| Produkt | Beschreibung |
+| --- | --- |
+| Neo4j | Marktführer für Property-Graphen |
+| ArangoDB | Multi-Modell, unterstützt auch Graph |
+| Amazon Neptune | Cloudbasierte Graphdatenbank von AWS |
+| OrientDB | Open Source mit mehreren Modi |
+| JanusGraph | Hochskalierbar, für Big Data geeignet |
+| Dgraph | Native Graphdatenbank, skalierbar |

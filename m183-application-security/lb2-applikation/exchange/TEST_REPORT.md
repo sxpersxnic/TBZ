@@ -8,7 +8,7 @@ user (no IDOR). The findings below are the **residual, exploitable issues** that
 remain.
 
 | # | Finding | Severity | Status |
-|---|---------|----------|--------|
+| --- | --- | --- | --- |
 | 1 | Rate-limit bypass via spoofed `X-Forwarded-For` (misconfigured `trust proxy`) | **Medium** | Exploitable in shipped config |
 | 2 | Username enumeration on `/register` | Low | Exploitable |
 | 3 | Session cookie transmitted over cleartext HTTP (no `Secure`, HSTS off) | Low–Medium | Exploitable on the network |

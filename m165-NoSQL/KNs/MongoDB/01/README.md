@@ -14,7 +14,7 @@
 
 - **mongod.conf Screenshot:**
 
-	![Screenshot von MongoDB Shell](../../../x-res/m/01/mongod-conf.png)
+    ![Screenshot von MongoDB Shell](../../../x-res/m/01/mongod-conf.png)
 
 ## B. Erste Schritte GUI
 
@@ -30,22 +30,22 @@
 
 - MongoDB-Shell in Compass:
 
-	![MongoDB-Shell in Compass](../../../x-res/m/01/mongosh.png)
+    ![MongoDB-Shell in Compass](../../../x-res/m/01/mongosh.png)
 
 - MongoDB-Shell auf AWS Linux-Server:
 
-	![MongoDB-Shell auf AWS Linux-Server](../../../x-res/m/01/aws.png)
+    ![MongoDB-Shell auf AWS Linux-Server](../../../x-res/m/01/aws.png)
 
 - Erklärung Befehle 1-5:
-	1. `show dbs;`: Zeigt alle Datenbanken des Clusters an.
-	2. `show databases;`: Zeigt alle Datenbanken des Clusters an.
-	3. `use Kampus;`: Verwendet die Datenbank 'Kampus'.
-	4. `show collections;`: Zeigt alle Collections der Datenbank 'Kampus'.
-	5. `show tables;`: Zeigt alle Tables der Datenbank 'Kampus'.
+    1. `show dbs;`: Zeigt alle Datenbanken des Clusters an.
+    2. `show databases;`: Zeigt alle Datenbanken des Clusters an.
+    3. `use Kampus;`: Verwendet die Datenbank 'Kampus'.
+    4. `show collections;`: Zeigt alle Collections der Datenbank 'Kampus'.
+    5. `show tables;`: Zeigt alle Tables der Datenbank 'Kampus'.
 
 - Collections vs. Tables:
 
-	Tables are used in relational databases, while collections are used in NoSQL databases like MongoDB. Tables have a fixed schema, while collections are schema-less and can store documents with different structures. This allows for more flexibility in data storage and retrieval in NoSQL databases.
+    Tables are used in relational databases, while collections are used in NoSQL databases like MongoDB. Tables have a fixed schema, while collections are schema-less and can store documents with different structures. This allows for more flexibility in data storage and retrieval in NoSQL databases.
 
 ## D. Rechte und Rollen
 

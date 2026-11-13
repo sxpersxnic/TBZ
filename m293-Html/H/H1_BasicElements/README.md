@@ -17,8 +17,6 @@ TBZ Informatik Modul 293 - Webauftritt erstellen und veröffentlichen
 - Ich kann den Unterschied zwischen absoluten und relativen URLs erklären.
 - Ich kann den Tag für Bilder korrekt anwenden.
 
-
-
 ## Geschichte
 
 - Ende der sechziger Jahre: Arpanet (Advanced Research Projects Agency Network) wurde im Auftrag der US-Luftwaffe von einer kleinen Forschergruppe unter der Leitung des MIT (Massachusetts Institute of Technology) entwickelt, mit dem Ziel ein dezentrales Netzwerk zwischen verschiedenen US-Universitäten zu erschaffen.
@@ -40,8 +38,6 @@ Quellen:
 - <https://www.polaris-systems.de/tutorials-beitrag/entstehung-und-zweck-von-html.html>
 - <https://de.wikipedia.org/wiki/Hypertext_Markup_Language>
 
-
-
 **Beispiel**
 
 ![MS-1999](x_gitressources/microsoft_1999.png)
@@ -50,21 +46,17 @@ Quellen:
 
 Sie können das Web Archive verwenden, um alte Webseiten anzuschauen: <https://web.archive.org/>
 
-
-
 ## Web 1.0 - Web 3.0
 
 Im Jahr 2020 kam immer mehr der Begriff des Web 3.0 auf. Folgend eine Übersicht was die verschiedenen Versionen für eine Bedeutung haben.
 
-| Version      | Beschreibung                                                 |
-| ------------ | ------------------------------------------------------------ |
+| Version | Beschreibung |
+| --- | --- |
 | Web&nbsp;1.0 | Web 1.0 wurde geprägt in den Anfangsjahren in denen Webseiten hauptsächlich server-seitigen Inhalt zur Verfügung stellte. |
 | Web&nbsp;2.0 | Der Begriff Web 2.0 wird verwendet um unsere heutigen mordernen Web Applikationen zu beschreiben. Web 2.0 erlaubt nicht nur die Darstellung von Inhalten, sondern erlaubt den Benutzern eine Interaktion auf den Websiten. Es beschreibt die Sozialen Netzwerke, aber auch die hoch-zentralisierten Seiten und Kooperationen, die solche Applikationen zur Verfügung stellen. |
 | Web&nbsp;3.0 | Der Begriff Web 3.0 ist neu und kommt immer mehr im Zusammenhang mit dezentralen Inhalten, die nicht mehr nur einer Kooperation gehören, sondern einer Gemscheinschaft und diese kann auch bestimmen wie sich die Inhalte weiterentwickeln werden. Die Dezentralisierung wird erreicht durch die Blockchain-Technologie und Cryptos, die SmartContracts zulassen. **Web 3.0 ist im Anfangsstadium**. |
 
 [Einen Artikel zu diesem Thema lesen...](https://www.gemini.com/cryptopedia/web-3-0-definition-open-internet-decentralized)
-
-
 
 ## Dokumentenaufbau
 
@@ -124,8 +116,6 @@ Ungültig wäre die Verschachtelung *&lt;p&gt;&lt;span&gt;Dies ist Text&lt;/p&gt
 
 [Mehr über HTML-Elemente lernen...](https://www.w3schools.com/html/html_elements.asp)
 
-
-
 ## Überschriften
 
 Überschriften sind Titel oder Untertitel, die in einem HTML-Dokument eingesetzt werden können. Es gibt **sechs vordefinierte Titelstufen** von `h1` bis `h6`, wobei der `h1`-Tag die grösste Stufe darstellt und nur einmal pro Seite verwendet werden sollte. Titel werden standardmässig in fetter Schrift und als Block-Element dargestellt.
@@ -171,8 +161,6 @@ Natürlich können Sie mit CSS auch normalen Text so formatieren, dass er gleich
 
 [Beispiel mit CodePen testen](https://codepen.io/nuy/pen/NWaQeWM)
 
-
-
 ## Paragraphen und Zeilenumbrüche
 
 In HTML wird Text - wie in Word-Dokumenten - in Paragraphen verpackt, die Abstände zueinander haben und wird mit einem *p*-Tag repräsentiert. Der Text zwischen dem öffnenden und schliessenden Tag ist der Inhalt, welcher im Dokument angezeigt wird. Zwischen zwei Paragraphen fügt der Browser einen vordefinierten Abstand ein, welcher mit CSS übersteuert werden kann. CSS wird später behandelt.
@@ -206,12 +194,10 @@ Ein einfacher Zeilenumbruch - ohne Abstand zwischen den Texten - wird mit dem *b
 
 [Beispiel mit CodePen testen](https://codepen.io/nuy/pen/JjrQepj)
 
-
-
 ## Listen
 
 Es existieren zwei Arten von Listen, eine **unsortierte** (*ul*-Tag) und eine **sortierte** (*ol*-Tag).
-Beide Listen-Tags benötigen Listen-Einträge, die mit dem *li*-Tag dargestellt werden. Andere Tags sind ungültig für die Listen-Tags. Innerhalb des *li*-Tags, können aber wieder viele verschiedene Tags verschachtelt werden. Über Attribute, können die Listen noch zusätzlich konfiguriert werden. 
+Beide Listen-Tags benötigen Listen-Einträge, die mit dem *li*-Tag dargestellt werden. Andere Tags sind ungültig für die Listen-Tags. Innerhalb des *li*-Tags, können aber wieder viele verschiedene Tags verschachtelt werden. Über Attribute, können die Listen noch zusätzlich konfiguriert werden.
 
 [Mehr über Listen lernen...](https://www.w3schools.com/html/html_lists.asp)
 
@@ -243,15 +229,13 @@ Beide Listen-Tags benötigen Listen-Einträge, die mit dem *li*-Tag dargestellt 
 
 [Beispiel mit Codepen testen](https://codepen.io/nuy/pen/ExwqGaY)
 
-
-
 ## Tabellen
 
 Tabellen haben sich über die Zeit entwickelt. Früher gab es weniger Tags, die man verwenden konnte, z.B. gab es keine Footer. Moderne Tabellen, haben eine bessere Unterteilung und Struktur.
 
 Früher (HTML 4.01) wurden Tabellen auch verwendet, um das Layout von HTML-Seiten zu gestalten. Dies war notwendig, weil HTML und CSS nicht weit genug entwickelt waren. Sie sollten es aber unbedingt **vermeiden Tabellen als Design-Elemente** zu verwenden.
 
-Eine einfache Tabelle, verwendet nur die Tags 
+Eine einfache Tabelle, verwendet nur die Tags
 
 - *table*
 - *tr*: Eine Zeile der Tabelle
@@ -332,8 +316,6 @@ Komplexere Tabellen verwenden zusätzliche Tags, die eine bessere Struktur zulas
 
 [Beispiel mit CodePen testen](https://codepen.io/nuy/pen/jOGgXEv)
 
-
-
 ## Hyperlinks
 
 Hyperlinks - oder kurz Links - werden verwendet, um zwischen Seiten zu wechseln. Sie können dabei auf einen Inhalt der gleichen Seite springen oder auf einen Inhalt einer anderen Seite wechseln. Der dazu verwendete *a*-Tag muss **zwingend das Attribute *href*** enthalten, welches die URL enthält auf die verlinkt wird. Ein **optionales Attribute *target*** dient zur Steuerung, ob die neue Seite im gleichen oder in einem neuen Fenster aufgerufen wird.
@@ -351,8 +333,8 @@ Eine absolute URL hat die folgenden Elemente, die in einem späteren Kapitel noc
 [Mehr über Hyperlinks lernen...](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL)
 
 | Beispiel | Erklärung |
-| ------------------------- | ------------------------------------------------------ |
-| https://gitlab.com/ch-tbz-it/Stud/m293/tree/main/D1_BasicStyles | Absolute URL auf eine Seite in Gitlab. |
+| --- | --- |
+| <https://gitlab.com/ch-tbz-it/Stud/m293/tree/main/D1_BasicStyles> | Absolute URL auf eine Seite in Gitlab. |
 | seite1.html | relative URL, die auf eine Datei zeigt, die im gleichen Ordner liegt wie das aufgerufene Dokument |
 | ./seite2.html | Genau gleich wie das vorherige Beispiel mit dem Unterschied, dass explizit angegeben wurde, dass sich die Datei im gleichen Ordner befindet via "./". |
 | ../seite3.html | relative URL, die auf eine Datei zeigt, die ein Ordner höher liegt als die aufgerufene Datei. |
@@ -394,8 +376,6 @@ Links können unterschiedliche Farben haben. Die Browser unterscheiden per Defau
 
 [Beispiel mit CodePen testen](https://codepen.io/nuy/pen/JjrgwdY)
 
-
-
 ## Bilder
 
 Eine HTML-Seite kann verschiedene Bild-Formate enthalten. Die Limitierung ist nicht HTML, sondern was der Browser darstellen kann. Die typischen Bild-Formate sind jpg, jpeg, gif, png, svg.
@@ -427,8 +407,6 @@ Bilder können - wie in Word - fliessend im Text platziert werden. Dies geschieh
 
 [Beispiel mit CodePen testen...](https://codepen.io/nuy/pen/qBPzQmW)
 
-
-
 ## Checkpoints
 
 - [ ] Ich kann die Geschichte und Entwicklung des Internets erzählen und den Erfinder von HTML nennen.
@@ -440,14 +418,10 @@ Bilder können - wie in Word - fliessend im Text platziert werden. Dies geschieh
 - [ ] Ich kann den Unterschied zwischen absoluten und relativen URLs erklären.
 - [ ] Ich kann den Tag für Bilder korrekt anwenden.
 
-
-
 ## Ressourcen
 
-1. https://de.wikipedia.org/wiki/Hypertext_Markup_Language (Wikipedia)
-2. https://html.spec.whatwg.org/multipage/ (W3C HTML Standard)
-3. https://www.w3schools.com/html/html_basic.asp (W3Schools)
-
-
+1. <https://de.wikipedia.org/wiki/Hypertext_Markup_Language> (Wikipedia)
+2. <https://html.spec.whatwg.org/multipage/> (W3C HTML Standard)
+3. <https://www.w3schools.com/html/html_basic.asp> (W3Schools)
 
 **Informatik Modul 293 - Webauftritt erstellen und veröffentlichen**

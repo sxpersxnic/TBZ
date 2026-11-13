@@ -12,20 +12,20 @@
 ## Exercise 1
 
 - Which test levels have we encountered so far?
- 	- Student 1:
-  		- Unit Testing
-  		- Integration Testing
-  		- Acceptance Testing
- 	- Student 2:
-  		- Acceptance Testing
+     - Student 1:
+          - Unit Testing
+          - Integration Testing
+          - Acceptance Testing
+     - Student 2:
+          - Acceptance Testing
 
 - When are tests executed?
   - Student 1:
- 	  - During development (Unit Testing)
-    		- CI pipelines (Unit/Integration Testing)
+       - During development (Unit Testing)
+            - CI pipelines (Unit/Integration Testing)
   - Student 2:
- 	  - Manually after development (Acceptance Testing)
-    		- User Acceptance Testing once per month
+       - Manually after development (Acceptance Testing)
+            - User Acceptance Testing once per month
 
 - Do we have dedicated testing or QA teams?
   - Student 1: No
@@ -33,7 +33,7 @@
 
 - How does our testing lifecycle look like?
   - Student 1:
- 	  - Client defines requirements
+       - Client defines requirements
     - Developer implements features and writes Unit Tests
     - CI runs tests on each commit
 
@@ -45,7 +45,7 @@
 
 **Definition**:
 
-A testing approach describes the overall philosophy, strategy, or mindset applied when designing and executing tests. It defines _how_ testing is performed at a high level.
+A testing approach describes the overall philosophy, strategy, or mindset applied when designing and executing tests. It defines *how* testing is performed at a high level.
 
 **Dependency**:
 
@@ -66,7 +66,7 @@ Testing levels are the stages at which software is tested during development. Ea
 
 **Definition**:
 
-These describe _what_ is being tested and _how_ the _tests_ are designed.
+These describe *what* is being tested and *how* the *tests* are designed.
 
 **Dependency**:
 

@@ -13,4 +13,4 @@ Der Unterschied zwischen Punkt 3 und 5 ist, dass beim ersten Öffnen der DevTool
 
 ### Übung 2 - Inspect Element
 
-Wenn Sie mit der rechten Maustaste auf ein Element klicken und "Inspect" oder "Untersuchen" wählen, sollten die DevTools geöffnet werden und das ausgewählte Element sollte im Elements-Tab hervorgehoben sein. Wenn dies nicht der Fall ist, könnte es daran liegen, dass das Element durch ein anderes Element überlagert wird oder dass das Element dynamisch durch JavaScript verändert wird. Sie können den Vorgang bei anderen Elementen wiederholen, um ein besseres Verständnis dafür zu bekommen, wie die Elementinspektion funktioniert. 
+Wenn Sie mit der rechten Maustaste auf ein Element klicken und "Inspect" oder "Untersuchen" wählen, sollten die DevTools geöffnet werden und das ausgewählte Element sollte im Elements-Tab hervorgehoben sein. Wenn dies nicht der Fall ist, könnte es daran liegen, dass das Element durch ein anderes Element überlagert wird oder dass das Element dynamisch durch JavaScript verändert wird. Sie können den Vorgang bei anderen Elementen wiederholen, um ein besseres Verständnis dafür zu bekommen, wie die Elementinspektion funktioniert.

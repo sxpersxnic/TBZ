@@ -92,7 +92,7 @@ Internal service with sensitive data. Should NOT be accessible from outside.
 
 ### Via the Web UI (Easiest)
 
-1. Open http://localhost:3000 in your browser
+1. Open <http://localhost:3000> in your browser
 2. Try the example buttons to test different scenarios:
     - **Public API**: `http://api:3001/api/data` ✓ Works
     - **Internal Secret**: `http://internal-secret-service:3002/api/secret` 🔥 SSRF!
@@ -291,11 +291,11 @@ ssrf-demo/
 
 ## Ports
 
-| Service                 | Port | Purpose                                    |
-| ----------------------- | ---- | ------------------------------------------ |
-| Web App                 | 3000 | Vulnerable application with SSRF endpoints |
-| Public API              | 3001 | Publicly accessible API                    |
-| Internal Secret Service | 3002 | Internal-only service (target of SSRF)     |
+| Service | Port | Purpose |
+| --- | --- | --- |
+| Web App | 3000 | Vulnerable application with SSRF endpoints |
+| Public API | 3001 | Publicly accessible API |
+| Internal Secret Service | 3002 | Internal-only service (target of SSRF) |
 
 ## Stopping the Demo
 
@@ -312,10 +312,10 @@ docker-compose down --rmi all
 
 ## Learning Resources
 
-### What to Try:
+### What to Try
 
 1. **Basic SSRF Attack**
-    - Access the web app at http://localhost:3000
+    - Access the web app at <http://localhost:3000>
     - In the "Vulnerable (SSRF)" tab
     - Click "→ Internal Secret (SSRF!) 🔥"
     - See how the backend fetches the internal service

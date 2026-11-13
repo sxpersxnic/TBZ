@@ -1,6 +1,7 @@
-# CheatSheet 
+# CheatSheet
 
-## DNS 
+## DNS
+
 - DNS -> **D**omain **N**ame **S**ystem
 
 - Converts Domain names to IP-Adresses: example.com -> x.x.x.x
@@ -9,20 +10,24 @@
 ## Ports
 
 ### Protocols
+
 - HTTP: 80
 - HTTPS: 443
 
 ### Databases
+
 - MySQL: 3306
 - PostgreSQL: 5432
 - MongoDB: 27017
 
 ### Develoment ports
+
 - 8080
 - 8081
 - 9001
 
-## IP-Adress 
+## IP-Adress
+
 *(Classful addressing is not used anymore -> Class A, B C)*
 
 ## MAC-Adress
@@ -32,6 +37,7 @@
 - Expressed as six groups of two hexadeximal digits, separated by colons or dashes *Example: 00:1A:2B:3C:4D:5E*
 
 ## Subnetting
+
     - Subnetting is the process of dividing a network into smaller sub-networks.
     - It helps in optimizing network performance, improving security and efficiently utilizing IP-Adresses.
     - Subnet masks are used to define the network portion and the host portion of an IP adress:
@@ -56,6 +62,7 @@
 ## TCP/IP Model
 
 ### Layers
+
 - **Layer 1 - Application Layer**
     This layer combines the OSI model's top three layers (Application, Presentation, and Session).
 Handles high-level protocols, interface with software applications, and provides network services to end-users.
@@ -64,12 +71,11 @@ Examples of protocols: HTTP, HTTPS, FTP, SMTP.
 - **Layer 3 - Network Layer**
 - **Layer 4 - Network Access Layer**
 
-
 ## ISO vs TCP
 
 ![ISO-Model-vs.-TCP-Model](./assets/OSI-vs-TCP.webp)
 
-## VLAN 
+## VLAN
 
 - VLAN -> **V**irtual **L**ocal **A**rea **N**etwork
 
@@ -80,23 +86,39 @@ Examples of protocols: HTTP, HTTPS, FTP, SMTP.
 ## Protocols
 
 ### HTTP
+
 ### HTTPS
+
 ### FTP
+
 ### SFTP
+
 ### SMTP
+
 ### TCP/UDP
+
 #### TCP
+
 #### UDP
 
 ### Fileextensions
 
 #### Visual
+
 ##### PNG
+
 ##### JPG
+
 ##### JPEG
+
 ##### MP4
+
 ##### GIF
+
 #### Audio
+
 ##### WAV
+
 ##### MPEG
+
 ##### MP3

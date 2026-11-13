@@ -1,7 +1,5 @@
 # T2 Übungen
 
-
-
 ### Übung 1: Webhosting erstellen und Webseite manuell publizieren
 
 Erstellen sie ein Webhosting auf [bplaced.net](https://www.bplaced.net/) oder anderen **Gratis-**Diensten. Bplaced.net bietet mit "FreeStyle" ein Gratishosting an und wurde aus diesem Grund hier aufgeführt.

@@ -19,12 +19,12 @@
 5. <div style="display:flex;flex-direction:row;gap:0.5rem;"><strong>C:</strong><p>0%</p></strong><strong>M:</strong><p>0%</p><strong>Y:</strong><p>0%</p><strong>K:</strong><p>100% =</p><p style="color:#000000;background-color:#ffffff11;">Black</p></div>
 6. <div style="display:flex;flex-direction:row;gap:0.5rem;"><strong>C:</strong><p>0%</p></strong><strong>M:</strong><p>46%</p><strong>Y:</strong><p>38%</p><strong>K:</strong><p>22% =</p><p style="color:#c76b7b;">Pink-Red</p></div>
 
-
 ## DPI (**d**ots **p**er **i**nch) -> Drucker
 
 - dpi = Anzahl Farbpunkte pro **2.54cm** Breite.
 - **1 Inch** = **1 Zoll** = **2.54cm**
 - **Formel:**  
+
   ```
   px / dpi = x cm
   ```
@@ -33,9 +33,11 @@
 
 - ppi = Anzahl Pixel pro **2.54cm** Breite.
 - **Formel:**  
+
   ```
   x = D / sqrt(a^2 + b^2)
   ```
+
   - Horizontale Pixel = a × x × ppi  
   - Vertikale Pixel = b × x × ppi  
 
@@ -45,24 +47,24 @@ Bsp. **1000x600** Pixel: 1000 x 600 x 3 = **1'800'000 Byte**
 
 - **Formel - HD *(x)* Seitenverhältnis *(a:b)* :**  
   - x / a * b = *y* Pixel/Bildzeile  
-  - x * y * 3 = *z* Byte/Bild  
+  - x *y* 3 = *z* Byte/Bild  
   - Speicherbedarf bei v-min-Video *(60 * v)* mit 25 Bilder/s *(s)*:  
-    - z * s * 60 * v = w Byte auf Speichermedium.  
+    - z *s* 60 * v = w Byte auf Speichermedium.  
 
 ## Bildformate
 
 - R = Rastergrafik  
 - V = Vektorgrafik  
 
-|Format|Browser unterstützt|Grafiktyp|a-Kanal|Transparenzfarbe|Geeignet für...|
-|------|-------------------|---------|-------|----------------|---------------|
-|JPG|Ja|R|Nein|Nein|Bilder, verlustfreie Komprimierung|
-|GIF|Ja|R|Nein|Ja|Grafik, Bildcompositing, Animation|
-|PNG|Ja|R|Ja|Nein|Bilder, 2D-Grafik|
-|TIF|Nein|R|Ja|Nein|Bilder für Archivierung, Verlustlos|
-|BMP|Ja|R|Nein|Nein|Bilder, kein bevorzugtes Format|
-|WEBP|Ja|R|Ja|Nein|Bilder, Animationen|
-|SVG|Ja|V|n.a.|n.a.|2D-Grafik|
+| Format | Browser unterstützt | Grafiktyp | a-Kanal | Transparenzfarbe | Geeignet für... |
+| --- | --- | --- | --- | --- | --- |
+| JPG | Ja | R | Nein | Nein | Bilder, verlustfreie Komprimierung |
+| GIF | Ja | R | Nein | Ja | Grafik, Bildcompositing, Animation |
+| PNG | Ja | R | Ja | Nein | Bilder, 2D-Grafik |
+| TIF | Nein | R | Ja | Nein | Bilder für Archivierung, Verlustlos |
+| BMP | Ja | R | Nein | Nein | Bilder, kein bevorzugtes Format |
+| WEBP | Ja | R | Ja | Nein | Bilder, Animationen |
+| SVG | Ja | V | n.a. | n.a. | 2D-Grafik |
 
 ## RGB, CMYK, HEX-Darstellung von RGB und CMYK
 
@@ -82,6 +84,7 @@ Bsp. **1000x600** Pixel: 1000 x 600 x 3 = **1'800'000 Byte**
   - **Vektorgrafik:** Mathematisch beschrieben (SVG, AI) → Skalierbar ohne Qualitätsverlust  
 
 ## Analog-Digital-Umwandlung
+
 1. **Sampling** → Zeitdiskretisierung (z. B. 44.1 kHz für Audio)  
 2. **Quantisierung** → Wertdiskretisierung (Bit-Tiefe)  
 3. **Kodierung** → Speicherung als Binärdaten  
@@ -89,7 +92,7 @@ Bsp. **1000x600** Pixel: 1000 x 600 x 3 = **1'800'000 Byte**
 ## Videonormen
 
 | Norm | Auflösung | Bildmodus |
-|------|-----------|----------|
+| --- | --- | --- |
 | **HD 720p** | 1280x720 | Progressiv |
 | **Full HD 1080p** | 1920x1080 | Progressiv |
 
@@ -117,6 +120,7 @@ Bsp. **1000x600** Pixel: 1000 x 600 x 3 = **1'800'000 Byte**
   - **4:2:0** → Horizontale & vertikale Reduktion  
 
 ### Subsampling-Berechnung
+
 ```Ersparnis = 100% - (Datenmenge mit Subsampling / Originaldatenmenge × 100%)```
 
 ## JPG Blockartefakte
@@ -135,4 +139,3 @@ Bsp. **1000x600** Pixel: 1000 x 600 x 3 = **1'800'000 Byte**
 - **P-Frame (Prädiktiv-Frame):** Speichert nur Änderungen zum letzten Bild  
 - **B-Frame (Bidirektional-Frame):** Speichert Unterschiede zu vorherigen & nächsten Bildern  
 - **Beispiel:** GOP25 → Alle **25 Bilder** enthält ein vollständiges I-Frame  
-

@@ -38,7 +38,6 @@
         Hexa: ```00-15-5D-99-FC-90```
         Dezimal: ```0-21-93-153-252-144```
         Binär: ```0000.0000-0001.0101-0101.1101-1001.1001-1111.1100-1001.0000```
-        
 
 3. Beantworten sie folgende Fragen zum Thema **IP-Adresse** :
     - **a.** Für was steht die Abkürzung IP?
@@ -49,7 +48,7 @@
     - **c.** Wo kann man bei Microsoft WINDOWS 10/11 die IP-Adresse eintragen?
 
     - **d.** Wie lautet die aktuelle IP-Adresse ihres Notebooks? Schreiben sie diese in binärer und dezimaler Schreibweise auf.
-    
+
     **ANTWORTEN**
 
     - **a.** Die Abkürzung *IP* steht für **I**nternet **P**rotocol.
@@ -58,7 +57,6 @@
     - **d.** Aktuelle IP-Adresse:
         Dezimal: 10.62.110.71
         Binär: 00001010.00111110.01101110.01000111
-
 
 4. Erklären sie in ein paar Worten, was Subnetting für Vorteile hat.
 
@@ -77,7 +75,7 @@
     **Subnetzmaske**
     - Dezimal: 255.0.0.0
     - Binär: 11111111.00000000.00000000.00000000
-    
+
     - CIDR: /24
     (Die IP-Adresse ist im PC binär gespeichert. Zwecks einfacherer Handhabung nutzen wir die Dezimalschreibweise.
     Die Subnetzmaske kann in Dezimal- oder CIDR-Schreibweise notiert werden.)
@@ -94,7 +92,7 @@
     **IPV4-Adresse**
     - Dezimal: 172.16.43.87
     - Binär: 10101100.00010000.00101011.01010111
-    
+
     **Subnetzmaske**
     - Dezimal: 255.255.0.0
     - Binär: 11111111.11111111.00000000.00000000
@@ -111,7 +109,7 @@
     **IPV4-Adresse**
     - Dezimal: 192.168.17.37
     - Binär: 11000000.10101000.00010001. 00100101
-    
+
     **Subnetzmaske**
     - Dezimal: 255.255.255.0
     - Binär: 11111111.111111.11111111.00000000
@@ -131,6 +129,7 @@
     In Microsoft Windows 10/11 kann man den Standardgateway (DefaultRouter) in den Netzwerkeinstellungen eingeben. Man geht dazu zu den Einstellungen -> Netzwerk & Internet -> Ethernet oder Wi-Fi -> Netzwerk- und Freigabecenter -> Adaptereinstellungen ändern -> Rechtsklick auf die Verbindung -> Eigenschaften -> Internetprotokoll Version 4 (TCP/IPv4) -> Eigenschaften.
 
 7. Wichtige IPv4-Adressen:
+
 - a. Wie lauten die drei für **LAN** s reservierte IP-Adressbereiche?
 
     **ANTWORT**
@@ -145,7 +144,7 @@
 
 - c. Unter welchen Voraussetzungen werden sie eine APIPA -Adresse (Zero-Conf)
 erhalten? In welchem Bereich liegt diese?
-    
+
     **ANTWORT**
 
     Eine APIPA-Adresse (Zero-Conf) erhalten Sie, wenn DHCP nicht verfügbar ist und Ihr Computer keine statische IP-Adresse hat. Diese Adressen liegen im Bereich 169.254.0.1 bis 169.254.255.254.
@@ -292,30 +291,26 @@ erhalten? In welchem Bereich liegt diese?
     mit allen Namens - und Adressangaben. ( IPERKA )
     Tipp: Überprüfen sie jeweils, ob das Interface des Netzwerkgeräts (Netzwerkschnittstelle) aktiv ist.
     Haben sie auch an die Standardgateway-Einstellungen (Default-Router) gedacht?
-    
+
     **ANTWORTEN**
+
 - a. Zwei PC’s an Switch-1 angeschlossen, zwei weitere an Switch-2. Switch-
 und Switch-2 sind über ein Ethernetkabel miteinander verbunden. Statische
 IP-Adressierung. Alle PC’s im selben Subnetz.
-
 
 - b. Wie Aufgabe 1 mit dem Unterschied, dass die IP-Adressen dynamisch über
 einen DHCP-Server zugewiesen werden. Der DHCP-Server ist an Switch-
 angeschlossen.
 
-
 - c. Wie Aufgabe 2. Allerdings kann der DHCP-Server nicht erreicht werden, da er
 z.B. offline, ausgeschaltet oder defekt ist.
-
 
 - d. Zwei PC’s in Subnetz-1 an Switch-1 angeschlossen, zwei weitere PC’s in
 Subnetz-2 an Switch-2. Switch-1 und Switch-2 sind über ein Ethernetkabel
 miteinander verbunden. Statische IP-Adressierung.
 
-
 - e. Wie Aufgabe 4 mit dem Unterschied, dass die beiden Switch’s nicht direkt,
 sondern über einen Router verbunden sind. Statische IP-Adressierung.
-
 
 - f. Für die Lernturbos (Optional):
 Zwei PC’s in Subnetz-A, zwei PC’s in Subnetz-B und zwei PC’s in Subnetz-C.

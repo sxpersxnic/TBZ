@@ -10,12 +10,12 @@ Stellen Sie sich Docker Swarm als Upgrade vor - von der Verwaltung einzelner Con
 
 ### Inhalt
 
--   [Erste Schritte](#erste-schritte)
--   [Docker Swarm vs. Docker Compose](#docker-swarm-vs-docker-compose)
--   [Docker Swarm Ressourcen](#docker-swarm-ressourcen)
--   [Docker Swarm vs. Kubernetes](#docker-swarm-vs-kubernetes)
--   [Docker Swarm Befehle](#docker-swarm-befehle)
--   [Quellen](#quellen)
+- [Erste Schritte](#erste-schritte)
+- [Docker Swarm vs. Docker Compose](#docker-swarm-vs-docker-compose)
+- [Docker Swarm Ressourcen](#docker-swarm-ressourcen)
+- [Docker Swarm vs. Kubernetes](#docker-swarm-vs-kubernetes)
+- [Docker Swarm Befehle](#docker-swarm-befehle)
+- [Quellen](#quellen)
 
 ## Erste Schritte
 
@@ -35,15 +35,15 @@ Betrachten Sie diese Progression:
 
 Bevor Sie einen Docker Swarm-Cluster initialisieren, stellen Sie sicher, dass die folgenden Anforderungen erfüllt sind:
 
--   Docker Engine Version 1.12 oder höher auf allen Nodes installiert
--   Netzwerkkonnektivität zwischen allen Nodes auf den Ports 2377 (Cluster-Verwaltung), 7946 (Nodes-Kommunikation) und 4789 (Overlay-Netzwerk-Traffic)
--   Ausreichende Systemressourcen für sowohl Docker-Daemon als auch containerisierte Anwendungen
+- Docker Engine Version 1.12 oder höher auf allen Nodes installiert
+- Netzwerkkonnektivität zwischen allen Nodes auf den Ports 2377 (Cluster-Verwaltung), 7946 (Nodes-Kommunikation) und 4789 (Overlay-Netzwerk-Traffic)
+- Ausreichende Systemressourcen für sowohl Docker-Daemon als auch containerisierte Anwendungen
 
 **Port-Erklärung:**
 
--   **Port 2377**: Verwendet für Cluster-Verwaltungskommunikation zwischen Manager-Nodes
--   **Port 7946**: Verwendet für Kommunikation zwischen Nodes (Container-Netzwerk-Discovery)
--   **Port 4789**: Verwendet für Overlay-Netzwerk-Traffic zwischen Containern
+- **Port 2377**: Verwendet für Cluster-Verwaltungskommunikation zwischen Manager-Nodes
+- **Port 7946**: Verwendet für Kommunikation zwischen Nodes (Container-Netzwerk-Discovery)
+- **Port 4789**: Verwendet für Overlay-Netzwerk-Traffic zwischen Containern
 
 ### Grundlegende Cluster-Architektur
 
@@ -84,9 +84,9 @@ graph TB
 
 **Wichtige Architektur-Konzepte:**
 
--   **Raft-Konsens**: Stellt sicher, dass alle Manager-Nodes über den Cluster-Status einig sind und Split-Brain-Szenarien verhindert
--   **Leader-Wahl**: Ein Manager fungiert als Leader, andere sind Follower, die bereit sind, die Führung zu übernehmen, wenn nötig
--   **Task-Verteilung**: Manager verteilen Workloads intelligent auf verfügbare Worker-Nodes
+- **Raft-Konsens**: Stellt sicher, dass alle Manager-Nodes über den Cluster-Status einig sind und Split-Brain-Szenarien verhindert
+- **Leader-Wahl**: Ein Manager fungiert als Leader, andere sind Follower, die bereit sind, die Führung zu übernehmen, wenn nötig
+- **Task-Verteilung**: Manager verteilen Workloads intelligent auf verfügbare Worker-Nodes
 
 ### Service-Deployment-Ablauf
 
@@ -136,21 +136,21 @@ graph LR
 
 **Docker Compose:**
 
--   **Zweck**: Definition und Ausführung von Multi-Container-Anwendungen auf einem einzigen Docker-Host
--   **Bereich**: Entwicklungsumgebungen, Tests, Einzelmaschinen-Deployments
--   **Dateiformat**: docker-compose.yml mit Services, Netzwerken und Volumes
--   **Skalierung**: Begrenzt auf Ressourcen einer einzigen Maschine
--   **Orchestrierung**: Grundlegende Container-Lifecycle-Verwaltung
--   **Hochverfügbarkeit**: Keine - Single Point of Failure
+- **Zweck**: Definition und Ausführung von Multi-Container-Anwendungen auf einem einzigen Docker-Host
+- **Bereich**: Entwicklungsumgebungen, Tests, Einzelmaschinen-Deployments
+- **Dateiformat**: docker-compose.yml mit Services, Netzwerken und Volumes
+- **Skalierung**: Begrenzt auf Ressourcen einer einzigen Maschine
+- **Orchestrierung**: Grundlegende Container-Lifecycle-Verwaltung
+- **Hochverfügbarkeit**: Keine - Single Point of Failure
 
 **Docker Swarm:**
 
--   **Zweck**: Orchestrierung von Containern über mehrere Docker-Hosts hinweg
--   **Bereich**: Produktionsumgebungen, verteilte Anwendungen, Clustering
--   **Dateiformat**: Kann docker-compose.yml-Dateien mit `docker stack deploy` verwenden
--   **Skalierung**: Horizontale Skalierung über mehrere Maschinen
--   **Orchestrierung**: Erweiterte Planung, Lastausgleich, Service-Discovery
--   **Hochverfügbarkeit**: Eingebaut durch Manager-Nodes-Redundanz
+- **Zweck**: Orchestrierung von Containern über mehrere Docker-Hosts hinweg
+- **Bereich**: Produktionsumgebungen, verteilte Anwendungen, Clustering
+- **Dateiformat**: Kann docker-compose.yml-Dateien mit `docker stack deploy` verwenden
+- **Skalierung**: Horizontale Skalierung über mehrere Maschinen
+- **Orchestrierung**: Erweiterte Planung, Lastausgleich, Service-Discovery
+- **Hochverfügbarkeit**: Eingebaut durch Manager-Nodes-Redundanz
 
 ### Migrationspfad: Compose zu Swarm
 
@@ -191,31 +191,31 @@ flowchart TD
 
 **Verwenden Sie Docker Compose wenn:**
 
--   Lokale Anwendungsentwicklung
--   Anwendungen auf einem einzigen Server laufen
--   Prototyping und Tests
--   Einfache Produktionsdeployments ohne Hochverfügbarkeitsanforderungen
+- Lokale Anwendungsentwicklung
+- Anwendungen auf einem einzigen Server laufen
+- Prototyping und Tests
+- Einfache Produktionsdeployments ohne Hochverfügbarkeitsanforderungen
 
 **Verwenden Sie Docker Swarm wenn:**
 
--   Produktionsumgebungen mit Hochverfügbarkeitsanforderungen
--   Anwendungen, die über eine einzige Maschine hinaus skalieren müssen
--   Mehrere Teammitglieder benötigen Zugriff auf denselben Anwendungscluster
--   Lastausgleich und Service-Discovery sind Anforderungen
+- Produktionsumgebungen mit Hochverfügbarkeitsanforderungen
+- Anwendungen, die über eine einzige Maschine hinaus skalieren müssen
+- Mehrere Teammitglieder benötigen Zugriff auf denselben Anwendungscluster
+- Lastausgleich und Service-Discovery sind Anforderungen
 
 ### Feature-Vergleichstabelle
 
-| Feature                        | Docker Compose             | Docker Swarm       |
-| ------------------------------ | -------------------------- | ------------------ |
-| **Deployment-Bereich**         | Einzelner Host             | Mehrere Hosts      |
-| **Hochverfügbarkeit**          | Nein                       | Ja                 |
-| **Lastausgleich**              | Extern (nginx, etc.)       | Eingebaut          |
-| **Service-Discovery**          | Container-Namen/Aliase     | Eingebautes DNS    |
-| **Rolling Updates**            | Manueller Neustart         | Automatisiert      |
-| **Skalierung**                 | Einzelmaschinen-Limits     | Cluster-weit       |
-| **Secrets-Verwaltung**         | Umgebungsvariablen/Dateien | Eingebaute Secrets |
-| **Konfigurations-Komplexität** | Einfach                    | Moderat            |
-| **Lernkurve**                  | Niedrig                    | Mittel             |
+| Feature | Docker Compose | Docker Swarm |
+| --- | --- | --- |
+| **Deployment-Bereich** | Einzelner Host | Mehrere Hosts |
+| **Hochverfügbarkeit** | Nein | Ja |
+| **Lastausgleich** | Extern (nginx, etc.) | Eingebaut |
+| **Service-Discovery** | Container-Namen/Aliase | Eingebautes DNS |
+| **Rolling Updates** | Manueller Neustart | Automatisiert |
+| **Skalierung** | Einzelmaschinen-Limits | Cluster-weit |
+| **Secrets-Verwaltung** | Umgebungsvariablen/Dateien | Eingebaute Secrets |
+| **Konfigurations-Komplexität** | Einfach | Moderat |
+| **Lernkurve** | Niedrig | Mittel |
 
 ## Docker Swarm Ressourcen
 
@@ -284,24 +284,24 @@ graph TB
 
 **Docker Swarm Vorteile:**
 
--   Vereinfachter Setup- und Konfigurationsprozess
--   Native Integration mit Docker-Ökosystem
--   Geringerer Ressourcenverbrauch und operative Komplexität
--   Eingebaute Service-Discovery und Lastausgleich
--   Unkomplizierte Rolling Updates und Rollbacks
+- Vereinfachter Setup- und Konfigurationsprozess
+- Native Integration mit Docker-Ökosystem
+- Geringerer Ressourcenverbrauch und operative Komplexität
+- Eingebaute Service-Discovery und Lastausgleich
+- Unkomplizierte Rolling Updates und Rollbacks
 
 **Kubernetes Vorteile:**
 
--   Umfangreiches Ökosystem und Drittanbieter-Integrationen
--   Erweiterte Scheduling-Fähigkeiten und Ressourcenverwaltung
--   Umfassende Monitoring- und Logging-Lösungen
--   Robuste Auto-Scaling-Mechanismen
--   Deklarative Konfigurationsverwaltung durch YAML-Manifeste
+- Umfangreiches Ökosystem und Drittanbieter-Integrationen
+- Erweiterte Scheduling-Fähigkeiten und Ressourcenverwaltung
+- Umfassende Monitoring- und Logging-Lösungen
+- Robuste Auto-Scaling-Mechanismen
+- Deklarative Konfigurationsverwaltung durch YAML-Manifeste
 
 **Anwendungsfall-Empfehlungen:**
 
--   Docker Swarm: Geeignet für kleine bis mittlere Deployments, Entwicklungsumgebungen und Organisationen, die Einfachheit priorisieren
--   Kubernetes: Bevorzugt für große Produktionsumgebungen, komplexe Microservices-Architekturen und Szenarien, die erweiterte Orchestrierungsfeatures erfordern
+- Docker Swarm: Geeignet für kleine bis mittlere Deployments, Entwicklungsumgebungen und Organisationen, die Einfachheit priorisieren
+- Kubernetes: Bevorzugt für große Produktionsumgebungen, komplexe Microservices-Architekturen und Szenarien, die erweiterte Orchestrierungsfeatures erfordern
 
 ### Deployment-Komplexität
 
@@ -464,6 +464,5 @@ Diese Befehle bieten umfassende Kontrolle über Docker Swarm-Cluster-Operationen
 
 ## Quellen
 
--   [Docker Swarm Dokumentation](https://docs.docker.com/engine/swarm/)
--   [Docker Swarm Tutorial](https://docs.docker.com/engine/swarm/swarm-tutorial/)
-
+- [Docker Swarm Dokumentation](https://docs.docker.com/engine/swarm/)
+- [Docker Swarm Tutorial](https://docs.docker.com/engine/swarm/swarm-tutorial/)

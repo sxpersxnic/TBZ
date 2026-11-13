@@ -43,12 +43,12 @@ JMeter is widely used for performance and stress testing of REST APIs.
 
 Key features explored during the exercise:
 
--	Thread Groups – define how many virtual users send requests
--	HTTP Request Sampler – configure GET/POST requests to the Spring Boot API
--	CSV Data Set Config – optional parameterization for tests
--	Listeners – view results in tables, graphs, and reports
--	Assertions – validate correctness of responses
--	Timers – simulate real-world request delays
+- Thread Groups – define how many virtual users send requests
+- HTTP Request Sampler – configure GET/POST requests to the Spring Boot API
+- CSV Data Set Config – optional parameterization for tests
+- Listeners – view results in tables, graphs, and reports
+- Assertions – validate correctness of responses
+- Timers – simulate real-world request delays
 
 ### Test Scenario
 
@@ -56,25 +56,25 @@ I created a test plan that simulates 200 virtual users, each repeatedly calling 
 
 ### High-Level Configuration
 
--	Thread Group:
--	Users = 200
--	Ramp-up = 10 seconds
--	Loop Count = 50
--	Sampler:
--	`GET http://localhost:8081/students`
--	Listener:
--	Vew Results Tree
--	Summary Report
+- Thread Group:
+- Users = 200
+- Ramp-up = 10 seconds
+- Loop Count = 50
+- Sampler:
+- `GET http://localhost:8081/students`
+- Listener:
+- Vew Results Tree
+- Summary Report
 
 ### Observed Results
 
-|Metric	|Result|
-|------|-------|
-|Total Requests	|10,000|
-|Average Response Time	|0ms (local server)|
-|Error Rate	|0%|
-|Max Response Time	|3ms|
-|Throughput	|1003.6 requests/sec|
+| Metric | Result |
+| --- | --- |
+| Total Requests | 10,000 |
+| Average Response Time | 0ms (local server) |
+| Error Rate | 0% |
+| Max Response Time | 3ms |
+| Throughput | 1003.6 requests/sec |
 
 Short Markdown Summary (deliverable)
 

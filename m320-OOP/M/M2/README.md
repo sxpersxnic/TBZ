@@ -54,5 +54,5 @@ A user wants to join a pre-seeded flight by entering their first and last name. 
 
 ## Spezieller Use Case ##
 
-Removing a Passenger from the Flight. 
+Removing a Passenger from the Flight.
 A user decides they do not want to be on the flight and chooses to remove themselves from the passenger list before the flight starts.

@@ -3,7 +3,7 @@ applyTo: 'react-components/*.jsx'
 ---
 
 Context:
-	- Path: `m306-Projects/project/tests/react-components/`
+    - Path: `m306-Projects/project/tests/react-components/`
 
 # React-Components Storybook Documentation
 

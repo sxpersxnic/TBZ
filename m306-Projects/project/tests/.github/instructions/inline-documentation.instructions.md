@@ -3,7 +3,7 @@ applyTo: 'inline-doc/*.go'
 ---
 
 Context:
-	Path: `m306-Projects/project/tests/inline-doc/`
+    Path: `m306-Projects/project/tests/inline-doc/`
 
 # Inline Documentation
 

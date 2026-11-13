@@ -1,7 +1,5 @@
 ## T1 Übungen
 
-
-
 ### Übung 1 - Developer Tools kennenlernen
 
 1. Gehen sie auf eine Webseite.
@@ -12,8 +10,6 @@
 6. Finden sie heraus wie sie die Liste manuell löschen.
 
 Halten sie für sich fest, was der Unterschied ist zwischen Punkt 3 und 5.
-
-
 
 ### Übung 2 - Inspect Element
 

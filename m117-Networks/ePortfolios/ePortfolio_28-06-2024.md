@@ -64,7 +64,7 @@ net user guS /add
 net user meM /add
 net user zoE /add
 net user stK /add
-``` 
+```
 
 #### Erstellen von Benutzergruppen
 
@@ -97,7 +97,7 @@ net localgroup "VRKF_ACQSTN Verkauf, Acquisition" guS /add
 
 #### Verwaltungskonsole öffnen
 
-```WIN + R``` > lusrmgr.msc 
+```WIN + R``` > lusrmgr.msc
 
 - Benutzer zu Gruppen hinzufügen
 - Rechte und Berechtigungen vergeben

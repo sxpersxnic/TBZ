@@ -6,8 +6,8 @@ A simple Go application that demonstrates best practices for inline documentatio
 
 This application provides:
 
--   **Calculator**: A calculator that performs basic arithmetic operations (addition, subtraction, multiplication, division) and maintains a history of all operations
--   **Logger**: A configurable logging utility with support for different log levels (INFO, WARN, ERROR)
+- **Calculator**: A calculator that performs basic arithmetic operations (addition, subtraction, multiplication, division) and maintains a history of all operations
+- **Logger**: A configurable logging utility with support for different log levels (INFO, WARN, ERROR)
 
 The project emphasizes comprehensive inline documentation using Go's standard documentation conventions, making the code easy to understand and maintain.
 
@@ -15,17 +15,17 @@ The project emphasizes comprehensive inline documentation using Go's standard do
 
 ### Calculator
 
--   ✅ Basic arithmetic operations: Add, Subtract, Multiply, Divide
--   ✅ Operation history tracking
--   ✅ Error handling for invalid operations (e.g., division by zero)
--   ✅ History display and clearing functionality
+- ✅ Basic arithmetic operations: Add, Subtract, Multiply, Divide
+- ✅ Operation history tracking
+- ✅ Error handling for invalid operations (e.g., division by zero)
+- ✅ History display and clearing functionality
 
 ### Logger
 
--   ✅ Configurable log levels (INFO, WARN, ERROR)
--   ✅ Level-based message filtering
--   ✅ Fatal error handling with panic
--   ✅ Validation of log level configuration
+- ✅ Configurable log levels (INFO, WARN, ERROR)
+- ✅ Level-based message filtering
+- ✅ Fatal error handling with panic
+- ✅ Validation of log level configuration
 
 ## Project Structure
 
@@ -42,8 +42,8 @@ inline-doc/
 
 ### Prerequisites
 
--   Go 1.25.1 or higher installed on your system
--   Basic understanding of Go programming
+- Go 1.25.1 or higher installed on your system
+- Basic understanding of Go programming
 
 ### Installation
 
@@ -149,19 +149,19 @@ calc.ClearHistory()
 
 This project follows Go's documentation conventions:
 
--   **Package-level documentation**: Describes the overall purpose of the package
--   **Type documentation**: Explains what each struct represents
--   **Function/Method documentation**: Details what each function does, its parameters, and return values
--   **Inline comments**: Clarifies complex logic within function bodies
+- **Package-level documentation**: Describes the overall purpose of the package
+- **Type documentation**: Explains what each struct represents
+- **Function/Method documentation**: Details what each function does, its parameters, and return values
+- **Inline comments**: Clarifies complex logic within function bodies
 
 All exported types, functions, and methods include comprehensive documentation comments starting with the name of the element being documented.
 
 ## Code Quality
 
--   ✅ **Comprehensive inline documentation** (80%+ coverage)
--   ✅ **Error handling** for edge cases
--   ✅ **Type safety** with proper Go types
--   ✅ **Clean code** following Go best practices
+- ✅ **Comprehensive inline documentation** (80%+ coverage)
+- ✅ **Error handling** for edge cases
+- ✅ **Type safety** with proper Go types
+- ✅ **Clean code** following Go best practices
 
 ## Learning Objectives
 
@@ -193,4 +193,3 @@ This is an educational project. For improvements or suggestions, please follow t
 ---
 
 Part of M306 Projects - Testing & Documentation
-

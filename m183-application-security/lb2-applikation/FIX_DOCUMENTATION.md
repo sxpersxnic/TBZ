@@ -11,7 +11,7 @@ This document describes what was changed to remediate each of the 21 vulnerabili
 ## Fix Summary Table
 
 | # | Vulnerability | Severity | File(s) Changed | Status |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | SQL Injection – Login | CRITICAL | `login.js`, `fw/db.js` | Fixed |
 | 2 | Plain-text Password Storage | CRITICAL | `login.js`, `package.json` | Fixed |
 | 3 | Credentials via GET Request | HIGH | `login.js` | Fixed |
@@ -43,12 +43,14 @@ This document describes what was changed to remediate each of the 21 vulnerabili
 **Root cause**: The SQL query concatenated the username directly into the query string.
 
 **Before**:
+
 ```javascript
 const sql = `SELECT id, username, password FROM users WHERE username='` + username + `'`;
 const [results] = await conn.query(sql);
 ```
 
 **After** (`login.js`):
+
 ```javascript
 const rows = await db.executeStatement(
     `SELECT u.id, u.username, u.password, COALESCE(r.id, 0) roleid
@@ -69,11 +71,13 @@ The `executeStatement` helper in `fw/db.js` always calls `conn.execute(statement
 **Root cause**: Passwords were stored and compared as plain text. Any database read would expose all credentials.
 
 **Before**:
+
 ```javascript
 if (password == db_password) { ... }
 ```
 
 **After** (`login.js`):
+
 ```javascript
 const bcrypt = require('bcryptjs');
 
@@ -99,12 +103,14 @@ if (storedHash.startsWith('$2b$') || storedHash.startsWith('$2a$')) {
 **Root cause**: The login form used `GET`, putting username and password in the URL — visible in logs, browser history, and referrer headers.
 
 **Before** (`login.js`):
+
 ```javascript
 if (typeof req.query.username !== 'undefined' && ...) {
     let result = await validateLogin(req.query.username, req.query.password);
 ```
 
 **After**: The login function now only processes credentials when `req.method === 'POST'`:
+
 ```javascript
 if (req.method !== 'POST') {
     return { html: getHtml(req), user: { username: '', userid: 0 } };
@@ -122,11 +128,13 @@ In `app.js`, `GET /login` only renders the form; `POST /login` handles credentia
 **Root cause**: `secret: 'secret'` allowed any attacker who read the source to forge valid session cookies.
 
 **Before**:
+
 ```javascript
 app.use(session({ secret: 'secret', resave: true, saveUninitialized: true }));
 ```
 
 **After** (`app.js`):
+
 ```javascript
 const SESSION_SECRET = process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex');
 app.use(session({
@@ -149,6 +157,7 @@ app.use(session({
 **Root cause**: `activeUserSession` only checked for the presence of a `username` cookie. Attackers could set `document.cookie = "username=admin"` to bypass authentication entirely.
 
 **Before**:
+
 ```javascript
 function activeUserSession(req) {
     return req.cookies?.username !== undefined && req.cookies.username !== '';
@@ -156,6 +165,7 @@ function activeUserSession(req) {
 ```
 
 **After** (`app.js`):
+
 ```javascript
 function requireAuth(req, res, next) {
     if (req.session?.userid) return next();
@@ -172,11 +182,13 @@ All protected routes use `requireAuth` as Express middleware. The session is man
 **Root cause**: `taskId` from `req.query.id` was directly interpolated into the SQL string.
 
 **Before**:
+
 ```javascript
 let [result, fields] = await conn.query('select ID, title, state from tasks where ID = ' + taskId);
 ```
 
 **After** (`edit.js`):
+
 ```javascript
 const rows = await db.executeStatement(
     'SELECT ID, title, state FROM tasks WHERE ID = ?',
@@ -191,12 +203,14 @@ const rows = await db.executeStatement(
 **Root cause**: `taskId` and `title` were interpolated into HTML attribute values without escaping, allowing attribute-breaking XSS payloads.
 
 **Before**:
+
 ```javascript
 html += `<input type="hidden" name="id" value="` + taskId + `" />`;
 html += `<input ... value="` + title + `">`;
 ```
 
 **After** (`edit.js`):
+
 ```javascript
 const escapeHtml = require('escape-html');
 // ...
@@ -213,11 +227,13 @@ html += `<input ... value="${escapeHtml(title)}">`;
 **Root cause**: `title`, `state`, and `taskId` were concatenated directly into INSERT and UPDATE statements.
 
 **Before**:
+
 ```javascript
 let stmt = db.executeStatement("insert into tasks (title, state, userID) values ('" + title + "', '" + state + "', '" + userid + "')");
 ```
 
 **After** (`savetask.js`):
+
 ```javascript
 await db.executeStatement(
     'INSERT INTO tasks (title, state, userID) VALUES (?, ?, ?)',
@@ -239,11 +255,13 @@ The `userid` is always taken from `req.session.userid` (server-authoritative), n
 **Root cause**: `userid` and `terms` from query parameters were concatenated into the LIKE query.
 
 **Before**:
+
 ```javascript
 let stmt = await db.executeStatement("select ... where userID = " + userid + " and title like '%" + terms + "%'");
 ```
 
 **After** (`search/v2/index.js`):
+
 ```javascript
 // userid is always taken from the server-side session
 const userid = req.session.userid;
@@ -262,11 +280,13 @@ The userid parameter in the query string is now ignored; the session value is us
 **Root cause**: `req.cookies.userid` was directly interpolated into the query.
 
 **Before**:
+
 ```javascript
 let [result, fields] = await conn.query('select ... from tasks where UserID = ' + req.cookies.userid);
 ```
 
 **After** (`user/tasklist.js`):
+
 ```javascript
 const rows = await db.executeStatement(
     'SELECT ID, title, state FROM tasks WHERE UserID = ?',
@@ -281,12 +301,14 @@ const rows = await db.executeStatement(
 **Root cause**: `row.ID`, `row.title`, and `row.state` were injected directly into HTML.
 
 **Before**:
+
 ```javascript
 html += `<td>` + row.ID + `</td>`;
 html += `<td class="wide">` + row.title + `</td>`;
 ```
 
 **After** (`user/tasklist.js`):
+
 ```javascript
 const escapeHtml = require('escape-html');
 // ...
@@ -304,6 +326,7 @@ html += `<a href="edit?id=${escapeHtml(String(row.ID))}">edit</a>`;
 **Root cause**: `id` from `req.cookies.userid` was interpolated into the role-lookup query.
 
 **Before**:
+
 ```javascript
 let stmt = await db.executeStatement("select ... where userid = " + id);
 ```
@@ -331,11 +354,13 @@ This removes a network round-trip on every page load and eliminates the injectio
 **Root cause**: `req.cookies.username` was interpolated into the welcome message without escaping.
 
 **Before**:
+
 ```javascript
 return `<h2>Welcome, ` + req.cookies.username + `!</h2>` + ...;
 ```
 
 **After** (`index.js`):
+
 ```javascript
 const escapeHtml = require('escape-html');
 const username = escapeHtml(req.session?.username || '');
@@ -349,6 +374,7 @@ return `<h2>Welcome, ${username}!</h2>${taskListHtml}<hr>${bgSearch.html(req)}`;
 **Root cause**: `req.session.username` was interpolated without escaping into the response.
 
 **Before**:
+
 ```javascript
 app.get('/profile', (req, res) => {
     res.send(`Welcome, ${req.session.username}! <a href="/logout">Logout</a>`);
@@ -364,12 +390,14 @@ app.get('/profile', (req, res) => {
 **Root cause**: `req.cookies.userid` was interpolated directly into a `<script>` block, allowing an attacker to break out of the JavaScript string literal.
 
 **Before**:
+
 ```javascript
 userid = ` + req.cookies.userid + `;
 // Payload: cookie value "1; alert('XSS'); //" → userid = 1; alert('XSS'); // ;
 ```
 
 **After** (`user/backgroundsearch.js`):
+
 ```javascript
 const userid = JSON.stringify(req.session?.userid ?? null);
 // In the template:
@@ -385,11 +413,13 @@ var userid = ${userid};  // JSON.stringify produces a quoted, escaped numeric li
 **Root cause**: The `provider` body parameter was directly appended to `http://localhost:3000`, allowing an attacker to supply arbitrary paths or full URLs.
 
 **Before**:
+
 ```javascript
 let theUrl = 'http://localhost:3000' + provider + '?userid=' + userid + '&terms=' + terms;
 ```
 
 **After** (`search.js`):
+
 ```javascript
 const ALLOWED_PROVIDERS = ['/search/v2/'];
 // ...
@@ -409,11 +439,13 @@ Only exact matches against `ALLOWED_PROVIDERS` are accepted. Any other path — 
 **Root cause**: The query joined the `users` table and included the `password` column, then embedded it in a hidden input in the HTML.
 
 **Before**:
+
 ```javascript
 html += `... <input type='hidden' name='password' value='` + record.password + `' />`;
 ```
 
 **After** (`admin/users.js`):
+
 ```javascript
 // Query does NOT select the password column at all
 const rows = await db.executeStatement(
@@ -433,6 +465,7 @@ const rows = await db.executeStatement(
 **Root cause**: The `/admin/users` route only checked `activeUserSession` (was the user logged in?), not whether they were an admin.
 
 **Before**:
+
 ```javascript
 app.get('/admin/users', async (req, res) => {
     if (activeUserSession(req)) {  // any logged-in user could access this
@@ -443,6 +476,7 @@ app.get('/admin/users', async (req, res) => {
 ```
 
 **After** (`app.js`):
+
 ```javascript
 function requireAdmin(req, res, next) {
     if (req.session?.userid && req.session.roleid === 1) return next();
@@ -463,11 +497,13 @@ app.get('/admin/users', requireAuth, requireAdmin, async (req, res) => {
 **Root cause**: `record.ID`, `record.username`, and `record.title` (role name) were interpolated without escaping.
 
 **Before**:
+
 ```javascript
 html += `<tr><td>` + record.ID + `</td><td>` + record.username + `</td><td>` + record.title + `</td>...`;
 ```
 
 **After** (`admin/users.js`):
+
 ```javascript
 const escapeHtml = require('escape-html');
 // ...
@@ -485,6 +521,7 @@ html += `<tr>
 **Root cause**: DB credentials were hardcoded in `config.js`, making them visible in source control and any codebase backup.
 
 **Before**:
+
 ```javascript
 module.exports = {
     host: 'm183-lb2-db',
@@ -495,6 +532,7 @@ module.exports = {
 ```
 
 **After** (`config.js`):
+
 ```javascript
 if (!process.env.DB_PASS) {
     throw new Error('DB_PASS environment variable is required.');
@@ -518,6 +556,7 @@ module.exports = {
 **Root cause**: No CSRF token was included in forms or verified on state-changing requests. An attacker could host a hidden form on another site that would submit actions on behalf of an authenticated user.
 
 **After** (`app.js`):
+
 ```javascript
 // Middleware: generate a per-session token
 app.use((req, _res, next) => {
@@ -540,6 +579,7 @@ function csrfCheck(req, res, next) {
 ```
 
 Every POST route (`/login`, `/savetask`, `/search`) uses `csrfCheck`. Every form template includes:
+
 ```html
 <input type="hidden" name="_csrf" value="${req.session.csrfToken}">
 ```
@@ -551,7 +591,7 @@ The AJAX search in `backgroundsearch.js` reads the token via `JSON.stringify(req
 ## Files Changed
 
 | File | Change |
-|---|---|
+| --- | --- |
 | `login.js` | Parameterized query, bcrypt, POST-only, CSRF token in form |
 | `app.js` | Session setup, CSRF middleware, `requireAuth`/`requireAdmin`, all routes protected |
 | `config.js` | Env-var credentials, hard-fail if `DB_PASS` missing |

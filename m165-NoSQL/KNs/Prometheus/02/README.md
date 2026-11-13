@@ -15,4 +15,4 @@ curl http://localhost:8080/metrics # Access the metrics endpoint
 
 ## B. Environment Configuration
 
-![Grafana Dashboard with Custom Metrics](/m165-NoSQL/x-resources/p/02/g-dashboard.png)
+![Grafana Dashboard with Custom Metrics](../../../x-res/p/02/g-dashboard.png)

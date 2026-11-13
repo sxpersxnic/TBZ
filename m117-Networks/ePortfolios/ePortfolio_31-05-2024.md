@@ -22,7 +22,7 @@ Der PC kann keine Verbindung zmu DHCP-Server herstellen, wodurch keine gültige 
 Ich muss sicher stellen, dass der DHCP-Server im Netzwerk funktioniert und überprüfen ob die Netzwerkkabel, Verbindungen und die Netzwerkeinstellungen des PCs richtig eingesteckt/konfiguriert sind. Ich versuche die Netzwerkeinstellungen auf dem PC zu erneuern, indem ich den Befehl ```ipconfig /release``` gefolgt von ```ipconfig /renew``` ausführe.
 
 **Aufgabe 3.**
-Der Kunde hat die Netzwerkeinstellungen selber bzw. von Hand eingetragen. Sie lauten: 
+Der Kunde hat die Netzwerkeinstellungen selber bzw. von Hand eingetragen. Sie lauten:
     - IP-Adress: *172.31.255.23/24*
     - Standardgateway: *172.31.254.1/24*
     - DNS1: *8.8.8.8*
@@ -39,7 +39,6 @@ Bei der manuellen Netzwerkeinstellung gibt es einen wesentlichen Fehler. Die IP-
     - *DNS*-Server sind korrekt konfiguriert und sollten keine Probleme verursachen.
     - Die Standardgateway-Adress sollte auf eine Adresse im selben Subnetz, wie die IP-Adresse des Hosts gesetzt werden, Beispielsweise: *172.31.255.1*.
 
-
 **Aufgabe 4.**
 Sie rufen mit einem Firefoc-Webbrowser die [TBZ-Webseite](https://www.tbz.ch/) auf. Ergänzen Sie Applikationsname, Absender- und Empfängeradressen:
 
@@ -47,25 +46,26 @@ Sie rufen mit einem Firefoc-Webbrowser die [TBZ-Webseite](https://www.tbz.ch/) a
 
 Diese Windows-Befehle können Ihnen weiterhelfen: **(cmd als Admin ausführen!)**
 
-|       Command        |   Description   |
-|----------------------|-----------------|
-| ```ipconfig /all```  | Für eigne IP- und MAC-Adresse, Router                |
-| ```nslookup <URL>``` | Ziel IP-Adresse des Webservers                |
-| ```netstat -abno```  | Abgehende, browserseitige Portnummber. Kurz vor diesem Befehl Webseitenrefresh mit ```Ctrl + F5```                |
-| ```arp -a```         | Router-MAC-Adresse                |
-| *Wikipedia*          | Um herauszufinden, auf welchem Port ein https-Webserver standardmässig konfiguriert ist.                |
-| *Wireshark*          | Mit Wireshark wäre alles auf einen Schlag einsehbar.                |
+| Command | Description |
+| --- | --- |
+| ```ipconfig /all``` | Für eigne IP- und MAC-Adresse, Router |
+| ```nslookup <URL>``` | Ziel IP-Adresse des Webservers |
+| ```netstat -abno``` | Abgehende, browserseitige Portnummber. Kurz vor diesem Befehl Webseitenrefresh mit ```Ctrl + F5``` |
+| ```arp -a``` | Router-MAC-Adresse |
+| *Wikipedia* | Um herauszufinden, auf welchem Port ein https-Webserver standardmässig konfiguriert ist. |
+| *Wireshark* | Mit Wireshark wäre alles auf einen Schlag einsehbar. |
 
 **Antwort**
-- *Applikationsname:* Opera Webbrowser   
+
+- *Applikationsname:* Opera Webbrowser
 - *Absender IP-Adresse:* 10.62.110.225 (Preferred) | *Mac-Adresse:* 40-A3-CC-08-D7-C0
 - *Browser Portnr.:* 443
-- *Empfänger IP-Adresse:* 10.62.98.9 
+- *Empfänger IP-Adresse:* 10.62.98.9
 - *Router MAC-Adresse:* 00-06-e3-ff-fd-90 *(Default Gateway: 10.62.104.1)*
 - *Standard HTTP-Port:* 80
-- *Standard HTTPS-Port:* 443 
+- *Standard HTTPS-Port:* 443
 
-## ipconfig /all 
+## ipconfig /all
 
 ```bash
 PS C:\WINDOWS\system23> ipconfig /all

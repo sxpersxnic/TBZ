@@ -1,4 +1,4 @@
-# Projects done:
+# Projects done
 
 - [x] A
 - [x] C

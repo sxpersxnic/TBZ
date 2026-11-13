@@ -189,7 +189,7 @@
 ## B. Validierung hinterlegen und testen
 
 - **Screenshot of valid Validation:**
-	![Valid Validation](../../../x-res/m/06/valid-validation.png)
+    ![Valid Validation](../../../x-res/m/06/valid-validation.png)
 
 - **Commands:**
 
@@ -199,8 +199,8 @@
 
 - **Screenshot of invalid Validation:**
 
-	![Invalid Validation](../../../x-res/m/06/invalid-insert.png)
+    ![Invalid Validation](../../../x-res/m/06/invalid-insert.png)
 
 - **Screenshot of valid Validation:**
 
-	![Valid Validation](../../../x-res/m/06/valid-insert.png)
+    ![Valid Validation](../../../x-res/m/06/valid-insert.png)

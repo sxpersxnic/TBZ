@@ -12,8 +12,6 @@ Think of Docker Swarm as an upgrade - from managing individual containers on one
 
 - [Getting Started](#getting-started)
 - [Docker Swarm vs. Docker Compose](#docker-swarm-vs-docker-compose)
-- [Docker Swarm Resources](#docker-swarm-resources)
-- [Docker Swarm vs. Kubernetes](#docker-swarm-vs-kubernetes)
 - [Docker Swarm Commands](#docker-swarm-commands)
 - [Sources](#sources)
 
@@ -208,7 +206,7 @@ flowchart TD
 ### Feature Comparison Table
 
 | Feature | Docker Compose | Docker Swarm |
-|---------|----------------|--------------|
+| --- | --- | --- |
 | **Deployment Scope** | Single host | Multiple hosts |
 | **High Availability** | No | Yes |
 | **Load Balancing** | External (nginx, etc.) | Built-in |
@@ -860,17 +858,17 @@ flowchart TD
 
 ### Feature Comparison Table
 
-| Feature                      | Docker Compose              | Docker Swarm     |
-| ---------------------------- | --------------------------- | ---------------- |
-| **Deployment Scope**         | Single host                 | Multiple hosts   |
-| **High Availability**        | No                          | Yes              |
-| **Load Balancing**           | External (nginx, etc.)      | Built-in         |
-| **Service Discovery**        | Container names/aliases     | Built-in DNS     |
-| **Rolling Updates**          | Manual restart              | Automated        |
-| **Scaling**                  | Single machine limits       | Cluster-wide     |
-| **Secrets Management**       | Environment variables/files | Built-in secrets |
-| **Configuration Complexity** | Simple                      | Moderate         |
-| **Learning Curve**           | Low                         | Medium           |
+| Feature | Docker Compose | Docker Swarm |
+| --- | --- | --- |
+| **Deployment Scope** | Single host | Multiple hosts |
+| **High Availability** | No | Yes |
+| **Load Balancing** | External (nginx, etc.) | Built-in |
+| **Service Discovery** | Container names/aliases | Built-in DNS |
+| **Rolling Updates** | Manual restart | Automated |
+| **Scaling** | Single machine limits | Cluster-wide |
+| **Secrets Management** | Environment variables/files | Built-in secrets |
+| **Configuration Complexity** | Simple | Moderate |
+| **Learning Curve** | Low | Medium |
 
 ## Getting Started
 

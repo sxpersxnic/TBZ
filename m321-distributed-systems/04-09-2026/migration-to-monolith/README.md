@@ -104,7 +104,7 @@ The LMS description contains the following features.
 The features can be grouped into several business domains.
 
 | Bounded Context | Main Responsibility |
-|---|---|
+| --- | --- |
 | Identity & Access | Users, roles, authentication and authorization |
 | Course Management | Courses, enrollment and course access |
 | Content Management | Modules and learning materials |
@@ -434,7 +434,7 @@ A core principle of the architecture is:
 > Every business entity has one authoritative owner.
 
 | Data | Owner |
-|---|---|
+| --- | --- |
 | Users | Identity & Access |
 | Roles | Identity & Access |
 | Permissions | Identity & Access |
@@ -764,7 +764,7 @@ The gateway should **not contain core business logic**. Business rules belong to
 # 11. Recommended Communication Strategy
 
 | Interaction | Communication |
-|---|---|
+| --- | --- |
 | Login | Synchronous REST |
 | Retrieve course | Synchronous REST |
 | Retrieve course content | Synchronous REST |

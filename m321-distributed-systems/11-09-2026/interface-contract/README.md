@@ -2,15 +2,15 @@
 
 ## Inhaltsverzeichnis
 
-* [1. Ausgangslage](#1-ausgangslage)
-* [2. Wahl des Schnittstellendefinitionsformats](#2-wahl-des-schnittstellendefinitionsformats)
-* [3. Umsetzung mit OpenAPI](#3-umsetzung-mit-openapi)
-* [4. Validierung der Schnittstellendefinition](#4-validierung-der-schnittstellendefinition)
-* [5. Umsetzung mit GraphQL](#5-umsetzung-mit-graphql)
-* [6. Vergleich der beiden Formate](#6-vergleich-der-beiden-formate)
-* [7. Persönliche Beurteilung](#7-persönliche-beurteilung)
-* [8. Fazit](#8-fazit)
-* [9. Challenge – Codegenerierung](#9-challenge--codegenerierung)
+- [1. Ausgangslage](#1-ausgangslage)
+- [2. Wahl des Schnittstellendefinitionsformats](#2-wahl-des-schnittstellendefinitionsformats)
+- [3. Umsetzung mit OpenAPI](#3-umsetzung-mit-openapi)
+- [4. Validierung der Schnittstellendefinition](#4-validierung-der-schnittstellendefinition)
+- [5. Umsetzung mit GraphQL](#5-umsetzung-mit-graphql)
+- [6. Vergleich der beiden Formate](#6-vergleich-der-beiden-formate)
+- [7. Persönliche Beurteilung](#7-persönliche-beurteilung)
+- [8. Fazit](#8-fazit)
+- [9. Challenge – Codegenerierung](#9-challenge--codegenerierung)
 
 ---
 
@@ -24,33 +24,33 @@ Die API soll folgende Funktionen anbieten:
 
 ### Bücher
 
-* Alle Bücher abrufen
-* Ein einzelnes Buch anhand seiner ID abrufen
-* Ein neues Buch erstellen
-* Ein bestehendes Buch aktualisieren
-* Ein Buch löschen
+- Alle Bücher abrufen
+- Ein einzelnes Buch anhand seiner ID abrufen
+- Ein neues Buch erstellen
+- Ein bestehendes Buch aktualisieren
+- Ein Buch löschen
 
 ### Autoren
 
-* Alle Autoren abrufen
-* Einen einzelnen Autor anhand seiner ID abrufen
-* Einen neuen Autor erstellen
-* Einen bestehenden Autor aktualisieren
+- Alle Autoren abrufen
+- Einen einzelnen Autor anhand seiner ID abrufen
+- Einen neuen Autor erstellen
+- Einen bestehenden Autor aktualisieren
 
 Ein Buch besitzt mindestens folgende Informationen:
 
-* ID
-* Titel
-* Beschreibung
-* Veröffentlichungsjahr
-* Autoren
+- ID
+- Titel
+- Beschreibung
+- Veröffentlichungsjahr
+- Autoren
 
 Ein Autor besitzt mindestens folgende Informationen:
 
-* ID
-* Name
-* Geburtsdatum
-* geschriebene Bücher
+- ID
+- Name
+- Geburtsdatum
+- geschriebene Bücher
 
 ---
 
@@ -88,17 +88,17 @@ Die Schnittstelle wurde mit **OpenAPI 3.1** beschrieben.
 
 Die wichtigsten Endpunkte sind:
 
-| Funktion              | HTTP-Methode | Endpoint              |
-| --------------------- | ------------ | --------------------- |
-| Alle Bücher abrufen   | `GET`        | `/books`              |
-| Buch nach ID abrufen  | `GET`        | `/books/{bookId}`     |
-| Buch erstellen        | `POST`       | `/books`              |
-| Buch aktualisieren    | `PUT`        | `/books/{bookId}`     |
-| Buch löschen          | `DELETE`     | `/books/{bookId}`     |
-| Alle Autoren abrufen  | `GET`        | `/authors`            |
-| Autor nach ID abrufen | `GET`        | `/authors/{authorId}` |
-| Autor erstellen       | `POST`       | `/authors`            |
-| Autor aktualisieren   | `PUT`        | `/authors/{authorId}` |
+| Funktion | HTTP-Methode | Endpoint |
+| --- | --- | --- |
+| Alle Bücher abrufen | `GET` | `/books` |
+| Buch nach ID abrufen | `GET` | `/books/{bookId}` |
+| Buch erstellen | `POST` | `/books` |
+| Buch aktualisieren | `PUT` | `/books/{bookId}` |
+| Buch löschen | `DELETE` | `/books/{bookId}` |
+| Alle Autoren abrufen | `GET` | `/authors` |
+| Autor nach ID abrufen | `GET` | `/authors/{authorId}` |
+| Autor erstellen | `POST` | `/authors` |
+| Autor aktualisieren | `PUT` | `/authors/{authorId}` |
 
 ## 3.1 Datenmodell
 
@@ -164,7 +164,7 @@ Die OpenAPI-Datei wurde auf ihre syntaktische Korrektheit überprüft.
 
 Dafür kann beispielsweise der **Swagger Editor** verwendet werden:
 
-https://editor.swagger.io/
+<https://editor.swagger.io/>
 
 Die Datei `openapi.yaml` wird in den Editor eingefügt. Der Editor überprüft anschliessend, ob die OpenAPI-Definition dem erwarteten Format entspricht.
 
@@ -275,23 +275,23 @@ Die Antwort kann ebenfalls vom Client bestimmt werden.
 
 OpenAPI und GraphQL können dieselben fachlichen Anforderungen abbilden. Die beiden Formate verfolgen jedoch unterschiedliche Ansätze.
 
-| Bereich          | OpenAPI / REST                       | GraphQL                            |
-| ---------------- | ------------------------------------ | ---------------------------------- |
-| Grundprinzip     | Ressourcen und HTTP-Endpunkte        | Daten und deren Beziehungen        |
-| Abrufen          | HTTP `GET`                           | `Query`                            |
-| Erstellen        | HTTP `POST`                          | `Mutation`                         |
-| Aktualisieren    | HTTP `PUT`                           | `Mutation`                         |
-| Löschen          | HTTP `DELETE`                        | `Mutation`                         |
-| Endpunkte        | Mehrere Endpunkte                    | Normalerweise ein GraphQL-Endpunkt |
-| Schema           | OpenAPI Schema                       | GraphQL Schema                     |
-| Datenfelder      | Vom Server definiert                 | Vom Client auswählbar              |
-| Beziehungen      | Über Responses oder weitere Requests | Direkt verschachtelbar             |
-| HTTP-Statuscodes | Zentrale Bedeutung                   | Weniger zentral                    |
-| Caching          | Sehr gut mit HTTP umsetzbar          | Komplexer                          |
-| Overfetching     | Kann auftreten                       | Wird reduziert                     |
-| Underfetching    | Kann auftreten                       | Wird reduziert                     |
-| Einstieg         | Einfacher                            | Etwas komplexer                    |
-| Tooling          | Sehr umfangreich                     | Umfangreich                        |
+| Bereich | OpenAPI / REST | GraphQL |
+| --- | --- | --- |
+| Grundprinzip | Ressourcen und HTTP-Endpunkte | Daten und deren Beziehungen |
+| Abrufen | HTTP `GET` | `Query` |
+| Erstellen | HTTP `POST` | `Mutation` |
+| Aktualisieren | HTTP `PUT` | `Mutation` |
+| Löschen | HTTP `DELETE` | `Mutation` |
+| Endpunkte | Mehrere Endpunkte | Normalerweise ein GraphQL-Endpunkt |
+| Schema | OpenAPI Schema | GraphQL Schema |
+| Datenfelder | Vom Server definiert | Vom Client auswählbar |
+| Beziehungen | Über Responses oder weitere Requests | Direkt verschachtelbar |
+| HTTP-Statuscodes | Zentrale Bedeutung | Weniger zentral |
+| Caching | Sehr gut mit HTTP umsetzbar | Komplexer |
+| Overfetching | Kann auftreten | Wird reduziert |
+| Underfetching | Kann auftreten | Wird reduziert |
+| Einstieg | Einfacher | Etwas komplexer |
+| Tooling | Sehr umfangreich | Umfangreich |
 
 ## 6.1 Unterschied bei Datenabfragen
 
@@ -449,6 +449,6 @@ Für grössere Projekte halte ich Codegenerierung besonders bei OpenAPI und Grap
 └── schema.graphql
 ```
 
-* `README.md` – Dokumentation und Vergleich
-* `openapi.yaml` – OpenAPI-Schnittstellendefinition
-* `schema.graphql` – GraphQL-Schnittstellendefinition
+- `README.md` – Dokumentation und Vergleich
+- `openapi.yaml` – OpenAPI-Schnittstellendefinition
+- `schema.graphql` – GraphQL-Schnittstellendefinition

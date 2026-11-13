@@ -30,10 +30,10 @@
 
 **Region:** US East (N. Virginia)
 
-![Kostenschätzung des Webservers](/m346-Cloud/Images/KN10/AWS-WEBSERVER.png)
-![Kostenschätzung des Datenbankservers](/m346-Cloud/Images/KN10/AWS-DATENBANKSERVER.png)
-![Kostenschätzung des Backup-Speichers](/m346-Cloud/Images/KN10/AWS-BACKUP.png)
-![Gesamte Kostenschätzung](/m346-Cloud/Images/KN10/AWS-TOTAL.png)
+![Kostenschätzung des Webservers](../../../x-res/10/AWS-WEBSERVER.png)
+![Kostenschätzung des Datenbankservers](../../../x-res/10/AWS-DATENBANKSERVER.png)
+![Kostenschätzung des Backup-Speichers](../../../x-res/10/AWS-BACKUP.png)
+![Gesamte Kostenschätzung](../../../x-res/10/AWS-TOTAL.png)
 
 ## Erklärung der Auswahl ##
 

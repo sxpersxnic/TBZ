@@ -2,14 +2,14 @@
 
 ## Exercise 01 - Pure vs. Impure
 
-|Exercise|Returns a value|Depends only on parameters|No state change|Pure/Impure|
-|--------|---------------|-------------------------|---------------|------------|
-|1.1 - addToCart|Yes|No|No|Impure|
-|1.2 - add|Yes|Yes|Yes|Pure|
-|1.3 - firstCharacter|No|Yes|Yes|Impure|
-|1.4 - multiplyWithRandom|Yes|No|Yes|Impure|
-|1.5 - divideNumbers|No|Yes|Yes|Impure|
-|1.6 - printAndReturnString|Yes|No|No|Impure|
+| Exercise | Returns a value | Depends only on parameters | No state change | Pure/Impure |
+| --- | --- | --- | --- | --- |
+| 1.1 - addToCart | Yes | No | No | Impure |
+| 1.2 - add | Yes | Yes | Yes | Pure |
+| 1.3 - firstCharacter | No | Yes | Yes | Impure |
+| 1.4 - multiplyWithRandom | Yes | No | Yes | Impure |
+| 1.5 - divideNumbers | No | Yes | Yes | Impure |
+| 1.6 - printAndReturnString | Yes | No | No | Impure |
 
 ## Exercise 02 - Refactor to Pure Functions
 

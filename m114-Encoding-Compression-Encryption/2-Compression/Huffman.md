@@ -5,26 +5,31 @@ Bei der **Huffman-Codierung** handelt es sich um ein **verlustfreies** Kompressi
 ## Beispiel "HEDGEHOG"
 
 1. Buchstabenhäufigkeit:
-  |Char|Count|
-  |----|-----|
-  |D|1|
-  |O|1|
-  |H|2|
-  |E|2|
-  |G|2|
+  | Char | Count |
+  | --- | --- |
+  | D | 1 |
+  | O | 1 |
+  | H | 2 |
+  | E | 2 |
+  | G | 2 |
 
 2. Binary-Tree
     1. Node für jedes Zeichen (key) und Häufigkeit (value).
+
     ```css
     (D, 1)  (O, 1) (H, 2) (E, 2) (G, 2)
     ```
+
     2. Nodes mit geringsten Häufigkeit verbinden zu neuer Node mit der Summe der Child-Nodes
+
     ```css
         (DO,2)
         /   \
     (D, 1)  (O, 1) (H, 2) (E, 2) (G, 2)
     ```
+
     3. Wiederholen, bis nur noch eine Node übrig ist (root).
+
     ```css
                    (DOHEG|8)
                      /   \
@@ -36,6 +41,7 @@ Bei der **Huffman-Codierung** handelt es sich um ein **verlustfreies** Kompressi
     ```
 
 3. Codes zuweisen
+
   ```css
                0 (DOHEG|8) 1
                   /     \
@@ -56,4 +62,3 @@ Bei der **Huffman-Codierung** handelt es sich um ein **verlustfreies** Kompressi
   = 000 0001 01 10 11
   = 0000001011011
   ```
-

@@ -73,9 +73,9 @@ graph LR
 
 ### Environment Variables
 
-|Variable|Description|Default Value|
-|---|---|---|
-|`ACCOUNT_SERVICE_URL`|URL of the AccountService|`http://localhost:8080`|
+| Variable | Description | Default Value |
+| --- | --- | --- |
+| `ACCOUNT_SERVICE_URL` | URL of the AccountService | `http://localhost:8080` |
 
 ## Run Locally
 
@@ -85,7 +85,7 @@ go run main.go
 
 ## Docker
 
-- Dockerfile: [here](./Dockerfile)
+- [Dockerfile](./Dockerfile)
 
 ### Build and Run
 
@@ -103,6 +103,6 @@ docker run -d \
 ## Endpoints
 
 | Endpoint | Method | Request Body | Request Headers | Response Body | Response | Description |
-| -------- | ------ | ------------ | --------------- | ------------- | -------- | ----------- |
-| `/buy`  | <span style="color:orange">POST</span> | `{ id: int, amount: int }` | Content-Type: text/json | { } | boolean | This Endpoint buys Cryptos for the user and writes it to the database |
-| `/sell`  | <span style="color:orange">POST</span> | `{ id: int, amount: int }` | Content-Type: text/json | { } | boolean | This Endpoint sells Cryptos for the user and updates the salary in the database. In case more are spent than owned, the salary is simply set to 0 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `/buy` | <span style="color:orange">POST</span> | `{ id: int, amount: int }` | Content-Type: text/json | { } | boolean | This Endpoint buys Cryptos for the user and writes it to the database |
+| `/sell` | <span style="color:orange">POST</span> | `{ id: int, amount: int }` | Content-Type: text/json | { } | boolean | This Endpoint sells Cryptos for the user and updates the salary in the database. In case more are spent than owned, the salary is simply set to 0 |

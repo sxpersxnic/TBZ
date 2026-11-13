@@ -4,7 +4,7 @@
 
 - **Screenshot of error at connection with wrong authentication source:**
 
-	![Authentication Error](../../../x-res/m/05/auth-error.png)
+    ![Authentication Error](../../../x-res/m/05/auth-error.png)
 
 - [User Creation Script (Shell)](create-user.sh)
 - [User Creation Script (Mongosh)](create-user.mongosh.txt)
@@ -91,7 +91,7 @@
 ### Difference: Replication vs. Partitioning
 
 | Replication | Partitioning (Sharding) |
-|-------------|-------------------------|
+| --- | --- |
 | Duplicates Data | Distributes Data horizontally to multiple Servers |
 | Provides High Availability | Provides Scalability |
 | Primary and Secondary Structure | Shard key-based Data Distribution |

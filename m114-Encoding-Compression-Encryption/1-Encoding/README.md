@@ -2,24 +2,24 @@
 
 1. Ergänzen Sie die Tabelle. Studieren Sie anschliessend Ihre fertig ausgefüllte Tabelle, insbesondere die Kolonnen mit den Binärwerten. Was stellen Sie fest?
 
-|DEC|HEX|BIN (8)|BIN (4)|BIN (2)|BIN (1)|
-|---|---|-------|-------|-------|-------|
-|0|0|0|0|0|0|
-|1|1|0|0|0|1|
-|2|2|0|0|1|0|
-|3|3|0|0|1|1|
-|4|4|0|1|0|0|
-|5|5|0|1|0|1|
-|6|6|0|1|1|0|
-|7|7|0|1|1|1|
-|8|8|1|0|0|0|
-|9|9|1|0|0|1|
-|10|A|1|0|1|0|
-|11|B|1|0|1|1|
-|12|C|1|1|0|0|
-|13|D|1|1|0|1|
-|14|E|1|1|1|0|
-|15|F|1|1|1|1|
+| DEC | HEX | BIN (8) | BIN (4) | BIN (2) | BIN (1) |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 0 | 0 | 0 | 0 | 0 |
+| 1 | 1 | 0 | 0 | 0 | 1 |
+| 2 | 2 | 0 | 0 | 1 | 0 |
+| 3 | 3 | 0 | 0 | 1 | 1 |
+| 4 | 4 | 0 | 1 | 0 | 0 |
+| 5 | 5 | 0 | 1 | 0 | 1 |
+| 6 | 6 | 0 | 1 | 1 | 0 |
+| 7 | 7 | 0 | 1 | 1 | 1 |
+| 8 | 8 | 1 | 0 | 0 | 0 |
+| 9 | 9 | 1 | 0 | 0 | 1 |
+| 10 | A | 1 | 0 | 1 | 0 |
+| 11 | B | 1 | 0 | 1 | 1 |
+| 12 | C | 1 | 1 | 0 | 0 |
+| 13 | D | 1 | 1 | 0 | 1 |
+| 14 | E | 1 | 1 | 1 | 0 |
+| 15 | F | 1 | 1 | 1 | 1 |
 
 **Schlussfolgerung:** Das Dezimalsystem beruht auf Basis 10, das Hexadezimalsystem auf Basis 16 und das Binärsystem auf Basis 2.
 
@@ -43,11 +43,11 @@
 
 Nutzt man die selbe Technik, wie für das schriftliche Addieren, ist es kinderleicht. Da das nächste *Bit*, das doppelte des betrachteten *Bit* ist, kann man es sich so merken: Sind beide Bits von Zahl-A und Zahl-B 1 oder 0, schreibt man 0 und rechnet beim nächsten *Bit* mit einem *Bit* an der Stelle mehr. Ist nur ein *Bit* der Zahl-A oder Zahl-B auf 1, schreibt man 1.
 
-|    |    |    |
-|----|----|----|
-|0000|1101|1001|
-|0000|0111|0101|
-|**0001**|**0100**|**1110**|
+| | | |
+| --- | --- | --- |
+| 0000 | 1101 | 1001 |
+| 0000 | 0111 | 0101 |
+| **0001** | **0100** | **1110** |
 
 6. Was könnten die beiden folgenden binären Wert für eine Bedeutung haben?
 

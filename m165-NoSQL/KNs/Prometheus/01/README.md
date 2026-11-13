@@ -4,22 +4,22 @@
 
 ### Prometheus Node-Exporter Metrics
 
-![Prometheus Node-Exporter Metrics](/m165-NoSQL/x-resources/p/01/p-metrics.png)
+![Prometheus Node-Exporter Metrics](../../../x-res/p/01/p-metrics.png)
 
 ### Prometheus Dashboard
 
-![Prometheus Dashboard](/m165-NoSQL/x-resources/p/01/p-dashboard.png)
+![Prometheus Dashboard](../../../x-res/p/01/p-dashboard.png)
 
 ### Grafana Dashboard
 
 - Username: `admin`
 - Password: `admin`
 
-![Grafana Dashboard](/m165-NoSQL/x-resources/p/01/g-dashboard.png)
+![Grafana Dashboard](../../../x-res/p/01/g-dashboard.png)
 
 ### Grafana Metrics for Prometheus
 
-![Grafana Metrics for Prometheus](/m165-NoSQL/x-resources/p/01/g-metrics.png)
+![Grafana Metrics for Prometheus](../../../x-res/p/01/g-metrics.png)
 
 ## B. Explanation Cloud-Init
 
@@ -27,7 +27,7 @@
 
 **Definition:**
 
-A _scrape_ in Prometheus refers to the act of collecting metrics data by periodically querying endpoints (usually `/metrics`) exposed by applications or services. Prometheus works on a **pull model**, where it actively scrapes metrics from configured targets.
+A *scrape* in Prometheus refers to the act of collecting metrics data by periodically querying endpoints (usually `/metrics`) exposed by applications or services. Prometheus works on a **pull model**, where it actively scrapes metrics from configured targets.
 
 **Example:**
 
@@ -89,8 +89,7 @@ They are declared in external **YAML** files (e.g. `rules.yml`) and referenced v
 
 ### 3. Steps to Push Custom Data into Prometheus
 
-Prometheus uses **pull-based architecture** - meaning _you expose_ the data via a `/metrics` endpoint HTTP endpoint, and Prometheus scrapes it.
-
+Prometheus uses **pull-based architecture** - meaning *you expose* the data via a `/metrics` endpoint HTTP endpoint, and Prometheus scrapes it.
 
 **Step-by-step:**
 

@@ -1,30 +1,38 @@
-# PH-Studio Blog WebApp for TBZ Module 426
+# M426 – Software mit agilen Methoden entwickeln
 
-## Overview
+> **Scrum** · Year 2 (2024/25) · Autumn semester (HS) · Done
 
-- [About](#about)
-- [Get Started with Vercel](#get-started-with-vercel)
-- [Get Started Locally](#get-started-locally)
-- [Technical details](#technical-details)
-- [License](#license)
+Developing software with Scrum. The module project is **PH-Studio Blog**, a blog web app built with Next.js, TypeScript, PostgreSQL and Drizzle ORM and deployed on Vercel.
 
-## About
+## Contents
 
-### Connect to your friends like never before
+| Section | Description |
+| --- | --- |
+| [About](#about) | Features of the blog app |
+| [Get started with Vercel](#get-started-with-vercel) | Deploying the app to Vercel |
+| [Get started locally](#get-started-locally) | Running the app on your machine |
+| [Technical details](#technical-details) | Tech stack |
+| [Source code](./src/) | Application source |
+
+## PH-Studio Blog
+
+### About
+
+#### Connect to your friends like never before
 
 With simple posts, you can now let your family, friends and everyone in the world know what is going on in your life!
 
-### Features
+#### Features
 
 Our App comes with many easy to use features, that make your experience even better! **Check them out:**
 
-#### Create
+##### Create
 
 Blog about your life with simple posts. In the Navigationbar, click on the *Plus-Icon* to get to the *Createform*. Enter your title to catch viewers and tell them your story in the body of your post:
 
 ![Screenshot of the Createform](./public/doc/CREATEFORM.png)
 
-#### Edit
+##### Edit
 
 You forgot to mention something in your post? Nothing to worry about!
 
@@ -32,7 +40,7 @@ You can now edit your posts by simply navigating to your profile. Click on the *
 
 ![Screenshot of the Editform](./public/doc/EDITFORM.png)
 
-#### View
+##### View
 
 You can view posts in many different ways:
 
@@ -51,19 +59,19 @@ You can view posts in many different ways:
 
    ![Screenshot of the Postpage](./public/doc/POSTPAGE.png)
 
-#### Sort
+##### Sort
 
 By default, the posts on the *Homepage*, are sorted by the creation date of the posts. If you prefer to sort them by the username of the author, simply select your preference through the *Sort-Dropdown* on the *Homepage*.
 
 ![Screenshot of the Sort-Dropdown](./public/doc/SORT.png)
 
-#### Search
+##### Search
 
 If you know only the username of a person or the title of a post you would like to read. Enter the term you search for in the *Searchfield* on the *Homepage*.
 
 ![Screenshot of the Searchfield](./public/doc/SEARCH.png)
 
-#### Delete
+##### Delete
 
 When you have posts you would not like to be on your profile, delete them and nobody will remember them.
 
@@ -72,7 +80,7 @@ On your profile, select the *Trash-Icon*, on the right of the post.
 
 ![Screenshot of the Delete feature](./public/doc/DELETE.png)
 
-## Get Started with Vercel
+### Get Started with Vercel
 
 1. Clone the Repository
 
@@ -97,7 +105,7 @@ On your profile, select the *Trash-Icon*, on the right of the post.
 10. Seed your database by either navigating to the api route in your current deployment `url-to-your-deployment/api/seed`.
     If you prefer to seed the database locally, read the following guide to get your app running locally.
 
-## Get Started Locally
+### Get Started Locally
 
 1. Clone the Repository
 
@@ -137,9 +145,9 @@ On your profile, select the *Trash-Icon*, on the right of the post.
 
 Don't worry if you want to deploy your project later on, just follow the [guide above](#get-started-with-vercel).
 
-## Technical details
+### Technical details
 
-### [Next.js](https://nextjs.org)
+#### [Next.js](https://nextjs.org)
 
 Next.js is a React framework for building full-stack web applications. You use React Components to build user interfaces, and Next.js for additional features and optimizations.
 
@@ -147,15 +155,15 @@ Under the hood, Next.js also abstracts and automatically configures tooling need
 
 Whether you're an individual developer or part of a larger team, Next.js can help you build interactive, dynamic, and fast React applications.
 
-### [Typescript](https://typescriptlang.org/)
+#### [Typescript](https://typescriptlang.org/)
 
 TypeScript adds additional syntax to JavaScript to support a tighter integration with your editor. Catch errors early in your editor.
 
-### [PostgreSQL](https://postgresql.org/)
+#### [PostgreSQL](https://postgresql.org/)
 
 PostgreSQL is a powerful, open source object-relational database system with over 35 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
 
-### [Drizzle ORM](https://orm.drizzle.team)
+#### [Drizzle ORM](https://orm.drizzle.team)
 
 Drizzle ORM is a headless TypeScript ORM with a head.
 
@@ -164,18 +172,22 @@ lets you do things your way, and is there when you need it.
 
 It’s the only ORM with both relational and SQL-like query APIs, providing you the best of both worlds when it comes to accessing your relational data. Drizzle is lightweight, performant, typesafe, non-lactose, gluten-free, sober, flexible and serverless-ready by design. Drizzle is not just a library, it’s an experience.
 
-### [TailwindCSS](https://tailwindcss.com)
+#### [TailwindCSS](https://tailwindcss.com)
 
 Rapidly build modern websites without ever leaving your HTML.
 A utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-center` and `rotate-90` that can be composed to build any design, directly in your markup.
 
-### [Vercel](https://vercel.com)
+#### [Vercel](https://vercel.com)
 
 Vercel is a platform for developers that provides the tools, workflows, and infrastructure you need to build and deploy your web apps faster, without the need for additional configuration.
 Vercel supports popular frontend frameworks out-of-the-box, and its scalable, secure infrastructure is globally distributed to serve content from data centers near your users for optimal speeds.
 
 During development, Vercel provides tools for real-time collaboration on your projects such as automatic preview and production environments, and comments on preview deployments.
 
-## License
+### License
 
-This repository is licensed with the [MIT](LICENSE) license.
+This project is licensed under the [MIT](../LICENSE) license.
+
+---
+
+[← Back to overview](../README.md)

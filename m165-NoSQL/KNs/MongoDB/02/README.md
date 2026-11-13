@@ -34,25 +34,25 @@
 ### Explanation: Logical Data Model
 
 - **BAND**:
- 	- `id`: Unique identifier.
- 	- `name`: Name of the band.
- 	- `formed`: Date the band was formed.
- 	- `genre`: Genre of the band.
+     - `id`: Unique identifier.
+     - `name`: Name of the band.
+     - `formed`: Date the band was formed.
+     - `genre`: Genre of the band.
 - **MUSICIAN**:
- 	- `id`: Unique identifier.
- 	- `name`: Name of the musician.
- 	- `birth_date`: Date of birth of the musician.
- 	- `instrument`: Instrument played by the musician.
+     - `id`: Unique identifier.
+     - `name`: Name of the musician.
+     - `birth_date`: Date of birth of the musician.
+     - `instrument`: Instrument played by the musician.
 - **ALBUM**:
- 	- `id`: Unique identifier.
- 	- `title`: Title of the album.
- 	- `release_date`: Release date of the album.
- 	- `band_id`: Foreign key referencing the band.
+     - `id`: Unique identifier.
+     - `title`: Title of the album.
+     - `release_date`: Release date of the album.
+     - `band_id`: Foreign key referencing the band.
 - **SONG**:
- 	- `id`: Unique identifier.
- 	- `title`: Title of the song.
- 	- `duration`: Duration of the song in seconds.
- 	- `album_id`: Foreign key referencing the album.
+     - `id`: Unique identifier.
+     - `title`: Title of the song.
+     - `duration`: Duration of the song in seconds.
+     - `album_id`: Foreign key referencing the album.
 
 **Relationships**:
 
