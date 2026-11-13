@@ -1,0 +1,1598 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>M324 DevOps Spickzettel</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Aura. Light = neumorphic (one ground), dark = clay. Raised = press, inset = input, flush = read. */
+:root{
+  --ground:#e6e8ec; --well:#dde0e5; --lit:#e6e8ec; --shade:#e6e8ec; --knob:#e6e8ec;
+  --ink:#16181d; --ink-2:#474c55; --ink-3:#5a606a; --edge:#767c86; --sep:#c8ccd3;
+  --accent:#0057d4; --accent-fill:#0057d4; --on-accent:#ffffff; --focus:#0057d4;
+  --good:#176b3d; --warn:#8f5400; --bad:#ba2418;
+  --product:#a85a0c; --solution:#0b7480; --build:#5541cf; --run:#22784a; --platform:#5a606a;
+  --raise-0:-2px -2px 4px rgba(255,255,255,.9),2px 2px 5px rgba(140,148,164,.45);
+  --raise-1:-4px -4px 10px rgba(255,255,255,.95),4px 4px 10px rgba(140,148,164,.45);
+  --raise-2:-10px -10px 24px rgba(255,255,255,.9),10px 10px 24px rgba(140,148,164,.42);
+  --raise-hover:-6px -6px 14px #fff,6px 6px 14px rgba(140,148,164,.5);
+  --press:inset 3px 3px 7px rgba(140,148,164,.5),inset -3px -3px 7px rgba(255,255,255,.9);
+  --inset:inset 2px 2px 5px rgba(140,148,164,.45),inset -2px -2px 5px rgba(255,255,255,.85);
+  --aura:0 0 0 1px rgba(0,87,212,.38),0 0 0 6px rgba(0,87,212,.08),0 18px 48px -18px rgba(0,87,212,.55);
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Segoe UI",system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s6:24px;--s8:32px;--s12:48px;--s16:64px;
+  --rs:10px;--rm:14px;--rl:22px;--rx:30px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ground:#1c1f24; --well:#17191d; --lit:#363941; --shade:#2d3037; --knob:#50545e;
+  --ink:#eef0f3; --ink-2:#b8bdc5; --ink-3:#a3a8b1; --edge:#858b95; --sep:#34373d;
+  --accent:#6aa6ff; --accent-fill:#2b66d4; --focus:#6aa6ff;
+  --good:#57ca8f; --warn:#ecb24f; --bad:#ff8a7f;
+  --product:#ec9c44; --solution:#3bbac6; --build:#a196ff; --run:#62c994; --platform:#a3a8b1;
+  --raise-0:2px 3px 6px rgba(0,0,0,.5),inset 1px 1px 1px rgba(255,255,255,.1),inset -1px -1px 2px rgba(0,0,0,.3);
+  --raise-1:6px 8px 16px rgba(0,0,0,.55),inset 2px 2px 3px rgba(255,255,255,.12),inset -3px -3px 6px rgba(0,0,0,.3);
+  --raise-2:10px 16px 32px rgba(0,0,0,.55),inset 3px 3px 6px rgba(255,255,255,.09),inset -6px -6px 14px rgba(0,0,0,.28);
+  --raise-hover:8px 12px 22px rgba(0,0,0,.6),inset 2px 2px 3px rgba(255,255,255,.15),inset -3px -3px 6px rgba(0,0,0,.3);
+  --press:inset 4px 4px 10px rgba(0,0,0,.55),inset -2px -2px 4px rgba(255,255,255,.05);
+  --inset:inset 3px 3px 8px rgba(0,0,0,.5),inset -2px -2px 4px rgba(255,255,255,.04);
+  --aura:0 0 0 1px rgba(92,157,255,.5),0 0 0 6px rgba(92,157,255,.1),0 18px 48px -16px rgba(92,157,255,.45);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --ground:#1c1f24; --well:#17191d; --lit:#363941; --shade:#2d3037; --knob:#50545e;
+  --ink:#eef0f3; --ink-2:#b8bdc5; --ink-3:#a3a8b1; --edge:#858b95; --sep:#34373d;
+  --accent:#6aa6ff; --accent-fill:#2b66d4; --focus:#6aa6ff;
+  --good:#57ca8f; --warn:#ecb24f; --bad:#ff8a7f;
+  --product:#ec9c44; --solution:#3bbac6; --build:#a196ff; --run:#62c994; --platform:#a3a8b1;
+  --raise-0:2px 3px 6px rgba(0,0,0,.5),inset 1px 1px 1px rgba(255,255,255,.1),inset -1px -1px 2px rgba(0,0,0,.3);
+  --raise-1:6px 8px 16px rgba(0,0,0,.55),inset 2px 2px 3px rgba(255,255,255,.12),inset -3px -3px 6px rgba(0,0,0,.3);
+  --raise-2:10px 16px 32px rgba(0,0,0,.55),inset 3px 3px 6px rgba(255,255,255,.09),inset -6px -6px 14px rgba(0,0,0,.28);
+  --raise-hover:8px 12px 22px rgba(0,0,0,.6),inset 2px 2px 3px rgba(255,255,255,.15),inset -3px -3px 6px rgba(0,0,0,.3);
+  --press:inset 4px 4px 10px rgba(0,0,0,.55),inset -2px -2px 4px rgba(255,255,255,.05);
+  --inset:inset 3px 3px 8px rgba(0,0,0,.5),inset -2px -2px 4px rgba(255,255,255,.04);
+  --aura:0 0 0 1px rgba(92,157,255,.5),0 0 0 6px rgba(92,157,255,.1),0 18px 48px -16px rgba(92,157,255,.45);
+  color-scheme:dark;
+}
+:root[data-theme="light"]{color-scheme:light}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 15px/22px var(--sans);letter-spacing:-.1px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ground)}
+a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;color:var(--ink)}
+h1,h2{font-size:34px;line-height:40px;font-weight:700;letter-spacing:-.8px}
+h3{font-size:22px;line-height:28px;font-weight:650;letter-spacing:-.4px}
+h4{font-size:17px;line-height:22px;font-weight:600;letter-spacing:-.2px}
+p{margin:0}
+code,kbd,pre,.mono{font-family:var(--mono);font-size:13px;line-height:20px}
+code{color:var(--ink)}
+.fn{font-size:13px;line-height:18px;color:var(--ink-3)}
+.d2{color:var(--ink-2)}.d3{color:var(--ink-3)}
+.num{font-variant-numeric:tabular-nums}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ground);border-bottom:1px solid var(--sep)}
+.bar-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:var(--s4);min-height:64px;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:15px;color:var(--ink);text-decoration:none;white-space:nowrap}
+.brand svg{flex:none}
+.bar .grow{flex:1}
+.chips{display:none;overflow-x:auto;scrollbar-width:none;gap:6px;padding:6px 2px}
+.chips::-webkit-scrollbar{display:none}
+.chips a{white-space:nowrap;font-size:13px;line-height:18px;padding:6px 10px;border-radius:var(--rs);color:var(--ink-2);text-decoration:none}
+.chips a.on{color:var(--accent);font-weight:600}
+.shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:var(--s12);padding-block:var(--s8) var(--s16);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.rail{position:sticky;top:calc(88px + env(safe-area-inset-top,0px));align-self:start;max-height:calc(100vh - 110px);overflow:auto;padding:4px 4px 24px}
+.rail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.rail a{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:var(--rs);color:var(--ink-2);text-decoration:none;font-size:14px;line-height:20px}
+.rail a .n{font-family:var(--mono);font-size:12px;color:var(--ink-3);width:14px}
+.rail a:hover{color:var(--ink)}
+.rail a.on{color:var(--accent);font-weight:600}
+.rail a.on .n{color:var(--accent)}
+.rail hr{border:0;border-top:1px solid var(--sep);margin:10px 0}
+main{min-width:0;display:flex;flex-direction:column;gap:var(--s16)}
+@media (max-width:1020px){.shell{grid-template-columns:minmax(0,1fr)}.rail{display:none}.chips{display:flex}.bar-in{flex-wrap:wrap;row-gap:0}.chips{order:3;flex-basis:100%;margin-inline:-4px}}
+
+section.ch{display:flex;flex-direction:column;gap:var(--s8);scroll-margin-top:84px}
+.ch-head{display:flex;flex-direction:column;gap:var(--s3);padding-top:var(--s8);border-top:1px solid var(--sep)}
+.ch-head .k{font-family:var(--mono);font-size:13px;color:var(--ink-3)}
+.lead{font-size:17px;line-height:26px;color:var(--ink-2);max-width:68ch}
+.blk{display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:84px}
+.prose{max-width:68ch;display:flex;flex-direction:column;gap:var(--s3)}
+.prose p,.prose li{color:var(--ink-2)}
+.prose strong{color:var(--ink);font-weight:600}
+ul.dl,ol.dl{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;color:var(--ink-2);max-width:68ch}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:var(--s6)}
+.cols3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:var(--s6)}
+.cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:var(--s6) var(--s8)}
+.cols5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s6)}
+@media (max-width:1180px){.cols5{grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}}
+.cols>*,.cols2>*,.cols3>*,.cols5>*{min-width:0}
+
+.obj{display:flex;flex-direction:column;gap:6px;padding-top:var(--s3);border-top:1px solid var(--sep)}
+.obj h4{display:flex;align-items:baseline;gap:8px}
+.obj .says{color:var(--ink-2)}
+.obj .so{color:var(--ink)}
+.obj .so::before{content:"Regel: ";font-weight:600;color:var(--ink)}
+.obj .meta{font-size:12px;line-height:16px;color:var(--ink-3)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:999px;flex:none;background:var(--platform);transform:translateY(-1px)}
+.dot.product{background:var(--product)}.dot.solution{background:var(--solution)}.dot.build{background:var(--build)}.dot.run{background:var(--run)}.dot.acc{background:var(--accent)}
+.lbl{display:inline-flex;align-items:center;gap:6px}
+.big{font-family:var(--mono);font-size:28px;line-height:32px;font-weight:700;color:var(--ink);letter-spacing:-.5px}
+
+figure{margin:0;display:flex;flex-direction:column;gap:var(--s3);min-width:0}
+figcaption{font-size:13px;line-height:18px;color:var(--ink-3);max-width:72ch}
+.fig{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.fig svg{display:block;width:100%;height:auto}
+.fig.wide svg{min-width:680px}
+.fig.mid svg{min-width:540px}
+svg text{font-family:var(--sans)}
+.t{fill:var(--ink);font-size:13px}
+.t2{fill:var(--ink-2);font-size:12px}
+.t3{fill:var(--ink-3);font-size:11px}
+.tl{fill:var(--ink);font-size:15px}
+.tb{font-weight:600}
+.tm{font-family:var(--mono)!important}
+.tw2{fill:#fff}
+.ln{stroke:var(--edge);stroke-width:1.25;fill:none}
+.ln2{stroke:var(--sep);stroke-width:1;fill:none}
+.lnd{stroke:var(--edge);stroke-width:1.25;fill:none;stroke-dasharray:3 4}
+.la{stroke:var(--accent);stroke-width:2;fill:none}
+.lw{stroke-width:3}
+.fa{fill:var(--accent)}.fw{fill:var(--well)}.fg{fill:var(--ground)}.fi{fill:var(--ink)}.fe{fill:var(--edge)}.fsep{fill:var(--sep)}
+.fp{fill:var(--product)}.fs{fill:var(--solution)}.fb{fill:var(--build)}.fr{fill:var(--run)}.fpl{fill:var(--platform)}
+.sp{stroke:var(--product)}.ss{stroke:var(--solution)}.sb{stroke:var(--build)}.sr{stroke:var(--run)}.spl{stroke:var(--platform)}.sbad{stroke:var(--bad)}.sgood{stroke:var(--good)}
+.fgood{fill:var(--good)}.fwarn{fill:var(--warn)}.fbad{fill:var(--bad)}
+.box{fill:var(--well);stroke:var(--edge);stroke-width:1}
+.boxg{fill:var(--ground);stroke:var(--edge);stroke-width:1}
+.boxa{fill:var(--ground);stroke:var(--accent);stroke-width:2}
+.op2{opacity:.18}.op3{opacity:.3}
+
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:20px}
+th{text-align:left;font-weight:600;color:var(--ink);padding:8px 12px 8px 0;border-bottom:1px solid var(--edge);vertical-align:bottom;white-space:nowrap}
+td{padding:9px 12px 9px 0;border-bottom:1px solid var(--sep);color:var(--ink-2);vertical-align:top}
+td:first-child{color:var(--ink);font-weight:500}
+.tw table{min-width:640px}
+.tw.sm table{min-width:460px}
+
+.st{font-size:12px;line-height:16px;font-weight:500;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.st::before{content:"";width:7px;height:7px;border-radius:99px;background:currentColor}
+.st.good{color:var(--good)}.st.warn{color:var(--warn)}.st.bad{color:var(--bad)}.st.idle{color:var(--ink-3)}
+
+.btn{appearance:none;border:0;font:550 15px/20px var(--sans);letter-spacing:-.1px;color:var(--ink);background:linear-gradient(145deg,var(--lit),var(--shade));box-shadow:var(--raise-1);border-radius:var(--rm);padding:10px 16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:box-shadow 180ms var(--ease);min-height:44px}
+.btn:hover{box-shadow:var(--raise-hover)}
+.btn:active{box-shadow:var(--press)}
+.btn.q{color:var(--accent)}
+.btn.p{background:var(--accent-fill);color:var(--on-accent)}
+.btn.sm{min-height:36px;padding:7px 12px;font-size:14px;border-radius:var(--rs)}
+.seg{align-self:flex-start;display:inline-flex;flex-wrap:wrap;gap:2px;padding:4px;border-radius:22px;background:var(--well);box-shadow:var(--inset)}
+.seg button{appearance:none;border:0;background:transparent;font:550 13px/18px var(--sans);color:var(--ink-2);padding:6px 12px;border-radius:999px;cursor:pointer;transition:box-shadow 180ms var(--ease);min-height:30px}
+.seg button[aria-pressed="true"]{background:linear-gradient(145deg,var(--lit),var(--shade));box-shadow:var(--raise-1);color:var(--accent);font-weight:650}
+.panel{background:linear-gradient(145deg,var(--lit),var(--shade));box-shadow:var(--raise-2);border-radius:var(--rx);padding:var(--s6);display:flex;flex-direction:column;gap:var(--s4);min-width:0}
+.panel h4 .k{font-family:var(--mono);font-size:12px;color:var(--ink-3);font-weight:500;margin-left:6px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label,.field .l{font-size:13px;line-height:18px;color:var(--ink-2);display:flex;justify-content:space-between;gap:8px}
+.field label b{color:var(--ink);font-variant-numeric:tabular-nums}
+.inp{appearance:none;font:400 15px/20px var(--sans);color:var(--ink);background:var(--well);box-shadow:var(--inset),inset 0 -1px 0 var(--edge);border:0;border-radius:var(--rm);padding:11px 14px;min-height:44px;width:100%;min-width:0}
+.inp.mono{font-family:var(--mono);font-size:15px}
+.inp.bad{box-shadow:var(--inset),inset 0 -2px 0 var(--bad)}
+.hint{font-size:13px;line-height:18px;color:var(--ink-3)}
+.out{display:flex;flex-wrap:wrap;gap:var(--s6);align-items:flex-end}
+.out div{display:flex;flex-direction:column}
+.out b{font-size:28px;line-height:34px;font-weight:700;letter-spacing:-.6px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.out span{font-size:13px;color:var(--ink-3)}
+input[type=range]{appearance:none;-webkit-appearance:none;width:100%;height:28px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:var(--well);box-shadow:var(--inset),inset 0 0 0 1px var(--edge)}
+input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:var(--well);box-shadow:var(--inset),inset 0 0 0 1px var(--edge)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-8px;border-radius:99px;background:var(--knob);box-shadow:var(--raise-1),inset 0 0 0 1px var(--edge);cursor:grab}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border:0;border-radius:99px;background:var(--knob);box-shadow:var(--raise-1),inset 0 0 0 1px var(--edge);cursor:grab}
+.tog{appearance:none;-webkit-appearance:none;width:52px;height:32px;border-radius:99px;background:var(--well);box-shadow:var(--inset),inset 0 0 0 1px var(--edge);position:relative;cursor:pointer;flex:none;margin:0;transition:background 260ms var(--ease)}
+.tog::after{content:"";position:absolute;top:4px;left:4px;width:24px;height:24px;border-radius:99px;background:var(--knob);box-shadow:var(--raise-1);transition:transform 260ms cubic-bezier(.34,1.56,.64,1)}
+.tog:checked{background:var(--accent)}
+.tog:checked::after{transform:translateX(20px)}
+.togrow{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-2)}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:500;color:var(--ink-2);background:var(--well);box-shadow:var(--inset);border-radius:var(--rs);padding:4px 9px;white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+pre{margin:0;padding:var(--s4);background:var(--well);border-radius:var(--rm);box-shadow:inset 0 0 0 1px var(--sep);overflow-x:auto;color:var(--ink);white-space:pre;font-size:12.5px;line-height:19px}
+pre .c{color:var(--ink-3)}
+pre .k{color:var(--build)}
+pre .s{color:var(--run)}
+details.more{border-top:1px solid var(--sep);padding-top:10px}
+details.more>summary{cursor:pointer;color:var(--accent);font-size:14px;font-weight:550;list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:32px}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary svg{transition:transform 180ms var(--ease)}
+details.more[open]>summary svg{transform:rotate(90deg)}
+details.more>div{display:flex;flex-direction:column;gap:10px;padding-top:8px}
+.formula{font-family:var(--mono);font-size:15px;line-height:24px;color:var(--ink);padding:14px 16px;border-left:3px solid var(--accent);background:var(--well);border-radius:0 var(--rm) var(--rm) 0;max-width:68ch;overflow-x:auto}
+.formula small{display:block;font-family:var(--sans);font-size:13px;color:var(--ink-3);line-height:18px;margin-top:4px}
+.check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.check li{border-top:1px solid var(--sep)}
+.check label{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;padding:10px 0;cursor:pointer;color:var(--ink-2)}
+.check input{appearance:none;-webkit-appearance:none;width:22px;height:22px;margin:0;border-radius:7px;background:var(--well);box-shadow:var(--inset),inset 0 0 0 1px var(--edge);cursor:pointer;display:grid;place-content:center}
+.check input:checked{background:var(--accent)}
+.check input:checked::after{content:"";width:10px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.check label b{color:var(--ink);font-weight:600}
+.check .grp{font-size:12px;color:var(--ink-3);display:block}
+
+@media (prefers-contrast:more){.btn,.seg,.panel,.inp,.tog,.tag,.seg button[aria-pressed="true"]{border:1px solid var(--edge)}}
+@media (forced-colors:active){.btn,.seg,.panel,.inp,.tog,.tag{box-shadow:none!important;outline:1px solid CanvasText}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s8);align-items:center}
+.hero .txt{display:flex;flex-direction:column;gap:var(--s4)}
+.hero .stats{display:flex;flex-wrap:wrap;gap:var(--s6);padding-top:var(--s2)}
+.hero .stats div{display:flex;flex-direction:column}
+.hero .stats b{font-size:22px;line-height:28px;font-weight:650;letter-spacing:-.4px;font-variant-numeric:tabular-nums}
+.hero .stats span{font-size:13px;color:var(--ink-3)}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}}
+
+.rules{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:0 var(--s8);counter-reset:r}
+.rules li{counter-increment:r;display:grid;grid-template-columns:28px minmax(0,1fr);gap:4px 8px;padding:10px 0;border-top:1px solid var(--sep);color:var(--ink-2)}
+.rules li::before{content:counter(r);font-family:var(--mono);font-size:13px;color:var(--ink-3);padding-top:1px}
+.rules li b{color:var(--ink);font-weight:600}
+.rules li .go{grid-column:2;font-size:12px;line-height:16px;color:var(--ink-3)}
+.rules li .go a{color:var(--ink-3)}
+
+/* deployment catalog */
+.grid-st{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:var(--s8) var(--s6)}
+.st-card{display:flex;flex-direction:column;gap:var(--s3);min-width:0;scroll-margin-top:90px}
+.st-card h4{display:flex;align-items:center;gap:8px}
+.st-card .facts{display:flex;flex-wrap:wrap;gap:6px 14px}
+.st-card p{color:var(--ink-2)}
+.st-card p b{color:var(--ink);font-weight:600}
+.spec{height:212px;background:var(--well);border-radius:var(--rl);box-shadow:inset 0 0 0 1px var(--sep);padding:14px 14px 10px;display:flex;flex-direction:column;gap:6px}
+.spec svg{width:100%;height:100%;display:block}
+.st-card:target .spec{outline:2px solid var(--focus);outline-offset:4px}
+
+/* kanban */
+.kb{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:10px;min-width:660px}
+.kb .col{background:var(--well);border-radius:var(--rm);box-shadow:inset 0 0 0 1px var(--sep);padding:10px;display:flex;flex-direction:column;gap:8px;min-height:230px}
+.kb .col.over{box-shadow:inset 0 0 0 2px var(--bad)}
+.kb .ch{display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:var(--ink)}
+.kb .ch span{font-family:var(--mono);font-weight:500;font-size:12px;color:var(--ink-3)}
+.kb .col.over .ch span{color:var(--bad)}
+.kb .card{background:var(--ground);border-radius:10px;padding:8px 10px;font-size:12px;line-height:16px;color:var(--ink-2);border-left:3px solid var(--solution)}
+.kb .card b{display:block;color:var(--ink);font-weight:600;font-size:12px}
+.kb .card.bug{border-left-color:var(--bad)}
+.kb .card.tech{border-left-color:var(--build)}
+
+/* pipeline tool */
+.pipe{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pipe .stg{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:var(--rm);background:var(--well);box-shadow:inset 0 0 0 1px var(--sep);min-width:108px}
+.pipe .stg b{font-size:13px;color:var(--ink)}
+.pipe .arr{color:var(--ink-3);font-size:14px}
+.pipe .stg.good{box-shadow:inset 0 0 0 2px var(--good)}
+.pipe .stg.bad{box-shadow:inset 0 0 0 2px var(--bad)}
+.pipe .stg.run{box-shadow:inset 0 0 0 2px var(--accent)}
+
+.qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:0 var(--s8)}
+.qa details{border-top:1px solid var(--sep);padding:10px 0}
+.qa summary{cursor:pointer;font-weight:600;color:var(--ink);list-style:none;display:flex;gap:8px;align-items:baseline}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::before{content:"+";font-family:var(--mono);color:var(--accent);width:12px;flex:none}
+.qa details[open] summary::before{content:"\2212"}
+.qa details p{color:var(--ink-2);padding:6px 0 0 20px}
+
+.src{display:flex;flex-direction:column;gap:var(--s6)}
+.src h4{font-size:15px}
+.src ul{margin:6px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:4px;color:var(--ink-2);font-size:14px}
+footer.fin{border-top:1px solid var(--sep);padding-top:var(--s6);color:var(--ink-3);font-size:13px;line-height:18px;display:flex;flex-direction:column;gap:6px;max-width:80ch}
+</style>
+</head><body>
+
+<header class="bar"><div class="bar-in">
+  <a class="brand" href="#start" aria-label="M324 DevOps Spickzettel, zum Anfang">
+    <svg width="30" height="18" viewBox="0 0 30 18" aria-hidden="true"><path d="M15 9C12 4 5 3 3 9s9 5 12 0 9-5 12 0-9 5-12 0Z" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linejoin="round"/></svg>
+    M324 DevOps Spickzettel
+  </a>
+  <span class="grow"></span>
+  <div class="seg" role="group" aria-label="Darstellung">
+    <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+    <button type="button" data-theme-set="light" aria-pressed="false">Hell</button>
+    <button type="button" data-theme-set="dark" aria-pressed="false">Dunkel</button>
+  </div>
+  <nav class="chips" aria-label="Kapitel">
+    <a href="#start">Überblick</a><a href="#k1">1 Kultur</a><a href="#k2">2 Teamprozess</a><a href="#k3">3 Code</a><a href="#k4">4 CI</a><a href="#k5">5 Artefakte</a><a href="#k6">6 Deployment</a><a href="#k7">7 Betrieb</a><a href="#k8">8 Nachweise</a><a href="#quellen">Quellen</a>
+  </nav>
+</div></header>
+
+<div class="shell">
+<nav class="rail" aria-label="Kapitel">
+  <ol>
+    <li><a href="#start"><span class="n">0</span>Überblick</a></li>
+    <li><a href="#k1"><span class="n">1</span>Kultur</a></li>
+    <li><a href="#k2"><span class="n">2</span>Teamprozess</a></li>
+    <li><a href="#k3"><span class="n">3</span>Code und Versionen</a></li>
+    <li><a href="#k4"><span class="n">4</span>Continuous Integration</a></li>
+    <li><a href="#k5"><span class="n">5</span>Artefakte und Infrastruktur</a></li>
+    <li><a href="#k6"><span class="n">6</span>Delivery und Deployment</a></li>
+    <li><a href="#k7"><span class="n">7</span>Betrieb und Kennzahlen</a></li>
+    <li><a href="#k8"><span class="n">8</span>Nachweise und KI</a></li>
+  </ol>
+  <hr>
+  <ol><li><a href="#quellen"><span class="n">§</span>Quellen</a></li></ol>
+</nav>
+
+<main>
+<!-- ============ OVERVIEW ============ -->
+<section class="ch" id="start">
+  <div class="hero">
+    <div class="txt">
+      <span class="fn mono">TBZ · Modul 324 · DevOps-Prozesse mit Tools unterstützen</span>
+      <h1>DevOps auf einen Blick</h1>
+      <p class="lead">DevOps ist ein Kreislauf. Ein Team plant, baut, testet, liefert aus, betreibt und misst, und was es misst, fliesst in die nächste Planung zurück. Diese Seite zeichnet jeden Teil dieses Kreislaufs als Objekt, mit der Regel, die du daraus für dein Teamprojekt ableitest.</p>
+      <div class="stats" id="stats">
+        <div><b id="sCh">0</b><span>Kapitel</span></div>
+        <div><b id="sFig">0</b><span>Diagramme und Werkzeuge</span></div>
+        <div><b id="sDep">0</b><span>Deployment-Strategien</span></div>
+        <div><b id="sSrc">0</b><span>Quellen</span></div>
+      </div>
+    </div>
+    <figure class="fig">
+      <svg id="loop" viewBox="-14 0 548 250" role="img" aria-label="DevOps-Endlosschleife mit acht Phasen: Plan, Code, Build, Test auf der Dev-Seite, Release, Deploy, Operate, Monitor auf der Ops-Seite"></svg>
+      <figcaption>Die acht Phasen als Endlosschleife. Links liegt die Dev-Seite, rechts die Ops-Seite. Achte auf den Kreuzungspunkt: dort wird aus Code ein laufendes System, und genau dort sitzen CI und CD.</figcaption>
+    </figure>
+  </div>
+
+  <div class="blk">
+    <h3>Systemsicht: Modulbereiche gegen Phasen</h3>
+    <p class="prose d2">Das Modul teilt DevOps in fünf Bereiche. Jeder Bereich ist ein Band, das quer über bestimmte Phasen läuft. Ein voller Punkt heisst, der Bereich prägt diese Phase direkt. Ein Ring heisst, er wirkt mit.</p>
+    <figure class="fig wide">
+      <svg id="matrix" viewBox="0 0 900 300" role="img" aria-label="Matrix der fünf Modulbereiche Kultur, Prozesse, Infrastruktur, Continuous Integration und Continuous Deployment gegen die acht DevOps-Phasen"></svg>
+      <figcaption>Kultur ist das einzige Band, das alle acht Phasen voll abdeckt. Das ist kein Zufall: Werkzeuge ohne gemeinsame Verantwortung verschieben das Problem nur. Bereiche nach der Modulübersicht M324, Zuordnung vereinfacht.</figcaption>
+    </figure>
+  </div>
+
+  <div class="blk" id="fahrplan">
+    <h3>Projekt-Fahrplan</h3>
+    <p class="prose d2">So läuft dein Teamprojekt als Plan. Jede Station hat ein Ergebnis und einen Nachweis, den du im Team-Fachgespräch zeigen und erklären kannst. Die genauen Daten stehen im Projekt-Readme unter Termine und Abgaben. Trage sie dort ein, wo sie für dein Team gelten.</p>
+    <figure class="fig wide">
+      <svg id="road" viewBox="0 0 1000 300" role="img" aria-label="Projekt-Fahrplan mit acht Stationen von Team bilden bis Betrieb und Reflexion, mit Rückkopplung von Betrieb zu Anforderungen"></svg>
+      <figcaption>Die Rückkopplung unten ist der Kern. Was Station 8 misst, wird zu neuen Karten auf dem Board von Station 2. Ohne diese Linie ist es ein Wasserfall mit Werkzeugen.</figcaption>
+    </figure>
+  </div>
+
+  <div class="blk">
+    <h3>Die 20 Regeln zum Mitnehmen</h3>
+    <ol class="rules">
+      <li><span><b>Teile das Ziel, nicht nur den Code.</b> Dev und Ops tragen gemeinsam die Verantwortung für den Betrieb.</span><span class="go"><a href="#k1">Kultur</a></span></li>
+      <li><span><b>Suche Ursachen im Prozess, nicht in Personen.</b> Postmortems sind schuldfrei.</span><span class="go"><a href="#k1">Kultur</a></span></li>
+      <li><span><b>Schreibe Stories mit Nutzen und prüfbaren Kriterien.</b> Als, möchte ich, damit, plus Gegeben, Wenn, Dann.</span><span class="go"><a href="#k2">Teamprozess</a></span></li>
+      <li><span><b>Begrenze angefangene Arbeit.</b> Weniger WIP heisst kürzere Durchlaufzeit, Little's Law.</span><span class="go"><a href="#k2">Teamprozess</a></span></li>
+      <li><span><b>Halte Branches kurz.</b> Zurück in main mindestens einmal pro Tag.</span><span class="go"><a href="#k3">Code</a></span></li>
+      <li><span><b>Jede Änderung geht durch einen Review.</b> Kein direkter Push auf main.</span><span class="go"><a href="#k3">Code</a></span></li>
+      <li><span><b>Commit-Nachrichten haben einen Typ.</b> feat, fix, docs, ci und so weiter.</span><span class="go"><a href="#k3">Code</a></span></li>
+      <li><span><b>Versioniere semantisch.</b> MAJOR bricht, MINOR erweitert, PATCH repariert.</span><span class="go"><a href="#k3">Code</a></span></li>
+      <li><span><b>Jeder Push startet einen Build.</b> Automatisch, ohne Knopf.</span><span class="go"><a href="#k4">CI</a></span></li>
+      <li><span><b>Ein roter Build ist Priorität eins.</b> Erst reparieren, dann weiterbauen.</span><span class="go"><a href="#k4">CI</a></span></li>
+      <li><span><b>Halte die Pipeline unter zehn Minuten.</b> Schnelle Stufen zuerst.</span><span class="go"><a href="#k4">CI</a></span></li>
+      <li><span><b>Viele Unit-Tests, wenige End-to-End-Tests.</b> Die Testpyramide.</span><span class="go"><a href="#k4">CI</a></span></li>
+      <li><span><b>Baue einmal, deploye überall.</b> Dasselbe Artefakt geht durch alle Umgebungen.</span><span class="go"><a href="#k5">Artefakte</a></span></li>
+      <li><span><b>Tags sind unveränderlich.</b> Kein Deployment auf latest.</span><span class="go"><a href="#k5">Artefakte</a></span></li>
+      <li><span><b>Konfiguration gehört in die Umgebung.</b> Nie Geheimnisse ins Repository.</span><span class="go"><a href="#k5">Artefakte</a></span></li>
+      <li><span><b>Trenne Deploy und Release.</b> Feature Toggles schalten Funktionen frei.</span><span class="go"><a href="#k6">Deployment</a></span></li>
+      <li><span><b>Plane den Rollback vor dem Rollout.</b> Und probiere ihn mindestens einmal aus.</span><span class="go"><a href="#k6">Deployment</a></span></li>
+      <li><span><b>Miss die vier goldenen Signale.</b> Latenz, Traffic, Fehler, Sättigung.</span><span class="go"><a href="#k7">Betrieb</a></span></li>
+      <li><span><b>Verbessere mit DORA-Kennzahlen, nicht mit Gefühl.</b> Trend vor Einzelwert.</span><span class="go"><a href="#k7">Betrieb</a></span></li>
+      <li><span><b>Nutze KI als Sparringpartner.</b> Alles, was du abgibst, musst du erklären können.</span><span class="go"><a href="#k8">Nachweise</a></span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ K1 KULTUR ============ -->
+<section class="ch" id="k1">
+  <div class="ch-head">
+    <span class="k">Kapitel 1 · Bereich DevOps-Kultur</span>
+    <h2>Kultur: eine gemeinsame Verantwortung</h2>
+    <p class="lead">DevOps beginnt nicht bei einem Tool. Es beginnt dort, wo Entwicklung und Betrieb aufhören, gegeneinander zu optimieren. Die Entwicklung will Änderung, der Betrieb will Stabilität. DevOps macht beides zu einem Ziel.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Vom Silo zum Team</h3>
+    <figure class="fig wide">
+      <svg viewBox="0 0 760 210" role="img" aria-label="Vorher: Dev und Ops getrennt durch eine Mauer. Nachher: Dev und Ops in einem Team mit gemeinsamem Ziel.">
+        <defs>
+          <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" class="fw"/><line x1="0" y1="0" x2="0" y2="6" class="ln" /></pattern>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="fe"/></marker>
+          <marker id="aha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="fa"/></marker>
+        </defs>
+        <text x="20" y="22" class="t tb">Vorher: Silos</text>
+        <rect x="20" y="78" width="120" height="66" rx="12" class="box"/>
+        <text x="80" y="104" text-anchor="middle" class="t tb">Dev</text>
+        <text x="80" y="124" text-anchor="middle" class="t2">will Änderung</text>
+        <rect x="166" y="44" width="24" height="132" fill="url(#hatch)" stroke="var(--edge)"/>
+        <rect x="216" y="78" width="120" height="66" rx="12" class="box"/>
+        <text x="276" y="104" text-anchor="middle" class="t tb">Ops</text>
+        <text x="276" y="124" text-anchor="middle" class="t2">will Stabilität</text>
+        <path d="M80 76 Q178 -6 270 74" class="ln" marker-end="url(#ah)"/>
+        <path d="M262 148 Q178 214 88 150" class="lnd" marker-end="url(#ah)"/>
+        <text x="178" y="200" text-anchor="middle" class="t3">Release wird übergeben, Fehler kommen als Ticket zurück</text>
+
+        <line x1="380" y1="20" x2="380" y2="190" class="ln2"/>
+
+        <text x="410" y="22" class="t tb">Nachher: ein Team</text>
+        <rect x="410" y="44" width="330" height="132" rx="20" class="boxa"/>
+        <rect x="434" y="78" width="120" height="66" rx="12" class="box"/>
+        <text x="494" y="104" text-anchor="middle" class="t tb">Dev</text>
+        <text x="494" y="124" text-anchor="middle" class="t2">baut und betreibt</text>
+        <rect x="596" y="78" width="120" height="66" rx="12" class="box"/>
+        <text x="656" y="104" text-anchor="middle" class="t tb">Ops</text>
+        <text x="656" y="124" text-anchor="middle" class="t2">automatisiert mit</text>
+        <line x1="558" y1="100" x2="592" y2="100" class="la" marker-end="url(#aha)"/>
+        <line x1="592" y1="122" x2="558" y2="122" class="la" marker-end="url(#aha)"/>
+        <text x="575" y="160" text-anchor="middle" class="t2">gemeinsames Board, gemeinsame Pipeline</text>
+        <text x="575" y="200" text-anchor="middle" class="t3">Ziel: schnell und stabil Wert liefern</text>
+      </svg>
+      <figcaption>Die Mauer steht für getrennte Ziele, nicht für getrennte Personen. Im Teamprojekt bist du Dev und Ops zugleich. Darum gehört der Betrieb deiner App zu deiner Arbeit und nicht ans Ende.</figcaption>
+    </figure>
+  </div>
+
+  <div class="blk">
+    <h3>CALMS: fünf Prüfsteine</h3>
+    <p class="prose d2">John Willis und Damon Edwards prägten 2010 das Kürzel CAMS. Jez Humble ergänzte später das L für Lean. CALMS dient als Raster, um zu prüfen, wie weit ein Team mit DevOps ist. Die fünf Teile hängen im Kreis zusammen.</p>
+    <div class="blk">
+      <figure class="fig" style="max-width:460px">
+        <svg id="calms" viewBox="0 0 400 300" role="img" aria-label="CALMS als Kreis: Culture, Automation, Lean, Measurement, Sharing"></svg>
+        <figcaption>Gezeichnet als Kreis, weil Sharing wieder in Culture mündet. Wer nur das A umsetzt, hat eine Pipeline, aber noch kein DevOps.</figcaption>
+      </figure>
+      <div class="cols5">
+        <div class="obj"><h4><span class="dot product"></span>Culture</h4><p class="says">Geteilte Verantwortung und Vertrauen. Fehler sind Lernmaterial.</p><p class="so">Entscheidungen im Team treffen und begründen.</p></div>
+        <div class="obj"><h4><span class="dot build"></span>Automation</h4><p class="says">Was sich wiederholt, macht eine Maschine. Build, Test, Deploy.</p><p class="so">Kein manueller Schritt zwischen Commit und Artefakt.</p></div>
+        <div class="obj"><h4><span class="dot solution"></span>Lean</h4><p class="says">Wartezeit und Verschwendung entfernen. Kleine Pakete, sichtbare Arbeit.</p><p class="so">WIP begrenzen und klein schneiden.</p></div>
+        <div class="obj"><h4><span class="dot run"></span>Measurement</h4><p class="says">Entscheiden mit Daten statt mit Gefühl.</p><p class="so">DORA-Kennzahlen und Monitoring erheben.</p></div>
+        <div class="obj"><h4><span class="dot acc"></span>Sharing</h4><p class="says">Wissen, Werkzeuge und Erfolge offen teilen.</p><p class="so">Doku im Repo, Retros, Pairing, gemeinsame Reviews.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>The Three Ways</h3>
+    <p class="prose d2">Gene Kim beschrieb 2012 drei Prinzipien, aus denen sich fast jede DevOps-Praxis ableiten lässt. Später wurden sie im DevOps Handbook (Kim, Humble, Debois, Willis, 2016) ausgearbeitet.</p>
+    <figure class="fig wide">
+      <svg viewBox="0 0 760 230" role="img" aria-label="Erster Weg Flow von links nach rechts, zweiter Weg Feedback von rechts nach links, dritter Weg Lernen als Rahmen um alles">
+        <defs><marker id="ahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fb"/></marker>
+        <marker id="ahr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fr"/></marker></defs>
+        <rect x="6" y="6" width="748" height="182" rx="18" class="lnd"/>
+        <text x="24" y="32" class="t tb" style="fill:var(--build)">Erster Weg: Flow</text>
+        <text x="150" y="32" class="t2">Arbeit fliesst schnell von links nach rechts</text>
+        <line x1="24" y1="46" x2="736" y2="46" class="sb lw" marker-end="url(#ahb)" style="fill:none"/>
+        <g id="ways-boxes"></g>
+        <line x1="736" y1="138" x2="24" y2="138" class="sr lw" marker-end="url(#ahr)" style="fill:none"/>
+        <text x="24" y="166" class="t tb" style="fill:var(--run)">Zweiter Weg: Feedback</text>
+        <text x="190" y="166" class="t2">Probleme werden rechts sichtbar und links behoben</text>
+        <text x="24" y="214" class="t tb">Dritter Weg: Lernen und Experimentieren</text>
+        <text x="306" y="214" class="t2">der Rahmen um beides, Üben ist die Voraussetzung für Können</text>
+      </svg>
+      <figcaption>Der gestrichelte Rahmen ist der dritte Weg. Er ist kein weiterer Pfeil, sondern die Kultur, in der die beiden anderen besser werden.</figcaption>
+    </figure>
+    <div class="cols3">
+      <div class="obj"><h4><span class="dot build"></span>1. Flow</h4><p class="says">Optimiere das ganze System, nicht einzelne Abteilungen. Kleine Batches, wenig WIP, keine Übergaben mit Wartezeit.</p><p class="so">Mach Arbeit auf dem Board sichtbar und halte sie klein.</p><p class="meta">Systemdenken</p></div>
+      <div class="obj"><h4><span class="dot run"></span>2. Feedback</h4><p class="says">Verkürze und verstärke die Rückmeldung. Fehler sollen dort auftauchen, wo sie entstehen, und zwar sofort.</p><p class="so">Tests in der Pipeline, Monitoring nach dem Deploy.</p><p class="meta">Feedback-Schleifen verstärken</p></div>
+      <div class="obj"><h4><span class="dot product"></span>3. Lernen</h4><p class="says">Risiken eingehen, aus Fehlern lernen, durch Wiederholung Meisterschaft erreichen.</p><p class="so">Retro nach jeder Iteration, schuldfreie Postmortems.</p><p class="meta">Kontinuierliches Experimentieren</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ K2 TEAMPROZESS ============ -->
+<section class="ch" id="k2">
+  <div class="ch-head">
+    <span class="k">Kapitel 2 · Bereich DevOps-Prozesse</span>
+    <h2>Teamprozess: von der Anforderung zur Karte</h2>
+    <p class="lead">Bevor eine Pipeline etwas bauen kann, muss klar sein, was gebaut wird und wann es fertig ist. Dieses Kapitel deckt Anforderungen, User Stories, Akzeptanzkriterien, das Kanban-Board und die Rollen im Team ab.</p>
+  </div>
+
+  <div class="blk">
+    <h3>User Story und Akzeptanzkriterien</h3>
+    <div class="cols2">
+      <div class="prose">
+        <div class="formula">Als &lt;Rolle&gt; möchte ich &lt;Ziel&gt;, damit &lt;Nutzen&gt;.<small>Die Story beschreibt ein Bedürfnis aus Sicht der Nutzenden, nicht die technische Lösung.</small></div>
+        <div class="formula">Gegeben &lt;Ausgangslage&gt;, wenn &lt;Aktion&gt;, dann &lt;Ergebnis&gt;.<small>Ein Akzeptanzkriterium ist ein Test in Satzform. Es entscheidet, wann die Story fertig ist.</small></div>
+      </div>
+      <figure>
+<pre><span class="c"># Story #14 · Label: feature</span>
+Als Teammitglied möchte ich, dass jeder Push
+automatisch gebaut und getestet wird,
+damit Fehler auffallen, bevor sie in main landen.
+
+<span class="c"># Akzeptanzkriterien</span>
+<span class="k">Gegeben</span> ein Push auf einen Branch,
+<span class="k">wenn</span> die Pipeline läuft,
+<span class="k">dann</span> sind Build und Unit-Tests in unter 10 min grün.
+
+<span class="k">Gegeben</span> ein fehlschlagender Test,
+<span class="k">wenn</span> ein Merge Request offen ist,
+<span class="k">dann</span> ist der Merge blockiert.</pre>
+        <figcaption>Ein Beispiel, das gleich zwei Modulziele trifft: Anforderung und CI. So eine Story ist im Fachgespräch ein starker Nachweis.</figcaption>
+      </figure>
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>INVEST</th><th>Bedeutung</th><th>Prüffrage für deine Story</th></tr></thead>
+        <tbody>
+          <tr><td>I · Independent</td><td>unabhängig von anderen Stories</td><td>Kann sie in beliebiger Reihenfolge umgesetzt werden?</td></tr>
+          <tr><td>N · Negotiable</td><td>Details sind verhandelbar</td><td>Lässt sie dem Team Raum für das Wie?</td></tr>
+          <tr><td>V · Valuable</td><td>bringt Nutzen</td><td>Merkt jemand ausserhalb des Teams, dass sie fertig ist?</td></tr>
+          <tr><td>E · Estimable</td><td>schätzbar</td><td>Kann das Team die Grösse einschätzen?</td></tr>
+          <tr><td>S · Small</td><td>klein</td><td>Passt sie in wenige Personentage?</td></tr>
+          <tr><td>T · Testable</td><td>prüfbar</td><td>Gibt es Akzeptanzkriterien, die man testen kann?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fn">INVEST nach Bill Wake, 2003. Wake sagte später selbst, er würde das E heute eher dem Nutzen widmen.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Das Kanban-Board mit WIP-Limits</h3>
+    <p class="prose d2">Kanban macht Arbeit sichtbar und begrenzt, wie viel gleichzeitig angefangen sein darf. Die Zahl im Spaltenkopf ist das WIP-Limit. Ist eine Spalte voll, zieht niemand Neues hinein. Das Team hilft stattdessen, Karten weiter rechts fertig zu machen.</p>
+    <figure class="fig">
+      <div class="kb" role="img" aria-label="Kanban-Board mit fünf Spalten. Die Spalte Review ist über ihrem Limit.">
+        <div class="col"><div class="ch">Backlog <span>–</span></div>
+          <div class="card"><b>#21 Login</b>Story, 3 Punkte</div><div class="card"><b>#22 Export CSV</b>Story</div><div class="card tech"><b>#23 Healthcheck</b>Technik</div></div>
+        <div class="col"><div class="ch">Bereit <span>2/3</span></div>
+          <div class="card"><b>#18 Profilseite</b>DoR erfüllt</div><div class="card tech"><b>#19 Docker-Image</b>Technik</div></div>
+        <div class="col"><div class="ch">In Arbeit <span>2/2</span></div>
+          <div class="card"><b>#14 Pipeline</b>Branch ci/14</div><div class="card bug"><b>#17 Absturz bei leerem Feld</b>Bug</div></div>
+        <div class="col over"><div class="ch">Review <span>3/2</span></div>
+          <div class="card"><b>#11 Suche</b>wartet auf Review</div><div class="card"><b>#12 Filter</b>wartet auf Review</div><div class="card tech"><b>#13 Lint-Regeln</b>wartet auf Review</div></div>
+        <div class="col"><div class="ch">Fertig <span>–</span></div>
+          <div class="card"><b>#9 Grundgerüst</b>deployed</div><div class="card"><b>#10 README</b>merged</div></div>
+      </div>
+    </figure>
+    <p class="fn">Die rote Spalte zeigt den Engpass. Drei Karten warten auf Review, also ist Review jetzt die wichtigste Arbeit. Linke Kante der Karten: türkis Story, violett Technik, rot Bug.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Little's Law: warum weniger mehr ist</h3>
+    <div class="formula">Durchlaufzeit = WIP ÷ Durchsatz<small>John D. C. Little, 1961. Gilt für stabile Systeme im Mittel. Wer bei gleichem Durchsatz die Hälfte weniger anfängt, ist im Schnitt doppelt so schnell fertig.</small></div>
+    <div class="cols2">
+      <div class="panel" id="little">
+        <h4>Durchlaufzeit-Rechner<span class="k">tool</span></h4>
+        <div class="field"><label for="lWip">Angefangene Karten (WIP) <b id="lWipV">8</b></label><input type="range" id="lWip" min="1" max="20" value="8"></div>
+        <div class="field"><label for="lTp">Fertige Karten pro Woche <b id="lTpV">4</b></label><input type="range" id="lTp" min="1" max="10" value="4"></div>
+        <div class="out"><div><b id="lOut">2.0</b><span>Wochen pro Karte im Schnitt</span></div><div><b id="lDays">10</b><span>Arbeitstage</span></div></div>
+        <p class="hint" id="lHint"></p>
+      </div>
+      <figure class="fig">
+        <svg id="lChart" viewBox="0 0 420 260" role="img" aria-label="Kurve der Durchlaufzeit über WIP bei gewähltem Durchsatz"></svg>
+        <figcaption>Die Linie ist exakt die Formel bei deinem Durchsatz. Der Punkt ist dein aktueller Zustand. Die Gerade steigt linear, jede zusätzlich angefangene Karte verlängert alle anderen.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>Ready und Done</h3>
+    <div class="cols2">
+      <div class="obj"><h4><span class="dot solution"></span>Definition of Ready</h4><p class="says">Wann eine Karte nach Bereit darf.</p>
+        <ul class="dl"><li>Story im Format Als, möchte ich, damit</li><li>Akzeptanzkriterien stehen</li><li>klein genug für wenige Tage</li><li>Abhängigkeiten geklärt</li></ul></div>
+      <div class="obj"><h4><span class="dot run"></span>Definition of Done</h4><p class="says">Wann eine Karte nach Fertig darf.</p>
+        <ul class="dl"><li>Code reviewed und in main gemergt</li><li>Pipeline grün, Tests für die Änderung vorhanden</li><li>Artefakt gebaut und versioniert</li><li>deployed und Healthcheck grün</li><li>Doku und Changelog nachgeführt</li></ul></div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>Rollen im Team</h3>
+    <p class="prose d2">Das Modul verlangt Rollen, legt aber keine festen Titel fest. Die folgende Aufteilung ist ein Vorschlag, der zu den Nachweisen passt. Rotiert sie, damit alle jede Rolle im Fachgespräch erklären können.</p>
+    <div class="cols5">
+      <div class="obj"><h4><span class="dot platform"></span>Auftraggeberin</h4><p class="says">Die Lehrperson. Stellt Anforderungen, gibt Feedback, nimmt ab.</p><p class="so">Unklarheiten früh als Frage aufs Board.</p></div>
+      <div class="obj"><h4><span class="dot solution"></span>Board und Fluss</h4><p class="says">Pflegt Backlog, achtet auf WIP-Limits, moderiert Daily und Retro.</p><p class="so">Engpässe benennen, nicht selbst lösen.</p></div>
+      <div class="obj"><h4><span class="dot build"></span>Pipeline</h4><p class="says">Verantwortet CI-Konfiguration, Testlauf, Qualitätsregeln.</p><p class="so">Roter Build wird sofort gemeldet.</p></div>
+      <div class="obj"><h4><span class="dot run"></span>Release und Betrieb</h4><p class="says">Versionierung, Registry, Deployment, Rollback, Monitoring.</p><p class="so">Jeder Release hat einen geprobten Rückweg.</p></div>
+      <div class="obj"><h4><span class="dot product"></span>Qualität und Doku</h4><p class="says">Review-Regeln, README, Entscheidungsprotokoll, KI-Nachweis.</p><p class="so">Jede Entscheidung hat ein Warum im Repo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ K3 CODE ============ -->
+<section class="ch" id="k3">
+  <div class="ch-head">
+    <span class="k">Kapitel 3 · Bereich DevOps-Prozesse</span>
+    <h2>Code und Versionen</h2>
+    <p class="lead">Git ist das gemeinsame Gedächtnis des Teams. Das Branching-Modell legt fest, wie lange Arbeit getrennt bleibt. Commit-Nachrichten und Versionsnummern machen Änderungen lesbar für Menschen und Maschinen.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Drei Branching-Modelle</h3>
+    <figure class="fig wide">
+      <svg viewBox="0 0 900 270" role="img" aria-label="Drei Git-Graphen: Trunk-based mit sehr kurzen Branches, GitHub Flow mit Feature-Branches und Pull Requests, Gitflow mit main, release, develop und feature">
+        <text x="20" y="24" class="t tb">Trunk-based</text>
+        <text x="320" y="24" class="t tb">GitHub Flow</text>
+        <text x="620" y="24" class="t tb">Gitflow</text>
+        <line x1="300" y1="40" x2="300" y2="250" class="ln2"/><line x1="600" y1="40" x2="600" y2="250" class="ln2"/>
+        <!-- trunk -->
+        <text x="20" y="154" class="t3 tm">main</text>
+        <line x1="60" y1="150" x2="280" y2="150" class="sb lw" style="fill:none"/>
+        <path d="M80 150 Q95 110 115 150" class="ln"/><path d="M150 150 Q165 110 180 150" class="ln"/><path d="M215 150 Q232 110 250 150" class="ln"/>
+        <g class="fb"><circle cx="60" cy="150" r="5"/><circle cx="80" cy="150" r="5"/><circle cx="115" cy="150" r="5"/><circle cx="150" cy="150" r="5"/><circle cx="180" cy="150" r="5"/><circle cx="215" cy="150" r="5"/><circle cx="250" cy="150" r="5"/><circle cx="275" cy="150" r="5"/></g>
+        <text x="20" y="236" class="t2">Branches leben Stunden</text>
+        <text x="20" y="252" class="t3">Fehlendes wird per Feature Toggle versteckt</text>
+        <!-- github flow -->
+        <text x="320" y="174" class="t3 tm">main</text>
+        <line x1="360" y1="170" x2="580" y2="170" class="sb lw" style="fill:none"/>
+        <path d="M370 170 Q380 110 400 110 L450 110 Q468 110 478 170" class="ss" style="fill:none;stroke-width:1.5"/>
+        <path d="M490 170 Q500 80 520 80 L548 80 Q562 80 570 170" class="ss" style="fill:none;stroke-width:1.5"/>
+        <g class="fs"><circle cx="408" cy="110" r="4.5"/><circle cx="430" cy="110" r="4.5"/><circle cx="452" cy="110" r="4.5"/><circle cx="525" cy="80" r="4.5"/><circle cx="548" cy="80" r="4.5"/></g>
+        <g class="fb"><circle cx="360" cy="170" r="5"/><circle cx="478" cy="170" r="5"/><circle cx="570" cy="170" r="5"/></g>
+        <text x="408" y="96" class="t3 tm">feature/14</text>
+        <text x="510" y="66" class="t3 tm">fix/17</text>
+        <text x="478" y="194" text-anchor="middle" class="t3">PR</text><text x="570" y="194" text-anchor="middle" class="t3">PR</text>
+        <text x="320" y="236" class="t2">Branches leben Tage</text>
+        <text x="320" y="252" class="t3">main ist immer deploybar</text>
+        <!-- gitflow -->
+        <text x="620" y="74" class="t3 tm">main</text>
+        <text x="620" y="114" class="t3 tm">release</text>
+        <text x="620" y="154" class="t3 tm">develop</text>
+        <text x="620" y="194" class="t3 tm">feature</text>
+        <line x1="680" y1="70" x2="880" y2="70" class="sr lw" style="fill:none"/>
+        <line x1="680" y1="150" x2="880" y2="150" class="sb lw" style="fill:none"/>
+        <path d="M690 70 L690 150" class="lnd"/>
+        <path d="M700 150 L712 190 L770 190 L782 150" class="ss" style="fill:none;stroke-width:1.5"/>
+        <path d="M800 150 L812 110 L838 110 L850 70" class="sp" style="fill:none;stroke-width:1.5"/>
+        <path d="M838 110 L850 150" class="sp" style="fill:none;stroke-width:1.5;stroke-dasharray:3 3"/>
+        <g class="fr"><circle cx="690" cy="70" r="5"/><circle cx="850" cy="70" r="5"/></g>
+        <g class="fb"><circle cx="700" cy="150" r="5"/><circle cx="782" cy="150" r="5"/><circle cx="800" cy="150" r="5"/><circle cx="850" cy="150" r="5"/></g>
+        <g class="fs"><circle cx="730" cy="190" r="4.5"/><circle cx="752" cy="190" r="4.5"/></g>
+        <g class="fp"><circle cx="825" cy="110" r="4.5"/></g>
+        <text x="690" y="56" text-anchor="middle" class="t3 tm">v1.0</text><text x="850" y="56" text-anchor="middle" class="t3 tm">v1.1</text>
+        <text x="620" y="236" class="t2">Branches leben Wochen</text>
+        <text x="620" y="252" class="t3">für geplante Releases mit Versionen</text>
+      </svg>
+      <figcaption>Von links nach rechts wächst die Zeit, in der Code getrennt lebt, und damit das Risiko beim Zusammenführen. Für ein kleines Team mit Pipeline passt GitHub Flow oder Trunk-based am besten.</figcaption>
+    </figure>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Modell</th><th>Branch-Lebensdauer</th><th>Haupt-Branches</th><th>Passt, wenn</th><th>Risiko</th></tr></thead>
+        <tbody>
+          <tr><td>Trunk-based</td><td>Stunden, höchstens ein Tag</td><td>main</td><td>Pipeline schnell und Tests gut sind</td><td><span class="st good">tief</span> beim Merge, braucht Disziplin</td></tr>
+          <tr><td>GitHub Flow</td><td>wenige Tage</td><td>main</td><td>ein Team mit Reviews per Pull Request arbeitet</td><td><span class="st good">tief</span> bei kleinen PRs</td></tr>
+          <tr><td>Gitflow</td><td>Tage bis Wochen</td><td>main, develop</td><td>mehrere Versionen parallel gepflegt werden</td><td><span class="st warn">mittel</span> grosse Merges, Merge-Hölle</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fn">DORA misst Trunk-based Development an drei Punkten: höchstens drei aktive Branches, Merge in den Trunk mindestens einmal täglich, keine Code-Freezes und keine Integrationsphasen.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Der Weg einer Änderung</h3>
+    <figure class="fig wide">
+      <svg id="prflow" viewBox="0 0 900 130" role="img" aria-label="Ablauf: Branch, Commits, Push, Merge Request, Pipeline grün, Review, Merge und Branch löschen"></svg>
+      <figcaption>Zwei Schranken schützen main: die Pipeline und der Mensch. Stelle beide in den Repository-Einstellungen als Pflicht ein, sonst sind sie nur gute Absicht. Auf GitLab heisst es Merge Request, auf GitHub Pull Request.</figcaption>
+    </figure>
+  </div>
+
+  <div class="blk">
+    <h3>Commits und Versionen</h3>
+    <div class="cols2">
+      <div class="prose">
+        <div class="formula">&lt;typ&gt;(&lt;bereich&gt;)!: &lt;beschreibung&gt;<small>Conventional Commits 1.0.0. Das Ausrufezeichen oder ein Footer BREAKING CHANGE markiert einen Bruch.</small></div>
+<pre><span class="k">feat</span>(auth): Login mit E-Mail
+<span class="k">fix</span>(api): leere Eingabe abfangen
+<span class="k">ci</span>: Cache für npm in Pipeline
+<span class="k">docs</span>: Rollback im README erklärt
+<span class="k">feat</span>(api)!: Endpunkt /v1 entfernt</pre>
+        <div class="formula">MAJOR . MINOR . PATCH<small>Semantic Versioning 2.0.0. MAJOR für inkompatible Änderungen, MINOR für neue kompatible Funktionen, PATCH für kompatible Fehlerkorrekturen.</small></div>
+      </div>
+      <div class="panel" id="semver">
+        <h4>Nächste Version<span class="k">tool</span></h4>
+        <div class="field"><label for="svIn">Aktuelle Version</label><input class="inp mono" id="svIn" value="1.4.2" spellcheck="false" autocomplete="off"></div>
+        <span class="l fn">Commits seit dem letzten Release</span>
+        <label class="togrow"><input type="checkbox" class="tog" id="svFix" checked> fix: Fehlerkorrektur</label>
+        <label class="togrow"><input type="checkbox" class="tog" id="svFeat"> feat: neue Funktion</label>
+        <label class="togrow"><input type="checkbox" class="tog" id="svBrk"> feat! oder BREAKING CHANGE</label>
+        <label class="togrow"><input type="checkbox" class="tog" id="svPre"> als Vorabversion (rc)</label>
+        <div class="out"><div><b class="mono" id="svOut">1.4.3</b><span id="svWhy">PATCH, weil nur Fehler behoben wurden</span></div></div>
+        <p class="hint" id="svHint">Die höchste Stufe gewinnt. Ein einziger Bruch macht das Release zu MAJOR.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ K4 CI ============ -->
+<section class="ch" id="k4">
+  <div class="ch-head">
+    <span class="k">Kapitel 4 · Bereich Continuous Integration</span>
+    <h2>Continuous Integration</h2>
+    <p class="lead">Continuous Integration heisst: alle mergen ihre Änderungen häufig in eine gemeinsame Codebasis, und jeder Merge wird von einem automatischen Build mit Tests geprüft. Integrationsfehler tauchen so nach Minuten auf statt nach Wochen.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Der CI-Kreislauf</h3>
+    <div class="cols2" style="align-items:center">
+      <figure class="fig">
+        <svg id="ciloop" viewBox="0 0 420 320" role="img" aria-label="CI-Kreislauf mit sechs Schritten: Commit, Push, Build, Test, Bericht, Reparieren oder weiter"></svg>
+        <figcaption>Ein Umlauf soll Minuten dauern. Martin Fowler nennt zehn Minuten als vernünftige Grenze für die meisten Projekte.</figcaption>
+      </figure>
+      <ol class="rules" style="grid-template-columns:1fr">
+        <li><span><b>Alles in einer versionierten Mainline</b></span><span class="go">auch Pipeline, Dockerfile, Infrastruktur</span></li>
+        <li><span><b>Build automatisieren</b></span><span class="go">ein Befehl baut alles</span></li>
+        <li><span><b>Build testet sich selbst</b></span><span class="go">Tests laufen im Build mit</span></li>
+        <li><span><b>Alle pushen täglich auf die Mainline</b></span><span class="go">kurze Branches</span></li>
+        <li><span><b>Jeder Push löst einen Build aus</b></span><span class="go">on: push</span></li>
+        <li><span><b>Kaputte Builds sofort reparieren</b></span><span class="go">rot stoppt alles</span></li>
+        <li><span><b>Build schnell halten</b></span><span class="go">unter zehn Minuten</span></li>
+        <li><span><b>Unfertiges verstecken</b></span><span class="go">Feature Toggles statt langer Branches</span></li>
+        <li><span><b>In einer Kopie der Produktion testen</b></span><span class="go">gleiches Image, gleiche Konfiguration</span></li>
+        <li><span><b>Alle sehen, was passiert</b></span><span class="go">Badge im README, Benachrichtigung</span></li>
+        <li><span><b>Deployment automatisieren</b></span><span class="go">Brücke zu Kapitel 6</span></li>
+      </ol>
+    </div>
+    <p class="fn">Die elf Praktiken nach Martin Fowler, Continuous Integration, überarbeitet 2024.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Pipeline-Stufen und Fail fast</h3>
+    <p class="prose d2">Eine Pipeline ist eine Kette von Stufen. Billige, schnelle Prüfungen gehören nach vorne, damit ein Fehler möglichst früh stoppt. Probiere es aus: wähle eine fehlschlagende Stufe und vergleiche die Reihenfolgen.</p>
+    <div class="panel" id="pipeTool">
+      <h4>Pipeline-Simulator<span class="k">tool</span></h4>
+      <div class="cols2" style="gap:12px 24px">
+        <div class="field"><span class="l">Fehler in Stufe</span>
+          <div class="seg" id="pFail" role="group" aria-label="Fehlschlagende Stufe">
+            <button type="button" data-v="-1" aria-pressed="true">keiner</button><button type="button" data-v="0" aria-pressed="false">Lint</button><button type="button" data-v="2" aria-pressed="false">Unit</button><button type="button" data-v="3" aria-pressed="false">Integration</button>
+          </div></div>
+        <div class="field"><span class="l">Reihenfolge</span>
+          <div class="seg" id="pOrder" role="group" aria-label="Reihenfolge der Stufen">
+            <button type="button" data-v="fast" aria-pressed="true">schnell zuerst</button><button type="button" data-v="slow" aria-pressed="false">langsam zuerst</button>
+          </div></div>
+      </div>
+      <div class="pipe" id="pStages" aria-live="polite"></div>
+      <div class="out"><div><b id="pTime">0</b><span>Minuten bis zum Ergebnis</span></div><div><b id="pRes">grün</b><span>Status</span></div></div>
+      <div><button type="button" class="btn p" id="pRun"><span>Pipeline starten</span></button></div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>Die Testpyramide</h3>
+    <div class="cols2" style="align-items:center">
+      <figure class="fig">
+        <svg viewBox="0 0 420 260" role="img" aria-label="Testpyramide: viele Unit-Tests unten, weniger Integrationstests in der Mitte, wenige End-to-End-Tests oben, mit Pfeilen für Geschwindigkeit und Kosten">
+          <defs><marker id="ahe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fe"/></marker></defs>
+          <polygon points="200,20 260,90 140,90" class="fp" opacity=".85"/>
+          <polygon points="140,94 260,94 310,164 90,164" class="fs" opacity=".85"/>
+          <polygon points="90,168 310,168 360,238 40,238" class="fb" opacity=".85"/>
+          <text x="200" y="76" text-anchor="middle" class="t tb tw2">E2E</text>
+          <text x="200" y="134" text-anchor="middle" class="t tb tw2">Integration</text>
+          <text x="200" y="208" text-anchor="middle" class="t tb tw2">Unit</text>
+          <line x1="22" y1="232" x2="22" y2="30" class="ln" marker-end="url(#ahe)"/>
+          <text x="30" y="34" class="t3">langsamer, teurer</text>
+          <line x1="398" y1="30" x2="398" y2="232" class="ln" marker-end="url(#ahe)"/>
+          <text x="390" y="250" text-anchor="end" class="t3">mehr Tests</text>
+        </svg>
+        <figcaption>Mike Cohn, Succeeding with Agile, 2009, Schichten heute meist als Unit, Integration und End-to-End benannt. Eine umgekehrte Pyramide, die Eistüte, macht die Pipeline langsam und brüchig.</figcaption>
+      </figure>
+      <div class="cols" style="grid-template-columns:1fr">
+        <div class="obj"><h4><span class="dot build"></span>Unit</h4><p class="says">Eine Funktion oder Klasse isoliert. Millisekunden.</p><p class="so">Jede Logik-Änderung bekommt einen Unit-Test.</p></div>
+        <div class="obj"><h4><span class="dot solution"></span>Integration</h4><p class="says">Mehrere Teile zusammen, etwa API mit Datenbank im Container.</p><p class="so">Jede Schnittstelle nach aussen einmal echt prüfen.</p></div>
+        <div class="obj"><h4><span class="dot product"></span>End-to-End</h4><p class="says">Die App wie ein Mensch bedienen. Langsam und anfällig.</p><p class="so">Nur die kritischen Wege, etwa Login und Hauptfunktion.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>Pipeline als Code</h3>
+    <div class="seg" id="ymlSeg" role="group" aria-label="CI-Plattform">
+      <button type="button" data-v="gl" aria-pressed="true">GitLab CI</button><button type="button" data-v="gh" aria-pressed="false">GitHub Actions</button>
+    </div>
+<pre id="yml-gl"><span class="c"># .gitlab-ci.yml · Beispiel für eine Node-App, Befehle an deinen Stack anpassen</span>
+<span class="k">stages</span>: [lint, build, test, package]
+<span class="k">default</span>:
+  <span class="k">image</span>: node:22
+<span class="k">lint</span>:
+  <span class="k">stage</span>: lint
+  <span class="k">script</span>: [npm ci, npm run lint]
+<span class="k">build</span>:
+  <span class="k">stage</span>: build
+  <span class="k">script</span>: [npm ci, npm run build]
+  <span class="k">artifacts</span>:
+    <span class="k">paths</span>: [dist/]
+<span class="k">test</span>:
+  <span class="k">stage</span>: test
+  <span class="k">script</span>: [npm ci, npm test]
+<span class="k">package</span>:                         <span class="c"># Image bauen und in die Registry schieben</span>
+  <span class="k">stage</span>: package
+  <span class="k">image</span>: docker:27
+  <span class="k">services</span>: [docker:27-dind]
+  <span class="k">script</span>:
+    - echo <span class="s">"$CI_REGISTRY_PASSWORD"</span> | docker login -u <span class="s">"$CI_REGISTRY_USER"</span> --password-stdin <span class="s">"$CI_REGISTRY"</span>
+    - docker build -t <span class="s">"$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"</span> .
+    - docker push <span class="s">"$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"</span>
+  <span class="k">rules</span>:
+    - <span class="k">if</span>: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH   <span class="c"># nur auf main</span></pre>
+<pre id="yml-gh" hidden><span class="c"># .github/workflows/ci.yml · Beispiel für eine Node-App</span>
+<span class="k">name</span>: ci
+<span class="k">on</span>:
+  <span class="k">push</span>:
+  <span class="k">pull_request</span>:
+<span class="k">jobs</span>:
+  <span class="k">build-test</span>:
+    <span class="k">runs-on</span>: ubuntu-latest
+    <span class="k">steps</span>:
+      - <span class="k">uses</span>: actions/checkout@v4     <span class="c"># aktuelle Hauptversion im Marketplace prüfen</span>
+      - <span class="k">uses</span>: actions/setup-node@v4
+        <span class="k">with</span>:
+          <span class="k">node-version</span>: 22
+          <span class="k">cache</span>: npm
+      - <span class="k">run</span>: npm ci
+      - <span class="k">run</span>: npm run lint
+      - <span class="k">run</span>: npm test
+      - <span class="k">run</span>: npm run build</pre>
+    <p class="fn">Geheimnisse wie Registry-Passwörter kommen aus den geschützten CI-Variablen der Plattform, nie aus der Datei. Die Datei selbst ist ein Nachweis: sie zeigt im Repository, dass eure Integration automatisch läuft.</p>
+    <div class="tags"><span class="tag">Lint und Formatierung</span><span class="tag">Unit-Tests</span><span class="tag">Testabdeckung als Bericht</span><span class="tag">Abhängigkeiten auf Schwachstellen prüfen</span><span class="tag">statische Code-Analyse</span><span class="tag">Build-Artefakt</span></div>
+  </div>
+</section>
+
+<!-- ============ K5 ARTEFAKTE ============ -->
+<section class="ch" id="k5">
+  <div class="ch-head">
+    <span class="k">Kapitel 5 · Bereich DevOps-Infrastruktur</span>
+    <h2>Artefakte und Infrastruktur</h2>
+    <p class="lead">Ein Artefakt ist das, was der Build herstellt: ein Container-Image, ein JAR, ein Bundle. Es bekommt eine Version, landet in einer Registry und wird von dort in jede Umgebung gezogen. Was sich zwischen Umgebungen unterscheidet, ist nur die Konfiguration.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Einmal bauen, überall deployen</h3>
+    <figure class="fig wide">
+      <svg viewBox="0 0 900 236" role="img" aria-label="Ein Commit wird einmal gebaut. Das versionierte Artefakt liegt in der Registry und wird unverändert nach Dev, Staging und Produktion gezogen, jeweils mit eigener Konfiguration.">
+        <defs><marker id="ahk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fe"/></marker></defs>
+        <rect x="10" y="90" width="104" height="56" rx="12" class="box"/><text x="62" y="114" text-anchor="middle" class="t tb">Commit</text><text x="62" y="132" text-anchor="middle" class="t3 tm">a1b2c3d</text>
+        <line x1="116" y1="118" x2="146" y2="118" class="ln" marker-end="url(#ahk)"/>
+        <rect x="150" y="90" width="104" height="56" rx="12" class="box"/><text x="202" y="114" text-anchor="middle" class="t tb">CI-Build</text><text x="202" y="132" text-anchor="middle" class="t3">einmal</text>
+        <line x1="256" y1="118" x2="286" y2="118" class="ln" marker-end="url(#ahk)"/>
+        <rect x="290" y="78" width="160" height="80" rx="14" class="boxa"/><text x="370" y="102" text-anchor="middle" class="t tb">Artefakt</text><text x="370" y="122" text-anchor="middle" class="t2 tm">app:1.4.3</text><text x="370" y="140" text-anchor="middle" class="t3 tm">app:sha-a1b2c3d</text>
+        <line x1="452" y1="118" x2="482" y2="118" class="ln" marker-end="url(#ahk)"/>
+        <path d="M486 96 a50 10 0 0 1 100 0 v48 a50 10 0 0 1 -100 0 z" class="box"/><path d="M486 96 a50 10 0 0 0 100 0" class="ln"/>
+        <text x="536" y="126" text-anchor="middle" class="t tb">Registry</text><text x="536" y="142" text-anchor="middle" class="t3">Ablage</text>
+        <path d="M590 108 C620 108 620 46 652 46" class="ln" marker-end="url(#ahk)"/>
+        <line x1="590" y1="118" x2="652" y2="118" class="ln" marker-end="url(#ahk)"/>
+        <path d="M590 128 C620 128 620 190 652 190" class="ln" marker-end="url(#ahk)"/>
+        <g id="envs"></g>
+        <text x="10" y="226" class="t3">Gleiches Image überall. Nur die Umgebungsvariablen unterscheiden sich.</text>
+      </svg>
+      <figcaption>Wird für Produktion neu gebaut, testet Staging etwas anderes als das, was live geht. Darum wandert genau ein Artefakt durch alle Stufen. Faktor V der Twelve-Factor App: Build, Release und Run strikt trennen.</figcaption>
+    </figure>
+  </div>
+
+  <div class="blk">
+    <h3>Image und Container</h3>
+    <div class="cols2" style="align-items:center">
+      <figure class="fig">
+        <svg viewBox="0 0 440 240" role="img" aria-label="Ein Image aus vier schreibgeschützten Schichten. Zwei Container nutzen dasselbe Image, jeder mit eigener beschreibbarer Schicht.">
+          <text x="20" y="22" class="t tb">Image</text><text x="70" y="22" class="t3">unveränderlich</text>
+          <g id="layers"></g>
+          <text x="250" y="22" class="t tb">Container</text><text x="320" y="22" class="t3">laufend</text>
+          <g id="ctrs"></g>
+        </svg>
+        <figcaption>Docker beschreibt ein Image als Paket aus Schichten, jede eine Menge von Dateisystem-Änderungen. Ein Image ändert man nicht, man baut ein neues. Ein Container ist ein isolierter Prozess, der aus dem Image läuft.</figcaption>
+      </figure>
+<pre><span class="c"># Dockerfile · mehrstufig, klein, ohne Build-Werkzeuge im Endbild</span>
+<span class="k">FROM</span> node:22-alpine <span class="k">AS</span> build
+<span class="k">WORKDIR</span> /app
+<span class="k">COPY</span> package*.json ./
+<span class="k">RUN</span> npm ci
+<span class="k">COPY</span> . .
+<span class="k">RUN</span> npm run build
+
+<span class="k">FROM</span> node:22-alpine
+<span class="k">WORKDIR</span> /app
+<span class="k">ENV</span> NODE_ENV=production
+<span class="k">COPY</span> --from=build /app/dist ./dist
+<span class="k">COPY</span> package*.json ./
+<span class="k">RUN</span> npm ci --omit=dev
+<span class="k">USER</span> node                       <span class="c"># nicht als root laufen</span>
+<span class="k">EXPOSE</span> 3000
+<span class="k">HEALTHCHECK</span> CMD wget -qO- http://localhost:3000/health || exit 1
+<span class="k">CMD</span> [<span class="s">"node"</span>, <span class="s">"dist/server.js"</span>]</pre>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>Tags richtig setzen</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Tag</th><th>Zeigt auf</th><th>Verschiebt sich?</th><th>Verwenden für</th></tr></thead>
+        <tbody>
+          <tr><td><code>latest</code></td><td>was zuletzt gepusht wurde</td><td><span class="st bad">ja, ständig</span></td><td>lokales Ausprobieren, nie für Deployments</td></tr>
+          <tr><td><code>1.4</code></td><td>neuester Patch von 1.4</td><td><span class="st warn">ja, bei jedem Patch</span></td><td>Basis-Images, wenn Patches automatisch kommen sollen</td></tr>
+          <tr><td><code>1.4.3</code></td><td>genau ein Release</td><td><span class="st good">nein</span></td><td>Deployments und Rollback</td></tr>
+          <tr><td><code>sha-a1b2c3d</code></td><td>genau ein Commit</td><td><span class="st good">nein</span></td><td>Nachvollziehbarkeit vom laufenden System zum Code</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fn">Gib jedem Build den Commit-Tag und jedem Release zusätzlich den SemVer-Tag. Dann weisst du bei jedem Container, welcher Code darin steckt, und ein Rollback ist ein Wechsel auf das vorherige feste Tag.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Twelve-Factor App</h3>
+    <p class="prose d2">Adam Wiggins hat zwölf Regeln für Apps formuliert, die sich gut automatisch bauen und betreiben lassen. Die markierten sind für das Teamprojekt am wichtigsten.</p>
+    <div class="tw">
+      <table id="twelve">
+        <thead><tr><th>Faktor</th><th>Regel</th><th>Im Projekt</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>Infrastruktur als Code</h3>
+    <div class="cols3">
+      <div class="obj"><h4><span class="dot platform"></span>Deklarativ</h4><p class="says">Du beschreibst den Zielzustand, nicht die Schritte dorthin.</p><p class="so">docker-compose.yml statt einer Liste von Befehlen im Chat.</p></div>
+      <div class="obj"><h4><span class="dot platform"></span>Idempotent</h4><p class="says">Zweimal ausführen ergibt dasselbe wie einmal.</p><p class="so">Setup jederzeit neu laufen lassen können.</p></div>
+      <div class="obj"><h4><span class="dot platform"></span>Versioniert</h4><p class="says">Infrastruktur liegt im Repository und geht durch Review wie Code.</p><p class="so">Keine Klicks in einer Konsole ohne Spur.</p></div>
+    </div>
+    <div class="tags"><span class="tag">Docker Compose</span><span class="tag">Kubernetes-Manifeste</span><span class="tag">Terraform oder OpenTofu</span><span class="tag">Ansible</span><span class="tag">GitLab oder GitHub Container Registry</span><span class="tag">Docker Hub</span></div>
+  </div>
+</section>
+
+<!-- ============ K6 DEPLOYMENT ============ -->
+<section class="ch" id="k6">
+  <div class="ch-head">
+    <span class="k">Kapitel 6 · Bereich Continuous Delivery und Deployment</span>
+    <h2>Delivery, Deployment, Rollback</h2>
+    <p class="lead">Continuous Delivery heisst, die Software ist jederzeit auslieferbar, und ein Knopfdruck bringt jede Version in jede Umgebung. Continuous Deployment geht einen Schritt weiter: jede Änderung, die die Pipeline besteht, geht automatisch in Produktion. Deployment braucht Delivery als Grundlage.</p>
+  </div>
+
+  <div class="blk">
+    <h3>CI, Delivery, Deployment im Vergleich</h3>
+    <figure class="fig wide">
+      <svg id="cdcmp" viewBox="0 0 900 220" role="img" aria-label="Drei Zeilen: Continuous Integration endet nach dem Test, Continuous Delivery hat eine manuelle Freigabe vor Produktion, Continuous Deployment ist bis Produktion automatisch"></svg>
+      <figcaption>Der einzige Unterschied zwischen den unteren beiden Zeilen ist das Tor vor Produktion. Im Fachgespräch ist das die häufigste Verwechslung. Definitionen nach Martin Fowler.</figcaption>
+    </figure>
+    <div class="cols2">
+      <div class="obj"><h4><span class="dot run"></span>Deploy</h4><p class="says">Neue Version läuft in der Umgebung. Technischer Vorgang.</p><p class="so">So oft und so langweilig wie möglich.</p></div>
+      <div class="obj"><h4><span class="dot product"></span>Release</h4><p class="says">Nutzende bekommen die Funktion zu sehen. Fachliche Entscheidung.</p><p class="so">Mit Feature Toggles vom Deploy entkoppeln.</p></div>
+    </div>
+  </div>
+
+  <div class="blk" id="katalog">
+    <h3>Katalog der Deployment-Strategien</h3>
+    <p class="prose d2">Jede Karte zeigt dasselbe Diagramm: den Anteil der Nutzenden auf der neuen Version v2 über die Zeit. So vergleichst du nur das, was sich wirklich unterscheidet. Die Karte darunter ordnet alle Strategien nach Zusatzkosten und Risiko.</p>
+    <figure class="fig mid">
+      <svg id="depmap" viewBox="0 0 640 330" role="img" aria-label="Karte der Deployment-Strategien nach Zusatzkosten für Infrastruktur und Risiko bei einem Fehler"></svg>
+      <figcaption>Unten links ist günstig und sicher, das Ziel. Feature Toggles kommen nah heran, kosten aber Komplexität im Code statt in der Infrastruktur. Einordnung qualitativ, eigene Schätzung für ein kleines Projekt.</figcaption>
+    </figure>
+    <div class="grid-st" id="depcards"></div>
+    <div class="tw"><table id="deptab"><thead><tr><th>Strategie</th><th>Ausfallzeit</th><th>Zusatzkosten</th><th>Wen trifft ein Fehler</th><th>Rückweg</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="blk">
+    <h3>Wie viele trifft ein Fehler?</h3>
+    <div class="formula">Betroffene = Nutzende × Anteil auf v2 × Fehlerquote von v2<small>Die Grundidee hinter Canary und Toggles. Der Fehler ist derselbe, nur die Zahl der Betroffenen schrumpft.</small></div>
+    <div class="cols2">
+      <div class="panel" id="blast">
+        <h4>Rollout-Rechner<span class="k">tool</span></h4>
+        <div class="field"><label for="bUsers">Nutzende <b id="bUsersV">10 000</b></label><input type="range" id="bUsers" min="100" max="50000" step="100" value="10000"></div>
+        <div class="field"><label for="bShare">Anteil auf v2 <b id="bShareV">5 %</b></label><input type="range" id="bShare" min="1" max="100" value="5"></div>
+        <div class="field"><label for="bErr">Fehlerquote von v2 <b id="bErrV">20 %</b></label><input type="range" id="bErr" min="1" max="100" value="20"></div>
+        <div class="out"><div><b id="bOut">100</b><span>Betroffene beim gewählten Anteil</span></div><div><b id="bBig">2000</b><span>Betroffene bei Big Bang</span></div></div>
+      </div>
+      <figure class="fig">
+        <svg id="bChart" viewBox="0 0 420 220" role="img" aria-label="Balken: Betroffene beim gewählten Anteil im Vergleich zu Big Bang"></svg>
+        <figcaption>Die Balken sind exakt proportional. Ein Canary mit fünf Prozent trifft ein Zwanzigstel der Leute, die ein Big Bang mit demselben Fehler trifft.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>Strategie wählen</h3>
+    <ol class="dl">
+      <li><b>Darf es kurz ausfallen?</b> Wenn ja und die App ist klein, reicht Recreate. Sonst weiter.</li>
+      <li><b>Gibt es zwei Umgebungen oder mehrere Instanzen?</b> Zwei Umgebungen ergeben Blue-Green, mehrere Instanzen ergeben Rolling.</li>
+      <li><b>Kann der Router Traffic prozentual verteilen?</b> Dann Canary, mit Monitoring als Schiedsrichter.</li>
+      <li><b>Soll eine Funktion vor dem Release live sein?</b> Feature Toggle, unabhängig von der Strategie oben.</li>
+      <li><b>Schreibe den Rückweg auf, bevor du deployst.</b> Und probiere ihn einmal aus, sonst ist er eine Vermutung.</li>
+    </ol>
+  </div>
+
+  <div class="blk">
+    <h3>Rollback und Roll forward</h3>
+    <div class="cols3">
+      <div class="obj"><h4><span class="dot run"></span>Rollback</h4><p class="says">Zurück auf die letzte gute Version: vorheriges Tag deployen oder Router zurückschalten.</p><p class="so">Das vorherige Tag ist immer bekannt und dokumentiert.</p></div>
+      <div class="obj"><h4><span class="dot build"></span>Roll forward</h4><p class="says">Den Fehler schnell beheben und eine neue Version nachliefern.</p><p class="so">Nur, wenn die Pipeline schneller ist als ein Rollback.</p></div>
+      <div class="obj"><h4><span class="dot product"></span>Datenbank: expand und contract</h4><p class="says">Schema erst erweitern, dann umstellen, erst zuletzt Altes entfernen. Beide Versionen können so parallel laufen.</p><p class="so">Keine Migration, die die alte Version bricht.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ K7 BETRIEB ============ -->
+<section class="ch" id="k7">
+  <div class="ch-head">
+    <span class="k">Kapitel 7 · Betrieb, Monitoring, Verbesserung</span>
+    <h2>Betrieb und Kennzahlen</h2>
+    <p class="lead">Nach dem Deploy beginnt der zweite Weg: Feedback. Monitoring sagt dir, ob das System gerade gesund ist. Die DORA-Kennzahlen sagen dir, ob euer Lieferprozess über Wochen besser wird.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Die vier goldenen Signale</h3>
+    <figure class="fig wide">
+      <svg viewBox="0 0 900 200" role="img" aria-label="Anfrageweg von Nutzenden über Load Balancer und App zur Datenbank, mit den Messpunkten der vier goldenen Signale">
+        <defs><marker id="ahs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fe"/></marker></defs>
+        <rect x="20" y="70" width="130" height="56" rx="12" class="box"/><text x="85" y="103" text-anchor="middle" class="t tb">Nutzende</text>
+        <rect x="250" y="70" width="140" height="56" rx="12" class="box"/><text x="320" y="103" text-anchor="middle" class="t tb">Load Balancer</text>
+        <rect x="490" y="70" width="140" height="56" rx="12" class="boxa"/><text x="560" y="103" text-anchor="middle" class="t tb">App v1.4.3</text>
+        <rect x="730" y="70" width="150" height="56" rx="12" class="box"/><text x="805" y="103" text-anchor="middle" class="t tb">Datenbank</text>
+        <line x1="152" y1="98" x2="246" y2="98" class="ln" marker-end="url(#ahs)"/>
+        <line x1="392" y1="98" x2="486" y2="98" class="ln" marker-end="url(#ahs)"/>
+        <line x1="632" y1="98" x2="726" y2="98" class="ln" marker-end="url(#ahs)"/>
+        <circle cx="200" cy="98" r="9" class="fs"/><text x="200" y="102" text-anchor="middle" class="t3 tb tw2">T</text>
+        <text x="200" y="58" text-anchor="middle" class="t tb" style="fill:var(--solution)">Traffic</text><text x="200" y="152" text-anchor="middle" class="t3">Anfragen pro Sekunde</text>
+        <path d="M250 26 L630 26" class="sb" style="fill:none;stroke-width:2"/><path d="M250 20 L250 32 M630 20 L630 32" class="sb" style="stroke-width:2"/>
+        <text x="440" y="16" text-anchor="middle" class="t tb" style="fill:var(--build)">Latenz</text>
+        <circle cx="440" cy="98" r="9" class="fbad"/><text x="440" y="102" text-anchor="middle" class="t3 tb tw2">E</text>
+        <text x="440" y="152" text-anchor="middle" class="t tb" style="fill:var(--bad)">Fehler</text><text x="440" y="168" text-anchor="middle" class="t3">Anteil 5xx und falscher Antworten</text>
+        <circle cx="805" cy="150" r="9" class="fp"/><text x="805" y="154" text-anchor="middle" class="t3 tb tw2">S</text>
+        <text x="788" y="155" text-anchor="end" class="t tb" style="fill:var(--product)">Sättigung</text><text x="788" y="172" text-anchor="end" class="t3">CPU, Speicher, Verbindungen</text>
+      </svg>
+      <figcaption>Nach dem SRE-Buch von Google, Kapitel Monitoring Distributed Systems von Rob Ewaschuk. Wer nur vier Dinge messen kann, misst diese vier. Miss die Latenz fehlgeschlagener Anfragen getrennt, sonst schönt ein schneller Fehler den Durchschnitt.</figcaption>
+    </figure>
+    <div class="cols2">
+      <div class="obj"><h4><span class="dot platform"></span>Black-Box</h4><p class="says">Von aussen wie ein Nutzer prüfen. Zeigt Symptome, die gerade auftreten.</p><p class="so">Smoke-Test und Healthcheck nach jedem Deploy.</p></div>
+      <div class="obj"><h4><span class="dot platform"></span>White-Box</h4><p class="says">Von innen über Logs und Metriken. Zeigt Ursachen und Probleme, bevor sie Nutzende treffen.</p><p class="so">Strukturierte Logs als Ereignisstrom, Metrik-Endpunkt.</p></div>
+    </div>
+<pre><span class="c"># Healthcheck, den Pipeline und Monitoring abfragen</span>
+GET /health  →  200 OK
+{ <span class="s">"status"</span>: <span class="s">"ok"</span>, <span class="s">"version"</span>: <span class="s">"1.4.3"</span>, <span class="s">"commit"</span>: <span class="s">"a1b2c3d"</span>, <span class="s">"db"</span>: <span class="s">"ok"</span> }</pre>
+    <p class="fn">Die Version im Healthcheck ist ein kleiner, starker Nachweis. Sie verbindet das laufende System mit Tag, Commit und Pipeline-Lauf.</p>
+  </div>
+
+  <div class="blk">
+    <h3>DORA: fünf Kennzahlen für den Lieferprozess</h3>
+    <p class="prose d2">Das DORA-Forschungsprogramm misst Software-Delivery mit fünf Kennzahlen in zwei Gruppen. Durchsatz sagt, wie schnell Änderungen fliessen. Instabilität sagt, wie gut Deployments gelingen. Laut DORA gehen Tempo und Stabilität bei guten Teams zusammen, sie sind kein Tauschgeschäft.</p>
+    <figure class="fig wide">
+      <svg id="dora" viewBox="0 0 900 250" role="img" aria-label="Zeitstrahl mit Deployments. Markiert sind Lead Time vom Commit zum Deploy, Deployment-Frequenz, ein fehlgeschlagenes Deployment mit Wiederherstellungszeit und ein ungeplantes Deployment als Rework."></svg>
+      <figcaption>Ein Zeitstrahl, alle fünf Kennzahlen. Grün sind normale Deployments, rot eines, das sofort eingreifen musste, orange ein ungeplantes Deployment wegen eines Vorfalls. Stand der Definitionen: dora.dev, aktualisiert am 5. Januar 2026.</figcaption>
+    </figure>
+    <div class="cols5">
+      <div class="obj"><h4><span class="dot build"></span>Change lead time</h4><p class="says">Zeit vom Commit bis zum Deploy in Produktion.</p><p class="meta">Durchsatz</p></div>
+      <div class="obj"><h4><span class="dot build"></span>Deployment frequency</h4><p class="says">Deployments pro Zeitraum oder Zeit zwischen Deployments.</p><p class="meta">Durchsatz</p></div>
+      <div class="obj"><h4><span class="dot build"></span>Failed deployment recovery time</h4><p class="says">Zeit, um ein fehlgeschlagenes Deployment zu beheben. Ersetzt MTTR.</p><p class="meta">Durchsatz</p></div>
+      <div class="obj"><h4><span class="dot bad" style="background:var(--bad)"></span>Change fail rate</h4><p class="says">Anteil Deployments, die sofort eingreifen müssen, etwa Rollback oder Hotfix.</p><p class="meta">Instabilität</p></div>
+      <div class="obj"><h4><span class="dot product"></span>Deployment rework rate</h4><p class="says">Anteil ungeplanter Deployments wegen eines Vorfalls in Produktion.</p><p class="meta">Instabilität</p></div>
+    </div>
+    <div class="panel" id="doraTool">
+      <h4>DORA-Rechner für euer Projekt<span class="k">tool</span></h4>
+      <div class="cols3" style="gap:12px 20px">
+        <div class="field"><label for="dDays">Zeitraum in Tagen</label><input class="inp" type="number" id="dDays" min="1" value="28"></div>
+        <div class="field"><label for="dDep">Deployments total</label><input class="inp" type="number" id="dDep" min="0" value="12"></div>
+        <div class="field"><label for="dFail">davon mit sofortigem Eingriff</label><input class="inp" type="number" id="dFail" min="0" value="2"></div>
+        <div class="field"><label for="dRew">davon ungeplant wegen Vorfall</label><input class="inp" type="number" id="dRew" min="0" value="1"></div>
+        <div class="field"><label for="dLead">mittlere Lead Time in Stunden</label><input class="inp" type="number" id="dLead" min="0" step="0.5" value="20"></div>
+        <div class="field"><label for="dRec">mittlere Wiederherstellung in Minuten</label><input class="inp" type="number" id="dRec" min="0" value="35"></div>
+      </div>
+      <div class="out">
+        <div><b id="oFreq">3.0</b><span>Deployments pro Woche</span></div>
+        <div><b id="oCfr">17 %</b><span>Change fail rate</span></div>
+        <div><b id="oRew">8 %</b><span>Rework rate</span></div>
+        <div><b id="oLead">20 h</b><span>Lead time</span></div>
+        <div><b id="oRec">35 min</b><span>Recovery time</span></div>
+      </div>
+      <p class="hint" id="dHint">DORA nennt auf der aktuellen Seite keine festen Leistungsstufen. Vergleicht darum euren eigenen Trend von Iteration zu Iteration, nicht eine Zahl mit anderen Teams.</p>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>Vom Vorfall zur Verbesserung</h3>
+    <figure class="fig wide">
+      <svg id="incflow" viewBox="0 0 900 130" role="img" aria-label="Ablauf: Alarm, Rollback, Postmortem ohne Schuldzuweisung, Massnahme als Karte, Retro, Kennzahl prüfen"></svg>
+      <figcaption>Hier schliesst sich der Kreis zu Kapitel 1 und 2. Ein Vorfall endet erst, wenn eine Massnahme auf dem Board liegt und später an einer Kennzahl geprüft wurde.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ K8 NACHWEISE ============ -->
+<section class="ch" id="k8">
+  <div class="ch-head">
+    <span class="k">Kapitel 8 · Bewertung, Fachgespräch, KI</span>
+    <h2>Nachweise und KI</h2>
+    <p class="lead">Die Note kommt zu hundert Prozent aus dem Projekt. Begleitet wird es von Team-Fachgesprächen, in denen jede Person erklären, begründen und übertragen können muss. Darum zählt nicht nur, was im Repo steht, sondern ob du es erklären kannst.</p>
+  </div>
+
+  <div class="blk">
+    <h3>KI im Modul: erlaubt und deins</h3>
+    <figure class="fig mid">
+      <svg viewBox="0 0 700 262" role="img" aria-label="Links vier erlaubte Rollen der KI: Tutor, Sparringpartner, Reviewer, Debugging-Hilfe. Rechts vier Dinge, die bei dir bleiben: verstehen, prüfen, entscheiden, erklären.">
+        <text x="20" y="24" class="t tb">KI darf sein</text>
+        <text x="420" y="24" class="t tb">Bei dir bleibt</text>
+        <g id="kiL"></g><g id="kiR"></g>
+        <defs><marker id="ahki" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="fa"/></marker></defs>
+        <line x1="290" y1="130" x2="404" y2="130" class="la" marker-end="url(#ahki)"/>
+        <text x="347" y="118" text-anchor="middle" class="t3">Vorschlag</text>
+        <text x="347" y="152" text-anchor="middle" class="t3">wird geprüft</text>
+      </svg>
+      <figcaption>Nach der Modulbeschreibung M324: KI unterstützt den Lernprozess, ersetzt aber nicht die eigene Handlungskompetenz. Code, Tests, Pipelines, Deployments und Entscheidungen müssen in einer Abnahme erklärt werden können. Details stehen im KI-Nutzungsrahmen und im KI-Nachweis-Template des Moduls.</figcaption>
+    </figure>
+  </div>
+
+  <div class="blk">
+    <h3>Kompetenz, Nachweis, Frage</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Modulziel</th><th>Nachweis im Repo</th><th>Typische Frage im Fachgespräch</th></tr></thead>
+        <tbody>
+          <tr><td>DevOps-Prinzipien anwenden</td><td>Retro-Notizen, Entscheidungslog</td><td>Wo im Projekt seht man den zweiten Weg?</td></tr>
+          <tr><td>Anforderungen in Arbeitspakete</td><td>Issues mit Story und Akzeptanzkriterien</td><td>Woran erkennt ihr, dass Story 14 fertig ist?</td></tr>
+          <tr><td>Teamprozess gestalten</td><td>Board, Branch-Regeln, Review-Historie</td><td>Warum dieses Branching-Modell und nicht Gitflow?</td></tr>
+          <tr><td>Code, Tests, Doku</td><td>Tests im Repo, README</td><td>Welcher Test hätte den letzten Bug gefunden?</td></tr>
+          <tr><td>CI-Pipeline</td><td>CI-Datei, grüne und rote Läufe</td><td>Was passiert, wenn ein Test fehlschlägt?</td></tr>
+          <tr><td>Artefakte publizieren</td><td>Tags in der Registry, CHANGELOG</td><td>Welcher Commit steckt im Container in Produktion?</td></tr>
+          <tr><td>Deployment und Rollback</td><td>Deploy-Job, Rollback-Anleitung, Protokoll eines Tests</td><td>Zeig den Rollback auf die vorherige Version.</td></tr>
+          <tr><td>Monitoring und Verbesserung</td><td>Healthcheck, Kennzahlen, Massnahmen</td><td>Welche Kennzahl hat sich verbessert und warum?</td></tr>
+          <tr><td>KI kontrolliert nutzen</td><td>KI-Nachweis nach Vorlage</td><td>Welchen KI-Vorschlag habt ihr verworfen und warum?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fn">Die linke Spalte folgt den Lernzielen aus der Modulübersicht. Mitte und rechts sind Vorschläge. Massgebend ist das Bewertungsraster, das die Lehrperson vorab bekannt gibt.</p>
+  </div>
+
+  <div class="blk">
+    <h3>Abgabe-Checkliste</h3>
+    <div class="cols2">
+      <ul class="check" id="checklist"></ul>
+      <div class="prose">
+        <p>Die Haken bleiben in diesem Browser gespeichert. <span id="ckCount" class="num"></span></p>
+        <div><button type="button" class="btn sm q" id="ckReset"><span>Alle Haken entfernen</span></button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <h3>In 30 Sekunden erklären</h3>
+    <div class="qa">
+      <details><summary>Was ist DevOps in einem Satz?</summary><p>Eine Kultur und eine Reihe von Praktiken, mit denen ein Team Software gemeinsam baut und betreibt, um schnell und zugleich stabil Wert zu liefern.</p></details>
+      <details><summary>Was unterscheidet Delivery von Deployment?</summary><p>Bei Continuous Delivery ist jede Version auslieferbar, aber der Schritt in Produktion wird bewusst ausgelöst. Bei Continuous Deployment geht jede grüne Änderung automatisch live.</p></details>
+      <details><summary>Warum kurze Branches?</summary><p>Je länger Code getrennt lebt, desto grösser und riskanter wird der Merge. Kurze Branches halten Integration klein und Feedback schnell.</p></details>
+      <details><summary>Warum nicht auf latest deployen?</summary><p>latest verschiebt sich. Ihr wüsstet nicht, welcher Code läuft, und ein Rollback hätte kein festes Ziel.</p></details>
+      <details><summary>Was ist ein Artefakt?</summary><p>Das versionierte Ergebnis des Builds, etwa ein Container-Image. Es wird einmal gebaut und unverändert durch alle Umgebungen gezogen.</p></details>
+      <details><summary>Blue-Green oder Canary?</summary><p>Blue-Green schaltet alle auf einmal um und kann sofort zurück. Canary gibt die neue Version zuerst wenigen Nutzenden und begrenzt so den Schaden eines Fehlers.</p></details>
+      <details><summary>Warum WIP-Limits?</summary><p>Nach Little's Law ist die Durchlaufzeit WIP geteilt durch Durchsatz. Weniger gleichzeitig angefangen heisst schneller fertig.</p></details>
+      <details><summary>Welche Kennzahl würdest du zuerst messen?</summary><p>Deployment-Frequenz, weil sie am einfachsten zu erheben ist. Dann Change fail rate, damit Tempo nicht auf Kosten der Stabilität geht.</p></details>
+      <details><summary>Was heisst schuldfreies Postmortem?</summary><p>Man sucht die Stelle im Prozess, die den Fehler zugelassen hat, und verbessert sie. Man sucht nicht die Person, die ihn gemacht hat.</p></details>
+      <details><summary>Was ist CALMS?</summary><p>Culture, Automation, Lean, Measurement, Sharing. Fünf Prüfsteine, um zu sehen, wie weit ein Team mit DevOps ist.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUELLEN ============ -->
+<section class="ch" id="quellen">
+  <div class="ch-head">
+    <span class="k">Quellen · geprüft am 13. November 2026</span>
+    <h2>Quellen</h2>
+    <p class="lead">Klassiker im Text: Little 1961, Wake 2003, Cohn 2009, Willis und Edwards 2010, Kim 2012, Kim, Humble, Debois, Willis 2016. Online-Quellen nach Kapitel.</p>
+  </div>
+  <div class="cols2 src" id="srclist">
+    <div><h4>Modul</h4><ul>
+      <li><a href="https://www.modulbaukasten.ch/module/324">Modulbaukasten ICT-Berufsbildung: Modul 324</a></li>
+      <li><a href="https://gitlab.com/ch-tbz-it/Stud/allgemein/ki-kompetenz">TBZ: KI-Kompetenz</a></li>
+      <li>TBZ M324 README, vom Nutzer bereitgestellt</li></ul></div>
+    <div><h4>1 Kultur</h4><ul>
+      <li><a href="https://itrevolution.com/the-three-ways-principles-underpinning-devops/">Gene Kim: The Three Ways, IT Revolution, 2012</a></li>
+      <li><a href="https://www.atlassian.com/devops/frameworks/calms-framework">Atlassian: CALMS Framework</a></li>
+      <li><a href="https://itrevolution.com/wp-content/uploads/2022/06/DOHB2_Excerpt.pdf">The DevOps Handbook, 2. Auflage, Auszug</a></li></ul></div>
+    <div><h4>2 Teamprozess</h4><ul>
+      <li><a href="https://www.martinfowler.com/bliki/UserStory.html">Martin Fowler: User Story, INVEST</a></li>
+      <li><a href="https://www.scrum.org/resources/kanban-guide-scrum-teams">Scrum.org: Kanban Guide for Scrum Teams</a></li></ul></div>
+    <div><h4>3 Code und Versionen</h4><ul>
+      <li><a href="https://dora.dev/capabilities/trunk-based-development/">DORA: Trunk-based development</a></li>
+      <li><a href="https://www.martinfowler.com/articles/branching-patterns.html">Martin Fowler: Patterns for Managing Source Code Branches</a></li>
+      <li><a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits 1.0.0</a></li>
+      <li><a href="https://semver.org/">Semantic Versioning 2.0.0</a></li></ul></div>
+    <div><h4>4 Continuous Integration</h4><ul>
+      <li><a href="https://www.martinfowler.com/articles/continuousIntegration.html">Martin Fowler: Continuous Integration, 2024</a></li>
+      <li><a href="https://www.martinfowler.com/bliki/DeploymentPipeline.html">Martin Fowler: Deployment Pipeline</a></li>
+      <li><a href="https://martinfowler.com/articles/practical-test-pyramid.html">Ham Vocke: The Practical Test Pyramid</a></li>
+      <li><a href="https://docs.gitlab.com/ee/ci/">GitLab Docs: CI/CD</a></li>
+      <li><a href="https://docs.github.com/en/actions">GitHub Docs: Actions</a></li></ul></div>
+    <div><h4>5 Artefakte und Infrastruktur</h4><ul>
+      <li><a href="https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image/">Docker Docs: What is an image?</a></li>
+      <li><a href="https://12factor.net/">Adam Wiggins: The Twelve-Factor App</a></li></ul></div>
+    <div><h4>6 Delivery und Deployment</h4><ul>
+      <li><a href="https://www.martinfowler.com/bliki/ContinuousDelivery.html">Martin Fowler: Continuous Delivery</a></li>
+      <li><a href="https://www.martinfowler.com/bliki/BlueGreenDeployment.html">Martin Fowler: Blue Green Deployment, 2010</a></li>
+      <li><a href="https://www.martinfowler.com/bliki/CanaryRelease.html">Danilo Sato: Canary Release, 2014</a></li>
+      <li><a href="https://www.martinfowler.com/articles/feature-toggles.html">Pete Hodgson: Feature Toggles, 2017</a></li>
+      <li><a href="https://learn.microsoft.com/training/modules/manage-release-cadence/2-what-are-deployment-patterns">Microsoft Learn: Deployment patterns</a></li></ul></div>
+    <div><h4>7 Betrieb und Kennzahlen</h4><ul>
+      <li><a href="https://sre.google/sre-book/monitoring-distributed-systems/">Google SRE Book: Monitoring Distributed Systems</a></li>
+      <li><a href="https://dora.dev/guides/dora-metrics-four-keys">DORA: Software delivery performance metrics</a></li></ul></div>
+  </div>
+  <footer class="fin">
+    <p>Vereinfacht und angenähert: Die Zuordnung der Modulbereiche zu Phasen, die Rollen im Team und die Fachgespräch-Fragen sind didaktische Vorschläge. Die Karte der Deployment-Strategien ist eine qualitative Einordnung. Die Unterseiten des TBZ-Repositorys waren für den Abruf gesperrt. Grundlage sind darum das bereitgestellte Modul-Readme und die oben genannten Fachquellen. Gleiche Begriffe und Anforderungen mit euren Unterlagen und dem Bewertungsraster ab.</p>
+    <p>Code-Beispiele zeigen eine Node-App. Für Java, Go oder andere Stacks bleiben Struktur und Regeln gleich, nur die Befehle ändern sich.</p>
+  </footer>
+</section>
+</main>
+</div>
+<script>
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+var RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function el(tag,attrs,parent,text){var e=document.createElementNS(NS,tag);if(attrs)for(var k in attrs){if(attrs[k]!==undefined&&attrs[k]!==null)e.setAttribute(k,attrs[k])}if(text!==undefined)e.textContent=text;if(parent)parent.appendChild(e);return e}
+function fmt(n,d){return Number(n).toFixed(d===undefined?0:d)}
+function de(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g," ")}
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function marker(svg,id,cls){var d=svg.querySelector("defs")||el("defs",null,svg);var m=el("marker",{id:id,viewBox:"0 0 10 10",refX:9,refY:5,markerWidth:7,markerHeight:7,orient:"auto"},d);el("path",{d:"M0 0L10 5L0 10z","class":cls},m);return "url(#"+id+")"}
+
+/* ---------- theme ---------- */
+var root=document.documentElement;
+function setTheme(v){if(v==="light"||v==="dark")root.setAttribute("data-theme",v);else root.removeAttribute("data-theme");$$("[data-theme-set]").forEach(function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-theme-set")===v))});lsSet("m324-theme",v)}
+setTheme(lsGet("m324-theme")||"auto");
+$$("[data-theme-set]").forEach(function(b){b.addEventListener("click",function(){setTheme(b.getAttribute("data-theme-set"))})});
+
+/* ---------- seg helper ---------- */
+function seg(id,cb){var g=document.getElementById(id);if(!g)return;var bs=$$("button",g);bs.forEach(function(b){b.addEventListener("click",function(){bs.forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});cb(b.getAttribute("data-v"))})})}
+
+/* ---------- bezier ---------- */
+function bz(p,t){var m=1-t;return[m*m*m*p[0][0]+3*m*m*t*p[1][0]+3*m*t*t*p[2][0]+t*t*t*p[3][0],m*m*m*p[0][1]+3*m*m*t*p[1][1]+3*m*t*t*p[2][1]+t*t*t*p[3][1]]}
+function bzd(p,t){var m=1-t;return[3*m*m*(p[1][0]-p[0][0])+6*m*t*(p[2][0]-p[1][0])+3*t*t*(p[3][0]-p[2][0]),3*m*m*(p[1][1]-p[0][1])+6*m*t*(p[2][1]-p[1][1])+3*t*t*(p[3][1]-p[2][1])]}
+
+/* ---------- hero loop ---------- */
+(function(){
+  var s=$("#loop");if(!s)return;
+  var C=[260,125],L=64,R=456;
+  var segs=[
+    [C,[195,35],[L,35],[L,125]],[[L,125],[L,215],[195,215],C],
+    [C,[325,35],[R,35],[R,125]],[[R,125],[R,215],[325,215],C]];
+  var cls=["sb","sb","sr","sr"];
+  segs.forEach(function(p,i){el("path",{d:"M"+p[0]+" C"+p[1]+" "+p[2]+" "+p[3],"class":cls[i],style:"fill:none;stroke-width:3;stroke-linecap:round"},s)});
+  [[0,.2],[1,.3],[2,.2],[3,.3]].forEach(function(a,i){var p=segs[a[0]],q=bz(p,a[1]),d=bzd(p,a[1]),ang=Math.atan2(d[1],d[0])*180/Math.PI;
+    el("path",{d:"M-5 -5 L5 0 L-5 5 z","class":i<2?"fb":"fr",transform:"translate("+q[0]+" "+q[1]+") rotate("+ang+")"},s)});
+  el("text",{x:162,y:121,"text-anchor":"middle","class":"tl tb",style:"fill:var(--build)"},s,"Dev");
+  el("text",{x:162,y:139,"text-anchor":"middle","class":"t3"},s,"bauen");
+  el("text",{x:358,y:121,"text-anchor":"middle","class":"tl tb",style:"fill:var(--run)"},s,"Ops");
+  el("text",{x:358,y:139,"text-anchor":"middle","class":"t3"},s,"betreiben");
+  var ph=[["Plan",0,.55],["Code",1,.02],["Build",1,.5],["Test",1,.86],["Release",2,.55],["Deploy",3,.02],["Operate",3,.5],["Monitor",3,.86]];
+  ph.forEach(function(f,i){var p=segs[f[1]],q=bz(p,f[2]),lc=f[1]<2?[162,125]:[358,125];
+    el("circle",{cx:q[0],cy:q[1],r:7,"class":f[1]<2?"fb":"fr",stroke:"var(--ground)","stroke-width":2.5},s);
+    var lx,ly,anc;
+    if(f[0]==="Test"||f[0]==="Monitor"){lx=q[0]+(f[0]==="Test"?-2:2);ly=q[1]+34;anc="middle"}
+    else{var dx=q[0]-lc[0],dy=q[1]-lc[1],n=Math.sqrt(dx*dx+dy*dy)||1;lx=q[0]+dx/n*22;ly=q[1]+dy/n*22+4;anc=Math.abs(dx/n)<.35?"middle":(dx<0?"end":"start")}
+    el("text",{x:lx,y:ly,"text-anchor":anc,"class":"t tb"},s,f[0]);
+  });
+})();
+
+/* ---------- matrix ---------- */
+(function(){
+  var s=$("#matrix");if(!s)return;
+  var ph=["Plan","Code","Build","Test","Release","Deploy","Operate","Monitor"];
+  var rows=[["Kultur","product",[2,2,2,2,2,2,2,2]],["Prozesse","solution",[2,2,0,1,1,0,0,1]],["Infrastruktur","platform",[0,0,2,1,2,2,2,0]],["Continuous Integration","build",[0,2,2,2,1,0,0,0]],["Continuous Deployment","run",[0,0,0,1,2,2,2,2]]];
+  var x0=210,cw=85;function cx(i){return x0+cw/2+i*cw}
+  ph.forEach(function(p,i){el("text",{x:cx(i),y:30,"text-anchor":"middle","class":"t2 tb",style:"fill:var("+(i<4?"--build":"--run")+")"},s,p)});
+  el("line",{x1:x0,y1:44,x2:x0+8*cw,y2:44,"class":"ln2"},s);
+  rows.forEach(function(r,j){var y=74+j*48,lo=r[2].findIndex(function(v){return v>0}),hi=7-r[2].slice().reverse().findIndex(function(v){return v>0});
+    el("text",{x:20,y:y+4,"class":"t tb"},s,r[0]);
+    el("rect",{x:cx(lo)-24,y:y-15,width:cx(hi)-cx(lo)+48,height:30,rx:15,style:"fill:var(--"+r[1]+");opacity:.14"},s);
+    r[2].forEach(function(v,i){if(!v)return;if(v===2)el("circle",{cx:cx(i),cy:y,r:9,style:"fill:var(--"+r[1]+")"},s);else el("circle",{cx:cx(i),cy:y,r:7,style:"fill:var(--ground);stroke:var(--"+r[1]+");stroke-width:2.5"},s)});
+  });
+  el("circle",{cx:224,cy:290,r:6,style:"fill:var(--ink-3)"},s);el("text",{x:236,y:294,"class":"t3"},s,"prägt direkt");
+  el("circle",{cx:334,cy:290,r:5,style:"fill:var(--ground);stroke:var(--ink-3);stroke-width:2"},s);el("text",{x:346,y:294,"class":"t3"},s,"wirkt mit");
+})();
+
+/* ---------- roadmap ---------- */
+(function(){
+  var s=$("#road");if(!s)return;
+  var st=[["Team bilden","product",["Rollen und Regeln","Teamvertrag","Tools wählen"]],["Anforderungen","solution",["User Stories","Akzeptanzkriterien","Backlog priorisiert"]],["Prozess","solution",["Kanban mit WIP","Branch-Regeln","Review-Pflicht"]],["Code und Tests","build",["Grundgerüst","Unit-Tests","README"]],["CI-Pipeline","build",["Lint, Build, Test","Merge nur grün","Badge im README"]],["Artefakt","platform",["SemVer-Tags","Image in Registry","CHANGELOG"]],["Deployment","run",["Deploy-Job","Rollback geprobt","Healthcheck"]],["Betrieb","run",["Monitoring","DORA-Kennzahlen","Retro, Massnahmen"]]];
+  var step=125;function cx(i){return 62.5+i*step}
+  var mk=marker(s,"ahroad","fa");
+  el("line",{x1:cx(0),y1:52,x2:cx(7),y2:52,"class":"ln",style:"stroke-width:2"},s);
+  st.forEach(function(d,i){var x=cx(i);
+    el("circle",{cx:x,cy:52,r:20,style:"fill:var(--"+d[1]+")"},s);
+    el("text",{x:x,y:57,"text-anchor":"middle","class":"t tb tw2"},s,String(i+1));
+    el("text",{x:x,y:100,"text-anchor":"middle","class":"t tb"},s,d[0]);
+    d[2].forEach(function(l,k){el("text",{x:x,y:122+k*18,"text-anchor":"middle","class":"t2"},s,l)});
+  });
+  el("path",{d:"M"+cx(7)+" 182 L"+cx(7)+" 236 L"+cx(1)+" 236 L"+cx(1)+" 184","class":"la",style:"stroke-dasharray:6 5","marker-end":mk},s);
+  el("text",{x:(cx(1)+cx(7))/2,y:262,"text-anchor":"middle","class":"t2"},s,"Feedback: Kennzahlen, Vorfälle und Retro werden zu neuen Karten");
+  el("text",{x:20,y:292,"class":"t3"},s,"Farbe gleich Modulbereich: orange Kultur, türkis Prozesse, violett CI, grau Infrastruktur, grün CD und Betrieb");
+})();
+
+/* ---------- CALMS ---------- */
+(function(){
+  var s=$("#calms");if(!s)return;var cx=195,cy=150,r=100;
+  el("circle",{cx:cx,cy:cy,r:r,"class":"lnd"},s);
+  var n=[["C","Culture","product"],["A","Automation","build"],["L","Lean","solution"],["M","Measurement","run"],["S","Sharing","accent"]];
+  n.forEach(function(d,i){var a=(-90+i*72)*Math.PI/180,x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);
+    el("circle",{cx:x,cy:y,r:28,style:"fill:var(--"+d[2]+")"},s);
+    el("text",{x:x,y:y+7,"text-anchor":"middle","class":"tw2 tb",style:"font-size:20px"},s,d[0]);
+    if(i===0||i===1)el("text",{x:x+36,y:y+5,"class":"t tb"},s,d[1]);else if(i===4)el("text",{x:x-36,y:y+5,"text-anchor":"end","class":"t tb"},s,d[1]);else el("text",{x:x,y:y+48,"text-anchor":"middle","class":"t tb"},s,d[1]);
+  });
+  el("text",{x:cx,y:cy+2,"text-anchor":"middle","class":"tl tb"},s,"CALMS");
+  el("text",{x:cx,y:cy+20,"text-anchor":"middle","class":"t3"},s,"im Kreis");
+})();
+
+/* ---------- three ways boxes ---------- */
+(function(){
+  var g=$("#ways-boxes");if(!g)return;
+  [["Idee","Anforderung"],["Dev","Code, Build, Test"],["Ops","Deploy, Betrieb"],["Kunde","Nutzen"]].forEach(function(d,i){var x=24+i*190;
+    el("rect",{x:x,y:64,width:150,height:56,rx:12,"class":"box"},g);
+    el("text",{x:x+75,y:88,"text-anchor":"middle","class":"t tb"},g,d[0]);
+    el("text",{x:x+75,y:106,"text-anchor":"middle","class":"t3"},g,d[1]);
+  });
+})();
+
+/* ---------- chain drawer ---------- */
+function chain(id,steps,gates){
+  var s=document.getElementById(id);if(!s)return;var vb=s.viewBox.baseVal,W=vb.width,n=steps.length,gap=16,w=(W-20-gap*(n-1))/n;
+  var mk=marker(s,id+"-ah","fe");
+  steps.forEach(function(d,i){var x=10+i*(w+gap),g=gates&&gates.indexOf(i)>=0;
+    el("rect",{x:x,y:28,width:w,height:58,rx:12,"class":g?"boxa":"box"},s);
+    el("text",{x:x+w/2,y:52,"text-anchor":"middle","class":"t tb"},s,d[0]);
+    el("text",{x:x+w/2,y:71,"text-anchor":"middle","class":"t3"},s,d[1]);
+    if(g)el("text",{x:x+w/2,y:108,"text-anchor":"middle","class":"t3",style:"fill:var(--accent)"},s,"Schranke");
+    if(i<n-1)el("line",{x1:x+w+2,y1:57,x2:x+w+gap-2,y2:57,"class":"ln","marker-end":mk},s);
+  });
+}
+chain("prflow",[["Branch","feature/14"],["Commits","klein, mit Typ"],["Push","startet CI"],["MR / PR","Link zum Issue"],["Pipeline grün","automatisch"],["Review","mind. 1 Freigabe"],["Merge","Branch löschen"]],[4,5]);
+chain("incflow",[["Alarm","Signal rot"],["Rollback","letztes Tag"],["Postmortem","schuldfrei"],["Massnahme","Karte aufs Board"],["Retro","priorisieren"],["Kennzahl","wirkt es?"]],[]);
+
+/* ---------- Little's Law ---------- */
+(function(){
+  var w=$("#lWip"),t=$("#lTp"),s=$("#lChart");if(!w||!s)return;
+  var X0=48,X1=404,Y0=222,Y1=16;
+  function draw(){
+    var wip=+w.value,tp=+t.value,lt=wip/tp;
+    $("#lWipV").textContent=wip;$("#lTpV").textContent=tp;
+    $("#lOut").textContent=fmt(lt,1).replace(".",".");$("#lDays").textContent=fmt(lt*5,0);
+    $("#lHint").textContent=wip>tp*2?"Mehr als zwei Wochen Arbeit gleichzeitig offen. Erst fertig machen, dann neu anfangen.":"Gut. Die angefangene Arbeit passt zum Durchsatz des Teams.";
+    while(s.firstChild)s.removeChild(s.firstChild);
+    var maxY=Math.max(2,Math.ceil(20/tp));var step=maxY<=4?1:maxY<=10?2:5;maxY=Math.ceil(maxY/step)*step;
+    function sx(v){return X0+(v/20)*(X1-X0)}function sy(v){return Y0-(v/maxY)*(Y0-Y1)}
+    for(var v=0;v<=maxY;v+=step){el("line",{x1:X0,y1:sy(v),x2:X1,y2:sy(v),"class":"ln2"},s);el("text",{x:X0-8,y:sy(v)+4,"text-anchor":"end","class":"t3 num"},s,String(v))}
+    [0,5,10,15,20].forEach(function(v){el("text",{x:sx(v),y:Y0+16,"text-anchor":"middle","class":"t3 num"},s,String(v))});
+    el("text",{x:X1,y:Y0+32,"text-anchor":"end","class":"t3"},s,"WIP, angefangene Karten");
+    el("text",{x:X0+6,y:Y1-4,"class":"t3"},s,"Wochen");
+    el("line",{x1:sx(1),y1:sy(1/tp),x2:sx(20),y2:sy(20/tp),"class":"la"},s);
+    el("line",{x1:sx(wip),y1:Y0,x2:sx(wip),y2:sy(lt),"class":"lnd"},s);
+    el("circle",{cx:sx(wip),cy:sy(lt),r:7,"class":"fa",stroke:"var(--ground)","stroke-width":2.5},s);
+  }
+  w.addEventListener("input",draw);t.addEventListener("input",draw);draw();
+})();
+
+/* ---------- SemVer ---------- */
+(function(){
+  var inp=$("#svIn");if(!inp)return;var ids=["svFix","svFeat","svBrk","svPre"];
+  function run(){
+    var m=/^v?(\d+)\.(\d+)\.(\d+)(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/.exec(inp.value.trim());
+    var out=$("#svOut"),why=$("#svWhy"),hint=$("#svHint");
+    if(!m){inp.classList.add("bad");out.textContent="?";why.textContent="Format MAJOR.MINOR.PATCH, etwa 1.4.2";return}
+    inp.classList.remove("bad");
+    var M=+m[1],N=+m[2],P=+m[3],fix=$("#svFix").checked,feat=$("#svFeat").checked,brk=$("#svBrk").checked,pre=$("#svPre").checked,lvl;
+    if(brk){M++;N=0;P=0;lvl="MAJOR, weil sich die öffentliche Schnittstelle inkompatibel ändert"}
+    else if(feat){N++;P=0;lvl="MINOR, weil eine kompatible Funktion dazukommt"}
+    else if(fix){P++;lvl="PATCH, weil nur Fehler behoben wurden"}
+    else{out.textContent=m[1]+"."+m[2]+"."+m[3];why.textContent="Kein Release nötig. docs, ci oder chore ändern die Version nicht.";hint.textContent="Die höchste Stufe gewinnt. Ein einziger Bruch macht das Release zu MAJOR.";return}
+    out.textContent=M+"."+N+"."+P+(pre?"-rc.1":"");why.textContent=lvl+(pre?". Als Vorabversion steht sie unter "+M+"."+N+"."+P:"");
+    hint.textContent=(+m[1]===0&&brk)?"Bei 0.x gilt die Schnittstelle laut SemVer als instabil. Viele Teams erhöhen dort bei einem Bruch nur MINOR.":"Die höchste Stufe gewinnt. Ein einziger Bruch macht das Release zu MAJOR.";
+  }
+  inp.addEventListener("input",run);ids.forEach(function(i){$("#"+i).addEventListener("change",run)});run();
+})();
+
+/* ---------- CI loop ---------- */
+(function(){
+  var s=$("#ciloop");if(!s)return;var cx=210,cy=160,rx=148,ry=110;var mk=marker(s,"ciah","fb");
+  var n=[["Commit","lokal"],["Push","auf Branch"],["Build","automatisch"],["Test","im Build"],["Bericht","sichtbar für alle"],["Fix oder weiter","rot stoppt alles"]];
+  function pt(deg){var a=deg*Math.PI/180;return[cx+rx*Math.cos(a),cy+ry*Math.sin(a)]}
+  var boxes=n.map(function(d,i){var p=pt(-90+i*60),w=i===5?124:104;return{x:p[0]-w/2,y:p[1]-21,w:w,h:42,c:p}});
+  function inside(p){return boxes.some(function(b){return p[0]>b.x-8&&p[0]<b.x+b.w+8&&p[1]>b.y-8&&p[1]<b.y+b.h+8})}
+  n.forEach(function(d,i){var pts=[];for(var k=0;k<=80;k++){var q=pt(-90+i*60+k*60/80);if(!inside(q))pts.push(q)}
+    if(pts.length>1)el("polyline",{points:pts.map(function(q){return q[0]+","+q[1]}).join(" "),"class":"sb",style:"fill:none;stroke-width:2","marker-end":mk},s)});
+  n.forEach(function(d,i){var b=boxes[i];
+    el("rect",{x:b.x,y:b.y,width:b.w,height:b.h,rx:21,"class":i===5?"boxa":"box"},s);
+    el("text",{x:b.c[0],y:b.c[1]-2,"text-anchor":"middle","class":"t tb"},s,d[0]);
+    el("text",{x:b.c[0],y:b.c[1]+13,"text-anchor":"middle","class":"t3"},s,d[1]);
+  });
+  el("text",{x:cx,y:cy-2,"text-anchor":"middle","class":"tl tb"},s,"jeder Push");
+  el("text",{x:cx,y:cy+18,"text-anchor":"middle","class":"t3"},s,"Umlauf unter 10 min");
+})();
+
+/* ---------- pipeline simulator ---------- */
+(function(){
+  var box=$("#pStages");if(!box)return;
+  var ST=[{n:"Lint",m:.5},{n:"Build",m:1},{n:"Unit",m:2},{n:"Integration",m:4},{n:"Paket",m:1},{n:"Publish",m:.5}];
+  var fail=-1,order="fast",timer=null;
+  function seq(){return order==="fast"?[0,1,2,3,4,5]:[1,3,2,0,4,5]}
+  function result(){var t=0,ok=true,q=seq();for(var i=0;i<q.length;i++){t+=ST[q[i]].m;if(q[i]===fail){ok=false;break}}return{t:t,ok:ok}}
+  function render(state){box.innerHTML="";seq().forEach(function(k,j){var d=document.createElement("div");d.className="stg "+(state[k]||"");
+      var st=state[k]==="good"?"grün":state[k]==="bad"?"rot":state[k]==="run"?"läuft":state[k]==="skip"?"übersprungen":"wartet";
+      d.innerHTML="<b>"+ST[k].n+"</b><span class='fn'>"+String(ST[k].m).replace(".",",")+" min · "+st+"</span>";box.appendChild(d);
+      if(j<5){var a=document.createElement("span");a.className="arr";a.textContent="→";a.setAttribute("aria-hidden","true");box.appendChild(a)}});}
+  function summary(){var r=result();$("#pTime").textContent=String(r.t).replace(".",",");var o=$("#pRes");o.textContent=r.ok?"grün":"rot";o.style.color=r.ok?"var(--good)":"var(--bad)"}
+  function final(){var st={},q=seq(),stop=false;q.forEach(function(k){if(stop){st[k]="skip";return}if(k===fail){st[k]="bad";stop=true}else st[k]="good"});return st}
+  function idle(){if(timer){clearTimeout(timer);timer=null}render({});summary()}
+  function runIt(){if(timer)clearTimeout(timer);var q=seq(),st={},i=0;
+    if(RM){render(final());summary();return}
+    (function next(){if(i>=q.length){summary();return}var k=q[i];st[k]="run";render(st);
+      timer=setTimeout(function(){if(k===fail){st[k]="bad";for(var j=i+1;j<q.length;j++)st[q[j]]="skip";render(st);summary();timer=null;return}st[k]="good";i++;next()},ST[k].m*260)})();}
+  seg("pFail",function(v){fail=+v;idle()});seg("pOrder",function(v){order=v;idle()});
+  $("#pRun").addEventListener("click",runIt);idle();
+})();
+
+/* ---------- yaml seg ---------- */
+seg("ymlSeg",function(v){$("#yml-gl").hidden=v!=="gl";$("#yml-gh").hidden=v!=="gh"});
+
+/* ---------- envs, layers ---------- */
+(function(){
+  var g=$("#envs");if(g){[["Dev","DB_URL=db-dev  LOG=debug",20],["Staging","DB_URL=db-stage  LOG=info",92],["Produktion","DB_URL=db-prod  LOG=warn",164]].forEach(function(d,i){
+    el("rect",{x:656,y:d[2],width:234,height:52,rx:12,"class":i===2?"boxa":"box"},g);
+    el("text",{x:670,y:d[2]+21,"class":"t tb"},g,d[0]);
+    el("text",{x:670,y:d[2]+39,"class":"t3 tm"},g,d[1]);})}
+  var L=$("#layers"),C=$("#ctrs");if(!L)return;
+  var ly=[["Metadaten: USER, CMD","run"],["App-Code: dist/","build"],["Abhängigkeiten: npm ci","solution"],["Basis: node:22-alpine","platform"]];
+  ly.forEach(function(d,i){var y=82+i*34;el("rect",{x:20,y:y,width:200,height:30,rx:8,"class":"box"},L);el("rect",{x:20,y:y,width:6,height:30,rx:3,style:"fill:var(--"+d[1]+")"},L);el("text",{x:34,y:y+20,"class":"t2"},L,d[0])});
+  el("text",{x:20,y:66,"class":"t3"},L,"Schichten, schreibgeschützt");
+  ["A","B"].forEach(function(n,j){var x=250+j*100;
+    el("rect",{x:x,y:44,width:86,height:30,rx:8,"class":"boxa"},C);el("text",{x:x+43,y:63,"text-anchor":"middle","class":"t3"},C,"beschreibbar");
+    ly.forEach(function(d,i){var y=82+i*34;el("rect",{x:x,y:y,width:86,height:30,rx:8,style:"fill:var(--"+d[1]+");opacity:.22"},C)});
+    el("text",{x:x+43,y:234,"text-anchor":"middle","class":"t tb"},C,"Container "+n);});
+})();
+
+/* ---------- twelve factor ---------- */
+(function(){
+  var tb=$("#twelve tbody");if(!tb)return;
+  var F=[["I Codebase","Eine Codebasis in Versionskontrolle, viele Deploys","ein Repo, alle Umgebungen daraus",1],["II Dependencies","Abhängigkeiten explizit deklarieren und isolieren","Lockfile, alles im Image",1],["III Config","Konfiguration in der Umgebung speichern","Umgebungsvariablen und CI-Secrets",1],["IV Backing services","Unterstützende Dienste als angehängte Ressourcen","Datenbank per URL austauschbar",0],["V Build, release, run","Build- und Run-Phase strikt trennen","ein Artefakt für alle Umgebungen",1],["VI Processes","App als zustandslose Prozesse ausführen","Zustand in die Datenbank, nicht in den Container",0],["VII Port binding","Dienste über Port-Bindung anbieten","EXPOSE und Port per Variable",0],["VIII Concurrency","Über das Prozessmodell skalieren","mehr Container statt grösserer",0],["IX Disposability","Schnell starten, sauber herunterfahren","Voraussetzung für Rolling und Rollback",1],["X Dev/prod parity","Entwicklung, Staging und Produktion möglichst gleich","gleiches Image, Docker Compose lokal",1],["XI Logs","Logs als Ereignisstrom behandeln","auf stdout schreiben, nicht in Dateien",1],["XII Admin processes","Admin-Aufgaben als einmalige Prozesse","Migration als eigener Job",0]];
+  F.forEach(function(f){var tr=document.createElement("tr");tr.innerHTML="<td>"+f[0]+"</td><td>"+f[1]+"</td><td>"+(f[3]?"<span class='st good'>wichtig</span> ":"")+f[2]+"</td>";tb.appendChild(tr)});
+})();
+
+/* ---------- CD comparison ---------- */
+(function(){
+  var s=$("#cdcmp");if(!s)return;var mk=marker(s,"cdah","fe"),mka=marker(s,"cdaa","fa");
+  var st=["Commit","Build","Test","Staging","Produktion"],x0=200,w=110,step=140;
+  var rows=[["Continuous Integration","bis zum grünen Test",3,-1],["Continuous Delivery","jederzeit auslieferbar",5,3],["Continuous Deployment","alles automatisch",5,-1]];
+  rows.forEach(function(r,j){var y=16+j*70;
+    el("text",{x:10,y:y+20,"class":"t tb"},s,r[0]);el("text",{x:10,y:y+38,"class":"t3"},s,r[1]);
+    st.forEach(function(n,i){var x=x0+i*step,on=i<r[2];
+      el("rect",{x:x,y:y,width:w,height:44,rx:10,"class":on?(i===4?"boxa":"box"):"lnd"},s);
+      el("text",{x:x+w/2,y:y+27,"text-anchor":"middle","class":on?"t tb":"t3"},s,n);
+      if(i<4){var a1=x+w+3,a2=x+step-3,next=i+1<r[2];
+        if(i===r[3]){el("line",{x1:a1,y1:y+22,x2:a2,y2:y+22,"class":"lnd","marker-end":mk},s);el("rect",{x:(a1+a2)/2-5,y:y+10,width:10,height:24,rx:3,"class":"fwarn"},s);el("text",{x:(a1+a2)/2,y:y+60,"text-anchor":"middle","class":"t3",style:"fill:var(--warn)"},s,"manuelle Freigabe")}
+        else if(next)el("line",{x1:a1,y1:y+22,x2:a2,y2:y+22,"class":j===2&&i===3?"la":"ln","marker-end":j===2&&i===3?mka:mk},s);}
+    });
+  });
+})();
+
+/* ---------- deployment catalog ---------- */
+var DEP=[
+ {id:"recreate",name:"Recreate",alias:"Big Bang",x:.08,y:.92,down:"ja, kurz",cost:"keine",who:"alle sofort",back:"alte Version neu deployen, Minuten",risk:"Ausfall bei jedem Deploy. Ein Fehler trifft alle.",use:"kleine Apps, wenn ein kurzer Ausfall okay ist, etwa ein Schulprojekt mit einer Instanz.",v2:[[0,0],[5,0],[5,100],[10,100]],v1:[[0,100],[4,100],[4,0],[10,0]],band:[4,5,"Ausfall"],marks:[]},
+ {id:"rolling",name:"Rolling",alias:"schrittweise Instanzen",x:.3,y:.6,down:"nein",cost:"eine Instanz extra",who:"wachsender Teil",back:"zurückrollen, Instanz für Instanz",risk:"Zwei Versionen laufen gleichzeitig. Schnittstellen und Datenbank müssen beide verkraften.",use:"mehrere Instanzen, etwa in Kubernetes oder Docker Swarm.",v2:[[0,0],[2,0],[2,25],[3.5,25],[3.5,50],[5,50],[5,75],[6.5,75],[6.5,100],[10,100]],marks:[]},
+ {id:"bluegreen",name:"Blue-Green",alias:"zwei Umgebungen",x:.86,y:.45,down:"nein",cost:"zweite volle Umgebung",who:"alle, aber nur kurz",back:"Router zurückschalten, Sekunden",risk:"Beide teilen meist die Datenbank. Migrationen müssen rückwärtskompatibel sein.",use:"wenn sofortiges Zurück wichtiger ist als Kosten.",v2:[[0,0],[5,0],[5,100],[10,100]],marks:[[2,"Deploy"],[5,"Umschalten"]]},
+ {id:"canary",name:"Canary",alias:"kleine Vorhut",x:.52,y:.2,down:"nein",cost:"Routing nach Anteil",who:"kleiner Anteil",back:"Anteil auf null, Sekunden",risk:"Braucht Metriken, die einen schlechten Canary schnell erkennen.",use:"viele Nutzende und gutes Monitoring.",v2:[[0,0],[3,0],[3,5],[5,5],[5,25],[7,25],[7,50],[8.5,50],[8.5,100],[10,100]],marks:[[3,"5 %"]]},
+ {id:"toggle",name:"Feature Toggle",alias:"Dark Launch",x:.18,y:.16,down:"nein",cost:"Komplexität im Code",who:"frei gewählte Gruppe",back:"Schalter aus, Sekunden",risk:"Alte Schalter werden zur Altlast. Ihre Zahl klein halten und aufräumen.",use:"Deploy und Release trennen, ideal mit Trunk-based.",v2:[[0,0],[5,0],[5,10],[7.5,10],[7.5,100],[10,100]],marks:[[2,"Deploy"],[5,"Release"]]},
+ {id:"shadow",name:"Shadow",alias:"Mirroring",x:.93,y:.06,down:"nein",cost:"doppelte Last",who:"niemand, Antworten werden verworfen",back:"Spiegelung abschalten",risk:"Schreibende Aufrufe dürfen nicht doppelt wirken, etwa keine doppelten E-Mails.",use:"Last und Verhalten testen, bevor jemand v2 sieht.",v2:[[0,0],[10,0]],mirror:[[0,0],[3,0],[3,100],[10,100]],marks:[[3,"Spiegelung an"]]}
+];
+function specimen(d){
+  var s=el("svg",{viewBox:"0 0 260 170",role:"img","aria-label":"Anteil der Nutzenden auf v2 über die Zeit, Strategie "+d.name});
+  var X0=42,X1=250,Y0=128,Y1=18;function sx(t){return X0+t/10*(X1-X0)}function sy(p){return Y0-p/100*(Y0-Y1)}
+  [0,50,100].forEach(function(p){el("line",{x1:X0,y1:sy(p),x2:X1,y2:sy(p),"class":"ln2"},s);el("text",{x:X0-6,y:sy(p)+4,"text-anchor":"end","class":"t3 num"},s,p+"%")});
+  if(d.band){el("rect",{x:sx(d.band[0]),y:Y1,width:sx(d.band[1])-sx(d.band[0]),height:Y0-Y1,style:"fill:var(--bad);opacity:.18"},s);el("text",{x:sx(d.band[1])+4,y:sy(50)+4,"class":"t3",style:"fill:var(--bad)"},s,d.band[2])}
+  (d.marks||[]).forEach(function(m,i){el("line",{x1:sx(m[0]),y1:Y0,x2:sx(m[0]),y2:Y1-6,"class":"lnd"},s);el("text",{x:sx(m[0])+3,y:Y1-6+(i%2)*0,"class":"t3"},s,m[1])});
+  var v1=d.v1||d.v2.map(function(p){return[p[0],100-p[1]]});
+  function pl(pts,cls,st){el("polyline",{points:pts.map(function(p){return sx(p[0])+","+sy(p[1])}).join(" "),"class":cls,style:st},s)}
+  pl(v1,"ln","fill:none;stroke-dasharray:4 4;stroke-width:1.5");
+  if(d.mirror)pl(d.mirror,"sb","fill:none;stroke-dasharray:2 4;stroke-width:2.5");
+  pl(d.v2,"la","fill:none;stroke-width:3;stroke-linejoin:round");
+  el("line",{x1:X0,y1:150,x2:X0+18,y2:150,"class":"la",style:"stroke-width:3"},s);el("text",{x:X0+24,y:154,"class":"t3"},s,"v2");
+  el("line",{x1:X0+52,y1:150,x2:X0+70,y2:150,"class":"ln",style:"stroke-dasharray:4 4;stroke-width:1.5"},s);el("text",{x:X0+76,y:154,"class":"t3"},s,"v1");
+  if(d.mirror){el("line",{x1:X0+104,y1:150,x2:X0+122,y2:150,"class":"sb",style:"stroke-dasharray:2 4;stroke-width:2.5"},s);el("text",{x:X0+128,y:154,"class":"t3"},s,"gespiegelt")}
+  el("text",{x:X1,y:154,"text-anchor":"end","class":"t3"},s,"Zeit");
+  return s;
+}
+(function(){
+  var cards=$("#depcards");if(!cards)return;
+  DEP.forEach(function(d){var c=document.createElement("article");c.className="st-card";c.id="dep-"+d.id;
+    var h=document.createElement("h4");h.innerHTML="<span class='dot acc'></span>"+d.name+" <span class='fn' style='font-weight:400'>"+d.alias+"</span>";c.appendChild(h);
+    var sp=document.createElement("div");sp.className="spec";sp.appendChild(specimen(d));c.appendChild(sp);
+    var f=document.createElement("div");f.className="facts";
+    f.innerHTML="<span class='st "+(d.down==="nein"?"good":"bad")+"'>Ausfall "+d.down+"</span><span class='st idle'>"+d.cost+"</span>";c.appendChild(f);
+    var p1=document.createElement("p");p1.innerHTML="<b>Rückweg:</b> "+d.back;c.appendChild(p1);
+    var p2=document.createElement("p");p2.innerHTML="<b>Risiko:</b> "+d.risk;c.appendChild(p2);
+    var p3=document.createElement("p");p3.innerHTML="<b>Passt für:</b> "+d.use;c.appendChild(p3);
+    cards.appendChild(c);});
+  var tb=$("#deptab tbody");DEP.forEach(function(d){var tr=document.createElement("tr");tr.innerHTML="<td><a href='#dep-"+d.id+"'>"+d.name+"</a></td><td>"+d.down+"</td><td>"+d.cost+"</td><td>"+d.who+"</td><td>"+d.back+"</td>";tb.appendChild(tr)});
+  var s=$("#depmap");var X0=80,X1=610,Y0=280,Y1=20;function sx(v){return X0+v*(X1-X0)}function sy(v){return Y0-v*(Y0-Y1)}
+  el("rect",{x:X0,y:sy(.5),width:(X1-X0)/2,height:Y0-sy(.5),rx:14,style:"fill:var(--accent);opacity:.07"},s);
+  el("text",{x:X0+10,y:Y0-10,"class":"t3",style:"fill:var(--accent)"},s,"günstig und sicher");
+  el("line",{x1:X0,y1:Y0,x2:X1,y2:Y0,"class":"ln"},s);el("line",{x1:X0,y1:Y0,x2:X0,y2:Y1,"class":"ln"},s);
+  el("line",{x1:(X0+X1)/2,y1:Y0,x2:(X0+X1)/2,y2:Y1,"class":"ln2"},s);el("line",{x1:X0,y1:sy(.5),x2:X1,y2:sy(.5),"class":"ln2"},s);
+  el("text",{x:X0,y:Y0+20,"class":"t3"},s,"tief");el("text",{x:X1,y:Y0+20,"text-anchor":"end","class":"t3"},s,"hoch");
+  el("text",{x:(X0+X1)/2,y:Y0+40,"text-anchor":"middle","class":"t2 tb"},s,"Zusatzkosten für Infrastruktur");
+  el("text",{x:X0-10,y:Y0,"text-anchor":"end","class":"t3"},s,"tief");el("text",{x:X0-10,y:Y1+8,"text-anchor":"end","class":"t3"},s,"hoch");
+  el("text",{x:22,y:(Y0+Y1)/2,"text-anchor":"middle","class":"t2 tb",transform:"rotate(-90 22 "+(Y0+Y1)/2+")"},s,"Risiko bei einem Fehler");
+  DEP.forEach(function(d){var a=el("a",{href:"#dep-"+d.id},s),x=sx(d.x),y=sy(d.y),left=d.x>.8;
+    el("circle",{cx:x,cy:y,r:8,"class":"fa",stroke:"var(--ground)","stroke-width":2.5},a);
+    el("text",{x:left?x-14:x+14,y:y+4,"text-anchor":left?"end":"start","class":"t tb"},a,d.name);});
+})();
+
+/* ---------- blast radius ---------- */
+(function(){
+  var u=$("#bUsers"),sh=$("#bShare"),er=$("#bErr"),s=$("#bChart");if(!u||!s)return;
+  function draw(){var U=+u.value,S=+sh.value/100,E=+er.value/100,a=U*S*E,b=U*E;
+    $("#bUsersV").textContent=de(U);$("#bShareV").textContent=sh.value+" %";$("#bErrV").textContent=er.value+" %";
+    $("#bOut").textContent=de(a);$("#bBig").textContent=de(b);
+    while(s.firstChild)s.removeChild(s.firstChild);var X0=20,X1=400,W=X1-X0;
+    [[a,"Gewählter Anteil, "+sh.value+" %",36,"fa"],[b,"Big Bang, 100 %",126,"fbad"]].forEach(function(r){
+      el("text",{x:X0,y:r[2]-8,"class":"t2"},s,r[1]);
+      el("rect",{x:X0,y:r[2],width:W,height:36,rx:8,"class":"fw",stroke:"var(--sep)"},s);
+      el("rect",{x:X0,y:r[2],width:Math.max(2,b?W*r[0]/b:0),height:36,rx:8,"class":r[3]},s);
+      el("text",{x:X1,y:r[2]+58,"text-anchor":"end","class":"t tb num"},s,de(r[0])+" betroffen");});
+  }
+  [u,sh,er].forEach(function(x){x.addEventListener("input",draw)});draw();
+})();
+
+/* ---------- DORA timeline ---------- */
+(function(){
+  var s=$("#dora");if(!s)return;var Y=150;var mk=marker(s,"dah","fe");
+  el("line",{x1:30,y1:Y,x2:876,y2:Y,"class":"ln","marker-end":mk},s);
+  el("text",{x:876,y:Y+20,"text-anchor":"end","class":"t3"},s,"Zeit");
+  var D=[[120,"ok"],[230,"ok"],[330,"ok"],[450,"bad"],[560,"ok"],[640,"rew"],[760,"ok"],[850,"ok"]];
+  D.forEach(function(d){var c=d[1]==="bad"?"fbad":d[1]==="rew"?"fp":"fgood";el("line",{x1:d[0],y1:Y-26,x2:d[0],y2:Y,"class":"ln"},s);el("circle",{cx:d[0],cy:Y-30,r:8,"class":c},s)});
+  el("circle",{cx:60,cy:Y,r:5,"class":"fb"},s);el("text",{x:60,y:Y+20,"text-anchor":"middle","class":"t3"},s,"Commit");
+  function br(x1,x2,y,cls,lab,lab2,col){el("path",{d:"M"+x1+" "+(y-6)+" L"+x1+" "+y+" L"+x2+" "+y+" L"+x2+" "+(y-6),"class":cls,style:"fill:none;stroke-width:2"},s);el("text",{x:(x1+x2)/2,y:y+18,"text-anchor":"middle","class":"t tb",style:"fill:var("+col+")"},s,lab);if(lab2)el("text",{x:(x1+x2)/2,y:y+34,"text-anchor":"middle","class":"t3"},s,lab2)}
+  br(60,120,Y+40,"sb","Lead time","Commit bis Deploy","--build");
+  el("path",{d:"M760 92 L760 86 L850 86 L850 92","class":"sb",style:"fill:none;stroke-width:2"},s);
+  el("text",{x:805,y:76,"text-anchor":"middle","class":"t tb",style:"fill:var(--build)"},s,"Frequenz");
+  el("text",{x:805,y:60,"text-anchor":"middle","class":"t3"},s,"Abstand zwischen Deploys");
+  el("circle",{cx:520,cy:Y,r:5,"class":"fgood"},s);
+  br(450,520,Y+40,"sbad","Recovery time","bis behoben","--bad");
+  el("text",{x:450,y:96,"text-anchor":"middle","class":"t tb",style:"fill:var(--bad)"},s,"fehlgeschlagen");
+  el("text",{x:640,y:96,"text-anchor":"middle","class":"t tb",style:"fill:var(--product)"},s,"ungeplant");
+  el("text",{x:30,y:24,"class":"t2"},s,"Change fail rate = rot ÷ alle = 1 ÷ 8 = 12,5 %");
+  el("text",{x:30,y:42,"class":"t2"},s,"Rework rate = orange ÷ alle = 1 ÷ 8 = 12,5 %");
+  el("text",{x:876,y:214,"text-anchor":"end","class":"t3"},s,"violett: Durchsatz");
+  el("text",{x:876,y:232,"text-anchor":"end","class":"t3"},s,"rot und orange: Instabilität");
+})();
+
+/* ---------- DORA calc ---------- */
+(function(){
+  var ids=["dDays","dDep","dFail","dRew","dLead","dRec"];if(!$("#dDays"))return;
+  function v(i){var x=parseFloat($("#"+i).value);return isFinite(x)&&x>=0?x:0}
+  function run(){var days=Math.max(1,v("dDays")),dep=v("dDep"),f=v("dFail"),r=v("dRew");var bad=f>dep||r>dep;
+    $("#dFail").classList.toggle("bad",f>dep);$("#dRew").classList.toggle("bad",r>dep);
+    $("#oFreq").textContent=fmt(dep/days*7,1);
+    $("#oCfr").textContent=dep?fmt(Math.min(f,dep)/dep*100,0)+" %":"–";
+    $("#oRew").textContent=dep?fmt(Math.min(r,dep)/dep*100,0)+" %":"–";
+    $("#oLead").textContent=fmt(v("dLead"),v("dLead")%1?1:0)+" h";$("#oRec").textContent=fmt(v("dRec"),0)+" min";
+    $("#dHint").textContent=bad?"Teilmengen dürfen nicht grösser sein als die Zahl aller Deployments.":"DORA nennt auf der aktuellen Seite keine festen Leistungsstufen. Vergleicht darum euren eigenen Trend von Iteration zu Iteration, nicht eine Zahl mit anderen Teams.";}
+  ids.forEach(function(i){$("#"+i).addEventListener("input",run)});run();
+})();
+
+/* ---------- KI ---------- */
+(function(){
+  var L=$("#kiL"),R=$("#kiR");if(!L)return;
+  [["Tutor","erklärt Konzepte"],["Sparringpartner","hinterfragt Entscheidungen"],["Reviewer","findet Schwächen im Code"],["Debugging-Hilfe","deutet Fehlermeldungen"]].forEach(function(d,i){var y=40+i*54;
+    el("rect",{x:20,y:y,width:260,height:46,rx:23,"class":"box"},L);el("text",{x:42,y:y+20,"class":"t tb"},L,d[0]);el("text",{x:42,y:y+36,"class":"t3"},L,d[1])});
+  [["Verstehen","jede Zeile erklären"],["Prüfen","testen und belegen"],["Entscheiden","im Team begründen"],["Nachweisen","KI-Nachweis führen"]].forEach(function(d,i){var y=40+i*54;
+    el("rect",{x:420,y:y,width:260,height:46,rx:23,"class":"boxa"},R);el("text",{x:442,y:y+20,"class":"t tb"},R,d[0]);el("text",{x:442,y:y+36,"class":"t3"},R,d[1])});
+})();
+
+/* ---------- checklist ---------- */
+(function(){
+  var ul=$("#checklist");if(!ul)return;
+  var C=[["team","Team","Rollen verteilt und im README festgehalten"],["board","Team","Board mit WIP-Limits aktiv genutzt"],["story","Anforderungen","Stories mit Akzeptanzkriterien"],["dod","Anforderungen","Definition of Ready und Done festgehalten"],["protect","Code","main geschützt, Merge nur mit Review"],["cc","Code","Commits mit Typ nach Conventional Commits"],["tests","Code","Tests zu jeder Story"],["ci","CI","Pipeline läuft bei jedem Push"],["block","CI","Merge blockiert bei rotem Build"],["fast","CI","Pipeline unter zehn Minuten"],["tag","Artefakt","SemVer- und Commit-Tag in der Registry"],["chlog","Artefakt","CHANGELOG nachgeführt"],["deploy","Deployment","automatischer Deploy-Job"],["rb","Deployment","Rollback einmal geprobt und protokolliert"],["health","Betrieb","Healthcheck mit Version"],["dora","Betrieb","DORA-Kennzahlen erhoben"],["retro","Betrieb","Retro mit Massnahmen auf dem Board"],["ki","KI","KI-Nachweis ausgefüllt"],["explain","Fachgespräch","Jede Person kann jeden Teil erklären"]];
+  var saved={};try{saved=JSON.parse(lsGet("m324-check")||"{}")||{}}catch(e){saved={}}
+  function count(){var n=$$("input",ul).filter(function(i){return i.checked}).length;$("#ckCount").textContent=n+" von "+C.length+" erledigt."}
+  C.forEach(function(c){var li=document.createElement("li");li.innerHTML="<label><input type='checkbox' data-k='"+c[0]+"'"+(saved[c[0]]?" checked":"")+"><span><span class='grp'>"+c[1]+"</span><b>"+c[2]+"</b></span></label>";ul.appendChild(li)});
+  ul.addEventListener("change",function(e){var k=e.target.getAttribute("data-k");if(!k)return;saved[k]=e.target.checked;lsSet("m324-check",JSON.stringify(saved));count()});
+  $("#ckReset").addEventListener("click",function(){saved={};lsSet("m324-check","{}");$$("input",ul).forEach(function(i){i.checked=false});count()});
+  count();
+})();
+
+/* ---------- stats ---------- */
+(function(){
+  $("#sCh").textContent=$$("section.ch[id^='k']").length;
+  $("#sFig").textContent=$$("svg[role=img]").filter(function(x){return !x.closest(".spec")}).length+$$(".panel").length+$$("div[role=img]").length;
+  $("#sDep").textContent=DEP.length;
+  $("#sSrc").textContent=$$("#srclist a").length;
+})();
+
+/* ---------- scrollspy ---------- */
+(function(){
+  var links=$$(".rail a, .chips a"),chips=$(".chips");
+  function on(id){links.forEach(function(a){var m=a.getAttribute("href")==="#"+id;a.classList.toggle("on",m);if(m&&a.parentNode===chips&&chips.offsetParent){chips.scrollTo({left:a.offsetLeft-24,behavior:RM?"auto":"smooth"})}})}
+  if(!("IntersectionObserver" in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)on(e.target.id)})},{rootMargin:"-30% 0px -60% 0px"});
+  $$("section.ch").forEach(function(s){io.observe(s)});on("start");
+})();
+})();
+</script></body></html>
