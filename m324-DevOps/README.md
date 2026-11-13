@@ -13,6 +13,7 @@ Supporting DevOps processes with tools.
 | Section | Description |
 | --- | --- |
 | [Journal](./Journal/) | Learning journal, one entry per lesson |
+| [Time sheet](./Timesheet_M324.xlsx) | Group time sheet: hours per person, day and task |
 | [Cheat sheet](<./M324 DevOps Spickzettel.html>) | DevOps cheat sheet (HTML) |
 
 ---

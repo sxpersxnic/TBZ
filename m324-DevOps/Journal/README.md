@@ -6,7 +6,7 @@ Learning journal for M324. One entry per lesson, saved as `DD-MM-YYYY.md` in thi
 
 | Date | Topic | Material |
 | --- | --- | --- |
-| 13.11.2026 | Day 1 | [13-11-2026](../13-11-2026/) |
+| [13.11.2026](./13-11-2026.md) | Day 1 – module start, P1 | [13-11-2026](../13-11-2026/) |
 
 ## Template
 

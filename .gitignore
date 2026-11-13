@@ -35,3 +35,6 @@ m450-Application-Testing/x-res/apps/*
 *.local*
 # m324 course packages (installers too large for GitHub)
 m324-DevOps/*.zip
+
+# Office lock files
+~$*
